@@ -57,6 +57,7 @@ jobs:
 
       - name: Run CLI and packaging smoke tests
         shell: pwsh
-        run: >-
-          ./tests/cli/smoke.ps1
-          -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+        run: |
+          ./tests/cli/smoke.ps1 -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          ./tools/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          ./tests/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/claude/${{ matrix.rid }}/relewise"
