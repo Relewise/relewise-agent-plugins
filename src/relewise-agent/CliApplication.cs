@@ -377,6 +377,12 @@ internal static class CliApplication
         string? operationId = null,
         int? statusCode = null)
     {
+        var token = ReadToken();
+        if (token is not null)
+        {
+            message = message.Replace(token, "[REDACTED]", StringComparison.Ordinal);
+        }
+
         WriteJson(new ErrorResponse(
             Success: false,
             Error: new ErrorDetails(type, message, operationId, statusCode)),

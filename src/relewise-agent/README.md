@@ -76,6 +76,21 @@ Input files are limited to 1 MiB and a JSON depth of 64. The PAT, HTTP method, U
 
 All commands emit one JSON document. Successful commands exit with code `0`; internal failures use `1`, invalid commands or arguments use `2`, unknown operation IDs use `3`, authentication failures use `4`, network failures use `5`, Agent Gateway API failures use `6`, Dataset access failures use `7`, and request validation failures use `8`.
 
+Failures use a stable machine-readable envelope:
+
+```json
+{
+  "success": false,
+  "error": {
+    "type": "validation_error",
+    "message": "Required parameter 'fromDate' is missing.",
+    "operationId": "AnalyticsGetRevenue"
+  }
+}
+```
+
+`type` is one of `authentication_error`, `dataset_access_error`, `operation_not_found`, `validation_error`, `api_error`, `network_error`, `invalid_arguments`, `command_not_found`, or `internal_error`. `operationId` and `statusCode` are included when they apply. For API failures, the CLI extracts a concise message from a JSON problem response when available; otherwise it reports the HTTP status. Error response bodies are bounded to 64 KiB, error messages to 500 characters, and bearer tokens are never returned.
+
 ## Run during development
 
 ```shell
