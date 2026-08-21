@@ -7,133 +7,168 @@
     {
       "operationId": "AnalyticsGetRevenue",
       "skills": [
-        "relewise/skills/analytics"
+        "relewise/skills/analytics",
+        "relewise/skills/compare-datasets"
       ]
     },
     {
       "operationId": "AnalyticsGetSearchFilterOptions",
       "skills": [
-        "relewise/skills/analytics"
+        "relewise/skills/analytics",
+        "relewise/skills/compare-datasets",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "AnalyticsGetSearchOverview",
       "skills": [
-        "relewise/skills/analytics"
+        "relewise/skills/analytics",
+        "relewise/skills/compare-datasets",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "AnalyticsListLowClickRateSearches",
       "skills": [
-        "relewise/skills/analytics"
+        "relewise/skills/analytics",
+        "relewise/skills/compare-datasets",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "AnalyticsListPopularSearches",
       "skills": [
-        "relewise/skills/analytics"
+        "relewise/skills/analytics",
+        "relewise/skills/compare-datasets",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "AnalyticsListSearchesWithoutResults",
       "skills": [
-        "relewise/skills/analytics"
+        "relewise/skills/analytics",
+        "relewise/skills/compare-datasets",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "AnalyticsListTrendingDownSearches",
       "skills": [
-        "relewise/skills/analytics"
+        "relewise/skills/analytics",
+        "relewise/skills/compare-datasets",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "AnalyticsListTrendingUpSearches",
       "skills": [
-        "relewise/skills/analytics"
+        "relewise/skills/analytics",
+        "relewise/skills/compare-datasets",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "CoreGetAnalyzerConsumptionSummary",
       "skills": [
+        "relewise/skills/compare-datasets",
         "relewise/skills/consumption"
       ]
     },
     {
       "operationId": "CoreGetBehavioralTrackingConsumptionSummary",
       "skills": [
+        "relewise/skills/compare-datasets",
         "relewise/skills/consumption"
       ]
     },
     {
       "operationId": "CoreGetContentDeliveryConsumptionSummary",
       "skills": [
+        "relewise/skills/compare-datasets",
         "relewise/skills/consumption"
       ]
     },
     {
       "operationId": "CoreGetDataset",
       "skills": [
-        "relewise/skills/core"
+        "relewise/skills/compare-datasets",
+        "relewise/skills/core",
+        "relewise/skills/merchandising-audit",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "CoreGetDatasetMetadata",
       "skills": [
-        "relewise/skills/core"
+        "relewise/skills/compare-datasets",
+        "relewise/skills/core",
+        "relewise/skills/merchandising-audit",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "CoreGetIntegrationsConsumptionSummary",
       "skills": [
+        "relewise/skills/compare-datasets",
         "relewise/skills/consumption"
       ]
     },
     {
       "operationId": "CoreGetMarketingAutomationConsumptionSummary",
       "skills": [
+        "relewise/skills/compare-datasets",
         "relewise/skills/consumption"
       ]
     },
     {
       "operationId": "CoreGetRecommendationsConsumptionSummary",
       "skills": [
+        "relewise/skills/compare-datasets",
         "relewise/skills/consumption"
       ]
     },
     {
       "operationId": "CoreGetRetailMediaConsumptionSummary",
       "skills": [
+        "relewise/skills/compare-datasets",
         "relewise/skills/consumption"
       ]
     },
     {
       "operationId": "CoreGetSearchConsumptionSummary",
       "skills": [
+        "relewise/skills/compare-datasets",
         "relewise/skills/consumption"
       ]
     },
     {
       "operationId": "CoreGetShoppertainmentConsumptionSummary",
       "skills": [
+        "relewise/skills/compare-datasets",
         "relewise/skills/consumption"
       ]
     },
     {
       "operationId": "IdentityGetCurrentUser",
       "skills": [
-        "relewise/skills/core"
+        "relewise/skills/compare-datasets",
+        "relewise/skills/core",
+        "relewise/skills/merchandising-audit",
+        "relewise/skills/search-performance-review"
       ]
     },
     {
       "operationId": "MerchandisingGetRule",
       "skills": [
-        "relewise/skills/merchandising"
+        "relewise/skills/merchandising",
+        "relewise/skills/merchandising-audit"
       ]
     },
     {
       "operationId": "MerchandisingListRules",
       "skills": [
-        "relewise/skills/merchandising"
+        "relewise/skills/merchandising",
+        "relewise/skills/merchandising-audit"
       ]
     },
     {
@@ -145,78 +180,91 @@
     {
       "operationId": "SearchToolsGetDecompoundingRule",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsGetRedirectRule",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsGetSearchIndex",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsGetSearchResultModifierRule",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsGetSearchTermModifierRule",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsGetStemmingRule",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsListDecompoundingRules",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsListRedirectRules",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsListSearchIndexes",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsListSearchResultModifierRules",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsListSearchTermModifierRules",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsListStemmingRules",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
     {
       "operationId": "SearchToolsListSynonymRules",
       "skills": [
+        "relewise/skills/merchandising-audit",
         "relewise/skills/search-tools"
       ]
     },
