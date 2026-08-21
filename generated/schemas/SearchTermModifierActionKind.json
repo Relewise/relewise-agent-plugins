@@ -1,0 +1,10 @@
+{
+  "enum": [
+    "AppendToTerm",
+    "RemoveFromTerm",
+    "ReplaceTerm",
+    "ReplaceWordsInTerm"
+  ],
+  "description": "Operation performed by a Search Term Modifier action.",
+  "type": "string"
+}

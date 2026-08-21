@@ -1,0 +1,48 @@
+{
+  "required": [
+    "fromDate",
+    "toDate",
+    "comparisonFromDate",
+    "comparisonToDate",
+    "filters",
+    "summary",
+    "timeline"
+  ],
+  "type": "object",
+  "properties": {
+    "fromDate": {
+      "type": "string",
+      "description": "Inclusive first date of the requested period.",
+      "format": "date"
+    },
+    "toDate": {
+      "type": "string",
+      "description": "Inclusive last date of the requested period.",
+      "format": "date"
+    },
+    "comparisonFromDate": {
+      "type": "string",
+      "description": "Inclusive first date of the preceding equivalent comparison period.",
+      "format": "date"
+    },
+    "comparisonToDate": {
+      "type": "string",
+      "description": "Inclusive last date of the preceding equivalent comparison period.",
+      "format": "date"
+    },
+    "filters": {
+      "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+    },
+    "summary": {
+      "$ref": "#/components/schemas/SearchAnalyticsSummary"
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SearchAnalyticsTimelineEntry"
+      },
+      "description": "Chronological daily measurements for the requested period. Presentation-specific graph metadata is excluded."
+    }
+  },
+  "description": "Search Analytics overview for the effective filters and date periods."
+}

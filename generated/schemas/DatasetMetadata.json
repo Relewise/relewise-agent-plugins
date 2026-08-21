@@ -1,0 +1,116 @@
+{
+  "required": [
+    "fromDate",
+    "toDate",
+    "languages",
+    "currencies",
+    "products",
+    "variants",
+    "productCategories",
+    "brands",
+    "content",
+    "contentCategories",
+    "users",
+    "companies"
+  ],
+  "type": "object",
+  "properties": {
+    "fromDate": {
+      "type": "string",
+      "description": "Inclusive start of the period used to resolve date-scoped metadata.",
+      "format": "date"
+    },
+    "toDate": {
+      "type": "string",
+      "description": "Inclusive end of the period used to resolve date-scoped metadata.",
+      "format": "date"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Distinct nonblank language codes available during the requested period."
+    },
+    "currencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Distinct nonblank currency codes available during the requested period."
+    },
+    "products": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/ProductMetadata"
+        }
+      ],
+      "nullable": true
+    },
+    "variants": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/VariantMetadata"
+        }
+      ],
+      "nullable": true
+    },
+    "productCategories": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/ProductCategoryMetadata"
+        }
+      ],
+      "nullable": true
+    },
+    "brands": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/BrandMetadata"
+        }
+      ],
+      "nullable": true
+    },
+    "content": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/ContentMetadata"
+        }
+      ],
+      "nullable": true
+    },
+    "contentCategories": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/ContentCategoryMetadata"
+        }
+      ],
+      "nullable": true
+    },
+    "users": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/UserMetadata"
+        }
+      ],
+      "nullable": true
+    },
+    "companies": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/CompanyMetadata"
+        }
+      ],
+      "nullable": true
+    }
+  },
+  "description": "Languages, currencies, and optionally requested entity metadata available for a Dataset."
+}

@@ -1,0 +1,21 @@
+{
+  "required": [
+    "title",
+    "series"
+  ],
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Human-readable description of what the time series measures."
+    },
+    "series": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PeriodGraphSeries"
+      },
+      "description": "Named daily numeric series."
+    }
+  },
+  "description": "A collection of named daily numeric series."
+}

@@ -1,0 +1,18 @@
+{
+  "required": [
+    "key"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "dataKey"
+      ],
+      "type": "string"
+    },
+    "key": {
+      "type": "string",
+      "description": "Case-sensitive data key containing the multiplier value."
+    }
+  },
+  "description": "A multiplier read from a data key on each matched entity."
+}

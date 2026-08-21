@@ -1,0 +1,16 @@
+{
+  "required": [
+    "total",
+    "uniqueTerms"
+  ],
+  "type": "object",
+  "properties": {
+    "total": {
+      "$ref": "#/components/schemas/ComparedValue"
+    },
+    "uniqueTerms": {
+      "$ref": "#/components/schemas/ComparedValue"
+    }
+  },
+  "description": "Search-volume metrics for the selected scope."
+}

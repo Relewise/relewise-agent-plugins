@@ -1,0 +1,21 @@
+{
+  "required": [
+    "key",
+    "values"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Exact case-sensitive classification key."
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Distinct nonblank classification values preserving their exact casing."
+    }
+  },
+  "description": "A case-sensitive user classification and its available values for the requested period."
+}

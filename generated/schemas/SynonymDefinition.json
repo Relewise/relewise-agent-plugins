@@ -1,0 +1,22 @@
+{
+  "required": [
+    "kind"
+  ],
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/SynonymDefinitionOneWaySynonymDefinition"
+    },
+    {
+      "$ref": "#/components/schemas/SynonymDefinitionMultidirectionalSynonymDefinition"
+    }
+  ],
+  "description": "Synonym definition. Kind identifies whether the relationship is one-way or multidirectional.",
+  "discriminator": {
+    "propertyName": "kind",
+    "mapping": {
+      "oneWay": "#/components/schemas/SynonymDefinitionOneWaySynonymDefinition",
+      "multidirectional": "#/components/schemas/SynonymDefinitionMultidirectionalSynonymDefinition"
+    }
+  }
+}

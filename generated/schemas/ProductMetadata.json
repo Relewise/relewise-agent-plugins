@@ -1,0 +1,16 @@
+{
+  "required": [
+    "dataKeys"
+  ],
+  "type": "object",
+  "properties": {
+    "dataKeys": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataKey"
+      },
+      "description": "Case-sensitive Data Keys available on products."
+    }
+  },
+  "description": "Metadata available for product entities."
+}

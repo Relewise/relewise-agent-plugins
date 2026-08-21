@@ -1,0 +1,30 @@
+{
+  "required": [
+    "kind",
+    "term",
+    "negated",
+    "filtersJson"
+  ],
+  "type": "object",
+  "properties": {
+    "kind": {
+      "$ref": "#/components/schemas/SearchResultModifierActionKind"
+    },
+    "term": {
+      "type": "string",
+      "description": "Term added as a result filter; otherwise null.",
+      "nullable": true
+    },
+    "negated": {
+      "type": "boolean",
+      "description": "Whether an added term filter is negated; otherwise null.",
+      "nullable": true
+    },
+    "filtersJson": {
+      "type": "string",
+      "description": "For AddFilters, the complete Relewise filter collection as JSON-encoded text; otherwise null. Parse this string as JSON. It preserves the documented $type metadata used to identify filter and condition types. See https://docs.relewise.com/docs/filters/index.html for the available types, structures, and examples.",
+      "nullable": true
+    }
+  },
+  "description": "One action currently performed by a Search Result Modifier rule."
+}

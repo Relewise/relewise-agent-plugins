@@ -1,0 +1,22 @@
+{
+  "required": [
+    "startsAt",
+    "endsAt"
+  ],
+  "type": "object",
+  "properties": {
+    "startsAt": {
+      "type": "string",
+      "description": "UTC date and time when the rule becomes active, or null when the schedule has no lower time bound.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "endsAt": {
+      "type": "string",
+      "description": "UTC date and time when the rule stops being active, or null when the schedule has no upper time bound.",
+      "format": "date-time",
+      "nullable": true
+    }
+  },
+  "description": "UTC time boundaries controlling when a merchandising rule is active."
+}

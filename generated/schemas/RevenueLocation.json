@@ -1,0 +1,30 @@
+{
+  "required": [
+    "location",
+    "metrics",
+    "recommendationTypes"
+  ],
+  "type": "object",
+  "properties": {
+    "location": {
+      "type": "string",
+      "description": "Exact location supplied with Search or Recommendation requests, or null for historical requests without a location.",
+      "nullable": true
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RevenueMetric"
+      },
+      "description": "Aggregate metrics for the location."
+    },
+    "recommendationTypes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RevenueRecommendationType"
+      },
+      "description": "Metrics grouped by recommendation request type within the location."
+    }
+  },
+  "description": "Revenue performance attributed to a Relewise request location."
+}

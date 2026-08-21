@@ -1,0 +1,17 @@
+{
+  "required": [
+    "multiplier"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "boostAndBury"
+      ],
+      "type": "string"
+    },
+    "multiplier": {
+      "$ref": "#/components/schemas/MerchandisingRuleMultiplier"
+    }
+  },
+  "description": "Configuration for a rule that boosts or buries matching entities."
+}

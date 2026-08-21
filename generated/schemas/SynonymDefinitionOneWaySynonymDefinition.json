@@ -1,0 +1,29 @@
+{
+  "required": [
+    "fromWords",
+    "toWords"
+  ],
+  "properties": {
+    "kind": {
+      "enum": [
+        "oneWay"
+      ],
+      "type": "string"
+    },
+    "fromWords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Search words submitted by users that activate the one-way relationship."
+    },
+    "toWords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional words included in Search when a From Word is submitted."
+    }
+  },
+  "description": "One-way Synonym definition where searches for From Words also include results matching To Words, but not the reverse."
+}

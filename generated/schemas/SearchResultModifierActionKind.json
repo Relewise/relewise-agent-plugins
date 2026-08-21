@@ -1,0 +1,8 @@
+{
+  "enum": [
+    "AddTermFilter",
+    "AddFilters"
+  ],
+  "description": "Operation performed by a Search Result Modifier action.",
+  "type": "string"
+}

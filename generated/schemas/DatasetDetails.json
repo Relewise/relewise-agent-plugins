@@ -1,0 +1,30 @@
+{
+  "required": [
+    "id",
+    "displayName",
+    "type",
+    "serverUrl"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The Dataset ID used in Dataset-scoped Agent Gateway routes.",
+      "format": "uuid"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The Dataset display name in My Relewise."
+    },
+    "type": {
+      "type": "string",
+      "description": "The Dataset environment type."
+    },
+    "serverUrl": {
+      "type": "string",
+      "description": "The base URL of the Relewise API server hosting the Dataset.",
+      "format": "uri"
+    }
+  },
+  "description": "Identifying and operational details about a Relewise Dataset."
+}

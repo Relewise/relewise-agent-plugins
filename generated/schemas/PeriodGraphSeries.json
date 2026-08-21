@@ -1,0 +1,21 @@
+{
+  "required": [
+    "displayName",
+    "dataPoints"
+  ],
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable name of the series."
+    },
+    "dataPoints": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PeriodGraphDataPoint"
+      },
+      "description": "Chronological daily values in the series."
+    }
+  },
+  "description": "One named daily numeric series."
+}

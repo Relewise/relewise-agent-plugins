@@ -1,0 +1,54 @@
+{
+  "required": [
+    "isRebuilding",
+    "isStale",
+    "lastRebuildStarted",
+    "lastRebuildCompleted",
+    "lastRebuildOpportunity",
+    "lastRebuildDuration",
+    "staleDuration",
+    "lastStaleDuration"
+  ],
+  "type": "object",
+  "properties": {
+    "isRebuilding": {
+      "type": "boolean",
+      "description": "Whether the Search Index is currently rebuilding."
+    },
+    "isStale": {
+      "type": "boolean",
+      "description": "Whether changes are waiting to be incorporated by a Search Index rebuild."
+    },
+    "lastRebuildStarted": {
+      "type": "string",
+      "description": "When the most recent rebuild started, or null when unavailable.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "lastRebuildCompleted": {
+      "type": "string",
+      "description": "When the most recent completed rebuild finished, or null when unavailable.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "lastRebuildOpportunity": {
+      "type": "string",
+      "description": "When the Search Index most recently had an opportunity to rebuild, whether or not a rebuild was required.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "lastRebuildDuration": {
+      "type": "string",
+      "description": "Human-readable duration of the most recent rebuild."
+    },
+    "staleDuration": {
+      "type": "string",
+      "description": "Human-readable duration for which the Search Index has currently been stale."
+    },
+    "lastStaleDuration": {
+      "type": "string",
+      "description": "Human-readable duration of the most recently completed stale period."
+    }
+  },
+  "description": "Current rebuild and stale-data state for a Search Index."
+}

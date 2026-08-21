@@ -1,0 +1,20 @@
+{
+  "required": [
+    "dataset",
+    "license",
+    "agentGatewayPolicy"
+  ],
+  "type": "object",
+  "properties": {
+    "dataset": {
+      "$ref": "#/components/schemas/DatasetDetails"
+    },
+    "license": {
+      "$ref": "#/components/schemas/License"
+    },
+    "agentGatewayPolicy": {
+      "$ref": "#/components/schemas/DatasetAgentGatewayPolicy"
+    }
+  },
+  "description": "Details about the requested Dataset and its effective Agent Gateway access policy."
+}

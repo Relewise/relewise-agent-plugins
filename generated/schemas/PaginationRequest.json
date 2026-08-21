@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "pageNumber": {
+      "maximum": 2147483647,
+      "minimum": 1,
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "One-based page number. Defaults to 1 when pagination is omitted or this property is null.",
+      "format": "uint32",
+      "nullable": true,
+      "type": "integer"
+    },
+    "pageSize": {
+      "maximum": 100,
+      "minimum": 10,
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when pagination is omitted or this property is null.",
+      "format": "uint32",
+      "nullable": true,
+      "type": "integer"
+    }
+  },
+  "description": "Controls which one-based page of a collection is returned."
+}

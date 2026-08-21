@@ -1,0 +1,24 @@
+{
+  "required": [
+    "user",
+    "personalAccessToken",
+    "licenses"
+  ],
+  "type": "object",
+  "properties": {
+    "user": {
+      "$ref": "#/components/schemas/UserDetails"
+    },
+    "personalAccessToken": {
+      "$ref": "#/components/schemas/PersonalAccessTokenDetails"
+    },
+    "licenses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/LicenseReference"
+      },
+      "description": "Licenses containing Datasets visible to the authenticated user and allowed by the supplied Personal Access Token. Verify a Dataset with CoreGetDataset before using it; the collection is empty when there are no datasets."
+    }
+  },
+  "description": "The My Relewise user represented by the supplied Personal Access Token, non-secret metadata about that token, and License-grouped Dataset references available for access verification."
+}

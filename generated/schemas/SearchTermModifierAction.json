@@ -1,0 +1,24 @@
+{
+  "required": [
+    "kind",
+    "words",
+    "replacement"
+  ],
+  "type": "object",
+  "properties": {
+    "kind": {
+      "$ref": "#/components/schemas/SearchTermModifierActionKind"
+    },
+    "words": {
+      "type": "string",
+      "description": "Words appended, removed, or replaced; otherwise null.",
+      "nullable": true
+    },
+    "replacement": {
+      "type": "string",
+      "description": "Replacement term or text; otherwise null.",
+      "nullable": true
+    }
+  },
+  "description": "One action currently performed by a Search Term Modifier rule."
+}

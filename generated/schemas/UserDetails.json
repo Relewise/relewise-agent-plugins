@@ -1,0 +1,18 @@
+{
+  "required": [
+    "displayName",
+    "emailAddress"
+  ],
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the authenticated user."
+    },
+    "emailAddress": {
+      "type": "string",
+      "description": "The email address of the authenticated user."
+    }
+  },
+  "description": "Details about the authenticated My Relewise user."
+}

@@ -1,0 +1,19 @@
+{
+  "required": [
+    "value"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "fixed"
+      ],
+      "type": "string"
+    },
+    "value": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+      "description": "Constant multiplier value. Values above one boost and values between zero and one bury matching entities.",
+      "format": "double"
+    }
+  },
+  "description": "A constant multiplier applied to every entity matched by the rule."
+}

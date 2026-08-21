@@ -1,0 +1,20 @@
+{
+  "required": [
+    "rules",
+    "pagination"
+  ],
+  "type": "object",
+  "properties": {
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/StemmingRuleSummary"
+      },
+      "description": "Compact Stemming rule representations returned on this page."
+    },
+    "pagination": {
+      "$ref": "#/components/schemas/PaginationMetadata"
+    }
+  },
+  "description": "A bounded page of Stemming rules."
+}

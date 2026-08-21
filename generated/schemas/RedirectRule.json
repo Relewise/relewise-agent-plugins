@@ -1,0 +1,42 @@
+{
+  "required": [
+    "id",
+    "isApproved",
+    "scope",
+    "condition",
+    "destination",
+    "data"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The stable Rule ID.",
+      "format": "uuid"
+    },
+    "isApproved": {
+      "type": "boolean",
+      "description": "Whether the rule is approved and active for matching searches."
+    },
+    "scope": {
+      "$ref": "#/components/schemas/SearchToolRuleScope"
+    },
+    "condition": {
+      "$ref": "#/components/schemas/SearchTermCondition"
+    },
+    "destination": {
+      "type": "string",
+      "description": "Destination returned in the Search response. Relewise does not perform a browser redirect itself.",
+      "nullable": true
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Additional key-value data returned with the redirect.",
+      "nullable": true
+    }
+  },
+  "description": "Detailed Redirect rule representation including its complete condition and optional data."
+}

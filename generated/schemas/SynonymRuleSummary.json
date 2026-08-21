@@ -1,0 +1,32 @@
+{
+  "required": [
+    "id",
+    "isApproved",
+    "scope",
+    "definition",
+    "allowInPredictions"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The stable Rule ID.",
+      "format": "uuid"
+    },
+    "isApproved": {
+      "type": "boolean",
+      "description": "Whether the rule is approved and active for matching searches."
+    },
+    "scope": {
+      "$ref": "#/components/schemas/SearchToolRuleScope"
+    },
+    "definition": {
+      "$ref": "#/components/schemas/SynonymDefinition"
+    },
+    "allowInPredictions": {
+      "type": "boolean",
+      "description": "Whether the Synonym rule also applies to Search Term Prediction."
+    }
+  },
+  "description": "Synonym rule representation returned by list operations."
+}

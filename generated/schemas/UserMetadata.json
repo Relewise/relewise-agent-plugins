@@ -1,0 +1,24 @@
+{
+  "required": [
+    "dataKeys",
+    "classifications"
+  ],
+  "type": "object",
+  "properties": {
+    "dataKeys": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataKey"
+      },
+      "description": "Case-sensitive Data Keys available on users."
+    },
+    "classifications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/UserClassification"
+      },
+      "description": "Case-sensitive user classifications and their available values for the requested period."
+    }
+  },
+  "description": "Metadata available for user entities during the requested period."
+}

@@ -1,0 +1,24 @@
+{
+  "required": [
+    "dataKeys",
+    "specificationKeys"
+  ],
+  "type": "object",
+  "properties": {
+    "dataKeys": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataKey"
+      },
+      "description": "Case-sensitive Data Keys available on variants."
+    },
+    "specificationKeys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Case-sensitive Variant Data Keys selected as dimensions, such as size or color, for correlating variants across products."
+    }
+  },
+  "description": "Metadata available for product variant entities."
+}

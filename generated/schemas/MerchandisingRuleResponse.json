@@ -1,0 +1,12 @@
+{
+  "required": [
+    "rule"
+  ],
+  "type": "object",
+  "properties": {
+    "rule": {
+      "$ref": "#/components/schemas/MerchandisingRuleDetails"
+    }
+  },
+  "description": "Detailed merchandising rule returned for a Dataset-scoped rule lookup."
+}

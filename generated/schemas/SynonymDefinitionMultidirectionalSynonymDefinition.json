@@ -1,0 +1,21 @@
+{
+  "required": [
+    "words"
+  ],
+  "properties": {
+    "kind": {
+      "enum": [
+        "multidirectional"
+      ],
+      "type": "string"
+    },
+    "words": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Words treated as equivalent in every direction."
+    }
+  },
+  "description": "Multidirectional Synonym definition where every configured word is treated as equivalent to every other word."
+}

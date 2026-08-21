@@ -1,0 +1,20 @@
+{
+  "required": [
+    "total",
+    "rate",
+    "averagePosition"
+  ],
+  "type": "object",
+  "properties": {
+    "total": {
+      "$ref": "#/components/schemas/ComparedValue"
+    },
+    "rate": {
+      "$ref": "#/components/schemas/ComparedValue"
+    },
+    "averagePosition": {
+      "$ref": "#/components/schemas/ComparedValue"
+    }
+  },
+  "description": "Click-performance metrics for searches."
+}

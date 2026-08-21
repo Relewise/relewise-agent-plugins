@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "type": {
+      "enum": [
+        "filter"
+      ],
+      "type": "string"
+    }
+  },
+  "description": "Configuration for a rule that removes matching entities from results."
+}

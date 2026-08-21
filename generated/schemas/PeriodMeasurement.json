@@ -1,0 +1,56 @@
+{
+  "required": [
+    "displayName",
+    "description",
+    "formattedValue",
+    "numericValue",
+    "previousFormattedValue",
+    "previousNumericValue",
+    "change",
+    "relativeChangePercent"
+  ],
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable label identifying the measurement."
+    },
+    "description": {
+      "type": "string",
+      "description": "Explanation of what the measurement represents."
+    },
+    "formattedValue": {
+      "type": "string",
+      "description": "Display-ready value including applicable formatting, units, or currency. Use this value when presenting the metric to users."
+    },
+    "numericValue": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Raw numeric value. Use this value for calculations instead of parsing the formatted value.",
+      "format": "double"
+    },
+    "previousFormattedValue": {
+      "type": "string",
+      "description": "Display-ready value for the comparison period, or null when comparison data is unavailable.",
+      "nullable": true
+    },
+    "previousNumericValue": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Raw numeric value for the comparison period, or null when comparison data is unavailable.",
+      "format": "double",
+      "nullable": true
+    },
+    "change": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Signed arithmetic difference calculated as the requested-period value minus the comparison-period value, or null when comparison data is unavailable.",
+      "format": "double",
+      "nullable": true
+    },
+    "relativeChangePercent": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Signed relative percentage change from the comparison-period value, or null when it cannot be calculated.",
+      "format": "double",
+      "nullable": true
+    }
+  },
+  "description": "One named measurement for the requested period with an optional comparison-period value."
+}

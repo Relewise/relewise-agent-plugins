@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the merchandising rule should be enabled. Omit this property or set it to null to preserve the current enabled state.",
+      "nullable": true
+    },
+    "schedule": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/UpdateMerchandisingRuleScheduleRequest"
+        }
+      ],
+      "nullable": true
+    }
+  },
+  "description": "Settings that control whether and when a merchandising rule is active without changing its definition or targeting configuration."
+}

@@ -1,0 +1,16 @@
+{
+  "required": [
+    "total",
+    "rate"
+  ],
+  "type": "object",
+  "properties": {
+    "total": {
+      "$ref": "#/components/schemas/ComparedValue"
+    },
+    "rate": {
+      "$ref": "#/components/schemas/ComparedValue"
+    }
+  },
+  "description": "Metrics for searches that returned no products."
+}

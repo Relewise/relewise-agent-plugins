@@ -1,0 +1,20 @@
+{
+  "required": [
+    "position"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "fixedPosition"
+      ],
+      "type": "string"
+    },
+    "position": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "One-based result position assigned to matching entities.",
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "description": "Configuration for a rule that places matching entities at a fixed result position."
+}

@@ -1,0 +1,36 @@
+{
+  "required": [
+    "pageNumber",
+    "pageSize",
+    "totalResults",
+    "totalPages"
+  ],
+  "type": "object",
+  "properties": {
+    "pageNumber": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "One-based number of the returned page.",
+      "format": "uint32",
+      "type": "integer"
+    },
+    "pageSize": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Maximum number of items requested for the page.",
+      "format": "uint32",
+      "type": "integer"
+    },
+    "totalResults": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Total number of items matching the request across all pages.",
+      "format": "uint32",
+      "type": "integer"
+    },
+    "totalPages": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Total number of pages required to return all matching items at the requested page size.",
+      "format": "uint32",
+      "type": "integer"
+    }
+  },
+  "description": "Pagination details for one page of a collection."
+}

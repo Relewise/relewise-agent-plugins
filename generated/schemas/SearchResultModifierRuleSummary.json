@@ -1,0 +1,35 @@
+{
+  "required": [
+    "id",
+    "isApproved",
+    "scope",
+    "condition",
+    "actionKinds"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The stable Rule ID.",
+      "format": "uuid"
+    },
+    "isApproved": {
+      "type": "boolean",
+      "description": "Whether the rule is approved and active for matching searches."
+    },
+    "scope": {
+      "$ref": "#/components/schemas/SearchToolRuleScope"
+    },
+    "condition": {
+      "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+    },
+    "actionKinds": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SearchResultModifierActionKind"
+      },
+      "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration and filters."
+    }
+  },
+  "description": "Compact Search Result Modifier rule representation returned by list operations."
+}

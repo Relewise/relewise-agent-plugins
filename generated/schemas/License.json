@@ -1,0 +1,19 @@
+{
+  "required": [
+    "id",
+    "displayName"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The License ID in My Relewise.",
+      "format": "uuid"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The License display name in My Relewise."
+    }
+  },
+  "description": "A Relewise License. A License can contain multiple Datasets."
+}

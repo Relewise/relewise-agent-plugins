@@ -1,0 +1,12 @@
+{
+  "required": [
+    "filterOptions"
+  ],
+  "type": "object",
+  "properties": {
+    "filterOptions": {
+      "$ref": "#/components/schemas/SearchAnalyticsFilterOptions"
+    }
+  },
+  "description": "Available Search Analytics filter options for the requested period and current selections."
+}
