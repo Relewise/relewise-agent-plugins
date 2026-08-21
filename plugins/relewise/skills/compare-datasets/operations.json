@@ -1,0 +1,24 @@
+{
+  "operationIds": [
+    "AnalyticsGetRevenue",
+    "AnalyticsGetSearchFilterOptions",
+    "AnalyticsGetSearchOverview",
+    "AnalyticsListLowClickRateSearches",
+    "AnalyticsListPopularSearches",
+    "AnalyticsListSearchesWithoutResults",
+    "AnalyticsListTrendingDownSearches",
+    "AnalyticsListTrendingUpSearches",
+    "CoreGetAnalyzerConsumptionSummary",
+    "CoreGetBehavioralTrackingConsumptionSummary",
+    "CoreGetContentDeliveryConsumptionSummary",
+    "CoreGetDataset",
+    "CoreGetDatasetMetadata",
+    "CoreGetIntegrationsConsumptionSummary",
+    "CoreGetMarketingAutomationConsumptionSummary",
+    "CoreGetRecommendationsConsumptionSummary",
+    "CoreGetRetailMediaConsumptionSummary",
+    "CoreGetSearchConsumptionSummary",
+    "CoreGetShoppertainmentConsumptionSummary",
+    "IdentityGetCurrentUser"
+  ]
+}

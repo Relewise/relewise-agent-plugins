@@ -1,0 +1,22 @@
+{
+  "operationIds": [
+    "CoreGetDataset",
+    "CoreGetDatasetMetadata",
+    "IdentityGetCurrentUser",
+    "MerchandisingGetRule",
+    "MerchandisingListRules",
+    "SearchToolsGetDecompoundingRule",
+    "SearchToolsGetRedirectRule",
+    "SearchToolsGetSearchIndex",
+    "SearchToolsGetSearchResultModifierRule",
+    "SearchToolsGetSearchTermModifierRule",
+    "SearchToolsGetStemmingRule",
+    "SearchToolsListDecompoundingRules",
+    "SearchToolsListRedirectRules",
+    "SearchToolsListSearchIndexes",
+    "SearchToolsListSearchResultModifierRules",
+    "SearchToolsListSearchTermModifierRules",
+    "SearchToolsListStemmingRules",
+    "SearchToolsListSynonymRules"
+  ]
+}

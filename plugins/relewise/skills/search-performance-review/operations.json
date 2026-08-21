@@ -1,0 +1,14 @@
+{
+  "operationIds": [
+    "AnalyticsGetSearchFilterOptions",
+    "AnalyticsGetSearchOverview",
+    "AnalyticsListLowClickRateSearches",
+    "AnalyticsListPopularSearches",
+    "AnalyticsListSearchesWithoutResults",
+    "AnalyticsListTrendingDownSearches",
+    "AnalyticsListTrendingUpSearches",
+    "CoreGetDataset",
+    "CoreGetDatasetMetadata",
+    "IdentityGetCurrentUser"
+  ]
+}
