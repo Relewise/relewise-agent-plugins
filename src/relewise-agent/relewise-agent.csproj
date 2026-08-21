@@ -12,4 +12,8 @@
     <StripSymbols>true</StripSymbols>
     <Version>0.1.0</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\generated\operations.json" LogicalName="Relewise.Agent.operations.json" />
+  </ItemGroup>
 </Project>
