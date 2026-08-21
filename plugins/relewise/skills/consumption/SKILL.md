@@ -18,4 +18,3 @@ Consumption operations are read-only and return aggregate measurements, comparis
 - daily trends show when usage occurred.
 
 State the Dataset, product area, and inclusive period with the result. Do not treat different product-area units as interchangeable or sum them unless the response contract establishes compatible units.
-

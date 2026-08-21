@@ -12,4 +12,3 @@
 | Valid search filters | `AnalyticsGetSearchFilterOptions` | Resolve language first; options depend on current selections. |
 
 Search Analytics represents Product Search activity from identified users. Keep that scope visible when interpreting results.
-
