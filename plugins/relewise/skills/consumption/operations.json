@@ -1,0 +1,13 @@
+{
+  "operationIds": [
+    "CoreGetAnalyzerConsumptionSummary",
+    "CoreGetBehavioralTrackingConsumptionSummary",
+    "CoreGetContentDeliveryConsumptionSummary",
+    "CoreGetIntegrationsConsumptionSummary",
+    "CoreGetMarketingAutomationConsumptionSummary",
+    "CoreGetRecommendationsConsumptionSummary",
+    "CoreGetRetailMediaConsumptionSummary",
+    "CoreGetSearchConsumptionSummary",
+    "CoreGetShoppertainmentConsumptionSummary"
+  ]
+}

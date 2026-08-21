@@ -1,0 +1,7 @@
+{
+  "operationIds": [
+    "MerchandisingGetRule",
+    "MerchandisingListRules",
+    "MerchandisingUpdateRule"
+  ]
+}
