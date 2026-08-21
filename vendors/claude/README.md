@@ -18,3 +18,15 @@ claude --plugin-dir artifacts/claude/<runtime-id>/relewise
 ```
 
 Supported runtime identifiers are `win-x64`, `linux-x64`, `linux-arm64`, `osx-x64`, and `osx-arm64`.
+
+## Fresh-install acceptance test
+
+Use a machine with Claude Code installed and authenticated but without an existing Relewise plugin. Build the package for that machine, load its `relewise` directory with `claude --plugin-dir`, and provide the Agent Gateway PAT when Claude prompts for the required protected plugin option.
+
+Verify these prompts in order:
+
+1. `What Relewise Datasets do I have access to?`
+2. `Tell me about <one returned Dataset name>.`
+3. `Compare <one returned Dataset name> and <another returned Dataset name>.`
+
+The workflow passes when Claude discovers and invokes the packaged skill and launcher, authenticates successfully, resolves the named Datasets without the user supplying IDs, and returns a useful comparison. The PAT must not appear in command arguments, output, transcripts, or package files.
