@@ -37,8 +37,11 @@ Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -De
 New-Item -ItemType Directory -Path (Join-Path $packageRoot 'bin'), (Join-Path $packageRoot 'libexec') | Out-Null
 
 $launcher = Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'bin\relewise-agent')
-$launcher = $launcher.Replace('__RELEWISE_AGENT_EXECUTABLE__', $expectedExecutableName)
-Set-Content -LiteralPath (Join-Path $packageRoot 'bin\relewise-agent') -Value $launcher -NoNewline
+$launcher = $launcher.Replace('__RELEWISE_AGENT_EXECUTABLE__', $expectedExecutableName).Replace("`r`n", "`n")
+[IO.File]::WriteAllText(
+    (Join-Path $packageRoot 'bin\relewise-agent'),
+    $launcher,
+    [Text.UTF8Encoding]::new($false))
 Copy-Item -LiteralPath $resolvedExecutable -Destination (Join-Path $packageRoot "libexec\$expectedExecutableName")
 
 if (-not $IsWindows) {
