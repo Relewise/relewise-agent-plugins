@@ -1,0 +1,47 @@
+name: Contract validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: contract-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate contract
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build generator
+        run: dotnet build tools/generate-contract/generate-contract.csproj --configuration Release
+
+      - name: Regenerate contract catalog
+        run: dotnet run --project tools/generate-contract/generate-contract.csproj --configuration Release --no-build
+
+      - name: Verify generated files are current
+        shell: bash
+        run: |
+          status="$(git status --porcelain --untracked-files=all -- generated)"
+          if [[ -n "$status" ]]; then
+            echo "Generated contract files are not current. Run:"
+            echo "dotnet run --project tools/generate-contract"
+            echo "$status"
+            git diff -- generated
+            exit 1
+          fi

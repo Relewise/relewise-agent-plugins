@@ -58,7 +58,9 @@ internal static class GenerateContract
         }
 
         var schemaIndex = GenerateSchemas(schemas, schemasDirectory);
-        var sourceHash = Convert.ToHexString(SHA256.HashData(sourceBytes)).ToLowerInvariant();
+        var normalizedSource = Encoding.UTF8.GetBytes(
+            Encoding.UTF8.GetString(sourceBytes).Replace("\r\n", "\n").Replace("\r", "\n"));
+        var sourceHash = Convert.ToHexString(SHA256.HashData(normalizedSource)).ToLowerInvariant();
         var catalog = new JsonObject
         {
             ["source"] = "contracts/agent-gateway-v1.json",

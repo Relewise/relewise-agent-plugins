@@ -1,6 +1,6 @@
 {
   "source": "contracts/agent-gateway-v1.json",
-  "sourceSha256": "3176f5227dde02fbf768ef97334a300685bdb7b0328df3d6d43b9b30d5b763f2",
+  "sourceSha256": "b8a22c425d2be610589cfbf9cfd430f9249f060b8c67d1309b362b9aafd46d88",
   "openapi": "3.0.4",
   "apiVersion": "v1",
   "operationCount": 41,
