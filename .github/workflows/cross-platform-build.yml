@@ -1,0 +1,63 @@
+name: Cross-platform build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cross-platform-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build ${{ matrix.rid }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: win-x64
+            runner: windows-2025
+            executable: relewise-agent.exe
+          - rid: linux-x64
+            runner: ubuntu-24.04
+            executable: relewise-agent
+          - rid: linux-arm64
+            runner: ubuntu-24.04-arm
+            executable: relewise-agent
+          - rid: osx-x64
+            runner: macos-15-intel
+            executable: relewise-agent
+          - rid: osx-arm64
+            runner: macos-15
+            executable: relewise-agent
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish native executable
+        run: >-
+          dotnet publish src/relewise-agent/relewise-agent.csproj
+          --configuration Release
+          --runtime ${{ matrix.rid }}
+          --output artifacts/${{ matrix.rid }}
+
+      - name: Run CLI and packaging smoke tests
+        shell: pwsh
+        run: >-
+          ./tests/cli/smoke.ps1
+          -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+
