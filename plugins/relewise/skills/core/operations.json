@@ -1,0 +1,8 @@
+{
+  "operationIds": [
+    "CoreGetDataset",
+    "CoreGetDatasetMetadata",
+    "IdentityGetCurrentUser"
+  ]
+}
+
