@@ -19,6 +19,14 @@ internal static class CliApplication
                 "RELEWISE_AGENT_GATEWAY_TOKEN is not a valid bearer token value.",
                 4);
         }
+        catch (RequestValidationException exception)
+        {
+            return WriteError(
+                "validation_error",
+                exception.Message,
+                8,
+                operationId: exception.OperationId);
+        }
         catch (TaskCanceledException)
         {
             return WriteError(
@@ -58,7 +66,7 @@ internal static class CliApplication
                 Data: new HelpData(
                     Name: ApplicationName,
                     Version: ApplicationVersion,
-                    Commands: ["me", "datasets", "dataset <dataset-id>", "operations", "schema <operation-id>", "--help", "--version"])),
+                    Commands: ["me", "datasets", "dataset <dataset-id>", "operations", "schema <operation-id>", "call <operation-id> --dataset <dataset-id> [--input <path>]", "--help", "--version"])),
                 AgentJsonContext.Default.HelpResponse);
             return 0;
         }
@@ -100,6 +108,11 @@ internal static class CliApplication
         if (args.Length > 0 && string.Equals(args[0], "dataset", StringComparison.Ordinal))
         {
             return WriteError("invalid_arguments", "Usage: relewise-agent dataset <dataset-id>", 2);
+        }
+
+        if (args.Length > 0 && string.Equals(args[0], "call", StringComparison.Ordinal))
+        {
+            return await RunCallAsync(args);
         }
 
         if (args is ["operations"])
@@ -246,6 +259,98 @@ internal static class CliApplication
             Success: true,
             Data: result.Data!.Value),
             AgentJsonContext.Default.DatasetResponse);
+        return 0;
+    }
+
+    private static async Task<int> RunCallAsync(string[] args)
+    {
+        var options = CallOptions.Parse(args);
+        var operation = OperationCatalog.Load().Find(options.OperationId);
+        if (operation is null)
+        {
+            return WriteError(
+                "operation_not_found",
+                $"Operation '{options.OperationId}' does not exist in the embedded Agent Gateway contract.",
+                3,
+                operationId: options.OperationId);
+        }
+
+        var request = OperationRequestBuilder.Build(
+            operation.Value,
+            options.DatasetId,
+            options.InputPath);
+        var token = ReadToken();
+        if (token is null)
+        {
+            return WriteError(
+                "authentication_error",
+                "RELEWISE_AGENT_GATEWAY_TOKEN is not configured.",
+                4,
+                operationId: options.OperationId);
+        }
+
+        using var client = new AgentGatewayClient();
+        var currentUser = await client.GetCurrentUserAsync(token);
+        if (!currentUser.Success)
+        {
+            return WriteGatewayError(currentUser, "IdentityGetCurrentUser");
+        }
+
+        var datasets = DatasetCatalog.FromCurrentUser(currentUser.Data!.Value);
+        if (!datasets.Any(dataset =>
+            Guid.TryParse(dataset.Id, out var accessibleId) &&
+            accessibleId == options.DatasetId))
+        {
+            return WriteError(
+                "dataset_access_error",
+                $"Dataset '{options.DatasetId:D}' is not accessible to the configured Personal Access Token.",
+                7,
+                operationId: options.OperationId);
+        }
+
+        var datasetDetails = await client.GetDatasetAsync(token, options.DatasetId);
+        if (!datasetDetails.Success)
+        {
+            return WriteGatewayError(datasetDetails, "CoreGetDataset");
+        }
+
+        var policy = DatasetCatalog.FromDatasetDetails(datasetDetails.Data!.Value);
+        if (!policy.RestApiEnabled)
+        {
+            return WriteError(
+                "dataset_access_error",
+                "Agent Gateway REST access is disabled for the requested Dataset.",
+                7,
+                operationId: options.OperationId);
+        }
+
+        if (!policy.Allows(request.Area))
+        {
+            return WriteError(
+                "dataset_access_error",
+                $"Dataset policy does not enable Agent Gateway Area '{request.Area}'.",
+                7,
+                operationId: options.OperationId);
+        }
+
+        var result = await client.ExecuteAsync(
+            token,
+            request.Method,
+            request.RequestUri,
+            request.Body);
+        if (!result.Success)
+        {
+            return WriteGatewayError(result, options.OperationId);
+        }
+
+        WriteJson(new CallResponse(
+            Success: true,
+            Data: new CallData(
+                OperationId: options.OperationId,
+                DatasetId: options.DatasetId.ToString("D"),
+                StatusCode: result.StatusCode!.Value,
+                Response: result.Data!.Value)),
+            AgentJsonContext.Default.CallResponse);
         return 0;
     }
 

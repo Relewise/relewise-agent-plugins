@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
 
 internal sealed class AgentGatewayClient : IDisposable
@@ -38,6 +39,51 @@ internal sealed class AgentGatewayClient : IDisposable
             notFoundExitCode: 7);
     }
 
+    public async Task<GatewayCallResult> ExecuteAsync(
+        string token,
+        string method,
+        string requestUri,
+        JsonElement? body)
+    {
+        using var request = new HttpRequestMessage(new HttpMethod(method), requestUri);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        if (body is not null)
+        {
+            request.Content = new StringContent(
+                body.Value.GetRawText(),
+                Encoding.UTF8,
+                "application/json");
+        }
+
+        using var response = await httpClient.SendAsync(
+            request,
+            HttpCompletionOption.ResponseHeadersRead);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return await ReadSuccessResponseAsync(response);
+        }
+
+        return response.StatusCode switch
+        {
+            HttpStatusCode.Unauthorized => GatewayCallResult.Failed(
+                "authentication_error",
+                "The Agent Gateway rejected the configured Personal Access Token.",
+                4,
+                (int)response.StatusCode),
+            HttpStatusCode.Forbidden => GatewayCallResult.Failed(
+                "dataset_access_error",
+                "The Dataset policy does not allow the requested Agent Gateway operation.",
+                7,
+                (int)response.StatusCode),
+            _ => GatewayCallResult.Failed(
+                "api_error",
+                $"The Agent Gateway returned HTTP {(int)response.StatusCode}.",
+                6,
+                (int)response.StatusCode)
+        };
+    }
+
     private async Task<GatewayCallResult> GetJsonAsync(
         string token,
         string requestUri,
@@ -55,20 +101,7 @@ internal sealed class AgentGatewayClient : IDisposable
 
         if (response.IsSuccessStatusCode)
         {
-            try
-            {
-                await using var stream = await response.Content.ReadAsStreamAsync();
-                using var document = await JsonDocument.ParseAsync(stream);
-                return GatewayCallResult.Succeeded(document.RootElement.Clone());
-            }
-            catch (JsonException)
-            {
-                return GatewayCallResult.Failed(
-                    "api_error",
-                    "The Agent Gateway returned an invalid JSON response.",
-                    6,
-                    (int)response.StatusCode);
-            }
+            return await ReadSuccessResponseAsync(response);
         }
 
         return response.StatusCode switch
@@ -98,6 +131,26 @@ internal sealed class AgentGatewayClient : IDisposable
         };
     }
 
+    private static async Task<GatewayCallResult> ReadSuccessResponseAsync(HttpResponseMessage response)
+    {
+        try
+        {
+            await using var stream = await response.Content.ReadAsStreamAsync();
+            using var document = await JsonDocument.ParseAsync(stream);
+            return GatewayCallResult.Succeeded(
+                document.RootElement.Clone(),
+                (int)response.StatusCode);
+        }
+        catch (JsonException)
+        {
+            return GatewayCallResult.Failed(
+                "api_error",
+                "The Agent Gateway returned an invalid JSON response.",
+                6,
+                (int)response.StatusCode);
+        }
+    }
+
     public void Dispose()
     {
         httpClient.Dispose();
@@ -112,8 +165,8 @@ internal sealed record GatewayCallResult(
     int ExitCode,
     int? StatusCode)
 {
-    public static GatewayCallResult Succeeded(JsonElement data) =>
-        new(true, data, null, null, 0, null);
+    public static GatewayCallResult Succeeded(JsonElement data, int statusCode) =>
+        new(true, data, null, null, 0, statusCode);
 
     public static GatewayCallResult Failed(
         string errorType,

@@ -42,7 +42,39 @@ relewise-agent schema CoreGetDataset
 
 The operation catalog is embedded at build time from `generated/operations.json`, so the released executable uses the same versioned contract as its source release.
 
-All commands emit one JSON document. Successful commands exit with code `0`; internal failures use `1`, invalid commands or arguments use `2`, unknown operation IDs use `3`, authentication failures use `4`, network failures use `5`, Agent Gateway API failures use `6`, and Dataset access failures use `7`.
+Execute a Dataset-scoped operation by its exact OpenAPI operation ID:
+
+```shell
+relewise-agent call AnalyticsGetRevenue --dataset 00000000-0000-0000-0000-000000000000 --input request.json
+```
+
+The optional input file uses a stable envelope:
+
+```json
+{
+  "parameters": {
+    "fromDate": "2026-08-01",
+    "toDate": "2026-08-21",
+    "currency": "DKK"
+  },
+  "body": {}
+}
+```
+
+`parameters` supplies non-Dataset path and query parameters. `body` supplies the JSON request body and must be omitted for operations that do not accept one. `--input` can be omitted when an operation requires neither.
+
+Before executing the operation, `call`:
+
+1. resolves method, path, parameters, body, and Area from the embedded catalog;
+2. validates the input envelope, required parameters, scalar parameter types, and required body presence;
+3. verifies the Dataset through `/me`;
+4. retrieves `/core/dataset` and enforces its effective REST and Area policy;
+5. attaches bearer authentication and executes the HTTPS request;
+6. returns the operation ID, Dataset ID, HTTP status, and JSON response.
+
+Input files are limited to 1 MiB and a JSON depth of 64. The PAT, HTTP method, URL construction, Dataset path placement, headers, and JSON escaping remain implementation details of `relewise-agent`.
+
+All commands emit one JSON document. Successful commands exit with code `0`; internal failures use `1`, invalid commands or arguments use `2`, unknown operation IDs use `3`, authentication failures use `4`, network failures use `5`, Agent Gateway API failures use `6`, Dataset access failures use `7`, and request validation failures use `8`.
 
 ## Run during development
 
