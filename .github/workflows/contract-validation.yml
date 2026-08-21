@@ -48,3 +48,18 @@ jobs:
 
       - name: Validate skill operation references
         run: dotnet run --project tools/validate-skills/validate-skills.csproj --configuration Release
+
+      - name: Generate API coverage
+        run: dotnet run --project tools/generate-coverage/generate-coverage.csproj --configuration Release
+
+      - name: Verify API coverage files are current
+        shell: bash
+        run: |
+          status="$(git status --porcelain --untracked-files=all -- generated/operation-coverage.json docs/api-coverage.md)"
+          if [[ -n "$status" ]]; then
+            echo "API coverage files are not current. Run:"
+            echo "dotnet run --project tools/generate-coverage"
+            echo "$status"
+            git diff -- generated/operation-coverage.json docs/api-coverage.md
+            exit 1
+          fi

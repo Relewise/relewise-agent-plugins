@@ -1,0 +1,254 @@
+{
+  "operationCount": 41,
+  "coveredOperationCount": 41,
+  "uncoveredOperationCount": 0,
+  "coveragePercent": 100,
+  "operations": [
+    {
+      "operationId": "AnalyticsGetRevenue",
+      "skills": [
+        "relewise/skills/analytics"
+      ]
+    },
+    {
+      "operationId": "AnalyticsGetSearchFilterOptions",
+      "skills": [
+        "relewise/skills/analytics"
+      ]
+    },
+    {
+      "operationId": "AnalyticsGetSearchOverview",
+      "skills": [
+        "relewise/skills/analytics"
+      ]
+    },
+    {
+      "operationId": "AnalyticsListLowClickRateSearches",
+      "skills": [
+        "relewise/skills/analytics"
+      ]
+    },
+    {
+      "operationId": "AnalyticsListPopularSearches",
+      "skills": [
+        "relewise/skills/analytics"
+      ]
+    },
+    {
+      "operationId": "AnalyticsListSearchesWithoutResults",
+      "skills": [
+        "relewise/skills/analytics"
+      ]
+    },
+    {
+      "operationId": "AnalyticsListTrendingDownSearches",
+      "skills": [
+        "relewise/skills/analytics"
+      ]
+    },
+    {
+      "operationId": "AnalyticsListTrendingUpSearches",
+      "skills": [
+        "relewise/skills/analytics"
+      ]
+    },
+    {
+      "operationId": "CoreGetAnalyzerConsumptionSummary",
+      "skills": [
+        "relewise/skills/consumption"
+      ]
+    },
+    {
+      "operationId": "CoreGetBehavioralTrackingConsumptionSummary",
+      "skills": [
+        "relewise/skills/consumption"
+      ]
+    },
+    {
+      "operationId": "CoreGetContentDeliveryConsumptionSummary",
+      "skills": [
+        "relewise/skills/consumption"
+      ]
+    },
+    {
+      "operationId": "CoreGetDataset",
+      "skills": [
+        "relewise/skills/core"
+      ]
+    },
+    {
+      "operationId": "CoreGetDatasetMetadata",
+      "skills": [
+        "relewise/skills/core"
+      ]
+    },
+    {
+      "operationId": "CoreGetIntegrationsConsumptionSummary",
+      "skills": [
+        "relewise/skills/consumption"
+      ]
+    },
+    {
+      "operationId": "CoreGetMarketingAutomationConsumptionSummary",
+      "skills": [
+        "relewise/skills/consumption"
+      ]
+    },
+    {
+      "operationId": "CoreGetRecommendationsConsumptionSummary",
+      "skills": [
+        "relewise/skills/consumption"
+      ]
+    },
+    {
+      "operationId": "CoreGetRetailMediaConsumptionSummary",
+      "skills": [
+        "relewise/skills/consumption"
+      ]
+    },
+    {
+      "operationId": "CoreGetSearchConsumptionSummary",
+      "skills": [
+        "relewise/skills/consumption"
+      ]
+    },
+    {
+      "operationId": "CoreGetShoppertainmentConsumptionSummary",
+      "skills": [
+        "relewise/skills/consumption"
+      ]
+    },
+    {
+      "operationId": "IdentityGetCurrentUser",
+      "skills": [
+        "relewise/skills/core"
+      ]
+    },
+    {
+      "operationId": "MerchandisingGetRule",
+      "skills": [
+        "relewise/skills/merchandising"
+      ]
+    },
+    {
+      "operationId": "MerchandisingListRules",
+      "skills": [
+        "relewise/skills/merchandising"
+      ]
+    },
+    {
+      "operationId": "MerchandisingUpdateRule",
+      "skills": [
+        "relewise/skills/merchandising"
+      ]
+    },
+    {
+      "operationId": "SearchToolsGetDecompoundingRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsGetRedirectRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsGetSearchIndex",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsGetSearchResultModifierRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsGetSearchTermModifierRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsGetStemmingRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsListDecompoundingRules",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsListRedirectRules",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsListSearchIndexes",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsListSearchResultModifierRules",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsListSearchTermModifierRules",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsListStemmingRules",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsListSynonymRules",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsPatchDecompoundingRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsPatchRedirectRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsPatchSearchResultModifierRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsPatchSearchTermModifierRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsPatchStemmingRule",
+      "skills": [
+        "relewise/skills/search-tools"
+      ]
+    }
+  ]
+}
