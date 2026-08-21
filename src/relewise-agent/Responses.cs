@@ -15,6 +15,12 @@ internal sealed record DatasetSummary(
     string LicenseId,
     string LicenseDisplayName);
 internal sealed record DatasetResponse(bool Success, JsonElement Data);
+internal sealed record CallResponse(bool Success, CallData Data);
+internal sealed record CallData(
+    string OperationId,
+    string DatasetId,
+    int StatusCode,
+    JsonElement Response);
 internal sealed record OperationsResponse(bool Success, OperationsData Data);
 internal sealed record OperationsData(int Count, OperationSummary[] Operations);
 internal sealed record OperationSummary(string OperationId, string Method, string Path, string[] Tags, string? Summary);
@@ -26,6 +32,8 @@ internal sealed record ErrorDetails(string Type, string Message, string? Operati
 internal sealed record CurrentUserContract(LicenseContract[] Licenses);
 internal sealed record LicenseContract(string Id, string DisplayName, DatasetContract[]? Datasets);
 internal sealed record DatasetContract(string Id, string DisplayName, string Type);
+internal sealed record DatasetDetailsContract(AgentGatewayPolicyContract AgentGatewayPolicy);
+internal sealed record AgentGatewayPolicyContract(bool RestApiEnabled, string[] Areas);
 
 [JsonSourceGenerationOptions(
     PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
@@ -35,7 +43,9 @@ internal sealed record DatasetContract(string Id, string DisplayName, string Typ
 [JsonSerializable(typeof(MeResponse))]
 [JsonSerializable(typeof(DatasetsResponse))]
 [JsonSerializable(typeof(DatasetResponse))]
+[JsonSerializable(typeof(CallResponse))]
 [JsonSerializable(typeof(CurrentUserContract))]
+[JsonSerializable(typeof(DatasetDetailsContract))]
 [JsonSerializable(typeof(OperationsResponse))]
 [JsonSerializable(typeof(SchemaResponse))]
 [JsonSerializable(typeof(ErrorResponse))]

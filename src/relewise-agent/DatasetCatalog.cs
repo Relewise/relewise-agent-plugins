@@ -33,6 +33,40 @@ internal static class DatasetCatalog
             .ThenBy(dataset => dataset.Id, StringComparer.Ordinal)
             .ToArray();
     }
+
+    public static DatasetPolicy FromDatasetDetails(JsonElement datasetDetails)
+    {
+        DatasetDetailsContract? response;
+        try
+        {
+            response = JsonSerializer.Deserialize(
+                datasetDetails,
+                AgentJsonContext.Default.DatasetDetailsContract);
+        }
+        catch (JsonException exception)
+        {
+            throw new AgentGatewayResponseException(exception);
+        }
+
+        if (response?.AgentGatewayPolicy?.Areas is null)
+        {
+            throw new AgentGatewayResponseException();
+        }
+
+        return new DatasetPolicy(
+            response.AgentGatewayPolicy.RestApiEnabled,
+            response.AgentGatewayPolicy.Areas);
+    }
+}
+
+internal sealed record DatasetPolicy(bool RestApiEnabled, string[] Areas)
+{
+    public bool Allows(string? area)
+    {
+        return RestApiEnabled &&
+            area is not null &&
+            Areas.Contains(area, StringComparer.OrdinalIgnoreCase);
+    }
 }
 
 internal sealed class AgentGatewayResponseException : Exception
