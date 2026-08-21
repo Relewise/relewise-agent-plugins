@@ -1,0 +1,17 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "relewise",
+  "version": "0.1.0",
+  "description": "Work with Relewise Datasets, analytics, consumption, merchandising, and Search Tools.",
+  "author": {
+    "name": "Relewise"
+  },
+  "homepage": "https://www.relewise.com/",
+  "repository": "https://github.com/Relewise/relewise-agent-plugins",
+  "keywords": [
+    "relewise",
+    "analytics",
+    "search",
+    "merchandising"
+  ]
+}
