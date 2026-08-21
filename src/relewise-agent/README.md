@@ -14,6 +14,20 @@ relewise-agent me
 
 `me` reads the PAT exclusively from `RELEWISE_AGENT_GATEWAY_TOKEN`. Tokens are not accepted as command-line arguments and are never included in diagnostics.
 
+List accessible Datasets in a normalized, deterministic order with their License context:
+
+```shell
+relewise-agent datasets
+```
+
+Validate a UUID against the Datasets returned by `/me`, then retrieve its Dataset details and effective Agent Gateway policy:
+
+```shell
+relewise-agent dataset 00000000-0000-0000-0000-000000000000
+```
+
+The `dataset` command always re-checks `/me` before making the Dataset-scoped request. Unknown, inaccessible, and malformed Dataset IDs return `dataset_access_error`; Dataset IDs are never inferred or invented.
+
 List the embedded Agent Gateway operation catalog in a bounded summary form:
 
 ```shell
@@ -28,7 +42,7 @@ relewise-agent schema CoreGetDataset
 
 The operation catalog is embedded at build time from `generated/operations.json`, so the released executable uses the same versioned contract as its source release.
 
-All commands emit one JSON document. Successful commands exit with code `0`; internal failures use `1`, invalid commands or arguments use `2`, unknown operation IDs use `3`, authentication failures use `4`, network failures use `5`, and Agent Gateway API failures use `6`.
+All commands emit one JSON document. Successful commands exit with code `0`; internal failures use `1`, invalid commands or arguments use `2`, unknown operation IDs use `3`, authentication failures use `4`, network failures use `5`, Agent Gateway API failures use `6`, and Dataset access failures use `7`.
 
 ## Run during development
 
