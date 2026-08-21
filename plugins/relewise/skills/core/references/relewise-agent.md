@@ -45,4 +45,3 @@ Use `parameters` for non-Dataset path and query parameters. Include `body` only 
 - `validation_error`: correct the input using `schema` and the returned message.
 - `api_error`: use the bounded message and status code to correct the request when possible; avoid identical retries.
 - `network_error`: report the connectivity failure; retry once only when the user's request warrants it.
-

@@ -27,4 +27,3 @@ For exact CLI syntax, input envelopes, and error recovery, read [references/rele
 ## Respond
 
 Use Dataset display names in the answer and include IDs only when they help disambiguate or the user requests them. For comparisons, preserve the association between each result and its Dataset. Explain access or policy limitations plainly; do not silently substitute another Dataset.
-

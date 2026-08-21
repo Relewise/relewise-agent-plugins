@@ -73,4 +73,3 @@ static string FindRepositoryRoot()
 
     throw new DirectoryNotFoundException("Could not locate the repository root containing generated/operations.json.");
 }
-
