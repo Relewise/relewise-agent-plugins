@@ -1,0 +1,13 @@
+{
+  "operationIds": [
+    "AnalyticsGetRevenue",
+    "AnalyticsGetSearchFilterOptions",
+    "AnalyticsGetSearchOverview",
+    "AnalyticsListLowClickRateSearches",
+    "AnalyticsListPopularSearches",
+    "AnalyticsListSearchesWithoutResults",
+    "AnalyticsListTrendingDownSearches",
+    "AnalyticsListTrendingUpSearches"
+  ]
+}
+

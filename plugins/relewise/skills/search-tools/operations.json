@@ -1,0 +1,23 @@
+{
+  "operationIds": [
+    "SearchToolsGetDecompoundingRule",
+    "SearchToolsGetRedirectRule",
+    "SearchToolsGetSearchIndex",
+    "SearchToolsGetSearchResultModifierRule",
+    "SearchToolsGetSearchTermModifierRule",
+    "SearchToolsGetStemmingRule",
+    "SearchToolsListDecompoundingRules",
+    "SearchToolsListRedirectRules",
+    "SearchToolsListSearchIndexes",
+    "SearchToolsListSearchResultModifierRules",
+    "SearchToolsListSearchTermModifierRules",
+    "SearchToolsListStemmingRules",
+    "SearchToolsListSynonymRules",
+    "SearchToolsPatchDecompoundingRule",
+    "SearchToolsPatchRedirectRule",
+    "SearchToolsPatchSearchResultModifierRule",
+    "SearchToolsPatchSearchTermModifierRule",
+    "SearchToolsPatchStemmingRule"
+  ]
+}
+
