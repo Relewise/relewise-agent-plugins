@@ -47,4 +47,3 @@ jobs:
         run: >-
           ./tests/integration/live.ps1
           -ExecutablePath artifacts/linux-x64/relewise-agent
-
