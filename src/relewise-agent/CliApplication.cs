@@ -6,11 +6,32 @@ internal static class CliApplication
     private const string ApplicationName = "relewise-agent";
     private const string ApplicationVersion = "0.1.0";
 
-    public static int Run(string[] args)
+    public static async Task<int> RunAsync(string[] args)
     {
         try
         {
-            return RunCommand(args);
+            return await RunCommandAsync(args);
+        }
+        catch (FormatException)
+        {
+            return WriteError(
+                "authentication_error",
+                "RELEWISE_AGENT_GATEWAY_TOKEN is not a valid bearer token value.",
+                4);
+        }
+        catch (TaskCanceledException)
+        {
+            return WriteError(
+                "network_error",
+                "The Agent Gateway request timed out.",
+                5);
+        }
+        catch (HttpRequestException)
+        {
+            return WriteError(
+                "network_error",
+                "The Agent Gateway could not be reached.",
+                5);
         }
         catch (Exception)
         {
@@ -21,7 +42,7 @@ internal static class CliApplication
         }
     }
 
-    private static int RunCommand(string[] args)
+    private static async Task<int> RunCommandAsync(string[] args)
     {
         if (args.Length == 0 || args is ["--help"] or ["-h"])
         {
@@ -30,7 +51,7 @@ internal static class CliApplication
                 Data: new HelpData(
                     Name: ApplicationName,
                     Version: ApplicationVersion,
-                    Commands: ["operations", "schema <operation-id>", "--help", "--version"])),
+                    Commands: ["me", "operations", "schema <operation-id>", "--help", "--version"])),
                 AgentJsonContext.Default.HelpResponse);
             return 0;
         }
@@ -42,6 +63,16 @@ internal static class CliApplication
                 Data: new VersionData(ApplicationName, ApplicationVersion)),
                 AgentJsonContext.Default.VersionResponse);
             return 0;
+        }
+
+        if (args is ["me"])
+        {
+            return await RunMeAsync();
+        }
+
+        if (args.Length > 0 && string.Equals(args[0], "me", StringComparison.Ordinal))
+        {
+            return WriteError("invalid_arguments", "Usage: relewise-agent me", 2);
         }
 
         if (args is ["operations"])
@@ -85,11 +116,46 @@ internal static class CliApplication
         return WriteError("command_not_found", $"Unknown command '{args[0]}'.", 2);
     }
 
-    private static int WriteError(string type, string message, int exitCode)
+    private static async Task<int> RunMeAsync()
+    {
+        var token = Environment.GetEnvironmentVariable("RELEWISE_AGENT_GATEWAY_TOKEN");
+        if (string.IsNullOrWhiteSpace(token))
+        {
+            return WriteError(
+                "authentication_error",
+                "RELEWISE_AGENT_GATEWAY_TOKEN is not configured.",
+                4);
+        }
+
+        using var client = new AgentGatewayClient();
+        var result = await client.GetCurrentUserAsync(token);
+        if (!result.Success)
+        {
+            return WriteError(
+                result.ErrorType!,
+                result.ErrorMessage!,
+                result.ExitCode,
+                operationId: "IdentityGetCurrentUser",
+                statusCode: result.StatusCode);
+        }
+
+        WriteJson(new MeResponse(
+            Success: true,
+            Data: result.Data!.Value),
+            AgentJsonContext.Default.MeResponse);
+        return 0;
+    }
+
+    private static int WriteError(
+        string type,
+        string message,
+        int exitCode,
+        string? operationId = null,
+        int? statusCode = null)
     {
         WriteJson(new ErrorResponse(
             Success: false,
-            Error: new ErrorDetails(type, message)),
+            Error: new ErrorDetails(type, message, operationId, statusCode)),
             AgentJsonContext.Default.ErrorResponse);
         return exitCode;
     }

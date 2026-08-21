@@ -1,1 +1,1 @@
-return CliApplication.Run(args);
+return await CliApplication.RunAsync(args);
