@@ -1,2 +1,5 @@
 **/bin/
 **/obj/
+artifacts/
+!vendors/claude/relewise/bin/
+!vendors/claude/relewise/bin/relewise-agent

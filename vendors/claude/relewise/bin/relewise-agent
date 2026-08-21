@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+set -eu
+
+plugin_root="${CLAUDE_PLUGIN_ROOT:-$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)}"
+case "$plugin_root" in
+  [A-Za-z]:\\*)
+    if command -v cygpath >/dev/null 2>&1; then
+      plugin_root="$(cygpath -u "$plugin_root")"
+    fi
+    ;;
+esac
+
+if [ -z "${RELEWISE_AGENT_GATEWAY_TOKEN:-}" ] && [ -n "${CLAUDE_PLUGIN_OPTION_agent_gateway_token:-}" ]; then
+  export RELEWISE_AGENT_GATEWAY_TOKEN="$CLAUDE_PLUGIN_OPTION_agent_gateway_token"
+fi
+
+exec "$plugin_root/libexec/__RELEWISE_AGENT_EXECUTABLE__" "$@"
