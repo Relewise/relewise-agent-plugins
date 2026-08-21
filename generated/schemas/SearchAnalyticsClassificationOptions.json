@@ -1,0 +1,21 @@
+{
+  "required": [
+    "key",
+    "values"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Case-sensitive classification key."
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Available nonblank values for the classification."
+    }
+  },
+  "description": "Available values for one Search Analytics classification filter."
+}

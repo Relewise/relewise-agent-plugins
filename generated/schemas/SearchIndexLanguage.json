@@ -1,0 +1,24 @@
+{
+  "required": [
+    "language",
+    "isIncluded",
+    "iso6391"
+  ],
+  "type": "object",
+  "properties": {
+    "language": {
+      "type": "string",
+      "description": "Exact, case-sensitive language name used by multilingual entity data and search requests."
+    },
+    "isIncluded": {
+      "type": "boolean",
+      "description": "Whether multilingual data for this language is included in the Search Index."
+    },
+    "iso6391": {
+      "type": "string",
+      "description": "ISO 639-1 alias used for language processing when Language is not itself a valid ISO 639-1 code, or null when no alias is configured.",
+      "nullable": true
+    }
+  },
+  "description": "Language configuration on a Search Index."
+}

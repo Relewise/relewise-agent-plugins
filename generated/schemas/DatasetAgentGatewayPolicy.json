@@ -1,0 +1,26 @@
+{
+  "required": [
+    "restApiEnabled",
+    "mcpEnabled",
+    "areas"
+  ],
+  "type": "object",
+  "properties": {
+    "restApiEnabled": {
+      "type": "boolean",
+      "description": "Whether the authenticated user can access the Dataset through Agent Gateway REST APIs."
+    },
+    "mcpEnabled": {
+      "type": "boolean",
+      "description": "Whether the authenticated user can access the Dataset through Agent Gateway MCP tools."
+    },
+    "areas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The Dataset-scoped Agent Gateway Areas enabled for the authenticated user."
+    }
+  },
+  "description": "The effective Agent Gateway access settings for a Dataset and authenticated user."
+}

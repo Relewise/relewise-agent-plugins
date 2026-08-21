@@ -1,0 +1,40 @@
+{
+  "required": [
+    "kind",
+    "value",
+    "minimumLength",
+    "negated",
+    "nestedConditionCount"
+  ],
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "The matching kind, such as Equals, Contains, StartsWith, or EndsWith.",
+      "nullable": true
+    },
+    "value": {
+      "type": "string",
+      "description": "The text that the submitted search term is compared against. Depending on Kind, the search term must equal, contain, start with, or end with this value.",
+      "nullable": true
+    },
+    "minimumLength": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Optional minimum search-term length required for this condition.",
+      "format": "int32",
+      "nullable": true,
+      "type": "integer"
+    },
+    "negated": {
+      "type": "boolean",
+      "description": "Whether the condition result is inverted."
+    },
+    "nestedConditionCount": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "description": "Compact representation of the root Search Term condition without its nested condition definitions."
+}

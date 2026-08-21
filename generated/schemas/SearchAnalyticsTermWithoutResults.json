@@ -1,0 +1,17 @@
+{
+  "required": [
+    "term",
+    "searchesWithoutResults"
+  ],
+  "type": "object",
+  "properties": {
+    "term": {
+      "type": "string",
+      "description": "Normalized search term."
+    },
+    "searchesWithoutResults": {
+      "$ref": "#/components/schemas/ComparedValue"
+    }
+  },
+  "description": "One search term that returned no products and its search-volume comparison."
+}

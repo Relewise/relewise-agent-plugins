@@ -1,0 +1,54 @@
+{
+  "required": [
+    "id",
+    "isApproved",
+    "scope",
+    "word",
+    "head",
+    "modifierCount",
+    "preventsDecompounding",
+    "modifiers"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The stable Rule ID.",
+      "format": "uuid"
+    },
+    "isApproved": {
+      "type": "boolean",
+      "description": "Whether the rule is approved and active for matching searches."
+    },
+    "scope": {
+      "$ref": "#/components/schemas/SearchToolRuleScope"
+    },
+    "word": {
+      "type": "string",
+      "description": "Compound word governed by the rule."
+    },
+    "head": {
+      "type": "string",
+      "description": "Term that identifies what the compound word represents, or null when the rule prevents decompounding.",
+      "nullable": true
+    },
+    "modifierCount": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Number of terms that modify the Head. Get the rule by ID to inspect the terms.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "preventsDecompounding": {
+      "type": "boolean",
+      "description": "Whether the rule keeps Word intact instead of splitting it into a Head and Modifiers."
+    },
+    "modifiers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Terms that modify the Head. Empty when the rule prevents decompounding."
+    }
+  },
+  "description": "Detailed Decompounding rule representation including its modifier terms."
+}

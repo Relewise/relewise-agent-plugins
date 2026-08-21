@@ -1,0 +1,52 @@
+{
+  "required": [
+    "fromDate",
+    "toDate",
+    "currency",
+    "overall",
+    "graph",
+    "locations"
+  ],
+  "type": "object",
+  "properties": {
+    "fromDate": {
+      "type": "string",
+      "description": "Inclusive first date represented by the analytics.",
+      "format": "date"
+    },
+    "toDate": {
+      "type": "string",
+      "description": "Inclusive last date represented by the analytics.",
+      "format": "date"
+    },
+    "currency": {
+      "type": "string",
+      "description": "Currency used by monetary measurements, or null when the requested currency is unavailable and the report is empty.",
+      "nullable": true
+    },
+    "overall": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RevenueMetric"
+      },
+      "description": "Metrics aggregated across the Dataset."
+    },
+    "graph": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/RevenueGraph"
+        }
+      ],
+      "nullable": true
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RevenueLocation"
+      },
+      "description": "Metrics grouped by request location and recommendation request type."
+    }
+  },
+  "description": "Revenue Analytics for the effective date range and currency."
+}

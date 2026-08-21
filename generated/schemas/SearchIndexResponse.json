@@ -1,0 +1,12 @@
+{
+  "required": [
+    "searchIndex"
+  ],
+  "type": "object",
+  "properties": {
+    "searchIndex": {
+      "$ref": "#/components/schemas/SearchIndex"
+    }
+  },
+  "description": "Response containing one Search Index."
+}

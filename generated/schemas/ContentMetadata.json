@@ -1,0 +1,16 @@
+{
+  "required": [
+    "dataKeys"
+  ],
+  "type": "object",
+  "properties": {
+    "dataKeys": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataKey"
+      },
+      "description": "Case-sensitive Data Keys available on content."
+    }
+  },
+  "description": "Metadata available for content entities."
+}

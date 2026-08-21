@@ -1,0 +1,26 @@
+{
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/MerchandisingRuleConfigurationBoostAndBuryRuleConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/MerchandisingRuleConfigurationFixedPositionRuleConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/MerchandisingRuleConfigurationFilterRuleConfiguration"
+    }
+  ],
+  "description": "Type-specific merchandising rule configuration selected by the stable type discriminator.",
+  "discriminator": {
+    "propertyName": "type",
+    "mapping": {
+      "boostAndBury": "#/components/schemas/MerchandisingRuleConfigurationBoostAndBuryRuleConfiguration",
+      "fixedPosition": "#/components/schemas/MerchandisingRuleConfigurationFixedPositionRuleConfiguration",
+      "filter": "#/components/schemas/MerchandisingRuleConfigurationFilterRuleConfiguration"
+    }
+  }
+}

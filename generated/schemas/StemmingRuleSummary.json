@@ -1,0 +1,36 @@
+{
+  "required": [
+    "id",
+    "isApproved",
+    "scope",
+    "stem",
+    "wordCount"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The stable Rule ID.",
+      "format": "uuid"
+    },
+    "isApproved": {
+      "type": "boolean",
+      "description": "Whether the rule is approved and active for matching searches."
+    },
+    "scope": {
+      "$ref": "#/components/schemas/SearchToolRuleScope"
+    },
+    "stem": {
+      "type": "string",
+      "description": "The canonical lexical stem, or null when the words must remain distinct from another inferred stem.",
+      "nullable": true
+    },
+    "wordCount": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Number of word variants governed by the rule. Get the rule by ID to inspect the words.",
+      "format": "int32",
+      "type": "integer"
+    }
+  },
+  "description": "Compact Stemming rule representation returned by list operations."
+}

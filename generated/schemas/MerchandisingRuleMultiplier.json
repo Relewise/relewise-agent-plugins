@@ -1,0 +1,22 @@
+{
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/MerchandisingRuleMultiplierFixedRuleMultiplier"
+    },
+    {
+      "$ref": "#/components/schemas/MerchandisingRuleMultiplierDataKeyRuleMultiplier"
+    }
+  ],
+  "description": "Multiplier selector used by a boost-and-bury rule.",
+  "discriminator": {
+    "propertyName": "type",
+    "mapping": {
+      "fixed": "#/components/schemas/MerchandisingRuleMultiplierFixedRuleMultiplier",
+      "dataKey": "#/components/schemas/MerchandisingRuleMultiplierDataKeyRuleMultiplier"
+    }
+  }
+}

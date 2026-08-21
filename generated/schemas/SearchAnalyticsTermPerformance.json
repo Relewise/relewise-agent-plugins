@@ -1,0 +1,25 @@
+{
+  "required": [
+    "term",
+    "searches",
+    "clicks",
+    "conversions"
+  ],
+  "type": "object",
+  "properties": {
+    "term": {
+      "type": "string",
+      "description": "Normalized search term."
+    },
+    "searches": {
+      "$ref": "#/components/schemas/ComparedValue"
+    },
+    "clicks": {
+      "$ref": "#/components/schemas/SearchClickMetrics"
+    },
+    "conversions": {
+      "$ref": "#/components/schemas/SearchConversionMetrics"
+    }
+  },
+  "description": "One search term and its aggregate search, click, and conversion performance."
+}

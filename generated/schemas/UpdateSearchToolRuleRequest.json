@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "isApproved": {
+      "type": "boolean",
+      "description": "Whether the Search Tools rule should be approved and active for matching searches. Omit this property or set it to null to preserve the current approval state.",
+      "nullable": true
+    }
+  },
+  "description": "Settings that update a Search Tools rule without replacing its definition or scope."
+}

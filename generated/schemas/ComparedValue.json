@@ -1,0 +1,33 @@
+{
+  "required": [
+    "currentValue",
+    "previousValue",
+    "change",
+    "relativeChangePercent"
+  ],
+  "type": "object",
+  "properties": {
+    "currentValue": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Value for the requested period.",
+      "format": "double"
+    },
+    "previousValue": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Value for the preceding equivalent period.",
+      "format": "double"
+    },
+    "change": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+      "format": "double"
+    },
+    "relativeChangePercent": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Signed relative percentage change from the previous value, or null when it cannot be calculated.",
+      "format": "double",
+      "nullable": true
+    }
+  },
+  "description": "A numeric metric value compared with the preceding equivalent period."
+}

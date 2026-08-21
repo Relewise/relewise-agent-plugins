@@ -1,0 +1,37 @@
+{
+  "required": [
+    "id",
+    "isApproved",
+    "scope",
+    "stem",
+    "words"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The stable Rule ID.",
+      "format": "uuid"
+    },
+    "isApproved": {
+      "type": "boolean",
+      "description": "Whether the rule is approved and active for matching searches."
+    },
+    "scope": {
+      "$ref": "#/components/schemas/SearchToolRuleScope"
+    },
+    "stem": {
+      "type": "string",
+      "description": "The canonical lexical stem, or null when the words must remain distinct from another inferred stem.",
+      "nullable": true
+    },
+    "words": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Word variants governed by the rule."
+    }
+  },
+  "description": "Detailed Stemming rule representation including its word variants."
+}

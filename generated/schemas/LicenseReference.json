@@ -1,0 +1,27 @@
+{
+  "required": [
+    "id",
+    "displayName",
+    "datasets"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The License ID in My Relewise.",
+      "format": "uuid"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The License display name in My Relewise."
+    },
+    "datasets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DatasetReference"
+      },
+      "description": "Datasets under this License that are visible to the authenticated user and allowed by the supplied Personal Access Token."
+    }
+  },
+  "description": "A Relewise License containing Dataset references available for access verification."
+}

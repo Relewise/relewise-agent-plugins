@@ -1,0 +1,12 @@
+{
+  "required": [
+    "rule"
+  ],
+  "type": "object",
+  "properties": {
+    "rule": {
+      "$ref": "#/components/schemas/SearchTermModifierRule"
+    }
+  },
+  "description": "One Search Term Modifier rule."
+}

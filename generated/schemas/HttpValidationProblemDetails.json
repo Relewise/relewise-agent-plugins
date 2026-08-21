@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "nullable": true
+    },
+    "title": {
+      "type": "string",
+      "nullable": true
+    },
+    "status": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "format": "int32",
+      "nullable": true,
+      "type": "integer"
+    },
+    "detail": {
+      "type": "string",
+      "nullable": true
+    },
+    "instance": {
+      "type": "string",
+      "nullable": true
+    },
+    "errors": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

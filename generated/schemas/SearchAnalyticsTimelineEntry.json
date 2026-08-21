@@ -1,0 +1,49 @@
+{
+  "required": [
+    "date",
+    "searches",
+    "searchesWithoutResults",
+    "clicks",
+    "averageClickPosition",
+    "conversions"
+  ],
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "description": "Calendar date represented by the measurements.",
+      "format": "date"
+    },
+    "searches": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Total searches on the date, or null when the upstream series has no value for the date.",
+      "format": "double",
+      "nullable": true
+    },
+    "searchesWithoutResults": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Searches returning no products on the date, or null when unavailable.",
+      "format": "double",
+      "nullable": true
+    },
+    "clicks": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Product clicks originating from searches on the date, or null when unavailable.",
+      "format": "double",
+      "nullable": true
+    },
+    "averageClickPosition": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Average position of clicked products on the date, or null when unavailable.",
+      "format": "double",
+      "nullable": true
+    },
+    "conversions": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Conversions attributed to searches on the date, or null when unavailable.",
+      "format": "double",
+      "nullable": true
+    }
+  },
+  "description": "Search Analytics measurements for one date in the requested period."
+}

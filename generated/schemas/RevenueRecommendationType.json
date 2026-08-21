@@ -1,0 +1,30 @@
+{
+  "required": [
+    "requestType",
+    "displayName",
+    "metrics",
+    "graph"
+  ],
+  "type": "object",
+  "properties": {
+    "requestType": {
+      "type": "string",
+      "description": "Technical recommendation request type, such as PopularProductsRequest."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable recommendation type name."
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RevenueMetric"
+      },
+      "description": "Revenue, order, and recommendation measurements for this recommendation type."
+    },
+    "graph": {
+      "$ref": "#/components/schemas/RevenueGraph"
+    }
+  },
+  "description": "Revenue performance attributed to one recommendation request type within a location."
+}

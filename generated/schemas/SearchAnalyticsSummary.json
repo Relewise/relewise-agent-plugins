@@ -1,0 +1,24 @@
+{
+  "required": [
+    "searches",
+    "searchesWithoutResults",
+    "clicks",
+    "conversions"
+  ],
+  "type": "object",
+  "properties": {
+    "searches": {
+      "$ref": "#/components/schemas/SearchMetrics"
+    },
+    "searchesWithoutResults": {
+      "$ref": "#/components/schemas/SearchesWithoutResultsMetrics"
+    },
+    "clicks": {
+      "$ref": "#/components/schemas/SearchClickMetrics"
+    },
+    "conversions": {
+      "$ref": "#/components/schemas/SearchConversionMetrics"
+    }
+  },
+  "description": "Search performance grouped into volume, zero-result, click, and conversion metrics."
+}

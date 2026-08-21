@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "startsAt": {
+      "type": "string",
+      "description": "UTC date and time when the rule should become active. Set to null to remove the lower time bound.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "endsAt": {
+      "type": "string",
+      "description": "UTC date and time when the rule should stop being active. Set to null to remove the upper time bound.",
+      "format": "date-time",
+      "nullable": true
+    }
+  },
+  "description": "UTC time boundaries controlling when a merchandising rule is active."
+}

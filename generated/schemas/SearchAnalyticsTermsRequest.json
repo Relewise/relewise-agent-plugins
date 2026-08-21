@@ -1,0 +1,62 @@
+{
+  "required": [
+    "fromDate",
+    "toDate",
+    "language"
+  ],
+  "type": "object",
+  "properties": {
+    "fromDate": {
+      "type": "string",
+      "description": "Inclusive start of the requested analytics period.",
+      "format": "date"
+    },
+    "toDate": {
+      "type": "string",
+      "description": "Inclusive end of the requested analytics period.",
+      "format": "date"
+    },
+    "language": {
+      "type": "string",
+      "description": "Language used to scope Search Analytics."
+    },
+    "currency": {
+      "type": "string",
+      "description": "Optional currency used to scope Search Analytics.",
+      "nullable": true
+    },
+    "channel": {
+      "type": "string",
+      "description": "Optional channel used to scope Search Analytics.",
+      "nullable": true
+    },
+    "subChannel": {
+      "type": "string",
+      "description": "Optional subchannel. It is ignored when channel is omitted.",
+      "nullable": true
+    },
+    "classifications": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Optional classification key/value filters. Keys are matched using Search Analytics classification semantics.",
+      "nullable": true
+    },
+    "term": {
+      "type": "string",
+      "description": "Optional case-insensitive text used to filter returned search terms.",
+      "nullable": true
+    },
+    "pagination": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/PaginationRequest"
+        }
+      ],
+      "nullable": true
+    }
+  },
+  "description": "Date range, filters, and pagination for a side-effect-free Search Analytics term query. The endpoint determines the ranking type."
+}

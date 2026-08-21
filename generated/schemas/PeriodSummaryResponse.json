@@ -1,0 +1,50 @@
+{
+  "required": [
+    "fromDate",
+    "toDate",
+    "comparisonFromDate",
+    "comparisonToDate",
+    "metrics",
+    "graph"
+  ],
+  "type": "object",
+  "properties": {
+    "fromDate": {
+      "type": "string",
+      "description": "Inclusive first date of the requested period.",
+      "format": "date"
+    },
+    "toDate": {
+      "type": "string",
+      "description": "Inclusive last date of the requested period.",
+      "format": "date"
+    },
+    "comparisonFromDate": {
+      "type": "string",
+      "description": "Inclusive first date of the preceding equivalent comparison period.",
+      "format": "date"
+    },
+    "comparisonToDate": {
+      "type": "string",
+      "description": "Inclusive last date of the preceding equivalent comparison period.",
+      "format": "date"
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PeriodMetric"
+      },
+      "description": "Named metrics for the requested period."
+    },
+    "graph": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/PeriodGraph"
+        }
+      ],
+      "nullable": true
+    }
+  },
+  "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available."
+}

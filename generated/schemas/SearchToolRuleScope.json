@@ -1,0 +1,24 @@
+{
+  "required": [
+    "indexes",
+    "languages"
+  ],
+  "type": "object",
+  "properties": {
+    "indexes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Exact Search Index names to which the rule applies. Empty means all Search Indexes."
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Language codes to which the rule applies. Empty means all languages."
+    }
+  },
+  "description": "The Search Index and language scope in which a Search Tools rule applies."
+}

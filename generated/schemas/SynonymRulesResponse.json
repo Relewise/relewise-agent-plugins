@@ -1,0 +1,20 @@
+{
+  "required": [
+    "rules",
+    "pagination"
+  ],
+  "type": "object",
+  "properties": {
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SynonymRuleSummary"
+      },
+      "description": "Synonym rules in the requested page."
+    },
+    "pagination": {
+      "$ref": "#/components/schemas/PaginationMetadata"
+    }
+  },
+  "description": "A page of Synonym rules."
+}

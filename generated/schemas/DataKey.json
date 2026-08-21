@@ -1,0 +1,26 @@
+{
+  "required": [
+    "key",
+    "dataType",
+    "nestedDataKeys"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Exact case-sensitive name of the Data Key."
+    },
+    "dataType": {
+      "type": "string",
+      "description": "Relewise Data Type, such as String, Boolean, Object, or ObjectList."
+    },
+    "nestedDataKeys": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataKey"
+      },
+      "description": "Data Keys contained inside an Object or ObjectList value; empty for Data Keys without a nested object structure."
+    }
+  },
+  "description": "A case-sensitive Relewise Data Key and its data structure."
+}

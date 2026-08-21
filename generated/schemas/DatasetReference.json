@@ -1,0 +1,24 @@
+{
+  "required": [
+    "id",
+    "displayName",
+    "type"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The Dataset ID to verify with CoreGetDataset and use in subsequent Dataset-scoped requests.",
+      "format": "uuid"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The Dataset display name in My Relewise."
+    },
+    "type": {
+      "type": "string",
+      "description": "The Dataset environment type."
+    }
+  },
+  "description": "A Dataset visible to the authenticated user and allowed by the supplied Personal Access Token."
+}

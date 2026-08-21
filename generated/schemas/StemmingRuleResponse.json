@@ -1,0 +1,12 @@
+{
+  "required": [
+    "rule"
+  ],
+  "type": "object",
+  "properties": {
+    "rule": {
+      "$ref": "#/components/schemas/StemmingRule"
+    }
+  },
+  "description": "One Stemming rule."
+}

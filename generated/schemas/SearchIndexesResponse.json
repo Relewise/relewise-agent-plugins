@@ -1,0 +1,16 @@
+{
+  "required": [
+    "indexes"
+  ],
+  "type": "object",
+  "properties": {
+    "indexes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SearchIndexSummary"
+      },
+      "description": "Compact Search Index representations. Use the Search Index ID to retrieve the complete configuration."
+    }
+  },
+  "description": "Search Indexes configured for the Dataset."
+}

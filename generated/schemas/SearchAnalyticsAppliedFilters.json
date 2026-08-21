@@ -1,0 +1,39 @@
+{
+  "required": [
+    "language",
+    "currency",
+    "channel",
+    "subChannel",
+    "classifications"
+  ],
+  "type": "object",
+  "properties": {
+    "language": {
+      "type": "string",
+      "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery."
+    },
+    "currency": {
+      "type": "string",
+      "description": "Currency used to scope Search Analytics, or null when omitted.",
+      "nullable": true
+    },
+    "channel": {
+      "type": "string",
+      "description": "Channel used to scope Search Analytics, or null when omitted.",
+      "nullable": true
+    },
+    "subChannel": {
+      "type": "string",
+      "description": "Subchannel used to scope Search Analytics, or null when omitted or no channel is selected.",
+      "nullable": true
+    },
+    "classifications": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Nonblank classification key/value selections applied to the query."
+    }
+  },
+  "description": "Effective dimensions used to scope a Search Analytics operation."
+}

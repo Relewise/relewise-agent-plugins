@@ -1,0 +1,20 @@
+{
+  "required": [
+    "date",
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "description": "Calendar date represented by the value.",
+      "format": "date"
+    },
+    "value": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Numeric measurement for the date.",
+      "format": "double"
+    }
+  },
+  "description": "One daily numeric value in a time series."
+}

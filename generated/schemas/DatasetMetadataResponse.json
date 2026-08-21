@@ -1,0 +1,12 @@
+{
+  "required": [
+    "metadata"
+  ],
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "$ref": "#/components/schemas/DatasetMetadata"
+    }
+  },
+  "description": "Dataset metadata resolved for the requested period and inclusion options."
+}

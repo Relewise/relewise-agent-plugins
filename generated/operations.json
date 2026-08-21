@@ -1,0 +1,3519 @@
+{
+  "source": "contracts/agent-gateway-v1.json",
+  "sourceSha256": "3176f5227dde02fbf768ef97334a300685bdb7b0328df3d6d43b9b30d5b763f2",
+  "openapi": "3.0.4",
+  "apiVersion": "v1",
+  "operationCount": 41,
+  "operations": [
+    {
+      "operationId": "AnalyticsGetRevenue",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/analytics/revenue",
+      "tags": [
+        "Analytics"
+      ],
+      "summary": "Gets revenue analytics.",
+      "description": "Returns read-only attributed Revenue measurements and trends for the requested period and currency. Use numeric values for calculations and formatted values for presentation. Use Search Analytics operations for search-performance questions.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive start of the requested revenue period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive end of the requested revenue period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "currency",
+          "required": true,
+          "description": "Currency used for revenue values. This must be provided, but an unavailable currency produces an empty report.",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/RevenueAnalyticsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsGetSearchFilterOptions",
+      "method": "POST",
+      "path": "/api/v1/datasets/{datasetId}/analytics/search/filter-options",
+      "tags": [
+        "Analytics"
+      ],
+      "summary": "Discovers filter options.",
+      "description": "Discovers valid Search Analytics filter values for the requested period and current selections. Use CoreGetDatasetMetadata first when the required language is unknown. After choosing a language, use this operation to discover or validate currencies, channels, subchannels, Classification Keys, and Classification Values instead of guessing them. Options are conditional; for example, available subchannels depend on the selected channel. This operation is read-only and covers Product Search data from identified users.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/SearchAnalyticsOverviewRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchAnalyticsFilterOptionsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsGetSearchOverview",
+      "method": "POST",
+      "path": "/api/v1/datasets/{datasetId}/analytics/search/overview",
+      "tags": [
+        "Analytics"
+      ],
+      "summary": "Gets search overview.",
+      "description": "Returns aggregate Search Analytics KPIs and trends for the requested period. Use this operation for an overall performance summary. Use a term-list operation when the user asks about individual search terms. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/SearchAnalyticsOverviewRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchAnalyticsOverviewResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsListLowClickRateSearches",
+      "method": "POST",
+      "path": "/api/v1/datasets/{datasetId}/analytics/search/low-click-rate",
+      "tags": [
+        "Analytics"
+      ],
+      "summary": "Lists low-click searches.",
+      "description": "Returns search terms ranked using Relewise's low-click-opportunity calculation for the requested period. Use this operation to identify searches that attract few result clicks. Use AnalyticsListSearchesWithoutResults for terms that returned no results. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/SearchAnalyticsTermsRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchAnalyticsTermsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsListPopularSearches",
+      "method": "POST",
+      "path": "/api/v1/datasets/{datasetId}/analytics/search/popular",
+      "tags": [
+        "Analytics"
+      ],
+      "summary": "Lists popular searches.",
+      "description": "Returns search terms ranked by search count for the requested period. Use this operation when the user asks what customers search for most or wants high-volume search terms. Use AnalyticsGetSearchOverview for aggregate KPIs or AnalyticsListTrendingUpSearches for terms gaining search volume. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/SearchAnalyticsTermsRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchAnalyticsTermsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsListSearchesWithoutResults",
+      "method": "POST",
+      "path": "/api/v1/datasets/{datasetId}/analytics/search/without-results",
+      "tags": [
+        "Analytics"
+      ],
+      "summary": "Lists unsuccessful searches.",
+      "description": "Returns search terms that produced no results, ranked by search count for the requested period. Use this operation to identify unmet search demand. Use AnalyticsListLowClickRateSearches when results existed but attracted few clicks. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/SearchAnalyticsTermsRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchAnalyticsTermsWithoutResultsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsListTrendingDownSearches",
+      "method": "POST",
+      "path": "/api/v1/datasets/{datasetId}/analytics/search/trending-down",
+      "tags": [
+        "Analytics"
+      ],
+      "summary": "Lists declining searches.",
+      "description": "Returns search terms ranked using Relewise's trending-down calculation for the requested period and its preceding equivalent period. Use this operation when the user asks which searches are losing popularity. Use AnalyticsListPopularSearches for the highest-volume terms regardless of trend. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/SearchAnalyticsTermsRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchAnalyticsTermsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsListTrendingUpSearches",
+      "method": "POST",
+      "path": "/api/v1/datasets/{datasetId}/analytics/search/trending-up",
+      "tags": [
+        "Analytics"
+      ],
+      "summary": "Lists rising searches.",
+      "description": "Returns search terms ranked using Relewise's trending-up calculation for the requested period and its preceding equivalent period. Use this operation when the user asks which searches are gaining popularity. Use AnalyticsListPopularSearches for the highest-volume terms regardless of trend. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/SearchAnalyticsTermsRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchAnalyticsTermsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetAnalyzerConsumptionSummary",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/consumption/analyzer/summary",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets the Analyzer consumption summary.",
+      "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive first date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive last date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetBehavioralTrackingConsumptionSummary",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/consumption/behavioral-tracking/summary",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets the Behavioral Tracking consumption summary.",
+      "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive first date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive last date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetContentDeliveryConsumptionSummary",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/consumption/content-delivery/summary",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets the Content Delivery consumption summary.",
+      "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive first date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive last date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetDataset",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/dataset",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets Dataset details.",
+      "description": "Returns identifying and operational details about the requested Dataset, its License, and its effective Agent Gateway access policy. Use CoreGetDatasetMetadata instead to discover languages, currencies, Data Keys, Classification Values, and other Dataset-specific request vocabulary. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/DatasetDetailsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetDatasetMetadata",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/dataset/metadata",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Discovers Dataset metadata.",
+      "description": "Discovers Dataset-specific languages, currencies, and schema information needed to construct subsequent requests. It can include available Data Keys, nested Data Keys, Variant specification keys, Classification Values, and company metadata. Use this operation when required Dataset-specific field names or values are unknown; Data Key names are case-sensitive. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive start of the period used to resolve date-scoped metadata.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive end of the period used to resolve date-scoped metadata.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "includeCatalogMetadata",
+          "required": false,
+          "description": "Whether to include metadata for products, variants, product categories, and brands.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "includeContentMetadata",
+          "required": false,
+          "description": "Whether to include metadata for content and content categories.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "includeUserMetadata",
+          "required": false,
+          "description": "Whether to include user Data Keys and classification options.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "includeCompanyMetadata",
+          "required": false,
+          "description": "Whether to include company Data Keys when company entities are available for the Dataset.",
+          "schema": {
+            "type": "boolean"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/DatasetMetadataResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetIntegrationsConsumptionSummary",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/consumption/integrations/summary",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets the Integrations consumption summary.",
+      "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive first date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive last date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetMarketingAutomationConsumptionSummary",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/consumption/marketing-automation/summary",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets the Marketing Automation consumption summary.",
+      "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive first date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive last date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetRecommendationsConsumptionSummary",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/consumption/recommendations/summary",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets the Recommendations consumption summary.",
+      "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive first date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive last date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetRetailMediaConsumptionSummary",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/consumption/retail-media/summary",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets the Retail Media consumption summary.",
+      "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive first date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive last date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetSearchConsumptionSummary",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/consumption/search/summary",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets the Search consumption summary.",
+      "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive first date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive last date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "CoreGetShoppertainmentConsumptionSummary",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/core/consumption/shoppertainment/summary",
+      "tags": [
+        "Core"
+      ],
+      "summary": "Gets the Shoppertainment consumption summary.",
+      "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "fromDate",
+          "required": true,
+          "description": "Inclusive first date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        {
+          "name": "toDate",
+          "required": true,
+          "description": "Inclusive last date of the requested period.",
+          "schema": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "IdentityGetCurrentUser",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "tags": [
+        "Identity"
+      ],
+      "summary": "Gets the authenticated user.",
+      "description": "Returns the My Relewise user represented by the supplied Personal Access Token, non-secret metadata about that token, and License-grouped Datasets visible to the user and allowed by the token. Use CoreGetDataset to verify access and discover the effective Agent Gateway policy before making other Dataset-scoped requests. This operation is read-only.",
+      "pathParameters": [],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/CurrentUserResponse"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "MerchandisingGetRule",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/merchandising/rules/{ruleId}",
+      "tags": [
+        "Merchandising"
+      ],
+      "summary": "Gets a merchandising rule.",
+      "description": "Returns one merchandising rule with its documented type-specific configuration. Use this operation to inspect current state before a possible change. Use MerchandisingListRules first when the Rule ID is unknown. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "ID of the merchandising rule to retrieve.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/MerchandisingRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "MerchandisingListRules",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/merchandising/rules",
+      "tags": [
+        "Merchandising"
+      ],
+      "summary": "Lists merchandising rules.",
+      "description": "Returns compact merchandising rule representations for the requested Dataset. Use this operation when the intended Rule ID is unknown. Inspect a selected rule with MerchandisingGetRule before changing it. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/MerchandisingRulesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "MerchandisingUpdateRule",
+      "method": "PATCH",
+      "path": "/api/v1/datasets/{datasetId}/merchandising/rules/{ruleId}",
+      "tags": [
+        "Merchandising"
+      ],
+      "summary": "Updates rule state.",
+      "description": "MODIFIES DATA. Updates the enabled state and/or activation schedule of an existing merchandising rule and can change live Dataset behavior. Use it only when the user explicitly requests the change. Omit a property or set it to null to preserve that part of the rule. When schedule is an object, a null startsAt or endsAt removes that schedule bound. Use MerchandisingGetRule to inspect without changing data.",
+      "pathParameters": [
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "ID of the merchandising rule to update.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/UpdateMerchandisingRuleRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/MerchandisingRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsGetDecompoundingRule",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/decompounding-rules/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Gets a Decompounding rule.",
+      "description": "Returns one rule's complete current configuration. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/DecompoundRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsGetRedirectRule",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/redirects/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Gets a Redirect rule.",
+      "description": "Returns one rule's complete current configuration. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/RedirectRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsGetSearchIndex",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/search-indexes/{searchIndexId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Gets a Search Index.",
+      "description": "Returns one Search Index's current operational state and complete configuration. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "searchIndexId",
+          "required": true,
+          "description": "Stable Search Index ID used by search requests and the Search Tools detail operation. Do not infer the default state from this value; use IsDefault.",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchIndexResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsGetSearchResultModifierRule",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/search-result-modifiers/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Gets a Search Result Modifier rule.",
+      "description": "Returns one rule's complete current configuration. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchResultModifierRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsGetSearchTermModifierRule",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/search-term-modifiers/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Gets a Search Term Modifier rule.",
+      "description": "Returns one rule's complete current configuration. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchTermModifierRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsGetStemmingRule",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/stemming-rules/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Gets a Stemming rule.",
+      "description": "Returns one rule's complete current configuration. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/StemmingRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsListDecompoundingRules",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/decompounding-rules",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Lists Decompounding rules.",
+      "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional text used to filter matching rules.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "approved",
+          "required": false,
+          "description": "Optional approval-state filter.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number. Defaults to 1 when omitted.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/DecompoundingRulesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsListRedirectRules",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/redirects",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Lists Redirect rules.",
+      "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional text used to filter matching rules.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "approved",
+          "required": false,
+          "description": "Optional approval-state filter.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number. Defaults to 1 when omitted.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/RedirectRulesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsListSearchIndexes",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/search-indexes",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Lists Search Indexes.",
+      "description": "Returns compact summaries of the Search Indexes configured for the Dataset. Use this read-only operation when the Search Index ID is unknown, then get the selected Search Index to inspect its complete configuration.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchIndexesResponse"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsListSearchResultModifierRules",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/search-result-modifiers",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Lists Search Result Modifier rules.",
+      "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional text used to filter matching rules.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "approved",
+          "required": false,
+          "description": "Optional approval-state filter.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number. Defaults to 1 when omitted.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchResultModifierRulesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsListSearchTermModifierRules",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/search-term-modifiers",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Lists Search Term Modifier rules.",
+      "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional text used to filter matching rules.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "approved",
+          "required": false,
+          "description": "Optional approval-state filter.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number. Defaults to 1 when omitted.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchTermModifierRulesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsListStemmingRules",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/stemming-rules",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Lists Stemming rules.",
+      "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional text used to filter matching rules.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "approved",
+          "required": false,
+          "description": "Optional approval-state filter.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number. Defaults to 1 when omitted.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/StemmingRulesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsListSynonymRules",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/synonyms",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Lists Synonym rules.",
+      "description": "Returns a bounded page of Synonym rules. This operation is read-only. Get-by-ID and mutations are not available until the upstream Synonym API supports the unified Search Tools model.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional text used to filter matching rules.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "approved",
+          "required": false,
+          "description": "Optional approval-state filter.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number. Defaults to 1 when omitted.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SynonymRulesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsPatchDecompoundingRule",
+      "method": "PATCH",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/decompounding-rules/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Updates Decompounding rule state.",
+      "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
+      "pathParameters": [
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID to update.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/UpdateSearchToolRuleRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/DecompoundRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsPatchRedirectRule",
+      "method": "PATCH",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/redirects/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Updates Redirect rule state.",
+      "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
+      "pathParameters": [
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID to update.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/UpdateSearchToolRuleRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/RedirectRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsPatchSearchResultModifierRule",
+      "method": "PATCH",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/search-result-modifiers/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Updates Search Result Modifier rule state.",
+      "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
+      "pathParameters": [
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID to update.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/UpdateSearchToolRuleRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchResultModifierRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsPatchSearchTermModifierRule",
+      "method": "PATCH",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/search-term-modifiers/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Updates Search Term Modifier rule state.",
+      "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
+      "pathParameters": [
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID to update.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/UpdateSearchToolRuleRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SearchTermModifierRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsPatchStemmingRule",
+      "method": "PATCH",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/stemming-rules/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Updates Stemming rule state.",
+      "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
+      "pathParameters": [
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID to update.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/UpdateSearchToolRuleRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/StemmingRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    }
+  ]
+}

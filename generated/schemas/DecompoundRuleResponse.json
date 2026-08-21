@@ -1,0 +1,12 @@
+{
+  "required": [
+    "rule"
+  ],
+  "type": "object",
+  "properties": {
+    "rule": {
+      "$ref": "#/components/schemas/DecompoundRule"
+    }
+  },
+  "description": "One Decompounding rule."
+}

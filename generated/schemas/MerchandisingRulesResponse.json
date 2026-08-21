@@ -1,0 +1,16 @@
+{
+  "required": [
+    "rules"
+  ],
+  "type": "object",
+  "properties": {
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/MerchandisingRuleSummary"
+      },
+      "description": "Merchandising rules returned for the requested Dataset. The collection is empty when no rules are available."
+    }
+  },
+  "description": "List of merchandising rules the authenticated user can inspect through Agent Gateway for a Dataset."
+}

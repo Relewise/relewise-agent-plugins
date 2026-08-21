@@ -1,0 +1,29 @@
+{
+  "required": [
+    "displayName",
+    "description",
+    "formattedValue",
+    "numericValue"
+  ],
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable label identifying the measurement."
+    },
+    "description": {
+      "type": "string",
+      "description": "Explanation of what the measurement represents."
+    },
+    "formattedValue": {
+      "type": "string",
+      "description": "Display-ready value including applicable formatting, units, or currency. Use this value when presenting the metric to users."
+    },
+    "numericValue": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "description": "Raw numeric value. Use this value for calculations instead of parsing the formatted value.",
+      "format": "double"
+    }
+  },
+  "description": "One named measurement within a Revenue Analytics metric."
+}

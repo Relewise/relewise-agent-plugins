@@ -1,0 +1,26 @@
+{
+  "required": [
+    "displayName",
+    "description",
+    "measurements"
+  ],
+  "type": "object",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable name of the metric."
+    },
+    "description": {
+      "type": "string",
+      "description": "Explanation of what the metric measures."
+    },
+    "measurements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RevenueMeasurement"
+      },
+      "description": "Named measurements belonging to the metric. The collection contains at least one item."
+    }
+  },
+  "description": "A named Revenue Analytics metric containing one or more related measurements."
+}

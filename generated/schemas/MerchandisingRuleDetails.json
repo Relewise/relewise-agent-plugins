@@ -1,0 +1,49 @@
+{
+  "required": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "enabled",
+    "schedule",
+    "status",
+    "configuration"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "ID of the merchandising rule. Use this value to retrieve the rule details.",
+      "format": "uuid"
+    },
+    "type": {
+      "type": "string",
+      "description": "Discriminator identifying the merchandising rule variant. It matches the discriminator in configuration."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name configured for the merchandising rule."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description configured for the merchandising rule, or null when the rule has no description.",
+      "nullable": true
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the merchandising rule is enabled. A disabled rule is not applied to requests."
+    },
+    "schedule": {
+      "$ref": "#/components/schemas/MerchandisingRuleSchedule"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current calculated rule status, or null when no status is available. This value is informational and may gain additional values in the future.",
+      "nullable": true
+    },
+    "configuration": {
+      "$ref": "#/components/schemas/MerchandisingRuleConfiguration"
+    }
+  },
+  "description": "Detailed representation of a merchandising rule, including its type-specific configuration."
+}

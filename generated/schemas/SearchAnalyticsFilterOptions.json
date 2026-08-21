@@ -1,0 +1,71 @@
+{
+  "required": [
+    "fromDate",
+    "toDate",
+    "appliedFilters",
+    "dataAvailableFromDate",
+    "languages",
+    "currencies",
+    "channels",
+    "subChannels",
+    "classifications"
+  ],
+  "type": "object",
+  "properties": {
+    "fromDate": {
+      "type": "string",
+      "description": "Inclusive first date used to discover options.",
+      "format": "date"
+    },
+    "toDate": {
+      "type": "string",
+      "description": "Inclusive last date used to discover options.",
+      "format": "date"
+    },
+    "appliedFilters": {
+      "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+    },
+    "dataAvailableFromDate": {
+      "type": "string",
+      "description": "Earliest known date containing Search Analytics data, or null when unavailable.",
+      "format": "date",
+      "nullable": true
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Available nonblank language codes."
+    },
+    "currencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Available nonblank currency codes."
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Available nonblank channels."
+    },
+    "subChannels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Available nonblank subchannels for the applied channel selection."
+    },
+    "classifications": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SearchAnalyticsClassificationOptions"
+      },
+      "description": "Available nonblank classification keys and values."
+    }
+  },
+  "description": "Available Search Analytics filter values for the effective period and current selections."
+}

@@ -1,0 +1,48 @@
+{
+  "required": [
+    "fromDate",
+    "toDate",
+    "comparisonFromDate",
+    "comparisonToDate",
+    "filters",
+    "terms",
+    "pagination"
+  ],
+  "type": "object",
+  "properties": {
+    "fromDate": {
+      "type": "string",
+      "description": "Inclusive first date of the requested period.",
+      "format": "date"
+    },
+    "toDate": {
+      "type": "string",
+      "description": "Inclusive last date of the requested period.",
+      "format": "date"
+    },
+    "comparisonFromDate": {
+      "type": "string",
+      "description": "Inclusive first date of the preceding equivalent comparison period.",
+      "format": "date"
+    },
+    "comparisonToDate": {
+      "type": "string",
+      "description": "Inclusive last date of the preceding equivalent comparison period.",
+      "format": "date"
+    },
+    "filters": {
+      "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+    },
+    "terms": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SearchAnalyticsTermWithoutResults"
+      },
+      "description": "Search terms without results included in this result."
+    },
+    "pagination": {
+      "$ref": "#/components/schemas/PaginationMetadata"
+    }
+  },
+  "description": "Search terms that returned no products and their effective query context."
+}

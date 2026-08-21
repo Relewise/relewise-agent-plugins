@@ -1,0 +1,445 @@
+{
+  "schemaCount": 110,
+  "schemas": [
+    {
+      "name": "BrandMetadata",
+      "file": "BrandMetadata.json"
+    },
+    {
+      "name": "CompanyMetadata",
+      "file": "CompanyMetadata.json"
+    },
+    {
+      "name": "ComparedValue",
+      "file": "ComparedValue.json"
+    },
+    {
+      "name": "ContentCategoryMetadata",
+      "file": "ContentCategoryMetadata.json"
+    },
+    {
+      "name": "ContentMetadata",
+      "file": "ContentMetadata.json"
+    },
+    {
+      "name": "CurrentUserResponse",
+      "file": "CurrentUserResponse.json"
+    },
+    {
+      "name": "DataKey",
+      "file": "DataKey.json"
+    },
+    {
+      "name": "DatasetAgentGatewayPolicy",
+      "file": "DatasetAgentGatewayPolicy.json"
+    },
+    {
+      "name": "DatasetDetails",
+      "file": "DatasetDetails.json"
+    },
+    {
+      "name": "DatasetDetailsResponse",
+      "file": "DatasetDetailsResponse.json"
+    },
+    {
+      "name": "DatasetMetadata",
+      "file": "DatasetMetadata.json"
+    },
+    {
+      "name": "DatasetMetadataResponse",
+      "file": "DatasetMetadataResponse.json"
+    },
+    {
+      "name": "DatasetReference",
+      "file": "DatasetReference.json"
+    },
+    {
+      "name": "DecompoundRule",
+      "file": "DecompoundRule.json"
+    },
+    {
+      "name": "DecompoundRuleResponse",
+      "file": "DecompoundRuleResponse.json"
+    },
+    {
+      "name": "DecompoundRuleSummary",
+      "file": "DecompoundRuleSummary.json"
+    },
+    {
+      "name": "DecompoundingRulesResponse",
+      "file": "DecompoundingRulesResponse.json"
+    },
+    {
+      "name": "HttpValidationProblemDetails",
+      "file": "HttpValidationProblemDetails.json"
+    },
+    {
+      "name": "License",
+      "file": "License.json"
+    },
+    {
+      "name": "LicenseReference",
+      "file": "LicenseReference.json"
+    },
+    {
+      "name": "MerchandisingRuleConfiguration",
+      "file": "MerchandisingRuleConfiguration.json"
+    },
+    {
+      "name": "MerchandisingRuleConfigurationBoostAndBuryRuleConfiguration",
+      "file": "MerchandisingRuleConfigurationBoostAndBuryRuleConfiguration.json"
+    },
+    {
+      "name": "MerchandisingRuleConfigurationFilterRuleConfiguration",
+      "file": "MerchandisingRuleConfigurationFilterRuleConfiguration.json"
+    },
+    {
+      "name": "MerchandisingRuleConfigurationFixedPositionRuleConfiguration",
+      "file": "MerchandisingRuleConfigurationFixedPositionRuleConfiguration.json"
+    },
+    {
+      "name": "MerchandisingRuleDetails",
+      "file": "MerchandisingRuleDetails.json"
+    },
+    {
+      "name": "MerchandisingRuleMultiplier",
+      "file": "MerchandisingRuleMultiplier.json"
+    },
+    {
+      "name": "MerchandisingRuleMultiplierDataKeyRuleMultiplier",
+      "file": "MerchandisingRuleMultiplierDataKeyRuleMultiplier.json"
+    },
+    {
+      "name": "MerchandisingRuleMultiplierFixedRuleMultiplier",
+      "file": "MerchandisingRuleMultiplierFixedRuleMultiplier.json"
+    },
+    {
+      "name": "MerchandisingRuleResponse",
+      "file": "MerchandisingRuleResponse.json"
+    },
+    {
+      "name": "MerchandisingRuleSchedule",
+      "file": "MerchandisingRuleSchedule.json"
+    },
+    {
+      "name": "MerchandisingRuleSummary",
+      "file": "MerchandisingRuleSummary.json"
+    },
+    {
+      "name": "MerchandisingRulesResponse",
+      "file": "MerchandisingRulesResponse.json"
+    },
+    {
+      "name": "PaginationMetadata",
+      "file": "PaginationMetadata.json"
+    },
+    {
+      "name": "PaginationRequest",
+      "file": "PaginationRequest.json"
+    },
+    {
+      "name": "PeriodGraph",
+      "file": "PeriodGraph.json"
+    },
+    {
+      "name": "PeriodGraphDataPoint",
+      "file": "PeriodGraphDataPoint.json"
+    },
+    {
+      "name": "PeriodGraphSeries",
+      "file": "PeriodGraphSeries.json"
+    },
+    {
+      "name": "PeriodMeasurement",
+      "file": "PeriodMeasurement.json"
+    },
+    {
+      "name": "PeriodMetric",
+      "file": "PeriodMetric.json"
+    },
+    {
+      "name": "PeriodSummaryResponse",
+      "file": "PeriodSummaryResponse.json"
+    },
+    {
+      "name": "PersonalAccessTokenDetails",
+      "file": "PersonalAccessTokenDetails.json"
+    },
+    {
+      "name": "ProblemDetails",
+      "file": "ProblemDetails.json"
+    },
+    {
+      "name": "ProductCategoryMetadata",
+      "file": "ProductCategoryMetadata.json"
+    },
+    {
+      "name": "ProductMetadata",
+      "file": "ProductMetadata.json"
+    },
+    {
+      "name": "RedirectRule",
+      "file": "RedirectRule.json"
+    },
+    {
+      "name": "RedirectRuleResponse",
+      "file": "RedirectRuleResponse.json"
+    },
+    {
+      "name": "RedirectRuleSummary",
+      "file": "RedirectRuleSummary.json"
+    },
+    {
+      "name": "RedirectRulesResponse",
+      "file": "RedirectRulesResponse.json"
+    },
+    {
+      "name": "RevenueAnalyticsResponse",
+      "file": "RevenueAnalyticsResponse.json"
+    },
+    {
+      "name": "RevenueGraph",
+      "file": "RevenueGraph.json"
+    },
+    {
+      "name": "RevenueGraphDataPoint",
+      "file": "RevenueGraphDataPoint.json"
+    },
+    {
+      "name": "RevenueGraphSeries",
+      "file": "RevenueGraphSeries.json"
+    },
+    {
+      "name": "RevenueLocation",
+      "file": "RevenueLocation.json"
+    },
+    {
+      "name": "RevenueMeasurement",
+      "file": "RevenueMeasurement.json"
+    },
+    {
+      "name": "RevenueMetric",
+      "file": "RevenueMetric.json"
+    },
+    {
+      "name": "RevenueRecommendationType",
+      "file": "RevenueRecommendationType.json"
+    },
+    {
+      "name": "SearchAnalyticsAppliedFilters",
+      "file": "SearchAnalyticsAppliedFilters.json"
+    },
+    {
+      "name": "SearchAnalyticsClassificationOptions",
+      "file": "SearchAnalyticsClassificationOptions.json"
+    },
+    {
+      "name": "SearchAnalyticsFilterOptions",
+      "file": "SearchAnalyticsFilterOptions.json"
+    },
+    {
+      "name": "SearchAnalyticsFilterOptionsResponse",
+      "file": "SearchAnalyticsFilterOptionsResponse.json"
+    },
+    {
+      "name": "SearchAnalyticsOverviewRequest",
+      "file": "SearchAnalyticsOverviewRequest.json"
+    },
+    {
+      "name": "SearchAnalyticsOverviewResponse",
+      "file": "SearchAnalyticsOverviewResponse.json"
+    },
+    {
+      "name": "SearchAnalyticsSummary",
+      "file": "SearchAnalyticsSummary.json"
+    },
+    {
+      "name": "SearchAnalyticsTermPerformance",
+      "file": "SearchAnalyticsTermPerformance.json"
+    },
+    {
+      "name": "SearchAnalyticsTermWithoutResults",
+      "file": "SearchAnalyticsTermWithoutResults.json"
+    },
+    {
+      "name": "SearchAnalyticsTermsRequest",
+      "file": "SearchAnalyticsTermsRequest.json"
+    },
+    {
+      "name": "SearchAnalyticsTermsResponse",
+      "file": "SearchAnalyticsTermsResponse.json"
+    },
+    {
+      "name": "SearchAnalyticsTermsWithoutResultsResponse",
+      "file": "SearchAnalyticsTermsWithoutResultsResponse.json"
+    },
+    {
+      "name": "SearchAnalyticsTimelineEntry",
+      "file": "SearchAnalyticsTimelineEntry.json"
+    },
+    {
+      "name": "SearchClickMetrics",
+      "file": "SearchClickMetrics.json"
+    },
+    {
+      "name": "SearchConversionMetrics",
+      "file": "SearchConversionMetrics.json"
+    },
+    {
+      "name": "SearchIndex",
+      "file": "SearchIndex.json"
+    },
+    {
+      "name": "SearchIndexLanguage",
+      "file": "SearchIndexLanguage.json"
+    },
+    {
+      "name": "SearchIndexRebuildStatus",
+      "file": "SearchIndexRebuildStatus.json"
+    },
+    {
+      "name": "SearchIndexResponse",
+      "file": "SearchIndexResponse.json"
+    },
+    {
+      "name": "SearchIndexSummary",
+      "file": "SearchIndexSummary.json"
+    },
+    {
+      "name": "SearchIndexesResponse",
+      "file": "SearchIndexesResponse.json"
+    },
+    {
+      "name": "SearchMetrics",
+      "file": "SearchMetrics.json"
+    },
+    {
+      "name": "SearchResultModifierAction",
+      "file": "SearchResultModifierAction.json"
+    },
+    {
+      "name": "SearchResultModifierActionKind",
+      "file": "SearchResultModifierActionKind.json"
+    },
+    {
+      "name": "SearchResultModifierRule",
+      "file": "SearchResultModifierRule.json"
+    },
+    {
+      "name": "SearchResultModifierRuleResponse",
+      "file": "SearchResultModifierRuleResponse.json"
+    },
+    {
+      "name": "SearchResultModifierRuleSummary",
+      "file": "SearchResultModifierRuleSummary.json"
+    },
+    {
+      "name": "SearchResultModifierRulesResponse",
+      "file": "SearchResultModifierRulesResponse.json"
+    },
+    {
+      "name": "SearchTermCondition",
+      "file": "SearchTermCondition.json"
+    },
+    {
+      "name": "SearchTermModifierAction",
+      "file": "SearchTermModifierAction.json"
+    },
+    {
+      "name": "SearchTermModifierActionKind",
+      "file": "SearchTermModifierActionKind.json"
+    },
+    {
+      "name": "SearchTermModifierRule",
+      "file": "SearchTermModifierRule.json"
+    },
+    {
+      "name": "SearchTermModifierRuleResponse",
+      "file": "SearchTermModifierRuleResponse.json"
+    },
+    {
+      "name": "SearchTermModifierRuleSummary",
+      "file": "SearchTermModifierRuleSummary.json"
+    },
+    {
+      "name": "SearchTermModifierRulesResponse",
+      "file": "SearchTermModifierRulesResponse.json"
+    },
+    {
+      "name": "SearchToolRuleConditionSummary",
+      "file": "SearchToolRuleConditionSummary.json"
+    },
+    {
+      "name": "SearchToolRuleScope",
+      "file": "SearchToolRuleScope.json"
+    },
+    {
+      "name": "SearchesWithoutResultsMetrics",
+      "file": "SearchesWithoutResultsMetrics.json"
+    },
+    {
+      "name": "StemmingRule",
+      "file": "StemmingRule.json"
+    },
+    {
+      "name": "StemmingRuleResponse",
+      "file": "StemmingRuleResponse.json"
+    },
+    {
+      "name": "StemmingRuleSummary",
+      "file": "StemmingRuleSummary.json"
+    },
+    {
+      "name": "StemmingRulesResponse",
+      "file": "StemmingRulesResponse.json"
+    },
+    {
+      "name": "SynonymDefinition",
+      "file": "SynonymDefinition.json"
+    },
+    {
+      "name": "SynonymDefinitionMultidirectionalSynonymDefinition",
+      "file": "SynonymDefinitionMultidirectionalSynonymDefinition.json"
+    },
+    {
+      "name": "SynonymDefinitionOneWaySynonymDefinition",
+      "file": "SynonymDefinitionOneWaySynonymDefinition.json"
+    },
+    {
+      "name": "SynonymRuleSummary",
+      "file": "SynonymRuleSummary.json"
+    },
+    {
+      "name": "SynonymRulesResponse",
+      "file": "SynonymRulesResponse.json"
+    },
+    {
+      "name": "UpdateMerchandisingRuleRequest",
+      "file": "UpdateMerchandisingRuleRequest.json"
+    },
+    {
+      "name": "UpdateMerchandisingRuleScheduleRequest",
+      "file": "UpdateMerchandisingRuleScheduleRequest.json"
+    },
+    {
+      "name": "UpdateSearchToolRuleRequest",
+      "file": "UpdateSearchToolRuleRequest.json"
+    },
+    {
+      "name": "UserClassification",
+      "file": "UserClassification.json"
+    },
+    {
+      "name": "UserDetails",
+      "file": "UserDetails.json"
+    },
+    {
+      "name": "UserMetadata",
+      "file": "UserMetadata.json"
+    },
+    {
+      "name": "VariantMetadata",
+      "file": "VariantMetadata.json"
+    }
+  ]
+}

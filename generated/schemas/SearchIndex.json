@@ -1,0 +1,64 @@
+{
+  "required": [
+    "id",
+    "description",
+    "isEnabled",
+    "isDefault",
+    "created",
+    "modified",
+    "lastRebuildCompleted",
+    "languages",
+    "rebuildStatus",
+    "indexJson"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable Search Index ID used by search requests and the Search Tools detail operation. Do not infer the default state from this value; use IsDefault."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the Search Index."
+    },
+    "isEnabled": {
+      "type": "boolean",
+      "description": "Whether the Search Index is enabled for use."
+    },
+    "isDefault": {
+      "type": "boolean",
+      "description": "Whether this is the Dataset's default Search Index. This state is separate from the Search Index ID."
+    },
+    "created": {
+      "type": "string",
+      "description": "When the Search Index was created.",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "description": "When the Search Index was last modified.",
+      "format": "date-time"
+    },
+    "lastRebuildCompleted": {
+      "type": "string",
+      "description": "When the most recent completed rebuild finished, or null when no completed rebuild is recorded.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SearchIndexLanguage"
+      },
+      "description": "Languages configured on the Search Index. A language must be included and match the search request language for its multilingual data to be searchable."
+    },
+    "rebuildStatus": {
+      "$ref": "#/components/schemas/SearchIndexRebuildStatus"
+    },
+    "indexJson": {
+      "type": "string",
+      "description": "Complete Search Index configuration as JSON-encoded text that consumers must parse. The document preserves the authoritative Relewise wire representation, including its $type metadata. See https://docs.relewise.com/docs/myrelewise/search-index.html for the configuration concepts."
+    }
+  },
+  "description": "Detailed Search Index representation including indexed languages, rebuild state, and its complete JSON configuration."
+}
