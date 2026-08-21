@@ -33,6 +33,13 @@ internal static class CliApplication
                 "The Agent Gateway could not be reached.",
                 5);
         }
+        catch (AgentGatewayResponseException)
+        {
+            return WriteError(
+                "api_error",
+                "The Agent Gateway response did not match the versioned API contract.",
+                6);
+        }
         catch (Exception)
         {
             return WriteError(
@@ -51,7 +58,7 @@ internal static class CliApplication
                 Data: new HelpData(
                     Name: ApplicationName,
                     Version: ApplicationVersion,
-                    Commands: ["me", "operations", "schema <operation-id>", "--help", "--version"])),
+                    Commands: ["me", "datasets", "dataset <dataset-id>", "operations", "schema <operation-id>", "--help", "--version"])),
                 AgentJsonContext.Default.HelpResponse);
             return 0;
         }
@@ -73,6 +80,26 @@ internal static class CliApplication
         if (args.Length > 0 && string.Equals(args[0], "me", StringComparison.Ordinal))
         {
             return WriteError("invalid_arguments", "Usage: relewise-agent me", 2);
+        }
+
+        if (args is ["datasets"])
+        {
+            return await RunDatasetsAsync();
+        }
+
+        if (args.Length > 0 && string.Equals(args[0], "datasets", StringComparison.Ordinal))
+        {
+            return WriteError("invalid_arguments", "Usage: relewise-agent datasets", 2);
+        }
+
+        if (args is ["dataset", var datasetId])
+        {
+            return await RunDatasetAsync(datasetId);
+        }
+
+        if (args.Length > 0 && string.Equals(args[0], "dataset", StringComparison.Ordinal))
+        {
+            return WriteError("invalid_arguments", "Usage: relewise-agent dataset <dataset-id>", 2);
         }
 
         if (args is ["operations"])
@@ -118,8 +145,8 @@ internal static class CliApplication
 
     private static async Task<int> RunMeAsync()
     {
-        var token = Environment.GetEnvironmentVariable("RELEWISE_AGENT_GATEWAY_TOKEN");
-        if (string.IsNullOrWhiteSpace(token))
+        var token = ReadToken();
+        if (token is null)
         {
             return WriteError(
                 "authentication_error",
@@ -144,6 +171,98 @@ internal static class CliApplication
             Data: result.Data!.Value),
             AgentJsonContext.Default.MeResponse);
         return 0;
+    }
+
+    private static async Task<int> RunDatasetsAsync()
+    {
+        var token = ReadToken();
+        if (token is null)
+        {
+            return WriteError(
+                "authentication_error",
+                "RELEWISE_AGENT_GATEWAY_TOKEN is not configured.",
+                4);
+        }
+
+        using var client = new AgentGatewayClient();
+        var result = await client.GetCurrentUserAsync(token);
+        if (!result.Success)
+        {
+            return WriteGatewayError(result, "IdentityGetCurrentUser");
+        }
+
+        var datasets = DatasetCatalog.FromCurrentUser(result.Data!.Value);
+        WriteJson(new DatasetsResponse(
+            Success: true,
+            Data: new DatasetsData(datasets.Length, datasets)),
+            AgentJsonContext.Default.DatasetsResponse);
+        return 0;
+    }
+
+    private static async Task<int> RunDatasetAsync(string datasetIdValue)
+    {
+        if (!Guid.TryParse(datasetIdValue, out var datasetId))
+        {
+            return WriteError(
+                "dataset_access_error",
+                $"Dataset ID '{datasetIdValue}' is not a valid UUID.",
+                7,
+                operationId: "CoreGetDataset");
+        }
+
+        var token = ReadToken();
+        if (token is null)
+        {
+            return WriteError(
+                "authentication_error",
+                "RELEWISE_AGENT_GATEWAY_TOKEN is not configured.",
+                4);
+        }
+
+        using var client = new AgentGatewayClient();
+        var currentUser = await client.GetCurrentUserAsync(token);
+        if (!currentUser.Success)
+        {
+            return WriteGatewayError(currentUser, "IdentityGetCurrentUser");
+        }
+
+        var datasets = DatasetCatalog.FromCurrentUser(currentUser.Data!.Value);
+        if (!datasets.Any(dataset => Guid.TryParse(dataset.Id, out var accessibleId) && accessibleId == datasetId))
+        {
+            return WriteError(
+                "dataset_access_error",
+                $"Dataset '{datasetId:D}' is not accessible to the configured Personal Access Token.",
+                7,
+                operationId: "CoreGetDataset");
+        }
+
+        var result = await client.GetDatasetAsync(token, datasetId);
+        if (!result.Success)
+        {
+            return WriteGatewayError(result, "CoreGetDataset");
+        }
+
+        WriteJson(new DatasetResponse(
+            Success: true,
+            Data: result.Data!.Value),
+            AgentJsonContext.Default.DatasetResponse);
+        return 0;
+    }
+
+    private static string? ReadToken()
+    {
+        var token = Environment.GetEnvironmentVariable("RELEWISE_AGENT_GATEWAY_TOKEN");
+        return string.IsNullOrWhiteSpace(token) ? null : token;
+    }
+
+    private static int WriteGatewayError(GatewayCallResult result, string operationId)
+    {
+        return WriteError(
+            result.ErrorType!,
+            result.ErrorMessage!,
+            result.ExitCode,
+            operationId,
+            result.StatusCode);
     }
 
     private static int WriteError(

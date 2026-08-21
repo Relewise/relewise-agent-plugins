@@ -20,7 +20,33 @@ internal sealed class AgentGatewayClient : IDisposable
 
     public async Task<GatewayCallResult> GetCurrentUserAsync(string token)
     {
-        using var request = new HttpRequestMessage(HttpMethod.Get, "api/v1/me");
+        return await GetJsonAsync(
+            token,
+            "api/v1/me",
+            forbiddenErrorType: "authentication_error",
+            forbiddenExitCode: 4);
+    }
+
+    public async Task<GatewayCallResult> GetDatasetAsync(string token, Guid datasetId)
+    {
+        return await GetJsonAsync(
+            token,
+            $"api/v1/datasets/{datasetId:D}/core/dataset",
+            forbiddenErrorType: "dataset_access_error",
+            forbiddenExitCode: 7,
+            notFoundErrorType: "dataset_access_error",
+            notFoundExitCode: 7);
+    }
+
+    private async Task<GatewayCallResult> GetJsonAsync(
+        string token,
+        string requestUri,
+        string forbiddenErrorType,
+        int forbiddenExitCode,
+        string? notFoundErrorType = null,
+        int? notFoundExitCode = null)
+    {
+        using var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         using var response = await httpClient.SendAsync(
@@ -47,10 +73,22 @@ internal sealed class AgentGatewayClient : IDisposable
 
         return response.StatusCode switch
         {
-            HttpStatusCode.Unauthorized or HttpStatusCode.Forbidden => GatewayCallResult.Failed(
+            HttpStatusCode.Unauthorized => GatewayCallResult.Failed(
                 "authentication_error",
                 "The Agent Gateway rejected the configured Personal Access Token.",
                 4,
+                (int)response.StatusCode),
+            HttpStatusCode.Forbidden => GatewayCallResult.Failed(
+                forbiddenErrorType,
+                forbiddenErrorType == "dataset_access_error"
+                    ? "The configured Personal Access Token cannot access the requested Dataset operation."
+                    : "The Agent Gateway rejected the configured Personal Access Token.",
+                forbiddenExitCode,
+                (int)response.StatusCode),
+            HttpStatusCode.NotFound when notFoundErrorType is not null => GatewayCallResult.Failed(
+                notFoundErrorType,
+                "The requested Dataset is not accessible or no longer exists.",
+                notFoundExitCode!.Value,
                 (int)response.StatusCode),
             _ => GatewayCallResult.Failed(
                 "api_error",
