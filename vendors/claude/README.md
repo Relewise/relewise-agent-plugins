@@ -1,6 +1,8 @@
 # Claude Code adapter
 
-The Claude Code adapter packages the canonical Relewise skills with one platform-specific `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; they are copied into packages and are not maintained here.
+This adapter packages `Relewise`: work with your Relewise configuration, analytics and optimization using AI. `Relewise Developer` is a separate product and is not included.
+
+The adapter packages the canonical Relewise skills with one platform-specific `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; they are copied into packages and are not maintained here.
 
 The plugin asks for a required Agent Gateway PAT through Claude Code's sensitive user configuration. Claude stores that value securely and exposes it to the bundled launcher as `CLAUDE_PLUGIN_OPTION_agent_gateway_token`. The launcher maps it to `RELEWISE_AGENT_GATEWAY_TOKEN` only in the executable process environment. It never places the PAT in command arguments or plugin files.
 

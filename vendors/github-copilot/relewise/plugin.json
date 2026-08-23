@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "relewise",
   "version": "0.1.0",
-  "description": "Work with Relewise Datasets, analytics, consumption, merchandising, and Search Tools.",
+  "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "author": {
     "name": "Relewise"
   },

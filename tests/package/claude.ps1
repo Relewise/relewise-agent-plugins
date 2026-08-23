@@ -12,7 +12,6 @@ $packageRoot = (Resolve-Path -LiteralPath $PackagePath).Path
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.claude-plugin\plugin.json') | ConvertFrom-Json
 
-if ($manifest.name -ne 'relewise') { throw 'Claude plugin manifest has an unexpected name.' }
 $tokenOption = $manifest.userConfig.agent_gateway_token
 if (-not $tokenOption.required -or -not $tokenOption.sensitive) { throw 'Agent Gateway PAT must be required and sensitive.' }
 

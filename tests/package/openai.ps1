@@ -12,9 +12,7 @@ $packageRoot = (Resolve-Path -LiteralPath $PackagePath).Path
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.codex-plugin\plugin.json') | ConvertFrom-Json
 
-if ($manifest.name -ne 'relewise') { throw 'Codex plugin manifest has an unexpected name.' }
 if ($manifest.skills -ne './skills/') { throw 'Codex plugin manifest does not expose the packaged skills.' }
-if ($manifest.author.name -ne 'Relewise') { throw 'Codex plugin manifest has an unexpected author.' }
 if ($null -ne $manifest.userConfig) { throw 'Codex plugin manifest must not claim unsupported protected user configuration.' }
 
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory

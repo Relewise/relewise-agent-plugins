@@ -1,7 +1,7 @@
 {
   "name": "relewise",
   "version": "0.1.0",
-  "description": "Work with Relewise Datasets, analytics, consumption, merchandising, and Search Tools.",
+  "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "settings": [
     {
       "name": "Relewise Agent Gateway PAT",

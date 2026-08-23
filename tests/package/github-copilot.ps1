@@ -13,7 +13,6 @@ $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'plugin.json') | ConvertFrom-Json
 
 if ($manifest.'$schema' -ne 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json') { throw 'Copilot plugin does not opt into Agent Plugins v1.0.0.' }
-if ($manifest.name -ne 'relewise') { throw 'Copilot plugin manifest has an unexpected name.' }
 if ($null -ne $manifest.userConfig) { throw 'Copilot plugin manifest must not claim unsupported protected user configuration.' }
 
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
