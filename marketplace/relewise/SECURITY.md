@@ -11,4 +11,4 @@ The Relewise plugin runs a platform-specific helper executable on the user's dev
 
 For Relewise security behavior, see [Agent Gateway security and RBAC](https://docs.relewise.com/docs/myrelewise/agent-gateway/security-and-rbac.html). For Relewise privacy information, see the [Relewise privacy policy](https://www.relewise.com/about/privacypolicy).
 
-Report security concerns privately to support@relewise.com. Do not include Personal Access Tokens or customer data in a public issue.
+Report security concerns privately using the repository's [security policy](../../SECURITY.md). Do not include Personal Access Tokens or customer data in a public issue.
