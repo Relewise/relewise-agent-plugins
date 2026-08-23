@@ -5,3 +5,5 @@ artifacts/
 !vendors/claude/relewise/bin/relewise-agent
 !vendors/github-copilot/relewise/bin/
 !vendors/github-copilot/relewise/bin/relewise-agent
+!vendors/openai/relewise/bin/
+!vendors/openai/relewise/bin/relewise-agent

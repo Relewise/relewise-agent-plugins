@@ -1,0 +1,37 @@
+{
+  "name": "relewise",
+  "version": "0.1.0",
+  "description": "Work with Relewise Datasets, analytics, consumption, merchandising, and Search Tools.",
+  "author": {
+    "name": "Relewise",
+    "url": "https://www.relewise.com/"
+  },
+  "homepage": "https://www.relewise.com/",
+  "repository": "https://github.com/Relewise/relewise-agent-plugins",
+  "keywords": [
+    "relewise",
+    "analytics",
+    "search",
+    "merchandising"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Relewise",
+    "shortDescription": "Analyze and optimize Relewise Datasets",
+    "longDescription": "Discover accessible Relewise Datasets, analyze performance and consumption, inspect configuration, and run guided optimization workflows.",
+    "developerName": "Relewise",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://www.relewise.com/",
+    "defaultPrompt": [
+      "What Relewise Datasets do I have access to?",
+      "Review search performance for my Relewise Dataset.",
+      "Audit merchandising rules for my Relewise Dataset."
+    ],
+    "brandColor": "#3764E4"
+  }
+}

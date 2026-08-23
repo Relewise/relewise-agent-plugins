@@ -63,6 +63,8 @@ jobs:
           ./tests/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/claude/${{ matrix.rid }}/relewise"
           ./tools/package/github-copilot.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
           ./tests/package/github-copilot.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/github-copilot/${{ matrix.rid }}/relewise"
+          ./tools/package/openai.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          ./tests/package/openai.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/openai/${{ matrix.rid }}/relewise"
 
       - name: Run Claude launcher smoke test
         shell: bash
@@ -77,3 +79,9 @@ jobs:
           COPILOT_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/github-copilot/${{ matrix.rid }}/relewise
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: artifacts/github-copilot/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+
+      - name: Run OpenAI Codex launcher smoke test
+        shell: bash
+        env:
+          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
+        run: artifacts/openai/${{ matrix.rid }}/relewise/bin/relewise-agent --version
