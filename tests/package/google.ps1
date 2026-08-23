@@ -11,6 +11,7 @@ $ErrorActionPreference = 'Stop'
 $packageRoot = (Resolve-Path -LiteralPath $PackagePath).Path
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'gemini-extension.json') | ConvertFrom-Json
+if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'Package is missing its license.' }
 
 if ($manifest.version -notmatch '^\d+\.\d+\.\d+$') { throw 'Gemini extension manifest version is not semantic.' }
 $tokenSetting = @($manifest.settings) | Where-Object envVar -eq 'RELEWISE_AGENT_GATEWAY_TOKEN'

@@ -11,6 +11,7 @@ $ErrorActionPreference = 'Stop'
 $packageRoot = (Resolve-Path -LiteralPath $PackagePath).Path
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.codex-plugin\plugin.json') | ConvertFrom-Json
+if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'Package is missing its license.' }
 
 if ($manifest.skills -ne './skills/') { throw 'Codex plugin manifest does not expose the packaged skills.' }
 if ($null -ne $manifest.userConfig) { throw 'Codex plugin manifest must not claim unsupported protected user configuration.' }
