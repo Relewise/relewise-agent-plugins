@@ -137,12 +137,54 @@ jobs:
         with:
           name: release-${{ matrix.rid }}
           path: artifacts/release/*
-          archive: false
+          if-no-files-found: error
+
+      - name: Upload native executable
+        uses: actions/upload-artifact@v7
+        with:
+          name: native-${{ matrix.rid }}
+          path: artifacts/${{ matrix.rid }}/${{ matrix.executable }}
+          if-no-files-found: error
+
+  assemble-universal:
+    name: Assemble universal packages
+    needs: package
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Download native executables
+        uses: actions/download-artifact@v7
+        with:
+          pattern: native-*
+          path: artifacts/native
+
+      - name: Assemble, validate and archive
+        shell: pwsh
+        run: |
+          $version = '${{ github.ref_name }}'.Substring(1)
+          ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
+          ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
+          ./tools/package/create-universal-release-archives.ps1 -Version $version
+
+      - name: Smoke-test universal launcher
+        shell: bash
+        env:
+          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
+        run: artifacts/universal/openai/relewise/bin/relewise-agent --version
+
+      - name: Upload universal release archives
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-universal
+          path: artifacts/release-universal/*
           if-no-files-found: error
 
   publish:
     name: Publish GitHub release
-    needs: package
+    needs: [package, assemble-universal]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -158,9 +200,15 @@ jobs:
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: >-
-          gh release create "${GITHUB_REF_NAME}"
-          release-assets/*
-          --verify-tag
-          --generate-notes
-          --title "${GITHUB_REF_NAME}"
+        shell: bash
+        run: |
+          prerelease=()
+          if [[ "${GITHUB_REF_NAME}" == v0.* ]]; then
+            prerelease=(--prerelease)
+          fi
+          gh release create "${GITHUB_REF_NAME}" \
+            release-assets/* \
+            --verify-tag \
+            --generate-notes \
+            --title "${GITHUB_REF_NAME}" \
+            "${prerelease[@]}"

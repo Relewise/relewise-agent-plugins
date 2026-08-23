@@ -7,3 +7,4 @@
 *.md text eol=lf
 *.ps1 text eol=lf
 *.yml text eol=lf
+vendors/*/relewise/bin/* text eol=lf

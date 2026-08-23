@@ -93,3 +93,38 @@ jobs:
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: artifacts/google/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+
+      - name: Upload native executable for universal package test
+        uses: actions/upload-artifact@v7
+        with:
+          name: ci-native-${{ matrix.rid }}
+          path: artifacts/${{ matrix.rid }}/${{ matrix.executable }}
+          if-no-files-found: error
+
+  universal-package:
+    name: Validate universal packages
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Download native executables
+        uses: actions/download-artifact@v7
+        with:
+          pattern: ci-native-*
+          path: artifacts/native
+
+      - name: Assemble and validate universal packages
+        shell: pwsh
+        run: |
+          ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version 0.1.0
+          ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version 0.1.0
+          ./tools/package/create-universal-release-archives.ps1 -Version 0.1.0
+
+      - name: Smoke-test universal launcher
+        shell: bash
+        env:
+          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
+        run: artifacts/universal/openai/relewise/bin/relewise-agent --version
