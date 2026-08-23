@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+set -eu
+
+extension_root="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+using_wsl=false
+if command -v wslpath >/dev/null 2>&1; then
+  using_wsl=true
+fi
+case "$extension_root" in
+  [A-Za-z]:\\*)
+    if command -v cygpath >/dev/null 2>&1; then
+      extension_root="$(cygpath -u "$extension_root")"
+    elif command -v wslpath >/dev/null 2>&1; then
+      extension_root="$(wslpath -u "$extension_root")"
+    fi
+    ;;
+esac
+
+if [ -z "${RELEWISE_AGENT_GATEWAY_TOKEN:-}" ]; then
+  echo "RELEWISE_AGENT_GATEWAY_TOKEN is required. Configure the Relewise extension setting." >&2
+  exit 2
+fi
+
+if [ "$using_wsl" = true ] && [ "__RELEWISE_AGENT_EXECUTABLE__" = "relewise-agent.exe" ]; then
+  case ":${WSLENV:-}:" in
+    *:RELEWISE_AGENT_GATEWAY_TOKEN/w:*) ;;
+    *) export WSLENV="${WSLENV:+$WSLENV:}RELEWISE_AGENT_GATEWAY_TOKEN/w" ;;
+  esac
+fi
+
+exec "$extension_root/libexec/__RELEWISE_AGENT_EXECUTABLE__" "$@"

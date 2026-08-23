@@ -1,0 +1,13 @@
+{
+  "name": "relewise",
+  "version": "0.1.0",
+  "description": "Work with Relewise Datasets, analytics, consumption, merchandising, and Search Tools.",
+  "settings": [
+    {
+      "name": "Relewise Agent Gateway PAT",
+      "description": "Personal Access Token used to access the Relewise Agent Gateway.",
+      "envVar": "RELEWISE_AGENT_GATEWAY_TOKEN",
+      "sensitive": true
+    }
+  ]
+}
