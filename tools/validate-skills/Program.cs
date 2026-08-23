@@ -11,6 +11,43 @@ try
         .Select(operation => operation.GetProperty("operationId").GetString()!)
         .ToHashSet(StringComparer.Ordinal);
 
+    var skillFiles = Directory.EnumerateFiles(
+        Path.Combine(repositoryRoot, "plugins"),
+        "SKILL.md",
+        SearchOption.AllDirectories).Order(StringComparer.Ordinal).ToArray();
+    var skillNames = new HashSet<string>(StringComparer.Ordinal);
+    foreach (var skillPath in skillFiles)
+    {
+        var content = File.ReadAllText(skillPath);
+        var lines = content.Replace("\r\n", "\n").Split('\n');
+        if (lines.Length < 4 || lines[0] != "---")
+        {
+            throw new InvalidDataException($"'{Relative(skillPath)}' must start with YAML frontmatter.");
+        }
+
+        var frontmatterEnd = Array.IndexOf(lines, "---", 1);
+        if (frontmatterEnd < 1)
+        {
+            throw new InvalidDataException($"'{Relative(skillPath)}' has unterminated YAML frontmatter.");
+        }
+
+        var frontmatter = lines[1..frontmatterEnd];
+        var name = Field(frontmatter, "name");
+        var description = Field(frontmatter, "description");
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description))
+        {
+            throw new InvalidDataException($"'{Relative(skillPath)}' must declare non-empty name and description fields.");
+        }
+        if (content.Contains("[TODO:", StringComparison.Ordinal))
+        {
+            throw new InvalidDataException($"'{Relative(skillPath)}' contains an unfinished placeholder.");
+        }
+        if (!skillNames.Add(name))
+        {
+            throw new InvalidDataException($"Skill name '{name}' is declared more than once.");
+        }
+    }
+
     var manifests = Directory.EnumerateFiles(
         Path.Combine(repositoryRoot, "plugins"),
         "operations.json",
@@ -44,10 +81,16 @@ try
         }
     }
 
-    Console.WriteLine($"Validated {manifests.Length} skill operation manifest(s).");
+    Console.WriteLine($"Validated {skillFiles.Length} skill definition(s) and {manifests.Length} operation manifest(s).");
     return 0;
 
     string Relative(string path) => Path.GetRelativePath(repositoryRoot, path).Replace('\\', '/');
+    static string? Field(string[] lines, string name)
+    {
+        var prefix = name + ":";
+        var line = lines.FirstOrDefault(value => value.StartsWith(prefix, StringComparison.Ordinal));
+        return line?[prefix.Length..].Trim().Trim('"', '\'');
+    }
 }
 catch (Exception exception)
 {
