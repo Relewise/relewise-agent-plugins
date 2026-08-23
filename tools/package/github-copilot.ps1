@@ -35,7 +35,7 @@ if ((Test-Path -LiteralPath $packageRoot) -and -not $Merge) {
 $adapterRoot = Join-Path $repositoryRoot 'vendors\github-copilot\relewise'
 if (-not (Test-Path -LiteralPath $packageRoot)) {
 New-Item -ItemType Directory -Path $packageRoot | Out-Null
-Copy-Item -LiteralPath (Join-Path $adapterRoot 'plugin.json') -Destination $packageRoot
+Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\plugin.json') -Destination $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
 New-Item -ItemType Directory -Path (Join-Path $packageRoot 'bin'), (Join-Path $packageRoot 'libexec') | Out-Null
