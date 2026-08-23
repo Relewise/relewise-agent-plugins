@@ -1,7 +1,7 @@
 {
   "name": "relewise",
   "version": "0.1.0",
-  "description": "Work with Relewise Datasets, analytics, consumption, merchandising, and Search Tools.",
+  "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "author": {
     "name": "Relewise",
     "url": "https://www.relewise.com/"
@@ -17,8 +17,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Relewise",
-    "shortDescription": "Analyze and optimize Relewise Datasets",
-    "longDescription": "Discover accessible Relewise Datasets, analyze performance and consumption, inspect configuration, and run guided optimization workflows.",
+    "shortDescription": "Configure, analyze and optimize Relewise",
+    "longDescription": "Work with your Relewise configuration, analytics and optimization using AI.",
     "developerName": "Relewise",
     "category": "Productivity",
     "capabilities": [

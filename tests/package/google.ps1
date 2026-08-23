@@ -13,6 +13,7 @@ $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'gemini-extension.json') | ConvertFrom-Json
 
 if ($manifest.name -ne 'relewise') { throw 'Gemini extension manifest has an unexpected name.' }
+if ($manifest.description -ne 'Work with your Relewise configuration, analytics and optimization using AI.') { throw 'Gemini extension manifest has an unexpected product description.' }
 if ($manifest.version -notmatch '^\d+\.\d+\.\d+$') { throw 'Gemini extension manifest version is not semantic.' }
 $tokenSetting = @($manifest.settings) | Where-Object envVar -eq 'RELEWISE_AGENT_GATEWAY_TOKEN'
 if ($tokenSetting.Count -ne 1 -or -not $tokenSetting.sensitive) { throw 'Agent Gateway PAT must be declared as one sensitive Gemini setting.' }
