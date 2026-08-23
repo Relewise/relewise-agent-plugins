@@ -61,6 +61,8 @@ jobs:
           ./tests/cli/smoke.ps1 -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
           ./tools/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
           ./tests/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/claude/${{ matrix.rid }}/relewise"
+          ./tools/package/github-copilot.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          ./tests/package/github-copilot.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/github-copilot/${{ matrix.rid }}/relewise"
 
       - name: Run Claude launcher smoke test
         shell: bash
@@ -68,3 +70,10 @@ jobs:
           CLAUDE_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/claude/${{ matrix.rid }}/relewise
           CLAUDE_PLUGIN_OPTION_agent_gateway_token: smoke-test-token
         run: artifacts/claude/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+
+      - name: Run GitHub Copilot launcher smoke test
+        shell: bash
+        env:
+          COPILOT_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/github-copilot/${{ matrix.rid }}/relewise
+          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
+        run: artifacts/github-copilot/${{ matrix.rid }}/relewise/bin/relewise-agent --version
