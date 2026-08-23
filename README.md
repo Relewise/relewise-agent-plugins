@@ -20,6 +20,19 @@ The two products are intentionally separate. Choose the product that matches the
 
 Both products use the portable [Agent Plugins](https://agent-plugins.org/) structure: each directory under `plugins/` contains a canonical `plugin.json` manifest and [Agent Skills](https://agentskills.io/) compliant with the open specification. Platform-specific files under `vendors/` adapt that shared source for clients that require their own format. Installation and updates remain specific to each client.
 
+## Prerelease installation
+
+The project is currently distributed as a prerelease. Download a package from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases) rather than using the source tree, which does not contain compiled executables.
+
+Choose the universal archive for your client:
+
+- `relewise-claude-universal-v<version>.tar.gz`
+- `relewise-github-copilot-universal-v<version>.tar.gz`
+- `relewise-openai-universal-v<version>.tar.gz`
+- `relewise-google-universal-v<version>.tar.gz`
+
+Each archive supports Windows x64, Linux x64/ARM64, and macOS x64/ARM64. Follow the client-specific instructions under [marketplace/relewise/platforms](marketplace/relewise/platforms) and configure a Relewise Agent Gateway PAT through the client's protected configuration or environment mechanism. Never put a PAT in a prompt or command argument.
+
 ## Releases
 
 The repository is versioned as one ecosystem. Pushing a semantic version tag such as `v0.1.0` validates the contracts and skills, builds and tests all supported native executables, packages every vendor adapter, and publishes the installable archives in a GitHub release. `v0.*` releases are published as prereleases; `v1.0.0` and later tags are stable releases.
@@ -32,4 +45,4 @@ Marketplace-ready copy, onboarding guidance, platform notes, and official artwor
 
 Installed versions update through the vendor's plugin or extension update mechanism. The Agent Gateway PAT remains external user configuration and is neither packaged nor replaced during an upgrade.
 
-This repository is licensed under the [MIT License](LICENSE).
+See [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes and [SECURITY.md](SECURITY.md) for private vulnerability reporting. This repository is licensed under the [MIT License](LICENSE).
