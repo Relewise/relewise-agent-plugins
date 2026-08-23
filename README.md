@@ -17,3 +17,9 @@ Build and troubleshoot Relewise integrations using AI development agents.
 This product is for developers implementing Search, Recommendations, and behavioral tracking with Relewise.
 
 The two products are intentionally separate. Choose the product that matches the work you want to do; no knowledge of the underlying Relewise APIs or agent protocols is required.
+
+## Releases
+
+The repository is versioned as one ecosystem. Pushing a semantic version tag such as `v0.1.0` validates the contracts and skills, builds and tests all supported native executables, packages every vendor adapter, and publishes the installable archives in a GitHub release.
+
+The tag is the release version source. It is applied to the executable and packaged manifests during the release; maintainers do not need to update each source manifest before tagging.

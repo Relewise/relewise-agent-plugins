@@ -1,0 +1,166 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate version tag
+        shell: bash
+        run: |
+          if [[ ! "${GITHUB_REF_NAME}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "Release tags must use v<major>.<minor>.<patch>."
+            exit 1
+          fi
+
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Regenerate contract catalog
+        run: dotnet run --project tools/generate-contract/generate-contract.csproj --configuration Release
+
+      - name: Validate generated contract files
+        shell: bash
+        run: |
+          status="$(git status --porcelain --untracked-files=all -- generated)"
+          if [[ -n "$status" ]]; then
+            echo "Generated contract files are not current."
+            echo "$status"
+            exit 1
+          fi
+
+      - name: Validate skills
+        run: dotnet run --project tools/validate-skills/validate-skills.csproj --configuration Release
+
+      - name: Regenerate API coverage
+        run: dotnet run --project tools/generate-coverage/generate-coverage.csproj --configuration Release
+
+      - name: Validate API coverage files
+        shell: bash
+        run: |
+          status="$(git status --porcelain --untracked-files=all -- generated/operation-coverage.json docs/api-coverage.md)"
+          if [[ -n "$status" ]]; then
+            echo "API coverage files are not current."
+            echo "$status"
+            exit 1
+          fi
+
+  package:
+    name: Package ${{ matrix.rid }}
+    needs: validate
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: win-x64
+            runner: windows-2025
+            executable: relewise-agent.exe
+          - rid: linux-x64
+            runner: ubuntu-24.04
+            executable: relewise-agent
+          - rid: linux-arm64
+            runner: ubuntu-24.04-arm
+            executable: relewise-agent
+          - rid: osx-x64
+            runner: macos-15-intel
+            executable: relewise-agent
+          - rid: osx-arm64
+            runner: macos-15
+            executable: relewise-agent
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build, package and test
+        shell: pwsh
+        run: |
+          $version = '${{ github.ref_name }}'.Substring(1)
+          $executable = "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+
+          dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}' -p:Version=$version
+          ./tests/cli/smoke.ps1 -ExecutablePath $executable
+
+          ./tools/package/claude.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -ExecutablePath $executable
+          ./tools/package/github-copilot.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -ExecutablePath $executable
+          ./tools/package/openai.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -ExecutablePath $executable
+          ./tools/package/google.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -ExecutablePath $executable
+
+          ./tools/package/set-manifest-version.ps1 -ManifestPath 'artifacts/claude/${{ matrix.rid }}/relewise/.claude-plugin/plugin.json' -Version $version
+          ./tools/package/set-manifest-version.ps1 -ManifestPath 'artifacts/github-copilot/${{ matrix.rid }}/relewise/plugin.json' -Version $version
+          ./tools/package/set-manifest-version.ps1 -ManifestPath 'artifacts/openai/${{ matrix.rid }}/relewise/.codex-plugin/plugin.json' -Version $version
+          ./tools/package/set-manifest-version.ps1 -ManifestPath 'artifacts/google/${{ matrix.rid }}/relewise/gemini-extension.json' -Version $version
+
+          ./tests/package/claude.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -PackagePath 'artifacts/claude/${{ matrix.rid }}/relewise'
+          ./tests/package/github-copilot.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -PackagePath 'artifacts/github-copilot/${{ matrix.rid }}/relewise'
+          ./tests/package/openai.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -PackagePath 'artifacts/openai/${{ matrix.rid }}/relewise'
+          ./tests/package/google.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -PackagePath 'artifacts/google/${{ matrix.rid }}/relewise'
+
+          ./tools/package/create-release-archives.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -Version $version
+
+      - name: Smoke-test packaged launchers
+        shell: bash
+        env:
+          CLAUDE_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/claude/${{ matrix.rid }}/relewise
+          CLAUDE_PLUGIN_OPTION_agent_gateway_token: smoke-test-token
+          COPILOT_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/github-copilot/${{ matrix.rid }}/relewise
+          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
+        run: |
+          artifacts/claude/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+          artifacts/github-copilot/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+          artifacts/openai/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+          artifacts/google/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+
+      - name: Upload release archives
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-${{ matrix.rid }}
+          path: artifacts/release/*
+          archive: false
+          if-no-files-found: error
+
+  publish:
+    name: Publish GitHub release
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download release archives
+        uses: actions/download-artifact@v7
+        with:
+          pattern: release-*
+          path: release-assets
+          merge-multiple: true
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "${GITHUB_REF_NAME}"
+          release-assets/*
+          --verify-tag
+          --generate-notes
+          --title "${GITHUB_REF_NAME}"
