@@ -34,6 +34,7 @@ $adapterRoot = Join-Path $repositoryRoot 'vendors\openai\relewise'
 New-Item -ItemType Directory -Path $packageRoot | Out-Null
 Copy-Item -LiteralPath (Join-Path $adapterRoot '.codex-plugin') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
+Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
 New-Item -ItemType Directory -Path (Join-Path $packageRoot 'bin'), (Join-Path $packageRoot 'libexec') | Out-Null
 
 $instruction = @'

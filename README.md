@@ -25,3 +25,5 @@ The repository is versioned as one ecosystem. Pushing a semantic version tag suc
 The tag is the release version source. It is applied to the executable and packaged manifests during the release; maintainers do not need to update each source manifest before tagging.
 
 Marketplace-ready copy, onboarding guidance, platform notes, and official artwork live under `marketplace/relewise/`.
+
+This repository is licensed under the [MIT License](LICENSE).
