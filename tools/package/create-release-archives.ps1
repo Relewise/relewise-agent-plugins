@@ -33,7 +33,19 @@ foreach ($vendor in $vendors) {
         throw "Package directory does not exist: $packageRoot"
     }
 
-    $baseName = "relewise-$vendor-$RuntimeIdentifier-v$Version"
+    if ($vendor -eq 'google') {
+        $geminiPlatform = switch ($RuntimeIdentifier) {
+            'win-x64' { 'win32.x64' }
+            'linux-x64' { 'linux.x64' }
+            'linux-arm64' { 'linux.arm64' }
+            'osx-x64' { 'darwin.x64' }
+            'osx-arm64' { 'darwin.arm64' }
+        }
+        $baseName = "$geminiPlatform.relewise"
+    }
+    else {
+        $baseName = "relewise-$vendor-$RuntimeIdentifier-v$Version"
+    }
     if ($RuntimeIdentifier -eq 'win-x64') {
         $archivePath = Join-Path $resolvedOutputDirectory "$baseName.zip"
         Compress-Archive -LiteralPath $packageRoot -DestinationPath $archivePath -Force

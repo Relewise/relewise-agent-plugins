@@ -23,3 +23,5 @@ The two products are intentionally separate. Choose the product that matches the
 The repository is versioned as one ecosystem. Pushing a semantic version tag such as `v0.1.0` validates the contracts and skills, builds and tests all supported native executables, packages every vendor adapter, and publishes the installable archives in a GitHub release.
 
 The tag is the release version source. It is applied to the executable and packaged manifests during the release; maintainers do not need to update each source manifest before tagging.
+
+Marketplace-ready copy, onboarding guidance, platform notes, and official artwork live under `marketplace/relewise/`.
