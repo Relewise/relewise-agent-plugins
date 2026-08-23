@@ -137,7 +137,6 @@ jobs:
         with:
           name: release-${{ matrix.rid }}
           path: artifacts/release/*
-          archive: false
           if-no-files-found: error
 
       - name: Upload native executable
@@ -145,7 +144,6 @@ jobs:
         with:
           name: native-${{ matrix.rid }}
           path: artifacts/${{ matrix.rid }}/${{ matrix.executable }}
-          archive: false
           if-no-files-found: error
 
   assemble-universal:
@@ -182,7 +180,6 @@ jobs:
         with:
           name: release-universal
           path: artifacts/release-universal/*
-          archive: false
           if-no-files-found: error
 
   publish:

@@ -99,7 +99,6 @@ jobs:
         with:
           name: ci-native-${{ matrix.rid }}
           path: artifacts/${{ matrix.rid }}/${{ matrix.executable }}
-          archive: false
           if-no-files-found: error
 
   universal-package:
