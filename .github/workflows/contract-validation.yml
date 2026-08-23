@@ -28,6 +28,14 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install Agent Skills reference validator
+        run: python -m pip install skills-ref==0.1.1
+
       - name: Build generator
         run: dotnet build tools/generate-contract/generate-contract.csproj --configuration Release
 
@@ -48,6 +56,10 @@ jobs:
 
       - name: Validate skill operation references
         run: dotnet run --project tools/validate-skills/validate-skills.csproj --configuration Release
+
+      - name: Validate Agent Skills specification
+        shell: pwsh
+        run: ./tools/validate-agent-skills/validate-agent-skills.ps1
 
       - name: Validate portable plugin manifests
         run: dotnet run --project tools/validate-agent-plugins/validate-agent-plugins.csproj --configuration Release
