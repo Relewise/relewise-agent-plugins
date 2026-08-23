@@ -11,10 +11,16 @@ $ErrorActionPreference = 'Stop'
 $packageRoot = (Resolve-Path -LiteralPath $PackagePath).Path
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'plugin.json') | ConvertFrom-Json
+$canonicalManifest = Get-Content -Raw -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\plugin.json') | ConvertFrom-Json
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'Package is missing its license.' }
 
 if ($manifest.'$schema' -ne 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json') { throw 'Copilot plugin does not opt into Agent Plugins v1.0.0.' }
 if ($null -ne $manifest.userConfig) { throw 'Copilot plugin manifest must not claim unsupported protected user configuration.' }
+foreach ($property in '$schema', 'name', 'description', 'author', 'homepage', 'repository', 'license', 'keywords') {
+    if (($manifest.$property | ConvertTo-Json -Compress) -ne ($canonicalManifest.$property | ConvertTo-Json -Compress)) {
+        throw "Copilot plugin manifest property '$property' differs from the canonical manifest."
+    }
+}
 
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
 $packagedSkills = Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory

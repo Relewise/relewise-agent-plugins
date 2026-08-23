@@ -46,6 +46,9 @@ jobs:
       - name: Validate skills
         run: dotnet run --project tools/validate-skills/validate-skills.csproj --configuration Release
 
+      - name: Validate portable plugin manifests
+        run: dotnet run --project tools/validate-agent-plugins/validate-agent-plugins.csproj --configuration Release
+
       - name: Regenerate API coverage
         run: dotnet run --project tools/generate-coverage/generate-coverage.csproj --configuration Release
 

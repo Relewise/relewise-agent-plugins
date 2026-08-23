@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "relewise",
+  "version": "0.1.0",
+  "description": "Inspect and manage Relewise search, recommendations, merchandising, analytics, and consumption through Agent Gateway.",
+  "author": {
+    "name": "Relewise",
+    "url": "https://www.relewise.com/"
+  },
+  "homepage": "https://www.relewise.com/",
+  "repository": "https://github.com/Relewise/relewise-agent-plugins",
+  "license": "MIT",
+  "keywords": [
+    "relewise",
+    "analytics",
+    "search",
+    "merchandising"
+  ]
+}
