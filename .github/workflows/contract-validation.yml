@@ -15,8 +15,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  marketplace-fingerprint:
+    name: Validate marketplace fingerprint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Verify committed marketplace payload is current
+        shell: pwsh
+        run: ./tests/package/marketplace-fingerprint.ps1
+
   validate:
     name: Validate contract
+    needs: marketplace-fingerprint
     runs-on: ubuntu-latest
 
     steps:

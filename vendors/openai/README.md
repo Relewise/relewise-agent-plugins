@@ -17,4 +17,4 @@ The default output is `artifacts/openai/<runtime-id>/relewise`. Supported runtim
 
 For direct Codex installation, add the repository as a marketplace using the `main` Git ref and an empty sparse-path setting. The root `.agents/plugins/marketplace.json` catalog points directly to the canonical plugin under `plugins/relewise`.
 
-The cross-platform workflow builds and validates all five native runtimes on every change. After relevant content reaches `main`, it opens or refreshes a generated PR that updates the committed runtimes and Codex manifest alongside the canonical skills. Public ChatGPT/Codex directory updates remain subject to OpenAI's submission, review, and publication process.
+The required source fingerprint prevents runtime-affecting changes from merging without their generated payload. A maintainer runs **Refresh marketplace payload** on the originating feature branch to build all five native runtimes and commit synchronized vendor manifests and executables before merge. `main` is verification-only and never opens a repair PR. Public ChatGPT/Codex directory updates remain subject to OpenAI's submission, review, and publication process.

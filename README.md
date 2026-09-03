@@ -24,7 +24,9 @@ Both products use the portable [Agent Plugins](https://agent-plugins.org/) struc
 
 The project is currently distributed as a prerelease. Codex, Claude Code, and GitHub Copilot CLI users can add this repository directly as a marketplace. Gemini CLI installs the platform package selected from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases).
 
-To add the Codex marketplace, use `https://github.com/Relewise/relewise-agent-plugins.git` as the source, `main` as the Git ref, and leave **Sparse paths** empty. The marketplace points directly at the canonical Relewise plugin and includes all five native runtimes. After relevant changes reach `main`, GitHub Actions opens or refreshes a PR containing the generated executable and manifest updates.
+To add the Codex marketplace, use `https://github.com/Relewise/relewise-agent-plugins.git` as the source, `main` as the Git ref, and leave **Sparse paths** empty. The marketplace points directly at the canonical Relewise plugin and includes all five native runtimes.
+
+Marketplace updates are atomic with their source changes. A required fingerprint check blocks a pull request when runtime inputs and the committed payload differ. A maintainer then runs **Refresh marketplace payload** on that feature branch; it builds and smoke-tests all five NativeAOT executables on their native runners, commits the synchronized runtimes and vendor manifests back to the same branch, and starts checks on the new PR head. Workflows on `main` only verify committed content and never create repair commits or follow-up pull requests.
 
 Claude Code users add the marketplace with `claude plugin marketplace add Relewise/relewise-agent-plugins` and install with `claude plugin install relewise@relewise`. GitHub Copilot CLI users run `copilot plugin marketplace add Relewise/relewise-agent-plugins` followed by `copilot plugin install relewise@relewise`. Both catalogs point to the same canonical plugin directory; no skills or executables are duplicated.
 

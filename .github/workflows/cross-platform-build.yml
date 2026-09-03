@@ -94,6 +94,17 @@ jobs:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: artifacts/google/${{ matrix.rid }}/relewise/bin/relewise-agent --version
 
+      - name: Smoke-test committed marketplace executable
+        shell: bash
+        env:
+          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
+        run: |
+          executable="plugins/relewise/libexec/${{ matrix.rid }}/relewise-agent"
+          if [[ "${{ matrix.rid }}" == "win-x64" ]]; then
+            executable="${executable}.exe"
+          fi
+          "$executable" --version
+
       - name: Upload native executable for universal package test
         uses: actions/upload-artifact@v7
         with:
@@ -119,120 +130,13 @@ jobs:
       - name: Assemble and validate universal packages
         shell: pwsh
         run: |
-          $fingerprint = (./tools/package/get-codex-marketplace-fingerprint.ps1 | Out-String).Trim()
           $version = "0.3.0-main.${{ github.run_number }}"
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
           ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
           ./tools/package/create-universal-release-archives.ps1 -Version $version
-
-          # Build one repository-shaped candidate from the already tested universal packages.
-          # Each vendor catalog points to the same plugin payload, so skills and binaries stay canonical.
-          $marketplaceRoot = 'artifacts/codex-marketplace'
-          New-Item -ItemType Directory -Path "$marketplaceRoot/.agents/plugins", "$marketplaceRoot/.claude-plugin", "$marketplaceRoot/.github/plugin", "$marketplaceRoot/plugins" | Out-Null
-          Copy-Item -LiteralPath 'vendors/openai/marketplace.json' -Destination "$marketplaceRoot/.agents/plugins/marketplace.json"
-          Copy-Item -LiteralPath '.claude-plugin/marketplace.json' -Destination "$marketplaceRoot/.claude-plugin/marketplace.json"
-          Copy-Item -LiteralPath '.github/plugin/marketplace.json' -Destination "$marketplaceRoot/.github/plugin/marketplace.json"
-          Copy-Item -LiteralPath 'artifacts/universal/openai/relewise' -Destination "$marketplaceRoot/plugins" -Recurse
-          Copy-Item -LiteralPath 'artifacts/universal/claude/relewise/.claude-plugin' -Destination "$marketplaceRoot/plugins/relewise" -Recurse
-          Copy-Item -LiteralPath 'artifacts/universal/github-copilot/relewise/plugin.json' -Destination "$marketplaceRoot/plugins/relewise/plugin.json"
-          [IO.File]::WriteAllText(
-            "$marketplaceRoot/plugins/relewise/.codex-plugin/source.sha256",
-            "$fingerprint`n",
-            [Text.UTF8Encoding]::new($false))
-          ./tests/package/codex-marketplace.ps1 -MarketplaceRoot $marketplaceRoot
 
       - name: Smoke-test universal launcher
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: artifacts/universal/openai/relewise/bin/relewise-agent --version
-
-      - name: Upload Codex marketplace candidate
-        # The main-only update job runs on a separate runner, so transfer the validated
-        # candidate as an artifact instead of rebuilding or validating it a second time.
-        uses: actions/upload-artifact@v7
-        with:
-          name: codex-marketplace-candidate
-          path: artifacts/codex-marketplace
-          include-hidden-files: true
-          if-no-files-found: error
-
-  update-codex-marketplace:
-    name: Update committed Codex marketplace
-    needs: universal-package
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v7
-
-      - name: Download validated marketplace
-        uses: actions/download-artifact@v7
-        with:
-          name: codex-marketplace-candidate
-          path: artifacts/codex-marketplace
-
-      - name: Restore executable permissions and validate candidate
-        shell: bash
-        run: |
-          chmod +x \
-            artifacts/codex-marketplace/plugins/relewise/bin/relewise-agent \
-            artifacts/codex-marketplace/plugins/relewise/libexec/linux-x64/relewise-agent \
-            artifacts/codex-marketplace/plugins/relewise/libexec/linux-arm64/relewise-agent \
-            artifacts/codex-marketplace/plugins/relewise/libexec/osx-x64/relewise-agent \
-            artifacts/codex-marketplace/plugins/relewise/libexec/osx-arm64/relewise-agent
-          pwsh ./tests/package/codex-marketplace.ps1 -MarketplaceRoot artifacts/codex-marketplace
-
-      - name: Open or update generated marketplace pull request
-        shell: pwsh
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          $candidate = 'artifacts/codex-marketplace/plugins/relewise'
-          $target = 'plugins/relewise'
-          $candidateFingerprint = (Get-Content -Raw -LiteralPath "$candidate/.codex-plugin/source.sha256").Trim()
-          $currentFingerprint = if (Test-Path -LiteralPath "$target/.codex-plugin/source.sha256") {
-            (Get-Content -Raw -LiteralPath "$target/.codex-plugin/source.sha256").Trim()
-          } else { '' }
-          if ($candidateFingerprint -eq $currentFingerprint) {
-            Write-Host 'Committed Codex marketplace payload is current.'
-            exit 0
-          }
-
-          $branch = 'automation/update-codex-marketplace'
-          git switch -C $branch
-          New-Item -ItemType Directory -Force -Path "$target/.codex-plugin", "$target/.claude-plugin", "$target/bin", "$target/libexec" | Out-Null
-          Copy-Item -LiteralPath "$candidate/.codex-plugin/plugin.json" -Destination "$target/.codex-plugin/plugin.json" -Force
-          Copy-Item -LiteralPath "$candidate/.codex-plugin/source.sha256" -Destination "$target/.codex-plugin/source.sha256" -Force
-          Copy-Item -LiteralPath "$candidate/.claude-plugin/plugin.json" -Destination "$target/.claude-plugin/plugin.json" -Force
-          Copy-Item -LiteralPath "$candidate/plugin.json" -Destination "$target/plugin.json" -Force
-          Copy-Item -LiteralPath "$candidate/bin/relewise-agent" -Destination "$target/bin/relewise-agent" -Force
-          foreach ($rid in @('win-x64', 'linux-x64', 'linux-arm64', 'osx-x64', 'osx-arm64')) {
-            $name = if ($rid -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }
-            New-Item -ItemType Directory -Force -Path "$target/libexec/$rid" | Out-Null
-            Copy-Item -LiteralPath "$candidate/libexec/$rid/$name" -Destination "$target/libexec/$rid/$name" -Force
-          }
-          Copy-Item -LiteralPath 'LICENSE' -Destination "$target/LICENSE" -Force
-
-          git add -- plugins/relewise/plugin.json plugins/relewise/.codex-plugin plugins/relewise/.claude-plugin plugins/relewise/bin plugins/relewise/libexec plugins/relewise/LICENSE
-          git update-index --chmod=+x plugins/relewise/bin/relewise-agent plugins/relewise/libexec/linux-x64/relewise-agent plugins/relewise/libexec/linux-arm64/relewise-agent plugins/relewise/libexec/osx-x64/relewise-agent plugins/relewise/libexec/osx-arm64/relewise-agent
-          if (git diff --cached --quiet) {
-            Write-Host 'No generated marketplace changes to commit.'
-            exit 0
-          }
-
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Update committed marketplace payload'
-          git push --force origin $branch
-
-          $existing = gh pr list --head $branch --base main --state open --json number --jq '.[0].number'
-          if ([string]::IsNullOrWhiteSpace($existing)) {
-            gh pr create --head $branch --base main --title 'Update committed marketplace payload' --body 'Automated refresh of the five NativeAOT executables and vendor manifests from the current canonical source. No reviewers are requested automatically.'
-          } else {
-            Write-Host "Updated existing PR #$existing."
-          }

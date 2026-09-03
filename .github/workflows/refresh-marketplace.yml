@@ -1,0 +1,153 @@
+name: Refresh marketplace payload
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: refresh-marketplace-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate-branch:
+    name: Validate target branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refuse main
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+            echo "Refresh a feature branch so the generated payload is reviewed and merged atomically."
+            exit 1
+          fi
+
+  build:
+    name: Build ${{ matrix.rid }}
+    needs: validate-branch
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - rid: win-x64
+            runner: windows-2025
+            executable: relewise-agent.exe
+          - rid: linux-x64
+            runner: ubuntu-24.04
+            executable: relewise-agent
+          - rid: linux-arm64
+            runner: ubuntu-24.04-arm
+            executable: relewise-agent
+          - rid: osx-x64
+            runner: macos-15-intel
+            executable: relewise-agent
+          - rid: osx-arm64
+            runner: macos-15
+            executable: relewise-agent
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Build and smoke-test native executable
+        shell: pwsh
+        run: |
+          dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}'
+          ./tests/cli/smoke.ps1 -ExecutablePath 'artifacts/${{ matrix.rid }}/${{ matrix.executable }}'
+
+      - name: Upload native executable
+        uses: actions/upload-artifact@v7
+        with:
+          name: refresh-native-${{ matrix.rid }}
+          path: artifacts/${{ matrix.rid }}/${{ matrix.executable }}
+          if-no-files-found: error
+
+  update-feature-branch:
+    name: Commit marketplace payload to feature branch
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Download native executables
+        uses: actions/download-artifact@v7
+        with:
+          pattern: refresh-native-*
+          path: artifacts/native
+
+      - name: Assemble and validate committed payload
+        shell: pwsh
+        run: |
+          $currentVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
+          $versionCore = ($currentVersion -split '-', 2)[0]
+          $version = "$versionCore-main.${{ github.run_number }}"
+          ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
+
+          $candidate = 'artifacts/universal'
+          $target = 'plugins/relewise'
+          Copy-Item -LiteralPath "$candidate/openai/relewise/.codex-plugin/plugin.json" -Destination "$target/.codex-plugin/plugin.json" -Force
+          Copy-Item -LiteralPath "$candidate/claude/relewise/.claude-plugin/plugin.json" -Destination "$target/.claude-plugin/plugin.json" -Force
+          Copy-Item -LiteralPath "$candidate/github-copilot/relewise/plugin.json" -Destination "$target/plugin.json" -Force
+          Copy-Item -LiteralPath "$candidate/openai/relewise/bin/relewise-agent" -Destination "$target/bin/relewise-agent" -Force
+          foreach ($rid in @('win-x64', 'linux-x64', 'linux-arm64', 'osx-x64', 'osx-arm64')) {
+            $name = if ($rid -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }
+            Copy-Item -LiteralPath "$candidate/openai/relewise/libexec/$rid/$name" -Destination "$target/libexec/$rid/$name" -Force
+          }
+          Copy-Item -LiteralPath 'LICENSE' -Destination "$target/LICENSE" -Force
+
+          # The versioned portable manifest is an input to the fingerprint, so calculate
+          # only after all generated manifests have been placed in their committed paths.
+          $fingerprint = (./tools/package/get-codex-marketplace-fingerprint.ps1 | Out-String).Trim()
+          [IO.File]::WriteAllText(
+            "$target/.codex-plugin/source.sha256",
+            "$fingerprint`n",
+            [Text.UTF8Encoding]::new($false))
+
+          ./tests/package/marketplace-fingerprint.ps1
+          ./tests/package/codex-marketplace.ps1 -MarketplaceRoot .
+
+      - name: Commit and push to the originating branch
+        shell: bash
+        run: |
+          git add -- \
+            plugins/relewise/plugin.json \
+            plugins/relewise/.codex-plugin \
+            plugins/relewise/.claude-plugin \
+            plugins/relewise/bin \
+            plugins/relewise/libexec \
+            plugins/relewise/LICENSE
+          git update-index --chmod=+x \
+            plugins/relewise/bin/relewise-agent \
+            plugins/relewise/libexec/linux-x64/relewise-agent \
+            plugins/relewise/libexec/linux-arm64/relewise-agent \
+            plugins/relewise/libexec/osx-x64/relewise-agent \
+            plugins/relewise/libexec/osx-arm64/relewise-agent
+          if git diff --cached --quiet; then
+            echo "Marketplace payload is already current."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refresh committed marketplace payload'
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Run checks on the updated PR head
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          gh workflow run contract-validation.yml --ref "${GITHUB_REF_NAME}"
+          gh workflow run cross-platform-build.yml --ref "${GITHUB_REF_NAME}"
+          gh workflow run agent-gateway-integration.yml --ref "${GITHUB_REF_NAME}"

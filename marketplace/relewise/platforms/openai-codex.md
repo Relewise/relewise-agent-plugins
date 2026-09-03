@@ -19,4 +19,4 @@ The repository marketplace is self-contained and supports Windows x64, Linux x64
 
 ## Publication route
 
-The repository-level `.agents/plugins/marketplace.json` on `main` points directly to the canonical Relewise plugin. GitHub Actions keeps its five committed NativeAOT runtimes synchronized through generated PRs. OpenAI's reviewed public directory remains a separate discovery route.
+The repository-level `.agents/plugins/marketplace.json` on `main` points directly to the canonical Relewise plugin. Runtime-affecting source changes cannot merge until a maintainer-triggered workflow has committed all five synchronized NativeAOT runtimes and vendor manifests to the same pull request branch. `main` only verifies that committed payload. OpenAI's reviewed public directory remains a separate discovery route.
