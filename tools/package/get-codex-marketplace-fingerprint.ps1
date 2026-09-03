@@ -2,6 +2,7 @@ $ErrorActionPreference = 'Stop'
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $includedPaths = @(
     'version.json',
+    '.github/workflows/refresh-marketplace.yml',
     'src/relewise-agent',
     'generated/operations.json',
     'plugins/relewise/plugin.json',
