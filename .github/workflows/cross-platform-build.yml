@@ -125,6 +125,8 @@ jobs:
           ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
           ./tools/package/create-universal-release-archives.ps1 -Version $version
 
+          # Build one repository-shaped candidate from the already tested universal packages.
+          # Each vendor catalog points to the same plugin payload, so skills and binaries stay canonical.
           $marketplaceRoot = 'artifacts/codex-marketplace'
           New-Item -ItemType Directory -Path "$marketplaceRoot/.agents/plugins", "$marketplaceRoot/.claude-plugin", "$marketplaceRoot/.github/plugin", "$marketplaceRoot/plugins" | Out-Null
           Copy-Item -LiteralPath 'vendors/openai/marketplace.json' -Destination "$marketplaceRoot/.agents/plugins/marketplace.json"
@@ -146,6 +148,8 @@ jobs:
         run: artifacts/universal/openai/relewise/bin/relewise-agent --version
 
       - name: Upload Codex marketplace candidate
+        # The main-only update job runs on a separate runner, so transfer the validated
+        # candidate as an artifact instead of rebuilding or validating it a second time.
         uses: actions/upload-artifact@v7
         with:
           name: codex-marketplace-candidate
