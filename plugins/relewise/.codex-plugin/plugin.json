@@ -1,6 +1,6 @@
 {
   "name": "relewise",
-  "version": "0.3.0-main.52",
+  "version": "0.3.0-main.1",
   "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "author": {
     "name": "Relewise",
@@ -32,6 +32,7 @@
       "Review search performance for my Relewise Dataset.",
       "Audit merchandising rules for my Relewise Dataset."
     ],
-    "brandColor": "#3764E4"
+    "brandColor": "#3764E4",
+    "logo": "./assets/logo.png"
   }
 }
