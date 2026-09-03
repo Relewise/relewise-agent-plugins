@@ -21,6 +21,13 @@ dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release 
 
 The default output is `artifacts/github-copilot/<runtime-id>/relewise`. Supported runtime identifiers are `win-x64`, `linux-x64`, `linux-arm64`, `osx-x64`, and `osx-arm64`.
 
-For a persistent installation, use `copilot plugin install <package-path>` instead of `--plugin-dir`.
+For repository installation, register and install the marketplace:
+
+```shell
+copilot plugin marketplace add Relewise/relewise-agent-plugins
+copilot plugin install relewise@relewise
+```
+
+The root `.github/plugin/marketplace.json` points directly to `plugins/relewise`; the package path remains useful for testing release archives.
 
 For distribution, use `relewise-github-copilot-universal-v<version>.tar.gz` from the GitHub release. Installed plugins update through `copilot plugin update relewise`; custom marketplace auto-update is an explicit user or administrator setting.

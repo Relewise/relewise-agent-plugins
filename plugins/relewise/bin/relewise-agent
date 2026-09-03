@@ -23,6 +23,10 @@ case "$os:$arch" in
   *) echo "Unsupported platform: $os $arch" >&2; exit 3 ;;
 esac
 
+if [ -z "${RELEWISE_AGENT_GATEWAY_TOKEN:-}" ] && [ -n "${CLAUDE_PLUGIN_OPTION_AGENT_GATEWAY_TOKEN:-}" ]; then
+  export RELEWISE_AGENT_GATEWAY_TOKEN="$CLAUDE_PLUGIN_OPTION_AGENT_GATEWAY_TOKEN"
+fi
+
 if [ -z "${RELEWISE_AGENT_GATEWAY_TOKEN:-}" ]; then
   echo "RELEWISE_AGENT_GATEWAY_TOKEN is required." >&2
   exit 2

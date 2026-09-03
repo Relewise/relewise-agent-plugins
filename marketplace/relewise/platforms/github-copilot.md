@@ -12,14 +12,19 @@ Use the detailed description, requirements, examples, and security text from the
 
 ## Installation and authentication copy
 
-Install the Relewise plugin from its published marketplace. Set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment used to start Copilot CLI, preferably through the operating system or a secret manager, and protect it from tool output:
+Register the repository marketplace and install Relewise:
+
+```shell
+copilot plugin marketplace add Relewise/relewise-agent-plugins
+copilot plugin install relewise@relewise
+```
+
+Set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment used to start Copilot CLI, preferably through the operating system or a secret manager, and protect it from tool output:
 
 ```shell
 copilot --secret-env-vars=RELEWISE_AGENT_GATEWAY_TOKEN
 ```
 
-The final installation command depends on the marketplace identifier assigned during publication.
-
 ## Publication route
 
-Copilot CLI installs plugins from registered marketplaces, repositories, or local paths. A marketplace catalog and public distribution source will be added during publication.
+Copilot CLI discovers the root `.github/plugin/marketplace.json`. Its Relewise entry points to the canonical `plugins/relewise` directory on `main`.

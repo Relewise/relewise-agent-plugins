@@ -31,7 +31,7 @@ $expectedExecutable = if ($RuntimeIdentifier -eq 'win-x64') { 'relewise-agent.ex
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "libexec\$RuntimeIdentifier\$expectedExecutable"))) { throw 'Package is missing its native executable.' }
 $launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'bin\relewise-agent')
 if (-not $launcher.Contains('runtime_id="win-x64"') -or -not $launcher.Contains('runtime_id="osx-arm64"')) { throw 'Launcher does not select a native executable by platform.' }
-if (-not $launcher.Contains('CLAUDE_PLUGIN_OPTION_agent_gateway_token') -or -not $launcher.Contains('RELEWISE_AGENT_GATEWAY_TOKEN')) {
+if (-not $launcher.Contains('CLAUDE_PLUGIN_OPTION_AGENT_GATEWAY_TOKEN') -or -not $launcher.Contains('RELEWISE_AGENT_GATEWAY_TOKEN')) {
     throw 'Launcher does not map Claude sensitive configuration to the CLI environment variable.'
 }
 

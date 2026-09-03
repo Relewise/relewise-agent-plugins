@@ -138,7 +138,7 @@ jobs:
         shell: bash
         env:
           CLAUDE_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/claude/${{ matrix.rid }}/relewise
-          CLAUDE_PLUGIN_OPTION_agent_gateway_token: smoke-test-token
+          CLAUDE_PLUGIN_OPTION_AGENT_GATEWAY_TOKEN: smoke-test-token
           COPILOT_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/github-copilot/${{ matrix.rid }}/relewise
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: |

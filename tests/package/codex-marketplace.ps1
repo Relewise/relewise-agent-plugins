@@ -20,9 +20,37 @@ if ($entry.policy.installation -ne 'AVAILABLE' -or $entry.policy.authentication 
     throw 'Codex marketplace policy is incomplete.'
 }
 
+$vendorMarketplaces = @(
+    @{ Vendor = 'Claude Code'; Path = '.claude-plugin\marketplace.json' },
+    @{ Vendor = 'GitHub Copilot CLI'; Path = '.github\plugin\marketplace.json' }
+)
+foreach ($vendorMarketplace in $vendorMarketplaces) {
+    $catalog = Get-Content -Raw -LiteralPath (Join-Path $resolvedMarketplaceRoot $vendorMarketplace.Path) | ConvertFrom-Json
+    if ($catalog.name -ne 'relewise' -or $catalog.owner.name -ne 'Relewise') {
+        throw "$($vendorMarketplace.Vendor) marketplace metadata is invalid."
+    }
+    if ($catalog.plugins.Count -ne 1 -or $catalog.plugins[0].name -ne 'relewise') {
+        throw "$($vendorMarketplace.Vendor) marketplace must contain exactly the Relewise plugin."
+    }
+    if ($catalog.plugins[0].source -ne './plugins/relewise') {
+        throw "$($vendorMarketplace.Vendor) marketplace does not reference the canonical plugin."
+    }
+}
+
 $pluginRoot = Join-Path $resolvedMarketplaceRoot 'plugins\relewise'
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.codex-plugin\plugin.json') | ConvertFrom-Json
 if ($manifest.name -ne $entry.name) { throw 'Marketplace and plugin manifest names do not match.' }
+$portableManifest = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot 'plugin.json') | ConvertFrom-Json
+$claudeManifest = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.claude-plugin\plugin.json') | ConvertFrom-Json
+if ($portableManifest.name -ne 'relewise' -or $claudeManifest.name -ne 'relewise') {
+    throw 'Vendor plugin manifests do not identify the canonical Relewise plugin.'
+}
+if ($manifest.version -ne $portableManifest.version -or $manifest.version -ne $claudeManifest.version) {
+    throw 'Committed vendor plugin manifest versions are not synchronized.'
+}
+if (-not $claudeManifest.userConfig.agent_gateway_token.sensitive -or -not $claudeManifest.userConfig.agent_gateway_token.required) {
+    throw 'Claude Code manifest does not require protected Agent Gateway authentication.'
+}
 
 $canonicalSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
 $installedSkills = Get-ChildItem -LiteralPath (Join-Path $pluginRoot 'skills') -Directory
@@ -63,4 +91,4 @@ if (-not $versionResponse.success -or $versionResponse.data.name -ne 'relewise-a
     throw 'The bundled Codex runtime did not return a valid version response.'
 }
 
-Write-Host "Codex repository marketplace tests passed for version $($manifest.version)"
+Write-Host "Repository marketplace tests passed for Codex, Claude Code and GitHub Copilot CLI at version $($manifest.version)"
