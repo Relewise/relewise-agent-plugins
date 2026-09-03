@@ -5,6 +5,8 @@ description: Inspect and update Relewise Search Tools configuration through the 
 
 # Relewise Search Tools
 
+When `../../bin/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
+
 Use `relewise-agent` for execution. Do not construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. Discover and validate the intended Dataset first. Dataset-specific Data Keys and values are case-sensitive; retrieve metadata when they are unknown rather than guessing. Inspect unfamiliar operations with `schema` and execute them with `call`.
 
 Read [references/rule-workflows.md](references/rule-workflows.md) to select the correct rule family and operation sequence.

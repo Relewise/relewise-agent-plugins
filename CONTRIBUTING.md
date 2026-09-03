@@ -50,6 +50,9 @@ Do not edit files under `generated/` or `docs/api-coverage.md` manually.
 - Never accept the PAT as a command-line argument or include it in diagnostics.
 - Preserve Dataset access validation and effective Agent Gateway policy enforcement.
 - Change shared behavior at its canonical source; vendor adapters should remain thin.
+- If **Validate marketplace fingerprint** fails, ask a maintainer to run the **Refresh marketplace payload** workflow on the pull request branch. Do not merge until its generated commit and the checks on that new head pass.
+- Never refresh the payload on `main`; source changes and their five native executables must merge atomically in the originating pull request.
+- Change `version.json` manually when the next release version is decided. Workflows add prerelease build numbers and synchronize executables and manifests automatically.
 
 ## Validation
 
@@ -79,3 +82,5 @@ Keep the title and description concise and explain:
 - whether generated files, contracts, manifests, or release packaging changed.
 
 All required CI checks must pass before merge. Contributions are licensed under the repository's [MIT License](LICENSE).
+
+Repository administrators must configure branch protection to require **Validate marketplace fingerprint**. The maintainer-triggered refresh uses the scoped workflow `GITHUB_TOKEN`, pushes only to the selected feature branch, and explicitly dispatches validation for the generated head. A future unattended variant should use a narrowly scoped GitHub App token so its push naturally triggers the required workflows; do not replace this with a broad personal token or weaken the fingerprint requirement.

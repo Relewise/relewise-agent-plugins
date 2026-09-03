@@ -1,0 +1,20 @@
+{
+  "name": "relewise",
+  "interface": {
+    "displayName": "Relewise"
+  },
+  "plugins": [
+    {
+      "name": "relewise",
+      "source": {
+        "source": "local",
+        "path": "./plugins/relewise"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

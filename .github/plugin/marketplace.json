@@ -1,0 +1,17 @@
+{
+  "name": "relewise",
+  "owner": {
+    "name": "Relewise"
+  },
+  "metadata": {
+    "description": "Official Relewise agent plugins."
+  },
+  "plugins": [
+    {
+      "name": "relewise",
+      "description": "Work with your Relewise configuration, analytics and optimization using AI.",
+      "source": "./plugins/relewise",
+      "category": "Productivity"
+    }
+  ]
+}

@@ -49,16 +49,18 @@ jobs:
           dotnet-version: 10.0.x
 
       - name: Publish native executable
-        run: >-
-          dotnet publish src/relewise-agent/relewise-agent.csproj
-          --configuration Release
-          --runtime ${{ matrix.rid }}
-          --output artifacts/${{ matrix.rid }}
+        shell: pwsh
+        run: |
+          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
+          $version = "$versionCore-main.${{ github.run_number }}"
+          dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}' -p:Version=$version
 
       - name: Run CLI and packaging smoke tests
         shell: pwsh
         run: |
-          ./tests/cli/smoke.ps1 -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
+          $version = "$versionCore-main.${{ github.run_number }}"
+          ./tests/cli/smoke.ps1 -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}" -ExpectedVersion $version
           ./tools/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
           ./tests/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/claude/${{ matrix.rid }}/relewise"
           ./tools/package/github-copilot.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
@@ -72,7 +74,7 @@ jobs:
         shell: bash
         env:
           CLAUDE_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/claude/${{ matrix.rid }}/relewise
-          CLAUDE_PLUGIN_OPTION_agent_gateway_token: smoke-test-token
+          CLAUDE_PLUGIN_OPTION_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: artifacts/claude/${{ matrix.rid }}/relewise/bin/relewise-agent --version
 
       - name: Run GitHub Copilot launcher smoke test
@@ -93,6 +95,14 @@ jobs:
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: artifacts/google/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+
+      - name: Smoke-test committed marketplace executable
+        shell: pwsh
+        env:
+          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
+        run: |
+          $expectedVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
+          ./tests/cli/smoke.ps1 -ExecutablePath 'plugins/relewise/libexec/${{ matrix.rid }}/${{ matrix.executable }}' -ExpectedVersion $expectedVersion
 
       - name: Upload native executable for universal package test
         uses: actions/upload-artifact@v7
@@ -119,9 +129,11 @@ jobs:
       - name: Assemble and validate universal packages
         shell: pwsh
         run: |
-          ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version 0.1.0
-          ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version 0.1.0
-          ./tools/package/create-universal-release-archives.ps1 -Version 0.1.0
+          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
+          $version = "$versionCore-main.${{ github.run_number }}"
+          ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
+          ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
+          ./tools/package/create-universal-release-archives.ps1 -Version $version
 
       - name: Smoke-test universal launcher
         shell: bash

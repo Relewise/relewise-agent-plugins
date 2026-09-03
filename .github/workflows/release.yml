@@ -25,6 +25,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
+      - name: Verify tag matches planned version
+        shell: pwsh
+        run: |
+          $planned = (Get-Content -Raw version.json | ConvertFrom-Json).version
+          $tagVersion = '${{ github.ref_name }}'.Substring(1)
+          if ($tagVersion -ne $planned) {
+            throw "Release tag version '$tagVersion' does not match version.json '$planned'."
+          }
+
       - name: Set up .NET
         uses: actions/setup-dotnet@v6
         with:
@@ -115,7 +124,7 @@ jobs:
           $executable = "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
 
           dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}' -p:Version=$version
-          ./tests/cli/smoke.ps1 -ExecutablePath $executable
+          ./tests/cli/smoke.ps1 -ExecutablePath $executable -ExpectedVersion $version
 
           ./tools/package/claude.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -ExecutablePath $executable
           ./tools/package/github-copilot.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -ExecutablePath $executable
@@ -138,7 +147,7 @@ jobs:
         shell: bash
         env:
           CLAUDE_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/claude/${{ matrix.rid }}/relewise
-          CLAUDE_PLUGIN_OPTION_agent_gateway_token: smoke-test-token
+          CLAUDE_PLUGIN_OPTION_AGENT_GATEWAY_TOKEN: smoke-test-token
           COPILOT_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/github-copilot/${{ matrix.rid }}/relewise
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: |

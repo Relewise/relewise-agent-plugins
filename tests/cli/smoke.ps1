@@ -1,6 +1,8 @@
 param(
     [Parameter(Mandatory = $true)]
-    [string] $ExecutablePath
+    [string] $ExecutablePath,
+
+    [string] $ExpectedVersion
 )
 
 $ErrorActionPreference = 'Stop'
@@ -61,6 +63,9 @@ $version = Read-JsonResult $versionResult
 Assert-Equal $versionResult.ExitCode 0 '--version exit code.'
 Assert-Equal $version.success $true '--version success field.'
 Assert-Equal $version.data.name 'relewise-agent' '--version application name.'
+if (-not [string]::IsNullOrWhiteSpace($ExpectedVersion)) {
+    Assert-Equal $version.data.version $ExpectedVersion '--version application version.'
+}
 
 $helpResult = Invoke-Agent @('--help')
 $help = Read-JsonResult $helpResult

@@ -10,7 +10,7 @@
     <IsAotCompatible>true</IsAotCompatible>
     <InvariantGlobalization>false</InvariantGlobalization>
     <StripSymbols>true</StripSymbols>
-    <Version>0.1.0</Version>
+    <Version Condition="'$(Version)' == ''">$([System.Text.RegularExpressions.Regex]::Match($([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\..\..\version.json')), '"version"\s*:\s*"([^"]+)"').Groups[1].Value)</Version>
   </PropertyGroup>
 
   <ItemGroup>

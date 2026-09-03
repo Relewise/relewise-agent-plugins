@@ -15,8 +15,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  marketplace-fingerprint:
+    name: Validate marketplace fingerprint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Verify committed marketplace payload is current
+        shell: pwsh
+        run: ./tests/package/marketplace-fingerprint.ps1
+
   validate:
     name: Validate contract
+    needs: marketplace-fingerprint
     runs-on: ubuntu-latest
 
     steps:
@@ -63,6 +76,10 @@ jobs:
 
       - name: Validate portable plugin manifests
         run: dotnet run --project tools/validate-agent-plugins/validate-agent-plugins.csproj --configuration Release
+
+      - name: Validate committed vendor marketplaces
+        shell: pwsh
+        run: ./tests/package/codex-marketplace.ps1 -MarketplaceRoot .
 
       - name: Generate API coverage
         run: dotnet run --project tools/generate-coverage/generate-coverage.csproj --configuration Release

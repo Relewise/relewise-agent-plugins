@@ -1,10 +1,15 @@
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 
 internal static class CliApplication
 {
     private const string ApplicationName = "relewise-agent";
-    private const string ApplicationVersion = "0.1.0";
+    internal static readonly string ApplicationVersion =
+        typeof(CliApplication).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+            .InformationalVersion.Split('+', 2)[0]
+        ?? "0.0.0";
 
     public static async Task<int> RunAsync(string[] args)
     {

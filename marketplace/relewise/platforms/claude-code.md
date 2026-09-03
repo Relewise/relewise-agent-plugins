@@ -12,10 +12,15 @@ Use the detailed description, requirements, examples, and security text from the
 
 ## Installation and authentication copy
 
-Install Relewise from the published marketplace, then provide a Relewise Agent Gateway Personal Access Token when Claude Code requests the protected plugin setting. Claude Code exposes the protected value only to the plugin launcher, which passes it to the bundled executable through its process environment.
+Register the repository marketplace and install Relewise:
 
-The final installation command depends on the marketplace identifier assigned during publication.
+```shell
+claude plugin marketplace add Relewise/relewise-agent-plugins
+claude plugin install relewise@relewise
+```
+
+Provide a Relewise Agent Gateway Personal Access Token when Claude Code requests the protected plugin setting. Claude Code exposes the protected value only to the plugin launcher, which passes it to the bundled executable through its process environment.
 
 ## Publication route
 
-Claude Code accepts independently hosted plugin marketplaces and submissions to Anthropic's official marketplace. The official submission is completed through Claude.ai or the Anthropic Console after the repository and release are public.
+Claude Code discovers the root `.claude-plugin/marketplace.json`. Its Relewise entry points to the canonical `plugins/relewise` directory on `main`. Submission to Anthropic's official marketplace remains a separate optional publication step.

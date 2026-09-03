@@ -17,7 +17,7 @@ internal sealed class AgentGatewayClient : IDisposable
             Timeout = TimeSpan.FromSeconds(30)
         };
         httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("relewise-agent/0.1.0");
+        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd($"relewise-agent/{CliApplication.ApplicationVersion}");
     }
 
     public async Task<GatewayCallResult> GetCurrentUserAsync(string token)

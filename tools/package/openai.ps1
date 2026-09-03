@@ -40,17 +40,6 @@ Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -De
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
 New-Item -ItemType Directory -Path (Join-Path $packageRoot 'bin'), (Join-Path $packageRoot 'libexec') | Out-Null
 
-$instruction = @'
-
-## OpenAI Codex execution
-
-This packaged skill includes the CLI at `../../bin/relewise-agent` relative to this `SKILL.md`. Resolve that path to an absolute path before invoking it; do not assume `relewise-agent` is globally installed.
-'@
-Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory | ForEach-Object {
-    $skillPath = Join-Path $_.FullName 'SKILL.md'
-    [IO.File]::AppendAllText($skillPath, $instruction.Replace("`r`n", "`n"), [Text.UTF8Encoding]::new($false))
-}
-
 $launcher = (Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'bin\relewise-agent')).Replace("`r`n", "`n")
 [IO.File]::WriteAllText((Join-Path $packageRoot 'bin\relewise-agent'), $launcher, [Text.UTF8Encoding]::new($false))
 }

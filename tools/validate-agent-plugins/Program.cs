@@ -5,7 +5,10 @@ var repositoryRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..
 var schemaPath = Path.Combine(repositoryRoot, "contracts", "agent-plugins-v1-plugin.schema.json");
 using var schemaDocument = JsonDocument.Parse(File.ReadAllText(schemaPath));
 var schema = schemaDocument.RootElement;
-var manifests = Directory.GetFiles(Path.Combine(repositoryRoot, "plugins"), "plugin.json", SearchOption.AllDirectories);
+var manifests = Directory.GetDirectories(Path.Combine(repositoryRoot, "plugins"))
+    .Select(pluginRoot => Path.Combine(pluginRoot, "plugin.json"))
+    .Where(File.Exists)
+    .ToArray();
 var errors = new List<string>();
 
 foreach (var manifestPath in manifests)
