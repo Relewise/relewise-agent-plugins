@@ -15,6 +15,6 @@ dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release 
 
 The default output is `artifacts/openai/<runtime-id>/relewise`. Supported runtime identifiers are `win-x64`, `linux-x64`, `linux-arm64`, `osx-x64`, and `osx-arm64`.
 
-For repository distribution and acceptance testing, use `relewise-openai-universal-v<version>.tar.gz` from the GitHub release. Public ChatGPT/Codex directory updates follow OpenAI's submission, review, and publication process rather than tracking the latest repository release automatically.
+For direct Codex installation, add the repository as a marketplace using the `main` Git ref and an empty sparse-path setting. The root `.agents/plugins/marketplace.json` catalog points directly to the canonical plugin under `plugins/relewise`.
 
-Marketplace metadata and public installation instructions are intentionally deferred to the marketplace phase of the implementation plan.
+The cross-platform workflow builds and validates all five native runtimes on every change. After relevant content reaches `main`, it opens or refreshes a generated PR that updates the committed runtimes and Codex manifest alongside the canonical skills. Public ChatGPT/Codex directory updates remain subject to OpenAI's submission, review, and publication process.

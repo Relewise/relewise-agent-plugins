@@ -5,6 +5,8 @@ description: Review and compare Relewise API consumption through the relewise-ag
 
 # Relewise Consumption
 
+When `../../bin/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
+
 Use `relewise-agent` for execution. Do not construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. Discover and validate every requested Dataset before retrieving consumption; never invent a Dataset ID.
 
 Choose the operation matching the product area named by the user. Read [references/operation-selection.md](references/operation-selection.md) for the exact mapping. If the area is unclear, present the relevant available areas rather than combining unrelated measurements automatically.

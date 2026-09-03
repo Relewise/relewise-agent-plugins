@@ -64,6 +64,10 @@ jobs:
       - name: Validate portable plugin manifests
         run: dotnet run --project tools/validate-agent-plugins/validate-agent-plugins.csproj --configuration Release
 
+      - name: Validate committed Codex marketplace
+        shell: pwsh
+        run: ./tests/package/codex-marketplace.ps1 -MarketplaceRoot .
+
       - name: Generate API coverage
         run: dotnet run --project tools/generate-coverage/generate-coverage.csproj --configuration Release
 

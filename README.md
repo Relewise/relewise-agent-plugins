@@ -22,7 +22,9 @@ Both products use the portable [Agent Plugins](https://agent-plugins.org/) struc
 
 ## Prerelease installation
 
-The project is currently distributed as a prerelease. Download a package from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases) rather than using the source tree, which does not contain compiled executables.
+The project is currently distributed as a prerelease. Codex users can add this repository directly as a marketplace. Other clients should download a package from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases).
+
+To add the Codex marketplace, use `https://github.com/Relewise/relewise-agent-plugins.git` as the source, `main` as the Git ref, and leave **Sparse paths** empty. The marketplace points directly at the canonical Relewise plugin and includes all five native runtimes. After relevant changes reach `main`, GitHub Actions opens or refreshes a PR containing the generated executable and manifest updates.
 
 Choose the universal archive for your client:
 

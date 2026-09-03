@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+set -eu
+
+plugin_root="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+case "$plugin_root" in
+  [A-Za-z]:\\*)
+    if command -v cygpath >/dev/null 2>&1; then
+      plugin_root="$(cygpath -u "$plugin_root")"
+    elif command -v wslpath >/dev/null 2>&1; then
+      plugin_root="$(wslpath -u "$plugin_root")"
+    fi
+    ;;
+esac
+
+os="$(uname -s)"
+arch="$(uname -m)"
+case "$os:$arch" in
+  MINGW*:*|MSYS*:*|CYGWIN*:*) runtime_id="win-x64"; executable="relewise-agent.exe" ;;
+  Linux:x86_64|Linux:amd64) runtime_id="linux-x64"; executable="relewise-agent" ;;
+  Linux:aarch64|Linux:arm64) runtime_id="linux-arm64"; executable="relewise-agent" ;;
+  Darwin:x86_64|Darwin:amd64) runtime_id="osx-x64"; executable="relewise-agent" ;;
+  Darwin:arm64|Darwin:aarch64) runtime_id="osx-arm64"; executable="relewise-agent" ;;
+  *) echo "Unsupported platform: $os $arch" >&2; exit 3 ;;
+esac
+
+if [ -z "${RELEWISE_AGENT_GATEWAY_TOKEN:-}" ]; then
+  echo "RELEWISE_AGENT_GATEWAY_TOKEN is required." >&2
+  exit 2
+fi
+
+exec "$plugin_root/libexec/$runtime_id/$executable" "$@"
