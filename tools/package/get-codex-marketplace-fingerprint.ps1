@@ -5,6 +5,7 @@ $includedPaths = @(
     'src/relewise-agent',
     'generated/operations.json',
     'plugins/relewise/plugin.json',
+    'plugins/relewise/assets',
     'plugins/relewise/skills',
     '.claude-plugin/marketplace.json',
     '.github/plugin/marketplace.json',
