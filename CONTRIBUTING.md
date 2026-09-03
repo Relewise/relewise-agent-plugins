@@ -52,6 +52,7 @@ Do not edit files under `generated/` or `docs/api-coverage.md` manually.
 - Change shared behavior at its canonical source; vendor adapters should remain thin.
 - If **Validate marketplace fingerprint** fails, ask a maintainer to run the **Refresh marketplace payload** workflow on the pull request branch. Do not merge until its generated commit and the checks on that new head pass.
 - Never refresh the payload on `main`; source changes and their five native executables must merge atomically in the originating pull request.
+- Change `version.json` manually when the next release version is decided. Workflows add prerelease build numbers and synchronize executables and manifests automatically.
 
 ## Validation
 

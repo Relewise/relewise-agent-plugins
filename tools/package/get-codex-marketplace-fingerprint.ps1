@@ -1,6 +1,7 @@
 $ErrorActionPreference = 'Stop'
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $includedPaths = @(
+    'version.json',
     'src/relewise-agent',
     'generated/operations.json',
     'plugins/relewise/plugin.json',
@@ -21,9 +22,19 @@ if ($LASTEXITCODE -ne 0 -or $files.Count -eq 0) {
 
 $builder = [Text.StringBuilder]::new()
 foreach ($file in $files) {
-    $hash = (& git -C $repositoryRoot hash-object -- $file | Out-String).Trim()
-    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($hash)) {
-        throw "Unable to hash '$file'."
+    if ($file.Replace('\', '/') -eq 'plugins/relewise/plugin.json') {
+        # Version is generated output. Hash every other manifest field so metadata
+        # changes invalidate the payload without making the fingerprint circular.
+        $manifest = Get-Content -Raw -LiteralPath (Join-Path $repositoryRoot $file) | ConvertFrom-Json
+        $manifest.PSObject.Properties.Remove('version')
+        $normalized = $manifest | ConvertTo-Json -Depth 100 -Compress
+        $normalizedBytes = [Text.Encoding]::UTF8.GetBytes($normalized)
+        $hash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($normalizedBytes)).ToLowerInvariant()
+    } else {
+        $hash = (& git -C $repositoryRoot hash-object -- $file | Out-String).Trim()
+        if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($hash)) {
+            throw "Unable to hash '$file'."
+        }
     }
     [void] $builder.Append($file.Replace('\', '/')).Append("`n").Append($hash).Append("`n")
 }

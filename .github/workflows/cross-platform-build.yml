@@ -51,16 +51,14 @@ jobs:
       - name: Publish native executable
         shell: pwsh
         run: |
-          $currentVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
-          $versionCore = ($currentVersion -split '-', 2)[0]
+          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
           $version = "$versionCore-main.${{ github.run_number }}"
           dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}' -p:Version=$version
 
       - name: Run CLI and packaging smoke tests
         shell: pwsh
         run: |
-          $currentVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
-          $versionCore = ($currentVersion -split '-', 2)[0]
+          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
           $version = "$versionCore-main.${{ github.run_number }}"
           ./tests/cli/smoke.ps1 -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}" -ExpectedVersion $version
           ./tools/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
@@ -99,15 +97,12 @@ jobs:
         run: artifacts/google/${{ matrix.rid }}/relewise/bin/relewise-agent --version
 
       - name: Smoke-test committed marketplace executable
-        shell: bash
+        shell: pwsh
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: |
-          executable="plugins/relewise/libexec/${{ matrix.rid }}/relewise-agent"
-          if [[ "${{ matrix.rid }}" == "win-x64" ]]; then
-            executable="${executable}.exe"
-          fi
-          "$executable" --version
+          $expectedVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
+          ./tests/cli/smoke.ps1 -ExecutablePath 'plugins/relewise/libexec/${{ matrix.rid }}/${{ matrix.executable }}' -ExpectedVersion $expectedVersion
 
       - name: Upload native executable for universal package test
         uses: actions/upload-artifact@v7
@@ -134,7 +129,8 @@ jobs:
       - name: Assemble and validate universal packages
         shell: pwsh
         run: |
-          $version = "0.3.0-main.${{ github.run_number }}"
+          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
+          $version = "$versionCore-main.${{ github.run_number }}"
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
           ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
           ./tools/package/create-universal-release-archives.ps1 -Version $version

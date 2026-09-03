@@ -90,5 +90,8 @@ $versionResponse = (& $currentExecutable --version | Out-String) | ConvertFrom-J
 if (-not $versionResponse.success -or $versionResponse.data.name -ne 'relewise-agent') {
     throw 'The bundled Codex runtime did not return a valid version response.'
 }
+if ($versionResponse.data.version -ne $manifest.version) {
+    throw "The bundled Codex runtime version '$($versionResponse.data.version)' does not match manifest version '$($manifest.version)'."
+}
 
 Write-Host "Repository marketplace tests passed for Codex, Claude Code and GitHub Copilot CLI at version $($manifest.version)"

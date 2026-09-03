@@ -15,7 +15,12 @@ jobs:
   validate-branch:
     name: Validate target branch
     runs-on: ubuntu-latest
+    outputs:
+      refresh-needed: ${{ steps.fingerprint.outputs.refresh-needed }}
     steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v7
+
       - name: Refuse main
         shell: bash
         run: |
@@ -24,9 +29,20 @@ jobs:
             exit 1
           fi
 
+      - name: Check whether refresh is needed
+        id: fingerprint
+        shell: pwsh
+        run: |
+          $actual = (./tools/package/get-codex-marketplace-fingerprint.ps1 | Out-String).Trim()
+          $expected = (Get-Content -Raw plugins/relewise/.codex-plugin/source.sha256).Trim()
+          $needed = if ($actual -eq $expected) { 'false' } else { 'true' }
+          "refresh-needed=$needed" >> $env:GITHUB_OUTPUT
+          Write-Host "Refresh needed: $needed"
+
   build:
     name: Build ${{ matrix.rid }}
     needs: validate-branch
+    if: needs.validate-branch.outputs.refresh-needed == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -60,8 +76,7 @@ jobs:
       - name: Build and smoke-test native executable
         shell: pwsh
         run: |
-          $currentVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
-          $versionCore = ($currentVersion -split '-', 2)[0]
+          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
           $version = "$versionCore-main.${{ github.run_number }}"
           dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}' -p:Version=$version
           ./tests/cli/smoke.ps1 -ExecutablePath 'artifacts/${{ matrix.rid }}/${{ matrix.executable }}' -ExpectedVersion $version
@@ -93,8 +108,7 @@ jobs:
       - name: Assemble and validate committed payload
         shell: pwsh
         run: |
-          $currentVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
-          $versionCore = ($currentVersion -split '-', 2)[0]
+          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
           $version = "$versionCore-main.${{ github.run_number }}"
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
 
@@ -110,8 +124,8 @@ jobs:
           }
           Copy-Item -LiteralPath 'LICENSE' -Destination "$target/LICENSE" -Force
 
-          # The versioned portable manifest is an input to the fingerprint, so calculate
-          # only after all generated manifests have been placed in their committed paths.
+          # Calculate after every generated file is in its committed path. The portable
+          # manifest version is ignored to avoid a circular fingerprint dependency.
           $fingerprint = (./tools/package/get-codex-marketplace-fingerprint.ps1 | Out-String).Trim()
           [IO.File]::WriteAllText(
             "$target/.codex-plugin/source.sha256",
