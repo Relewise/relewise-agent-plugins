@@ -60,8 +60,11 @@ jobs:
       - name: Build and smoke-test native executable
         shell: pwsh
         run: |
-          dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}'
-          ./tests/cli/smoke.ps1 -ExecutablePath 'artifacts/${{ matrix.rid }}/${{ matrix.executable }}'
+          $currentVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
+          $versionCore = ($currentVersion -split '-', 2)[0]
+          $version = "$versionCore-main.${{ github.run_number }}"
+          dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}' -p:Version=$version
+          ./tests/cli/smoke.ps1 -ExecutablePath 'artifacts/${{ matrix.rid }}/${{ matrix.executable }}' -ExpectedVersion $version
 
       - name: Upload native executable
         uses: actions/upload-artifact@v7

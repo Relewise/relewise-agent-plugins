@@ -49,16 +49,20 @@ jobs:
           dotnet-version: 10.0.x
 
       - name: Publish native executable
-        run: >-
-          dotnet publish src/relewise-agent/relewise-agent.csproj
-          --configuration Release
-          --runtime ${{ matrix.rid }}
-          --output artifacts/${{ matrix.rid }}
+        shell: pwsh
+        run: |
+          $currentVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
+          $versionCore = ($currentVersion -split '-', 2)[0]
+          $version = "$versionCore-main.${{ github.run_number }}"
+          dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}' -p:Version=$version
 
       - name: Run CLI and packaging smoke tests
         shell: pwsh
         run: |
-          ./tests/cli/smoke.ps1 -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          $currentVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
+          $versionCore = ($currentVersion -split '-', 2)[0]
+          $version = "$versionCore-main.${{ github.run_number }}"
+          ./tests/cli/smoke.ps1 -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}" -ExpectedVersion $version
           ./tools/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
           ./tests/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/claude/${{ matrix.rid }}/relewise"
           ./tools/package/github-copilot.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
