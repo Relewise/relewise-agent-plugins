@@ -61,7 +61,7 @@ foreach ($canonicalSkill in $canonicalSkills) {
     $canonicalContent = Get-Content -Raw -LiteralPath (Join-Path $canonicalSkill.FullName 'SKILL.md')
     $installedContent = Get-Content -Raw -LiteralPath $installedSkillPath
     if (-not $installedContent.StartsWith($canonicalContent)) { throw "Codex skill '$($canonicalSkill.Name)' is stale." }
-    if (-not $installedContent.Contains('../../bin/relewise-agent')) { throw "Codex skill '$($canonicalSkill.Name)' cannot locate its bundled CLI." }
+    if (-not $installedContent.Contains('../../scripts/relewise-agent')) { throw "Codex skill '$($canonicalSkill.Name)' cannot locate its bundled CLI." }
 }
 
 $runtimeFiles = @(

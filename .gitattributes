@@ -7,5 +7,5 @@
 *.md text eol=lf
 *.ps1 text eol=lf
 *.yml text eol=lf
-vendors/*/relewise/bin/* text eol=lf
-plugins/relewise/bin/* text eol=lf
+vendors/*/relewise/scripts/* text eol=lf
+plugins/relewise/scripts/* text eol=lf

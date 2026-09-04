@@ -5,7 +5,7 @@ description: Compare two or more Relewise Datasets using consistent metadata, an
 
 # Compare Relewise Datasets
 
-When `../../bin/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
+When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
 
 Use `relewise-agent` for execution. Never invent Dataset IDs, construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. This workflow is read-only.
 

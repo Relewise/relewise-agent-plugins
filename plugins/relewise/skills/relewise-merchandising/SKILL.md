@@ -5,7 +5,7 @@ description: Inspect and update existing Relewise merchandising rules through th
 
 # Relewise Merchandising
 
-When `../../bin/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
+When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
 
 Use `relewise-agent` for execution. Do not construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. Discover and validate the intended Dataset before reading or changing rules. Do not infer a rule ID. Inspect unfamiliar operations with `schema` and execute them with `call`.
 

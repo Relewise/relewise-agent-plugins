@@ -5,7 +5,7 @@ description: Discover, identify, inspect, and compare Relewise Datasets through 
 
 # Relewise Core
 
-When `../../bin/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
+When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
 
 Use `relewise-agent` as the execution boundary. Do not construct Agent Gateway URLs, send HTTP requests directly, or ask the user to provide a Personal Access Token in chat.
 

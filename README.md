@@ -41,6 +41,8 @@ Choose the universal archive for your client:
 
 Each archive supports Windows x64, Linux x64/ARM64, and macOS x64/ARM64. Make a Relewise Agent Gateway PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`, either through a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
 
+Packaged skills explicitly invoke `scripts/relewise-agent`, which selects the matching native executable under `libexec/<runtime>/`. Packages intentionally have no top-level `bin/` directory so hosted marketplaces do not receive an undeclared PATH executable.
+
 ## Releases
 
 The repository is versioned as one ecosystem. Pushing a semantic version tag such as `v0.1.0` validates the contracts and skills, builds and tests all supported native executables, packages every vendor adapter, and publishes the installable archives in a GitHub release. `v0.*` releases are published as prereleases; `v1.0.0` and later tags are stable releases.

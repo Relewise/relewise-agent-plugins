@@ -5,7 +5,7 @@ description: Review Relewise product-search performance and prioritize optimizat
 
 # Review Relewise Search Performance
 
-When `../../bin/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
+When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
 
 Use `relewise-agent` for execution. Never invent Dataset IDs or filter values, construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. This workflow is read-only and does not authorize configuration changes.
 

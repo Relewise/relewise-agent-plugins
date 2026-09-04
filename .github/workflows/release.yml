@@ -150,10 +150,10 @@ jobs:
           COPILOT_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/github-copilot/${{ matrix.rid }}/relewise
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: |
-          artifacts/claude/${{ matrix.rid }}/relewise/bin/relewise-agent --version
-          artifacts/github-copilot/${{ matrix.rid }}/relewise/bin/relewise-agent --version
-          artifacts/openai/${{ matrix.rid }}/relewise/bin/relewise-agent --version
-          artifacts/google/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+          artifacts/claude/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
+          artifacts/github-copilot/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
+          artifacts/openai/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
+          artifacts/google/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
 
       - name: Upload release archives
         uses: actions/upload-artifact@v7
@@ -196,7 +196,7 @@ jobs:
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/universal/openai/relewise/bin/relewise-agent --version
+        run: artifacts/universal/openai/relewise/scripts/relewise-agent --version
 
       - name: Upload universal release archives
         uses: actions/upload-artifact@v7
