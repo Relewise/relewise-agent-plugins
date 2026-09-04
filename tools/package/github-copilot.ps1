@@ -38,17 +38,17 @@ New-Item -ItemType Directory -Path $packageRoot | Out-Null
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\plugin.json') -Destination $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
-New-Item -ItemType Directory -Path (Join-Path $packageRoot 'bin'), (Join-Path $packageRoot 'libexec') | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $packageRoot 'scripts'), (Join-Path $packageRoot 'libexec') | Out-Null
 
-$launcher = (Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'bin\relewise-agent')).Replace("`r`n", "`n")
-[IO.File]::WriteAllText((Join-Path $packageRoot 'bin\relewise-agent'), $launcher, [Text.UTF8Encoding]::new($false))
+$launcher = (Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'scripts\relewise-agent')).Replace("`r`n", "`n")
+[IO.File]::WriteAllText((Join-Path $packageRoot 'scripts\relewise-agent'), $launcher, [Text.UTF8Encoding]::new($false))
 }
 $runtimeDirectory = Join-Path $packageRoot "libexec\$RuntimeIdentifier"
 New-Item -ItemType Directory -Force -Path $runtimeDirectory | Out-Null
 Copy-Item -LiteralPath $resolvedExecutable -Destination (Join-Path $runtimeDirectory $expectedExecutableName) -Force
 
 if (-not $IsWindows) {
-    & chmod +x (Join-Path $packageRoot 'bin\relewise-agent') (Join-Path $runtimeDirectory $expectedExecutableName)
+    & chmod +x (Join-Path $packageRoot 'scripts\relewise-agent') (Join-Path $runtimeDirectory $expectedExecutableName)
 }
 
 Write-Host "Packaged GitHub Copilot CLI plugin for $RuntimeIdentifier at $packageRoot"

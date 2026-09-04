@@ -27,7 +27,7 @@ foreach ($vendor in $manifestPaths.Keys) {
             throw "$vendor package is missing its $runtime executable."
         }
     }
-    $launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'bin\relewise-agent')
+    $launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'scripts\relewise-agent')
     foreach ($runtime in $runtimes) {
         if (-not $launcher.Contains("runtime_id=`"$runtime`"")) { throw "$vendor launcher does not select $runtime." }
     }

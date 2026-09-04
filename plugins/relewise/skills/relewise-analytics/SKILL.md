@@ -5,7 +5,7 @@ description: Analyze Relewise revenue and product-search performance through the
 
 # Relewise Analytics
 
-When `../../bin/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
+When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
 
 Use `relewise-agent` for execution. Do not construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. Discover and validate each requested Dataset before analysis; never invent a Dataset ID or silently substitute another Dataset.
 

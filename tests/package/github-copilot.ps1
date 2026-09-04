@@ -29,7 +29,7 @@ foreach ($sourceSkill in $sourceSkills) {
     $packagedSkill = Join-Path $packageRoot "skills\$($sourceSkill.Name)\SKILL.md"
     if (-not (Test-Path -LiteralPath $packagedSkill)) { throw "Package is missing skill '$($sourceSkill.Name)'." }
     $content = Get-Content -Raw -LiteralPath $packagedSkill
-    if (-not $content.Contains('../../bin/relewise-agent')) { throw "Packaged skill '$($sourceSkill.Name)' does not locate the bundled CLI." }
+    if (-not $content.Contains('../../scripts/relewise-agent')) { throw "Packaged skill '$($sourceSkill.Name)' does not locate the bundled CLI." }
     if (-not $content.StartsWith((Get-Content -Raw -LiteralPath (Join-Path $sourceSkill.FullName 'SKILL.md')))) {
         throw "Packaged skill '$($sourceSkill.Name)' does not preserve its canonical source."
     }
@@ -37,7 +37,7 @@ foreach ($sourceSkill in $sourceSkills) {
 
 $expectedExecutable = if ($RuntimeIdentifier -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "libexec\$RuntimeIdentifier\$expectedExecutable"))) { throw 'Package is missing its native executable.' }
-$launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'bin\relewise-agent')
+$launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'scripts\relewise-agent')
 if (-not $launcher.Contains('runtime_id="win-x64"') -or -not $launcher.Contains('runtime_id="osx-arm64"')) { throw 'Launcher does not select a native executable by platform.' }
 
 Write-Host "GitHub Copilot CLI package smoke tests passed for $RuntimeIdentifier"

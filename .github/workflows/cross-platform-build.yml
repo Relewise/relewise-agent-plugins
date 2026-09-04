@@ -75,26 +75,26 @@ jobs:
         env:
           CLAUDE_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/claude/${{ matrix.rid }}/relewise
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/claude/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+        run: artifacts/claude/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
 
       - name: Run GitHub Copilot launcher smoke test
         shell: bash
         env:
           COPILOT_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/github-copilot/${{ matrix.rid }}/relewise
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/github-copilot/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+        run: artifacts/github-copilot/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
 
       - name: Run OpenAI Codex launcher smoke test
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/openai/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+        run: artifacts/openai/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
 
       - name: Run Google Gemini launcher smoke test
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/google/${{ matrix.rid }}/relewise/bin/relewise-agent --version
+        run: artifacts/google/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
 
       - name: Smoke-test committed marketplace executable
         shell: pwsh
@@ -139,4 +139,4 @@ jobs:
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/universal/openai/relewise/bin/relewise-agent --version
+        run: artifacts/universal/openai/relewise/scripts/relewise-agent --version

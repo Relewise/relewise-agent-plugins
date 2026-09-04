@@ -117,7 +117,7 @@ jobs:
           Copy-Item -LiteralPath "$candidate/openai/relewise/.codex-plugin/plugin.json" -Destination "$target/.codex-plugin/plugin.json" -Force
           Copy-Item -LiteralPath "$candidate/claude/relewise/.claude-plugin/plugin.json" -Destination "$target/.claude-plugin/plugin.json" -Force
           Copy-Item -LiteralPath "$candidate/github-copilot/relewise/plugin.json" -Destination "$target/plugin.json" -Force
-          Copy-Item -LiteralPath "$candidate/openai/relewise/bin/relewise-agent" -Destination "$target/bin/relewise-agent" -Force
+          Copy-Item -LiteralPath "$candidate/openai/relewise/scripts/relewise-agent" -Destination "$target/scripts/relewise-agent" -Force
           foreach ($rid in @('win-x64', 'linux-x64', 'linux-arm64', 'osx-x64', 'osx-arm64')) {
             $name = if ($rid -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }
             Copy-Item -LiteralPath "$candidate/openai/relewise/libexec/$rid/$name" -Destination "$target/libexec/$rid/$name" -Force
@@ -142,11 +142,11 @@ jobs:
             plugins/relewise/plugin.json \
             plugins/relewise/.codex-plugin \
             plugins/relewise/.claude-plugin \
-            plugins/relewise/bin \
+            plugins/relewise/scripts \
             plugins/relewise/libexec \
             plugins/relewise/LICENSE
           git update-index --chmod=+x \
-            plugins/relewise/bin/relewise-agent \
+            plugins/relewise/scripts/relewise-agent \
             plugins/relewise/libexec/linux-x64/relewise-agent \
             plugins/relewise/libexec/linux-arm64/relewise-agent \
             plugins/relewise/libexec/osx-x64/relewise-agent \

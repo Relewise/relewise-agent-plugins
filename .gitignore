@@ -1,13 +1,3 @@
 **/bin/
 **/obj/
 artifacts/
-!vendors/claude/relewise/bin/
-!vendors/claude/relewise/bin/relewise-agent
-!vendors/github-copilot/relewise/bin/
-!vendors/github-copilot/relewise/bin/relewise-agent
-!vendors/openai/relewise/bin/
-!vendors/openai/relewise/bin/relewise-agent
-!plugins/relewise/bin/
-!plugins/relewise/bin/relewise-agent
-!vendors/google/relewise/bin/
-!vendors/google/relewise/bin/relewise-agent
