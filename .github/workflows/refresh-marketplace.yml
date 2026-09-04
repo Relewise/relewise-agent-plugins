@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       refresh-needed: ${{ steps.fingerprint.outputs.refresh-needed }}
+      runtime-refresh-needed: ${{ steps.fingerprint.outputs.runtime-refresh-needed }}
     steps:
       - name: Check out feature branch
         uses: actions/checkout@v7
@@ -36,13 +37,18 @@ jobs:
           $actual = (./tools/package/get-codex-marketplace-fingerprint.ps1 | Out-String).Trim()
           $expected = (Get-Content -Raw plugins/relewise/.codex-plugin/source.sha256).Trim()
           $needed = if ($actual -eq $expected) { 'false' } else { 'true' }
+          $runtimeActual = (./tools/package/get-runtime-fingerprint.ps1 | Out-String).Trim()
+          $runtimeExpected = (Get-Content -Raw plugins/relewise/.codex-plugin/runtime-source.sha256).Trim()
+          $runtimeNeeded = if ($runtimeActual -eq $runtimeExpected) { 'false' } else { 'true' }
           "refresh-needed=$needed" >> $env:GITHUB_OUTPUT
+          "runtime-refresh-needed=$runtimeNeeded" >> $env:GITHUB_OUTPUT
           Write-Host "Refresh needed: $needed"
+          Write-Host "Runtime refresh needed: $runtimeNeeded"
 
   build:
     name: Build ${{ matrix.rid }}
     needs: validate-branch
-    if: needs.validate-branch.outputs.refresh-needed == 'true'
+    if: needs.validate-branch.outputs.runtime-refresh-needed == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -90,7 +96,8 @@ jobs:
 
   update-feature-branch:
     name: Commit marketplace payload to feature branch
-    needs: build
+    needs: [validate-branch, build]
+    if: always() && needs.validate-branch.outputs.refresh-needed == 'true' && (needs.build.result == 'success' || needs.build.result == 'skipped')
     runs-on: ubuntu-latest
 
     steps:
@@ -100,6 +107,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download native executables
+        if: needs.validate-branch.outputs.runtime-refresh-needed == 'true'
         uses: actions/download-artifact@v7
         with:
           pattern: refresh-native-*
@@ -110,7 +118,9 @@ jobs:
         run: |
           $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
           $version = "$versionCore-main.${{ github.run_id }}"
-          ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
+          $runtimeRefreshNeeded = '${{ needs.validate-branch.outputs.runtime-refresh-needed }}' -eq 'true'
+          $executablesRoot = if ($runtimeRefreshNeeded) { 'artifacts/native' } else { 'plugins/relewise/libexec' }
+          ./tools/package/create-universal-packages.ps1 -ExecutablesRoot $executablesRoot -Version $version
 
           $candidate = 'artifacts/universal'
           $target = 'plugins/relewise'
@@ -118,9 +128,20 @@ jobs:
           Copy-Item -LiteralPath "$candidate/claude/relewise/.claude-plugin/plugin.json" -Destination "$target/.claude-plugin/plugin.json" -Force
           Copy-Item -LiteralPath "$candidate/github-copilot/relewise/plugin.json" -Destination "$target/plugin.json" -Force
           Copy-Item -LiteralPath "$candidate/openai/relewise/scripts/relewise-agent" -Destination "$target/scripts/relewise-agent" -Force
-          foreach ($rid in @('win-x64', 'linux-x64', 'linux-arm64', 'osx-x64', 'osx-arm64')) {
-            $name = if ($rid -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }
-            Copy-Item -LiteralPath "$candidate/openai/relewise/libexec/$rid/$name" -Destination "$target/libexec/$rid/$name" -Force
+          if ($runtimeRefreshNeeded) {
+            foreach ($rid in @('win-x64', 'linux-x64', 'linux-arm64', 'osx-x64', 'osx-arm64')) {
+              $name = if ($rid -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }
+              Copy-Item -LiteralPath "$candidate/openai/relewise/libexec/$rid/$name" -Destination "$target/libexec/$rid/$name" -Force
+            }
+            $runtimeFingerprint = (./tools/package/get-runtime-fingerprint.ps1 | Out-String).Trim()
+            [IO.File]::WriteAllText(
+              "$target/.codex-plugin/runtime-source.sha256",
+              "$runtimeFingerprint`n",
+              [Text.UTF8Encoding]::new($false))
+            [IO.File]::WriteAllText(
+              "$target/.codex-plugin/runtime-version.txt",
+              "$version`n",
+              [Text.UTF8Encoding]::new($false))
           }
           Copy-Item -LiteralPath 'LICENSE' -Destination "$target/LICENSE" -Force
 

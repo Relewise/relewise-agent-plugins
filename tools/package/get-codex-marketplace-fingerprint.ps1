@@ -14,7 +14,8 @@ $includedPaths = @(
     'vendors/openai/relewise/.codex-plugin/plugin.json',
     'vendors/openai/relewise/scripts/relewise-agent',
     'vendors/openai/marketplace.json',
-    'tools/package/openai.ps1'
+    'tools/package/openai.ps1',
+    'tools/package/get-runtime-fingerprint.ps1'
 )
 
 $files = @(& git -C $repositoryRoot ls-files -- @includedPaths | Sort-Object)

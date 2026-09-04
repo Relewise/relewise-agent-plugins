@@ -15,8 +15,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  runtime-fingerprint:
+    name: Check runtime freshness
+    runs-on: ubuntu-latest
+    outputs:
+      refresh-needed: ${{ steps.fingerprint.outputs.refresh-needed }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Compare runtime inputs with committed executables
+        id: fingerprint
+        shell: pwsh
+        run: |
+          $actual = (./tools/package/get-runtime-fingerprint.ps1 | Out-String).Trim()
+          $expected = (Get-Content -Raw plugins/relewise/.codex-plugin/runtime-source.sha256).Trim()
+          $needed = if ($actual -eq $expected) { 'false' } else { 'true' }
+          "refresh-needed=$needed" >> $env:GITHUB_OUTPUT
+          Write-Host "Runtime build needed: $needed"
+
   build:
-    name: Build ${{ matrix.rid }}
+    name: Validate ${{ matrix.rid }}
+    needs: runtime-fingerprint
     strategy:
       fail-fast: false
       matrix:
@@ -44,11 +64,13 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Set up .NET
+        if: needs.runtime-fingerprint.outputs.refresh-needed == 'true'
         uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
 
       - name: Publish native executable
+        if: needs.runtime-fingerprint.outputs.refresh-needed == 'true'
         shell: pwsh
         run: |
           $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
@@ -58,17 +80,27 @@ jobs:
       - name: Run CLI and packaging smoke tests
         shell: pwsh
         run: |
-          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
-          $version = "$versionCore-main.${{ github.run_id }}"
-          ./tests/cli/smoke.ps1 -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}" -ExpectedVersion $version
-          ./tools/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          $runtimeBuildNeeded = '${{ needs.runtime-fingerprint.outputs.refresh-needed }}' -eq 'true'
+          if ($runtimeBuildNeeded) {
+            $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
+            $expectedVersion = "$versionCore-main.${{ github.run_id }}"
+            $executable = "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          } else {
+            $expectedVersion = (Get-Content -Raw plugins/relewise/.codex-plugin/runtime-version.txt).Trim()
+            $executable = "plugins/relewise/libexec/${{ matrix.rid }}/${{ matrix.executable }}"
+          }
+          ./tests/cli/smoke.ps1 -ExecutablePath $executable -ExpectedVersion $expectedVersion
+          ./tools/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath $executable
           ./tests/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/claude/${{ matrix.rid }}/relewise"
-          ./tools/package/github-copilot.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          ./tools/package/github-copilot.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath $executable
           ./tests/package/github-copilot.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/github-copilot/${{ matrix.rid }}/relewise"
-          ./tools/package/openai.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          ./tools/package/openai.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath $executable
           ./tests/package/openai.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/openai/${{ matrix.rid }}/relewise"
-          ./tools/package/google.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
+          ./tools/package/google.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath $executable
           ./tests/package/google.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -PackagePath "artifacts/google/${{ matrix.rid }}/relewise"
+          $stagedExecutable = "artifacts/ci-native/${{ matrix.rid }}/${{ matrix.executable }}"
+          New-Item -ItemType Directory -Force -Path (Split-Path $stagedExecutable) | Out-Null
+          Copy-Item -LiteralPath $executable -Destination $stagedExecutable
 
       - name: Run Claude launcher smoke test
         shell: bash
@@ -96,19 +128,11 @@ jobs:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: artifacts/google/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
 
-      - name: Smoke-test committed marketplace executable
-        shell: pwsh
-        env:
-          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: |
-          $expectedVersion = (Get-Content -Raw plugins/relewise/plugin.json | ConvertFrom-Json).version
-          ./tests/cli/smoke.ps1 -ExecutablePath 'plugins/relewise/libexec/${{ matrix.rid }}/${{ matrix.executable }}' -ExpectedVersion $expectedVersion
-
       - name: Upload native executable for universal package test
         uses: actions/upload-artifact@v7
         with:
           name: ci-native-${{ matrix.rid }}
-          path: artifacts/${{ matrix.rid }}/${{ matrix.executable }}
+          path: artifacts/ci-native/${{ matrix.rid }}/${{ matrix.executable }}
           if-no-files-found: error
 
   universal-package:

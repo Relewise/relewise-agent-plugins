@@ -38,6 +38,14 @@ foreach ($vendorMarketplace in $vendorMarketplaces) {
 }
 
 $pluginRoot = Join-Path $resolvedMarketplaceRoot 'plugins\relewise'
+$runtimeVersionPath = Join-Path $pluginRoot '.codex-plugin\runtime-version.txt'
+if (-not (Test-Path -LiteralPath $runtimeVersionPath -PathType Leaf)) {
+    throw 'Committed runtime version metadata is missing.'
+}
+$runtimeVersion = (Get-Content -Raw -LiteralPath $runtimeVersionPath).Trim()
+if ($runtimeVersion -notmatch '^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$') {
+    throw "Committed runtime version '$runtimeVersion' is invalid."
+}
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.codex-plugin\plugin.json') | ConvertFrom-Json
 if ($manifest.name -ne $entry.name) { throw 'Marketplace and plugin manifest names do not match.' }
 $portableManifest = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot 'plugin.json') | ConvertFrom-Json
@@ -90,8 +98,8 @@ $versionResponse = (& $currentExecutable --version | Out-String) | ConvertFrom-J
 if (-not $versionResponse.success -or $versionResponse.data.name -ne 'relewise-agent') {
     throw 'The bundled Codex runtime did not return a valid version response.'
 }
-if ($versionResponse.data.version -ne $manifest.version) {
-    throw "The bundled Codex runtime version '$($versionResponse.data.version)' does not match manifest version '$($manifest.version)'."
+if ($versionResponse.data.version -ne $runtimeVersion) {
+    throw "The bundled Codex runtime version '$($versionResponse.data.version)' does not match runtime metadata '$runtimeVersion'."
 }
 
-Write-Host "Repository marketplace tests passed for Codex, Claude Code and GitHub Copilot CLI at version $($manifest.version)"
+Write-Host "Repository marketplace tests passed for Codex, Claude Code and GitHub Copilot CLI at plugin version $($manifest.version) with runtime $runtimeVersion"
