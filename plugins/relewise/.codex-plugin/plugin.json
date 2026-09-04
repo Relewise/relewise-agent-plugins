@@ -1,6 +1,6 @@
 {
   "name": "relewise",
-  "version": "0.3.0-main.33846320457",
+  "version": "0.3.0-main.33853983184",
   "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "author": {
     "name": "Relewise",
@@ -28,6 +28,7 @@
     ],
     "websiteURL": "https://www.relewise.com/",
     "defaultPrompt": [
+      "Help me connect Relewise.",
       "What Relewise Datasets do I have access to?",
       "Review search performance for my Relewise Dataset.",
       "Audit merchandising rules for my Relewise Dataset."
