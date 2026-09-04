@@ -4,7 +4,7 @@ This adapter packages `Relewise`: work with your Relewise configuration, analyti
 
 The adapter packages the canonical Relewise skills with the `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; they are copied into packages and are not maintained here. Local packaging can target one runtime, while tagged releases also provide a universal archive containing every supported runtime. Its launcher selects the correct executable automatically without downloading code during use.
 
-Set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment available to Claude Code, preferably through Claude Desktop's encrypted local environment configuration or a trusted secret manager. The PAT is inherited by the bundled launcher and passed to the executable through its process environment. It is never placed in command arguments or plugin files.
+Make the Agent Gateway PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`. Use a secure credential provider that can inject it into the `relewise-agent` process on every invocation, or configure it as a persistent user or system environment variable. The PAT is never placed in command arguments or plugin files.
 
 Build the executable for the target runtime, then package it:
 

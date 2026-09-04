@@ -19,7 +19,7 @@ claude plugin marketplace add Relewise/relewise-agent-plugins
 claude plugin install relewise@relewise
 ```
 
-Make `RELEWISE_AGENT_GATEWAY_TOKEN` available in the environment used by Claude Code. In Claude Desktop, use the encrypted local environment editor; open the environment selector beside the prompt, hover over **Local**, select the gear icon, and add the variable there. Start a new Claude session after changing it. The plugin does not use Claude's protected `userConfig` because those sensitive values are not available to ordinary commands run by skills.
+Make the Personal Access Token available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`. Use a secure credential provider that can inject it into the `relewise-agent` process on every invocation, or configure it as a persistent user or system environment variable and restart Claude Code. Never place the PAT in a prompt, command argument, repository file, or log. The plugin does not use Claude's protected `userConfig` because its sensitive values are not available to ordinary commands run by skills.
 
 ## Publication route
 

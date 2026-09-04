@@ -13,7 +13,7 @@ Use the detailed description, requirements, examples, and security text from the
 
 ## Installation and authentication copy
 
-Add `https://github.com/Relewise/relewise-agent-plugins.git` as a Codex plugin marketplace, use `main` as the Git ref, and leave **Sparse paths** empty. Then install Relewise from that marketplace. Set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment available to Codex, preferably through the operating system or a secret manager. The bundled launcher passes the token to the executable through its process environment and never places it in command arguments.
+Add `https://github.com/Relewise/relewise-agent-plugins.git` as a Codex plugin marketplace, use `main` as the Git ref, and leave **Sparse paths** empty. Then install Relewise from that marketplace. Make the Personal Access Token available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`. Use a secure credential provider that can inject it into the `relewise-agent` process on every invocation, or configure it as a persistent user or system environment variable. Never place the PAT in a prompt, command argument, repository file, or log.
 
 The repository marketplace is self-contained and supports Windows x64, Linux x64/ARM64, and macOS x64/ARM64 without downloading executable code during use.
 

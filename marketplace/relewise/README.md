@@ -35,7 +35,7 @@ After installation, ask the agent **Help me connect Relewise**. The `relewise-se
 1. In My Relewise, open **User > Personal Access Tokens**.
 2. Create a token and select the smallest practical Dataset scope.
 3. Store the value immediately. My Relewise shows it only once.
-4. Provide it through the host agent's protected setting or secret environment mechanism. Never put it in a prompt, command argument, repository file, or transcript.
+4. Make it available to `relewise-agent` as `RELEWISE_AGENT_GATEWAY_TOKEN`. Use a secure credential provider that can inject it into the process on every invocation, or configure it as a persistent user or system environment variable. Never put it in a prompt, command argument, repository file, log, or transcript.
 5. Regenerate or revoke the token in My Relewise if it may have been exposed.
 
 See [Personal Access Tokens](https://docs.relewise.com/docs/myrelewise/agent-gateway/personal-access-tokens.html) and [Agent Gateway security and RBAC](https://docs.relewise.com/docs/myrelewise/agent-gateway/security-and-rbac.html).
