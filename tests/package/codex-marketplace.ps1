@@ -35,6 +35,14 @@ foreach ($vendorMarketplace in $vendorMarketplaces) {
     if ($catalog.plugins[0].source -ne './plugins/relewise') {
         throw "$($vendorMarketplace.Vendor) marketplace does not reference the canonical plugin."
     }
+    if ($vendorMarketplace.Vendor -eq 'Claude Code') {
+        if ([string]::IsNullOrWhiteSpace($catalog.description)) {
+            throw 'Claude marketplace must provide its description at the top level.'
+        }
+        if ([string]::IsNullOrWhiteSpace($catalog.plugins[0].author.name)) {
+            throw 'Claude marketplace plugin entry must include an author for Desktop compatibility.'
+        }
+    }
 }
 
 $pluginRoot = Join-Path $resolvedMarketplaceRoot 'plugins\relewise'
