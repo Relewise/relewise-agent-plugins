@@ -14,6 +14,7 @@ Access stays within the permissions, Dataset scope, connection methods, and allo
 
 ## Example prompts
 
+- Help me connect Relewise.
 - What Relewise Datasets do I have access to?
 - Review search performance for my Relewise Dataset.
 - Compare search performance across two Relewise Datasets.
@@ -28,6 +29,8 @@ Access stays within the permissions, Dataset scope, connection methods, and allo
 - A Relewise Personal Access Token scoped to the Datasets and allowed areas needed for the task.
 
 ## Personal Access Token onboarding
+
+After installation, ask the agent **Help me connect Relewise**. The `relewise-setup` skill first checks whether authentication already works and only presents setup or repair instructions when needed.
 
 1. In My Relewise, open **User > Personal Access Tokens**.
 2. Create a token and select the smallest practical Dataset scope.

@@ -89,7 +89,7 @@ Failures use a stable machine-readable envelope:
 }
 ```
 
-`type` is one of `authentication_error`, `dataset_access_error`, `operation_not_found`, `validation_error`, `api_error`, `network_error`, `invalid_arguments`, `command_not_found`, or `internal_error`. `operationId` and `statusCode` are included when they apply. For API failures, the CLI extracts a concise message from a JSON problem response when available; otherwise it reports the HTTP status. Error response bodies are bounded to 64 KiB, error messages to 500 characters, and bearer tokens are never returned.
+`type` is one of `authentication_error`, `dataset_access_error`, `operation_not_found`, `validation_error`, `api_error`, `network_error`, `invalid_arguments`, `command_not_found`, or `internal_error`. `operationId` and `statusCode` are included when they apply. Authentication errors also include `token_not_configured`, `token_invalid`, or `token_rejected` as a stable `code`, plus a `help` object that directs the agent to the vendor-neutral `relewise-setup` skill and official Personal Access Token documentation. The executable does not embed the skill's setup instructions. For API failures, the CLI extracts a concise message from a JSON problem response when available; otherwise it reports the HTTP status. Error response bodies are bounded to 64 KiB, error messages to 500 characters, and bearer tokens are never returned.
 
 ## Run during development
 

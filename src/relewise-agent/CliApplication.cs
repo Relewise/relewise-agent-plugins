@@ -5,6 +5,9 @@ using System.Text.Json.Serialization.Metadata;
 internal static class CliApplication
 {
     private const string ApplicationName = "relewise-agent";
+    private const string AuthenticationSetupSkill = "relewise-setup";
+    private const string AuthenticationSetupUrl = "https://docs.relewise.com/docs/myrelewise/agent-gateway/personal-access-tokens.html";
+    private const string TokenEnvironmentVariable = "RELEWISE_AGENT_GATEWAY_TOKEN";
     internal static readonly string ApplicationVersion =
         typeof(CliApplication).Assembly
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
@@ -21,8 +24,9 @@ internal static class CliApplication
         {
             return WriteError(
                 "authentication_error",
-                "RELEWISE_AGENT_GATEWAY_TOKEN is not a valid bearer token value.",
-                4);
+                $"{TokenEnvironmentVariable} is not a valid bearer token value.",
+                4,
+                code: "token_invalid");
         }
         catch (RequestValidationException exception)
         {
@@ -168,20 +172,16 @@ internal static class CliApplication
         {
             return WriteError(
                 "authentication_error",
-                "RELEWISE_AGENT_GATEWAY_TOKEN is not configured.",
-                4);
+                $"Relewise is not connected. Follow the '{AuthenticationSetupSkill}' skill to securely configure a Personal Access Token.",
+                4,
+                code: "token_not_configured");
         }
 
         using var client = new AgentGatewayClient();
         var result = await client.GetCurrentUserAsync(token);
         if (!result.Success)
         {
-            return WriteError(
-                result.ErrorType!,
-                result.ErrorMessage!,
-                result.ExitCode,
-                operationId: "IdentityGetCurrentUser",
-                statusCode: result.StatusCode);
+            return WriteGatewayError(result, "IdentityGetCurrentUser");
         }
 
         WriteJson(new MeResponse(
@@ -198,8 +198,9 @@ internal static class CliApplication
         {
             return WriteError(
                 "authentication_error",
-                "RELEWISE_AGENT_GATEWAY_TOKEN is not configured.",
-                4);
+                $"Relewise is not connected. Follow the '{AuthenticationSetupSkill}' skill to securely configure a Personal Access Token.",
+                4,
+                code: "token_not_configured");
         }
 
         using var client = new AgentGatewayClient();
@@ -233,8 +234,9 @@ internal static class CliApplication
         {
             return WriteError(
                 "authentication_error",
-                "RELEWISE_AGENT_GATEWAY_TOKEN is not configured.",
-                4);
+                $"Relewise is not connected. Follow the '{AuthenticationSetupSkill}' skill to securely configure a Personal Access Token.",
+                4,
+                code: "token_not_configured");
         }
 
         using var client = new AgentGatewayClient();
@@ -289,9 +291,10 @@ internal static class CliApplication
         {
             return WriteError(
                 "authentication_error",
-                "RELEWISE_AGENT_GATEWAY_TOKEN is not configured.",
+                $"Relewise is not connected. Follow the '{AuthenticationSetupSkill}' skill to securely configure a Personal Access Token.",
                 4,
-                operationId: options.OperationId);
+                operationId: options.OperationId,
+                code: "token_not_configured");
         }
 
         using var client = new AgentGatewayClient();
@@ -361,7 +364,7 @@ internal static class CliApplication
 
     private static string? ReadToken()
     {
-        var token = Environment.GetEnvironmentVariable("RELEWISE_AGENT_GATEWAY_TOKEN");
+        var token = Environment.GetEnvironmentVariable(TokenEnvironmentVariable);
         return string.IsNullOrWhiteSpace(token) ? null : token;
     }
 
@@ -372,7 +375,8 @@ internal static class CliApplication
             result.ErrorMessage!,
             result.ExitCode,
             operationId,
-            result.StatusCode);
+            result.StatusCode,
+            code: result.ErrorType == "authentication_error" ? "token_rejected" : null);
     }
 
     private static int WriteError(
@@ -380,7 +384,8 @@ internal static class CliApplication
         string message,
         int exitCode,
         string? operationId = null,
-        int? statusCode = null)
+        int? statusCode = null,
+        string? code = null)
     {
         var token = ReadToken();
         if (token is not null)
@@ -388,9 +393,17 @@ internal static class CliApplication
             message = message.Replace(token, "[REDACTED]", StringComparison.Ordinal);
         }
 
+        var help = type == "authentication_error"
+            ? new ErrorHelp(
+                AuthenticationSetupSkill,
+                "authentication-setup",
+                TokenEnvironmentVariable,
+                AuthenticationSetupUrl)
+            : null;
+
         WriteJson(new ErrorResponse(
             Success: false,
-            Error: new ErrorDetails(type, message, operationId, statusCode)),
+            Error: new ErrorDetails(type, code, message, operationId, statusCode, help)),
             AgentJsonContext.Default.ErrorResponse);
         return exitCode;
     }

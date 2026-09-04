@@ -27,7 +27,18 @@ internal sealed record OperationSummary(string OperationId, string Method, strin
 internal sealed record SchemaResponse(bool Success, SchemaData Data);
 internal sealed record SchemaData(JsonElement Operation);
 internal sealed record ErrorResponse(bool Success, ErrorDetails Error);
-internal sealed record ErrorDetails(string Type, string Message, string? OperationId, int? StatusCode);
+internal sealed record ErrorDetails(
+    string Type,
+    string? Code,
+    string Message,
+    string? OperationId,
+    int? StatusCode,
+    ErrorHelp? Help);
+internal sealed record ErrorHelp(
+    string Skill,
+    string Topic,
+    string EnvironmentVariable,
+    string DocumentationUrl);
 
 internal sealed record CurrentUserContract(LicenseContract[] Licenses);
 internal sealed record LicenseContract(string Id, string DisplayName, DatasetContract[]? Datasets);
