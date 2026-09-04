@@ -77,7 +77,7 @@ jobs:
         shell: pwsh
         run: |
           $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
-          $version = "$versionCore-main.${{ github.run_number }}"
+          $version = "$versionCore-main.${{ github.run_id }}"
           dotnet publish src/relewise-agent/relewise-agent.csproj --configuration Release --runtime '${{ matrix.rid }}' --output 'artifacts/${{ matrix.rid }}' -p:Version=$version
           ./tests/cli/smoke.ps1 -ExecutablePath 'artifacts/${{ matrix.rid }}/${{ matrix.executable }}' -ExpectedVersion $version
 
@@ -109,7 +109,7 @@ jobs:
         shell: pwsh
         run: |
           $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
-          $version = "$versionCore-main.${{ github.run_number }}"
+          $version = "$versionCore-main.${{ github.run_id }}"
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
 
           $candidate = 'artifacts/universal'
@@ -151,6 +151,8 @@ jobs:
             plugins/relewise/libexec/linux-arm64/relewise-agent \
             plugins/relewise/libexec/osx-x64/relewise-agent \
             plugins/relewise/libexec/osx-arm64/relewise-agent
+          # Artifacts are assembled on Linux, so explicitly keep the Windows binary non-executable in Git.
+          git update-index --chmod=-x plugins/relewise/libexec/win-x64/relewise-agent.exe
           if git diff --cached --quiet; then
             echo "Marketplace payload is already current."
             exit 0

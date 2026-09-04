@@ -32,6 +32,7 @@
       "Review search performance for my Relewise Dataset.",
       "Audit merchandising rules for my Relewise Dataset."
     ],
-    "brandColor": "#3764E4"
+    "brandColor": "#3764E4",
+    "logo": "./assets/logo.png"
   }
 }

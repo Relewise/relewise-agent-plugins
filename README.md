@@ -45,7 +45,7 @@ Each archive supports Windows x64, Linux x64/ARM64, and macOS x64/ARM64. Follow 
 
 The repository is versioned as one ecosystem. Pushing a semantic version tag such as `v0.1.0` validates the contracts and skills, builds and tests all supported native executables, packages every vendor adapter, and publishes the installable archives in a GitHub release. `v0.*` releases are published as prereleases; `v1.0.0` and later tags are stable releases.
 
-The planned version is maintained manually in `version.json`. Marketplace refreshes automatically use `<version>-main.<workflow run>`, while a release tag such as `v0.4.0` must match `version.json` and produces version `0.4.0` in every executable and manifest. After a release, update `version.json` in a normal pull request when the next version is decided.
+The planned version is maintained manually in `version.json`. Marketplace refreshes automatically use `<version>-main.<run ID>`, while a release tag such as `v0.4.0` must match `version.json` and produces version `0.4.0` in every executable and manifest. After a release, update `version.json` in a normal pull request when the next version is decided.
 
 Each tagged release includes a self-contained universal archive for Claude Code, GitHub Copilot CLI, OpenAI Codex, and Google Gemini CLI. A universal archive contains all five supported native runtimes and its launcher automatically selects Windows x64, Linux x64/ARM64, or macOS x64/ARM64. No executable is downloaded during plugin use. Platform-specific archives remain available, including Gemini's conventionally named assets used for automatic platform selection.
 

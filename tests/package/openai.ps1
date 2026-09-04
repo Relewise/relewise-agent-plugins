@@ -15,6 +15,8 @@ if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'P
 
 if ($manifest.skills -ne './skills/') { throw 'Codex plugin manifest does not expose the packaged skills.' }
 if ($null -ne $manifest.userConfig) { throw 'Codex plugin manifest must not claim unsupported protected user configuration.' }
+if ($manifest.interface.logo -ne './assets/logo.png') { throw 'Codex plugin manifest does not reference the Relewise logo.' }
+if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'assets\logo.png'))) { throw 'Package is missing the Relewise logo.' }
 
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
 $packagedSkills = Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory
