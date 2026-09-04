@@ -102,5 +102,10 @@ $authenticationResult = Invoke-Agent @('me')
 $authentication = Read-JsonResult $authenticationResult
 Assert-Equal $authenticationResult.ExitCode 4 'Missing authentication exit code.'
 Assert-Equal $authentication.error.type 'authentication_error' 'Missing authentication error type.'
+Assert-Equal $authentication.error.code 'token_not_configured' 'Missing authentication error code.'
+Assert-Equal $authentication.error.help.skill 'relewise-setup' 'Missing authentication setup skill.'
+Assert-Equal $authentication.error.help.topic 'authentication-setup' 'Missing authentication help topic.'
+Assert-Equal $authentication.error.help.environmentVariable 'RELEWISE_AGENT_GATEWAY_TOKEN' 'Missing authentication environment variable.'
+Assert-Equal $authentication.error.help.documentationUrl 'https://docs.relewise.com/docs/myrelewise/agent-gateway/personal-access-tokens.html' 'Missing authentication documentation URL.'
 
 Write-Host "CLI smoke tests passed for $resolvedExecutable"
