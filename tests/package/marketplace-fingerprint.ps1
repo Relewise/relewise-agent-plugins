@@ -9,3 +9,13 @@ if ($actual -ne $expected) {
 }
 
 Write-Host "Marketplace source fingerprint is current: $actual"
+
+$runtimeExpectedPath = Join-Path $repositoryRoot 'plugins\relewise\.codex-plugin\runtime-source.sha256'
+$runtimeExpected = (Get-Content -Raw -LiteralPath $runtimeExpectedPath).Trim()
+$runtimeActual = (& (Join-Path $repositoryRoot 'tools\package\get-runtime-fingerprint.ps1') | Out-String).Trim()
+
+if ($runtimeActual -ne $runtimeExpected) {
+    throw "The committed marketplace executables are stale. Expected runtime fingerprint '$runtimeExpected', calculated '$runtimeActual'. Ask a maintainer to run the Refresh marketplace payload workflow on this branch."
+}
+
+Write-Host "Marketplace runtime fingerprint is current: $runtimeActual"

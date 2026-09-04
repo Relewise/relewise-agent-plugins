@@ -50,9 +50,9 @@ Do not edit files under `generated/` or `docs/api-coverage.md` manually.
 - Never accept the PAT as a command-line argument or include it in diagnostics.
 - Preserve Dataset access validation and effective Agent Gateway policy enforcement.
 - Change shared behavior at its canonical source; vendor adapters should remain thin.
-- If **Validate marketplace fingerprint** fails, ask a maintainer to run the **Refresh marketplace payload** workflow on the pull request branch. Do not merge until its generated commit and the checks on that new head pass.
-- Never refresh the payload on `main`; source changes and their five native executables must merge atomically in the originating pull request.
-- Change `version.json` manually when the next release version is decided. Workflows add prerelease build numbers and synchronize executables and manifests automatically.
+- If **Validate marketplace fingerprint** fails, ask a maintainer to run the **Refresh marketplace payload** workflow on the pull request branch. Runtime inputs rebuild all five executables; other plugin changes reuse them and update only the package metadata. Do not merge until its generated commit and the checks on that new head pass.
+- Never refresh the payload on `main`; source changes, synchronized metadata, and any required executable updates must merge atomically in the originating pull request.
+- Change `version.json` manually when the next release version is decided. Workflows add prerelease build numbers to manifests and rebuild the executables when runtime inputs change.
 
 ## Validation
 
