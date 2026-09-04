@@ -4,7 +4,7 @@ This adapter packages `Relewise`: work with your Relewise configuration, analyti
 
 The adapter packages the canonical Relewise skills with the `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; they are copied into packages and are not maintained here. Local packaging can target one runtime, while tagged releases also provide a universal archive containing every supported runtime. Its launcher selects the correct executable automatically without downloading code during use.
 
-The plugin asks for a required Agent Gateway PAT through Claude Code's sensitive user configuration. Claude stores that value securely and exposes it to the bundled launcher as `CLAUDE_PLUGIN_OPTION_AGENT_GATEWAY_TOKEN`. The launcher maps it to `RELEWISE_AGENT_GATEWAY_TOKEN` only in the executable process environment. It never places the PAT in command arguments or plugin files.
+Set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment available to Claude Code, preferably through Claude Desktop's encrypted local environment configuration or a trusted secret manager. The PAT is inherited by the bundled launcher and passed to the executable through its process environment. It is never placed in command arguments or plugin files.
 
 Build the executable for the target runtime, then package it:
 
@@ -34,7 +34,7 @@ For distribution, use `relewise-claude-universal-v<version>.tar.gz` from the Git
 
 ## Fresh-install acceptance test
 
-Use a machine with Claude Code installed and authenticated but without an existing Relewise plugin. Build the package for that machine, load its `relewise` directory with `claude --plugin-dir`, and provide the Agent Gateway PAT when Claude prompts for the required protected plugin option.
+Use a machine with Claude Code installed and authenticated but without an existing Relewise plugin. Configure `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment available to Claude Code, build the package for that machine, and load its `relewise` directory with `claude --plugin-dir`.
 
 Verify these prompts in order:
 

@@ -19,7 +19,7 @@ claude plugin marketplace add Relewise/relewise-agent-plugins
 claude plugin install relewise@relewise
 ```
 
-Provide a Relewise Agent Gateway Personal Access Token when Claude Code requests the protected plugin setting. Claude Code exposes the protected value only to the plugin launcher, which passes it to the bundled executable through its process environment.
+Make `RELEWISE_AGENT_GATEWAY_TOKEN` available in the environment used by Claude Code. In Claude Desktop, use the encrypted local environment editor; open the environment selector beside the prompt, hover over **Local**, select the gear icon, and add the variable there. Start a new Claude session after changing it. The plugin does not use Claude's protected `userConfig` because those sensitive values are not available to ordinary commands run by skills.
 
 ## Publication route
 

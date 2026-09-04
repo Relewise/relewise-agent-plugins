@@ -34,6 +34,5 @@ $expectedExecutable = if ($RuntimeIdentifier -eq 'win-x64') { 'relewise-agent.ex
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "libexec\$RuntimeIdentifier\$expectedExecutable"))) { throw 'Package is missing its native executable.' }
 $launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'bin\relewise-agent')
 if (-not $launcher.Contains('runtime_id="win-x64"') -or -not $launcher.Contains('runtime_id="osx-arm64"')) { throw 'Launcher does not select a native executable by platform.' }
-if (-not $launcher.Contains('RELEWISE_AGENT_GATEWAY_TOKEN')) { throw 'Launcher does not enforce the CLI environment-variable contract.' }
 
 Write-Host "Google Gemini CLI package smoke tests passed for $RuntimeIdentifier"

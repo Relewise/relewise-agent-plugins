@@ -42,9 +42,20 @@ The launch setting lasts only for the current macOS login session. Run `launchct
 
 ## Claude Code
 
-Use the Relewise plugin's required **Relewise Agent Gateway PAT** protected setting. Claude Code stores it as sensitive user configuration and supplies it only to the plugin launcher. Do not additionally create `RELEWISE_AGENT_GATEWAY_TOKEN` at operating-system level unless the protected setting is unavailable in the installed Claude version.
+Make `RELEWISE_AGENT_GATEWAY_TOKEN` available in the environment used by Claude Code. The Relewise plugin does not ask for or retrieve the PAT through Claude plugin configuration.
 
-If the protected value must be replaced, use Claude Code's plugin configuration to update it, then start a new Claude session before verifying the connection.
+### Claude Desktop
+
+1. Open the environment selector beside the prompt.
+2. Hover over **Local** and select the gear icon.
+3. Add `RELEWISE_AGENT_GATEWAY_TOKEN` and paste the token as its value. Claude stores local-environment values encrypted on the machine.
+4. Start a new local session before verifying the connection.
+
+This does not create an operating-system-wide environment variable. It applies to local Claude sessions and does not synchronize to another computer.
+
+### Claude Code started from a terminal
+
+Set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment that starts Claude Code, preferably through a trusted secret manager. A variable set only for the current terminal session is inherited by Claude Code without becoming a persistent operating-system variable. Start a new Claude session after changing it.
 
 ## GitHub Copilot CLI
 

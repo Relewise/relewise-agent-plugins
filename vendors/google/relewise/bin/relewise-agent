@@ -23,9 +23,4 @@ case "$os:$arch" in
   *) echo "Unsupported platform: $os $arch" >&2; exit 3 ;;
 esac
 
-if [ -z "${RELEWISE_AGENT_GATEWAY_TOKEN:-}" ]; then
-  echo "RELEWISE_AGENT_GATEWAY_TOKEN is required. Configure the Relewise extension setting." >&2
-  exit 2
-fi
-
 exec "$extension_root/libexec/$runtime_id/$executable" "$@"
