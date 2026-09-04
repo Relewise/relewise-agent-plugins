@@ -151,6 +151,7 @@ jobs:
             plugins/relewise/libexec/linux-arm64/relewise-agent \
             plugins/relewise/libexec/osx-x64/relewise-agent \
             plugins/relewise/libexec/osx-arm64/relewise-agent
+          # Artifacts are assembled on Linux, so explicitly keep the Windows binary non-executable in Git.
           git update-index --chmod=-x plugins/relewise/libexec/win-x64/relewise-agent.exe
           if git diff --cached --quiet; then
             echo "Marketplace payload is already current."
