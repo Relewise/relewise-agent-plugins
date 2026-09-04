@@ -74,7 +74,7 @@ jobs:
         shell: bash
         env:
           CLAUDE_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/claude/${{ matrix.rid }}/relewise
-          CLAUDE_PLUGIN_OPTION_AGENT_GATEWAY_TOKEN: smoke-test-token
+          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: artifacts/claude/${{ matrix.rid }}/relewise/bin/relewise-agent --version
 
       - name: Run GitHub Copilot launcher smoke test

@@ -39,7 +39,7 @@ Choose the universal archive for your client:
 - `relewise-openai-universal-v<version>.tar.gz`
 - `relewise-google-universal-v<version>.tar.gz`
 
-Each archive supports Windows x64, Linux x64/ARM64, and macOS x64/ARM64. Follow the client-specific instructions under [marketplace/relewise/platforms](marketplace/relewise/platforms) and configure a Relewise Agent Gateway PAT through the client's protected configuration or environment mechanism. Never put a PAT in a prompt or command argument.
+Each archive supports Windows x64, Linux x64/ARM64, and macOS x64/ARM64. Make a Relewise Agent Gateway PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`, either through a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
 
 ## Releases
 

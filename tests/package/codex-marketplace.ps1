@@ -48,8 +48,8 @@ if ($portableManifest.name -ne 'relewise' -or $claudeManifest.name -ne 'relewise
 if ($manifest.version -ne $portableManifest.version -or $manifest.version -ne $claudeManifest.version) {
     throw 'Committed vendor plugin manifest versions are not synchronized.'
 }
-if (-not $claudeManifest.userConfig.agent_gateway_token.sensitive -or -not $claudeManifest.userConfig.agent_gateway_token.required) {
-    throw 'Claude Code manifest does not require protected Agent Gateway authentication.'
+if ($null -ne $claudeManifest.userConfig) {
+    throw 'Claude Code manifest must not claim protected Agent Gateway configuration.'
 }
 
 $canonicalSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory

@@ -1,19 +1,10 @@
 {
   "name": "relewise",
-  "version": "0.3.0-main.33853983184",
+  "version": "0.3.0-main.33858972155",
   "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "author": {
     "name": "Relewise"
   },
   "homepage": "https://www.relewise.com/",
-  "repository": "https://github.com/Relewise/relewise-agent-plugins",
-  "userConfig": {
-    "agent_gateway_token": {
-      "type": "string",
-      "title": "Relewise Agent Gateway PAT",
-      "description": "Personal Access Token used to access the Agent Gateway.",
-      "sensitive": true,
-      "required": true
-    }
-  }
+  "repository": "https://github.com/Relewise/relewise-agent-plugins"
 }

@@ -13,8 +13,7 @@ $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.claude-plugin\plugin.json') | ConvertFrom-Json
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'Package is missing its license.' }
 
-$tokenOption = $manifest.userConfig.agent_gateway_token
-if (-not $tokenOption.required -or -not $tokenOption.sensitive) { throw 'Agent Gateway PAT must be required and sensitive.' }
+if ($null -ne $manifest.userConfig) { throw 'Claude Code manifest must not declare protected user configuration.' }
 
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
 $packagedSkills = Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory
@@ -31,8 +30,8 @@ $expectedExecutable = if ($RuntimeIdentifier -eq 'win-x64') { 'relewise-agent.ex
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "libexec\$RuntimeIdentifier\$expectedExecutable"))) { throw 'Package is missing its native executable.' }
 $launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'bin\relewise-agent')
 if (-not $launcher.Contains('runtime_id="win-x64"') -or -not $launcher.Contains('runtime_id="osx-arm64"')) { throw 'Launcher does not select a native executable by platform.' }
-if (-not $launcher.Contains('CLAUDE_PLUGIN_OPTION_AGENT_GATEWAY_TOKEN') -or -not $launcher.Contains('RELEWISE_AGENT_GATEWAY_TOKEN')) {
-    throw 'Launcher does not map Claude sensitive configuration to the CLI environment variable.'
+if ($launcher.Contains('CLAUDE_PLUGIN_OPTION_') -or $launcher.Contains('RELEWISE_AGENT_GATEWAY_TOKEN is required')) {
+    throw 'Launcher must delegate authentication handling to the executable.'
 }
 
 Write-Host "Claude Code package smoke tests passed for $RuntimeIdentifier"
