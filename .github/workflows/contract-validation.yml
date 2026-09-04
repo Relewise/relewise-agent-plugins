@@ -27,6 +27,61 @@ jobs:
         shell: pwsh
         run: ./tests/package/marketplace-fingerprint.ps1
 
+  claude-marketplace:
+    name: Validate Claude marketplace
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Install Claude Code validator
+        run: npm install --global @anthropic-ai/claude-code@2.1.260
+
+      - name: Validate marketplace, plugin, and skills
+        run: |
+          claude plugin validate .
+          claude plugin validate ./plugins/relewise
+
+      - name: Smoke-test marketplace installation
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $env:CLAUDE_CONFIG_DIR = Join-Path $env:RUNNER_TEMP 'relewise-claude-config'
+          New-Item -ItemType Directory -Force -Path $env:CLAUDE_CONFIG_DIR | Out-Null
+
+          claude plugin marketplace add $env:GITHUB_WORKSPACE --scope user
+          if ($LASTEXITCODE -ne 0) { throw 'Claude failed to add the repository marketplace.' }
+          claude plugin install relewise@relewise --scope user
+          if ($LASTEXITCODE -ne 0) { throw 'Claude failed to install the Relewise plugin.' }
+
+          $installedPlugins = (claude plugin list --json | Out-String) | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { throw 'Claude failed to list installed plugins.' }
+          $plugin = @($installedPlugins) | Where-Object { $_.id -eq 'relewise@relewise' }
+          if ($plugin.Count -ne 1 -or -not $plugin[0].enabled) {
+            throw 'The installed Relewise plugin is missing or disabled.'
+          }
+
+          $installedRoot = $plugin[0].installPath
+          $expectedSkills = Get-ChildItem -LiteralPath 'plugins/relewise/skills' -Directory | Select-Object -ExpandProperty Name
+          $installedSkills = Get-ChildItem -LiteralPath (Join-Path $installedRoot 'skills') -Directory | Select-Object -ExpandProperty Name
+          $skillDifference = Compare-Object $expectedSkills $installedSkills
+          if ($null -ne $skillDifference) {
+            throw "The installed Claude plugin does not contain the canonical skill set: $($skillDifference | Out-String)"
+          }
+
+          $env:CLAUDE_PLUGIN_ROOT = $installedRoot
+          $launcher = Join-Path $installedRoot 'scripts/relewise-agent'
+          $versionResponse = (& $launcher --version | Out-String) | ConvertFrom-Json
+          if (-not $versionResponse.success -or $versionResponse.data.name -ne 'relewise-agent') {
+            throw 'The installed Claude launcher did not return a valid version response.'
+          }
+
   validate:
     name: Validate contract
     needs: marketplace-fingerprint
