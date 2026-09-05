@@ -13,6 +13,15 @@
       },
       "source": "./plugins/relewise",
       "category": "Productivity"
+    },
+    {
+      "name": "relewise-developer",
+      "description": "Build and troubleshoot Relewise integrations with current API and SDK guidance.",
+      "author": {
+        "name": "Relewise"
+      },
+      "source": "./plugins/relewise-developer",
+      "category": "Development"
     }
   ]
 }

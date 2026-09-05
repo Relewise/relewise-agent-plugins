@@ -121,6 +121,9 @@ jobs:
           $runtimeRefreshNeeded = '${{ needs.validate-branch.outputs.runtime-refresh-needed }}' -eq 'true'
           $executablesRoot = if ($runtimeRefreshNeeded) { 'artifacts/native' } else { 'plugins/relewise/libexec' }
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot $executablesRoot -Version $version
+          foreach ($vendor in @('claude', 'github-copilot', 'openai')) {
+            ./tools/package/relewise-developer.ps1 -Vendor $vendor -Version $version -OutputRoot "artifacts/developer/$vendor"
+          }
 
           $candidate = 'artifacts/universal'
           $target = 'plugins/relewise'
@@ -145,6 +148,11 @@ jobs:
           }
           Copy-Item -LiteralPath 'LICENSE' -Destination "$target/LICENSE" -Force
 
+          $developerTarget = 'plugins/relewise-developer'
+          Copy-Item -LiteralPath 'artifacts/developer/openai/relewise-developer/.codex-plugin/plugin.json' -Destination "$developerTarget/.codex-plugin/plugin.json" -Force
+          Copy-Item -LiteralPath 'artifacts/developer/claude/relewise-developer/.claude-plugin/plugin.json' -Destination "$developerTarget/.claude-plugin/plugin.json" -Force
+          Copy-Item -LiteralPath 'artifacts/developer/github-copilot/relewise-developer/plugin.json' -Destination "$developerTarget/plugin.json" -Force
+
           # Calculate after every generated file is in its committed path. The portable
           # manifest version is ignored to avoid a circular fingerprint dependency.
           $fingerprint = (./tools/package/get-codex-marketplace-fingerprint.ps1 | Out-String).Trim()
@@ -155,6 +163,9 @@ jobs:
 
           ./tests/package/marketplace-fingerprint.ps1
           ./tests/package/codex-marketplace.ps1 -MarketplaceRoot .
+          foreach ($vendor in @('claude', 'github-copilot', 'openai')) {
+            ./tests/package/relewise-developer.ps1 -Vendor $vendor -PackagePath "artifacts/developer/$vendor/relewise-developer" -Version $version
+          }
 
       - name: Commit and push to the originating branch
         shell: bash
@@ -165,7 +176,10 @@ jobs:
             plugins/relewise/.claude-plugin \
             plugins/relewise/scripts \
             plugins/relewise/libexec \
-            plugins/relewise/LICENSE
+            plugins/relewise/LICENSE \
+            plugins/relewise-developer/plugin.json \
+            plugins/relewise-developer/.codex-plugin \
+            plugins/relewise-developer/.claude-plugin
           git update-index --chmod=+x \
             plugins/relewise/scripts/relewise-agent \
             plugins/relewise/libexec/linux-x64/relewise-agent \

@@ -1,6 +1,6 @@
 # Claude Code adapter
 
-This adapter packages `Relewise`: work with your Relewise configuration, analytics and optimization using AI. `Relewise Developer` is a separate product and is not included.
+This adapter supports two separately installable products: `Relewise` for configuration, analytics, and optimization, and `Relewise Developer` for implementation and troubleshooting.
 
 The adapter packages the canonical Relewise skills with the `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; they are copied into packages and are not maintained here. Local adapter packaging can target one runtime for validation. Tagged releases provide a direct-upload Claude plugin ZIP containing every supported runtime.
 
@@ -26,11 +26,14 @@ For repository installation, register and install the marketplace:
 ```shell
 claude plugin marketplace add Relewise/relewise-agent-plugins
 claude plugin install relewise@relewise
+claude plugin install relewise-developer@relewise
 ```
 
 The root `.claude-plugin/marketplace.json` points directly to `plugins/relewise`; the package path remains useful for testing release archives.
 
-For manual distribution, upload `relewise-claude-plugin-v<version>.zip` from the GitHub release as a custom plugin in Claude Desktop or Cowork. The archive places `.claude-plugin/plugin.json` at its root as required by Claude's plugin uploader. Manually uploaded plugins do not receive GitHub marketplace updates, so upload the newer ZIP with the same plugin name to upgrade. Repository-installed plugins continue to update through Claude's marketplace mechanism.
+For manual distribution, upload `relewise-claude-plugin-v<version>.zip` or `relewise-developer-claude-plugin-v<version>.zip` from the GitHub release as a custom plugin in Claude Desktop or Cowork. Each archive places `.claude-plugin/plugin.json` at its root as required by Claude's plugin uploader. Manually uploaded plugins do not receive GitHub marketplace updates, so upload the newer ZIP with the same plugin name to upgrade. Repository-installed plugins continue to update through Claude's marketplace mechanism.
+
+The Relewise Developer package contains its focused development skill and `.mcp.json`, which automatically connects `https://mcp.relewise.com`. It contains no Agent Gateway executable and requires no Agent Gateway PAT.
 
 ## Fresh-install acceptance test
 

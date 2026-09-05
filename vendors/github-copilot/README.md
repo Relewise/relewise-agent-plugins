@@ -1,6 +1,6 @@
 # GitHub Copilot CLI adapter
 
-This adapter packages `Relewise`: work with your Relewise configuration, analytics and optimization using AI. `Relewise Developer` is a separate product and is not included.
+This adapter supports two separately installable products: `Relewise` for configuration, analytics, and optimization, and `Relewise Developer` for implementation and troubleshooting.
 
 The adapter packages the canonical Relewise Agent Plugin with the `relewise-agent` NativeAOT executable. Its manifest and skills remain under `plugins/relewise`; the package script copies them and adds only the Copilot-specific executable-location instruction. Local adapter packaging can target one runtime for validation; normal distribution uses the repository marketplace.
 
@@ -26,8 +26,11 @@ For repository installation, register and install the marketplace:
 ```shell
 copilot plugin marketplace add Relewise/relewise-agent-plugins
 copilot plugin install relewise@relewise
+copilot plugin install relewise-developer@relewise
 ```
 
 The root `.github/plugin/marketplace.json` points directly to `plugins/relewise`; the package path remains useful for testing release archives.
 
 Installed plugins update through Copilot's marketplace mechanism. The Claude custom-plugin ZIP is not a Copilot distribution artifact.
+
+The Relewise Developer plugin is read directly from `plugins/relewise-developer`. Copilot discovers its `.mcp.json`, connects `https://mcp.relewise.com`, and loads the development skill without an Agent Gateway executable or PAT.

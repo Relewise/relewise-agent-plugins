@@ -1,0 +1,12 @@
+{
+  "name": "relewise-developer",
+  "displayName": "Relewise Developer",
+  "version": "0.1.0",
+  "description": "Build and troubleshoot Relewise integrations with current API and SDK guidance.",
+  "author": {
+    "name": "Relewise"
+  },
+  "homepage": "https://docs.relewise.com/docs/developer/mcp.html",
+  "repository": "https://github.com/Relewise/relewise-agent-plugins",
+  "mcpServers": "./.mcp.json"
+}

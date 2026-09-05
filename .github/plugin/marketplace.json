@@ -12,6 +12,12 @@
       "description": "Work with your Relewise configuration, analytics and optimization using AI.",
       "source": "./plugins/relewise",
       "category": "Productivity"
+    },
+    {
+      "name": "relewise-developer",
+      "description": "Build and troubleshoot Relewise integrations with current API and SDK guidance.",
+      "source": "./plugins/relewise-developer",
+      "category": "Development"
     }
   ]
 }

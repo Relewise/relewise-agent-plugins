@@ -190,7 +190,10 @@ jobs:
           $version = '${{ github.ref_name }}'.Substring(1)
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
           ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
+          ./tools/package/relewise-developer.ps1 -Vendor claude -Version $version -OutputRoot artifacts/universal/claude
+          ./tests/package/relewise-developer.ps1 -Vendor claude -PackagePath artifacts/universal/claude/relewise-developer -Version $version
           ./tools/package/create-claude-plugin-archive.ps1 -PluginName relewise -Version $version -PluginRoot artifacts/universal/claude/relewise
+          ./tools/package/create-claude-plugin-archive.ps1 -PluginName relewise-developer -Version $version -PluginRoot artifacts/universal/claude/relewise-developer
 
       - name: Install Claude Code validator
         run: npm install --global @anthropic-ai/claude-code@2.1.260
@@ -199,7 +202,9 @@ jobs:
         shell: bash
         run: |
           mkdir -p artifacts/extracted/relewise
+          mkdir -p artifacts/extracted/relewise-developer
           unzip -q "artifacts/release-plugin/relewise-claude-plugin-v${GITHUB_REF_NAME#v}.zip" -d artifacts/extracted/relewise
+          unzip -q "artifacts/release-plugin/relewise-developer-claude-plugin-v${GITHUB_REF_NAME#v}.zip" -d artifacts/extracted/relewise-developer
           test -x artifacts/extracted/relewise/scripts/relewise-agent
           test -x artifacts/extracted/relewise/libexec/linux-x64/relewise-agent
 
@@ -208,7 +213,9 @@ jobs:
         run: |
           $version = '${{ github.ref_name }}'.Substring(1)
           ./tests/package/claude-plugin-archive.ps1 -PluginRoot artifacts/extracted/relewise -Version $version
+          ./tests/package/relewise-developer.ps1 -Vendor claude -PackagePath artifacts/extracted/relewise-developer -Version $version
           claude plugin validate artifacts/extracted/relewise
+          claude plugin validate artifacts/extracted/relewise-developer
 
       - name: Smoke-test Claude plugin launcher
         shell: bash
@@ -252,11 +259,12 @@ jobs:
             linux.x64.relewise.tar.gz
             win32.x64.relewise.zip
             "relewise-claude-plugin-v${version}.zip"
+            "relewise-developer-claude-plugin-v${version}.zip"
           )
           mapfile -t actual < <(find release-assets -maxdepth 1 -type f -printf '%f\n' | sort)
           mapfile -t wanted < <(printf '%s\n' "${expected[@]}" | sort)
           if [[ "${actual[*]}" != "${wanted[*]}" ]]; then
-            echo "Release assets do not match the six supported distributions."
+            echo "Release assets do not match the seven supported distributions."
             printf 'Expected: %s\n' "${wanted[@]}"
             printf 'Actual: %s\n' "${actual[@]}"
             exit 1
