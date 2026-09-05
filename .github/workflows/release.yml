@@ -141,7 +141,7 @@ jobs:
           ./tests/package/openai.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -PackagePath 'artifacts/openai/${{ matrix.rid }}/relewise'
           ./tests/package/google.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -PackagePath 'artifacts/google/${{ matrix.rid }}/relewise'
 
-          ./tools/package/create-release-archives.ps1 -RuntimeIdentifier '${{ matrix.rid }}' -Version $version
+          ./tools/package/create-gemini-release-archive.ps1 -RuntimeIdentifier '${{ matrix.rid }}'
 
       - name: Smoke-test packaged launchers
         shell: bash
@@ -155,7 +155,7 @@ jobs:
           artifacts/openai/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
           artifacts/google/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
 
-      - name: Upload release archives
+      - name: Upload Gemini release archive
         uses: actions/upload-artifact@v7
         with:
           name: release-${{ matrix.rid }}
@@ -169,8 +169,8 @@ jobs:
           path: artifacts/${{ matrix.rid }}/${{ matrix.executable }}
           if-no-files-found: error
 
-  assemble-universal:
-    name: Assemble universal packages
+  assemble-claude-plugin:
+    name: Assemble Claude plugin archive
     needs: package
     runs-on: ubuntu-latest
 
@@ -184,30 +184,48 @@ jobs:
           pattern: native-*
           path: artifacts/native
 
-      - name: Assemble, validate and archive
+      - name: Assemble and validate vendor packages
         shell: pwsh
         run: |
           $version = '${{ github.ref_name }}'.Substring(1)
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
           ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
-          ./tools/package/create-universal-release-archives.ps1 -Version $version
+          ./tools/package/create-claude-plugin-archive.ps1 -PluginName relewise -Version $version -PluginRoot artifacts/universal/claude/relewise
 
-      - name: Smoke-test universal launcher
+      - name: Install Claude Code validator
+        run: npm install --global @anthropic-ai/claude-code@2.1.260
+
+      - name: Extract and verify Claude plugin archive
+        shell: bash
+        run: |
+          mkdir -p artifacts/extracted/relewise
+          unzip -q "artifacts/release-plugin/relewise-claude-plugin-v${GITHUB_REF_NAME#v}.zip" -d artifacts/extracted/relewise
+          test -x artifacts/extracted/relewise/scripts/relewise-agent
+          test -x artifacts/extracted/relewise/libexec/linux-x64/relewise-agent
+
+      - name: Validate extracted Claude plugin
+        shell: pwsh
+        run: |
+          $version = '${{ github.ref_name }}'.Substring(1)
+          ./tests/package/claude-plugin-archive.ps1 -PluginRoot artifacts/extracted/relewise -Version $version
+          claude plugin validate artifacts/extracted/relewise
+
+      - name: Smoke-test Claude plugin launcher
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/universal/openai/relewise/scripts/relewise-agent --version
+        run: artifacts/extracted/relewise/scripts/relewise-agent --version
 
-      - name: Upload universal release archives
+      - name: Upload Claude plugin archive
         uses: actions/upload-artifact@v7
         with:
-          name: release-universal
-          path: artifacts/release-universal/*
+          name: release-plugin
+          path: artifacts/release-plugin/*
           if-no-files-found: error
 
   publish:
     name: Publish GitHub release
-    needs: [package, assemble-universal]
+    needs: [package, assemble-claude-plugin]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -226,6 +244,23 @@ jobs:
           GH_REPO: ${{ github.repository }}
         shell: bash
         run: |
+          version="${GITHUB_REF_NAME#v}"
+          expected=(
+            darwin.arm64.relewise.tar.gz
+            darwin.x64.relewise.tar.gz
+            linux.arm64.relewise.tar.gz
+            linux.x64.relewise.tar.gz
+            win32.x64.relewise.zip
+            "relewise-claude-plugin-v${version}.zip"
+          )
+          mapfile -t actual < <(find release-assets -maxdepth 1 -type f -printf '%f\n' | sort)
+          mapfile -t wanted < <(printf '%s\n' "${expected[@]}" | sort)
+          if [[ "${actual[*]}" != "${wanted[*]}" ]]; then
+            echo "Release assets do not match the six supported distributions."
+            printf 'Expected: %s\n' "${wanted[@]}"
+            printf 'Actual: %s\n' "${actual[@]}"
+            exit 1
+          fi
           prerelease=()
           if [[ "${GITHUB_REF_NAME}" == v0.* ]]; then
             prerelease=(--prerelease)

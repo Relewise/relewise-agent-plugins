@@ -135,8 +135,8 @@ jobs:
           path: artifacts/ci-native/${{ matrix.rid }}/${{ matrix.executable }}
           if-no-files-found: error
 
-  universal-package:
-    name: Validate universal packages
+  claude-plugin-archive:
+    name: Validate Claude plugin archive
     needs: build
     runs-on: ubuntu-latest
 
@@ -150,17 +150,34 @@ jobs:
           pattern: ci-native-*
           path: artifacts/native
 
-      - name: Assemble and validate universal packages
+      - name: Assemble and validate vendor packages
         shell: pwsh
         run: |
           $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
           $version = "$versionCore-main.${{ github.run_id }}"
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
           ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
-          ./tools/package/create-universal-release-archives.ps1 -Version $version
+          ./tools/package/create-claude-plugin-archive.ps1 -PluginName relewise -Version $version -PluginRoot artifacts/universal/claude/relewise
 
-      - name: Smoke-test universal launcher
+      - name: Extract and verify Claude plugin archive
+        shell: bash
+        run: |
+          versionCore="$(jq -r .version version.json)"
+          version="${versionCore}-main.${{ github.run_id }}"
+          mkdir -p artifacts/extracted/relewise
+          unzip -q "artifacts/release-plugin/relewise-claude-plugin-v${version}.zip" -d artifacts/extracted/relewise
+          test -x artifacts/extracted/relewise/scripts/relewise-agent
+          test -x artifacts/extracted/relewise/libexec/linux-x64/relewise-agent
+
+      - name: Validate extracted Claude plugin
+        shell: pwsh
+        run: |
+          $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
+          $version = "$versionCore-main.${{ github.run_id }}"
+          ./tests/package/claude-plugin-archive.ps1 -PluginRoot artifacts/extracted/relewise -Version $version
+
+      - name: Smoke-test Claude plugin launcher
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/universal/openai/relewise/scripts/relewise-agent --version
+        run: artifacts/extracted/relewise/scripts/relewise-agent --version

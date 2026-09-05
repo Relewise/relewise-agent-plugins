@@ -2,7 +2,7 @@
 
 This adapter packages `Relewise`: work with your Relewise configuration, analytics and optimization using AI. `Relewise Developer` is a separate product and is not included.
 
-The adapter packages the canonical Relewise skills with the `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; the package script copies them and adds only the Gemini-specific executable-location instruction. Tagged releases provide both a universal archive and Gemini's conventionally named platform archives; the latter let Gemini CLI select the smallest correct asset automatically.
+The adapter packages the canonical Relewise skills with the `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; the package script copies them and adds only the Gemini-specific executable-location instruction. Tagged releases provide Gemini's five conventionally named platform archives so Gemini CLI can select the smallest correct asset automatically.
 
 During extension installation, Gemini CLI asks for the Relewise Agent Gateway PAT declared in `gemini-extension.json`. The setting is marked sensitive, so Gemini stores it in the system keychain, obfuscates it in the UI, and exposes it to the extension as `RELEWISE_AGENT_GATEWAY_TOKEN`. The PAT is never placed in command arguments or package files.
 
@@ -21,4 +21,4 @@ gemini extensions install artifacts/google/<runtime-id>/relewise
 
 Supported runtime identifiers are `win-x64`, `linux-x64`, `linux-arm64`, `osx-x64`, and `osx-arm64`.
 
-For normal GitHub installation, Gemini CLI uses the conventionally named platform release asset and detects updates from the latest GitHub release tag. The universal `relewise-google-universal-v<version>.tar.gz` archive is available for inspection and manual distribution.
+For normal GitHub installation, Gemini CLI uses the conventionally named platform release asset and detects updates from the latest stable GitHub release tag. Gemini does not use the Claude custom-plugin ZIP.
