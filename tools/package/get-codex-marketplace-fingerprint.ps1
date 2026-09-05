@@ -2,19 +2,28 @@ $ErrorActionPreference = 'Stop'
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $includedPaths = @(
     'version.json',
+    '.agents/plugins/marketplace.json',
     '.github/workflows/refresh-marketplace.yml',
     'src/relewise-agent',
     'generated/operations.json',
     'plugins/relewise/plugin.json',
     'plugins/relewise/assets',
     'plugins/relewise/skills',
+    'plugins/relewise-developer/.mcp.json',
+    'plugins/relewise-developer/README.md',
+    'plugins/relewise-developer/assets',
+    'plugins/relewise-developer/plugin.json',
+    'plugins/relewise-developer/skills',
     '.claude-plugin/marketplace.json',
     '.github/plugin/marketplace.json',
     'vendors/claude/relewise/.claude-plugin/plugin.json',
+    'vendors/claude/relewise-developer/.claude-plugin/plugin.json',
     'vendors/openai/relewise/.codex-plugin/plugin.json',
+    'vendors/openai/relewise-developer/.codex-plugin/plugin.json',
     'vendors/openai/relewise/scripts/relewise-agent',
     'vendors/openai/marketplace.json',
     'tools/package/openai.ps1',
+    'tools/package/relewise-developer.ps1',
     'tools/package/get-runtime-fingerprint.ps1'
 )
 
@@ -25,7 +34,7 @@ if ($LASTEXITCODE -ne 0 -or $files.Count -eq 0) {
 
 $builder = [Text.StringBuilder]::new()
 foreach ($file in $files) {
-    if ($file.Replace('\', '/') -eq 'plugins/relewise/plugin.json') {
+    if (@('plugins/relewise/plugin.json', 'plugins/relewise-developer/plugin.json') -contains $file.Replace('\', '/')) {
         # Version is generated output. Hash every other manifest field so metadata
         # changes invalidate the payload without making the fingerprint circular.
         $manifest = Get-Content -Raw -LiteralPath (Join-Path $repositoryRoot $file) | ConvertFrom-Json

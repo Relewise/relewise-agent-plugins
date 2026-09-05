@@ -10,14 +10,22 @@ $marketplacePath = Join-Path $resolvedMarketplaceRoot '.agents\plugins\marketpla
 $marketplace = Get-Content -Raw -LiteralPath $marketplacePath | ConvertFrom-Json
 
 if ($marketplace.name -ne 'relewise') { throw 'Unexpected Codex marketplace name.' }
-if ($marketplace.plugins.Count -ne 1) { throw 'Codex marketplace must contain exactly one plugin.' }
-$entry = $marketplace.plugins[0]
-if ($entry.name -ne 'relewise') { throw 'Unexpected Codex marketplace plugin name.' }
+if ($marketplace.plugins.Count -ne 2) { throw 'Codex marketplace must contain the Relewise and Relewise Developer plugins.' }
+$entry = @($marketplace.plugins) | Where-Object name -eq 'relewise'
+if ($entry.Count -ne 1) { throw 'Codex marketplace must contain exactly one Relewise plugin.' }
 if ($entry.source.source -ne 'local' -or $entry.source.path -ne './plugins/relewise') {
     throw 'Codex marketplace does not reference the repository-backed plugin.'
 }
 if ($entry.policy.installation -ne 'AVAILABLE' -or $entry.policy.authentication -ne 'ON_INSTALL') {
     throw 'Codex marketplace policy is incomplete.'
+}
+$developerEntry = @($marketplace.plugins) | Where-Object name -eq 'relewise-developer'
+if ($developerEntry.Count -ne 1) { throw 'Codex marketplace must contain exactly one Relewise Developer plugin.' }
+if ($developerEntry.source.source -ne 'local' -or $developerEntry.source.path -ne './plugins/relewise-developer') {
+    throw 'Codex marketplace does not reference the repository-backed Relewise Developer plugin.'
+}
+if ($developerEntry.policy.installation -ne 'AVAILABLE' -or $developerEntry.policy.authentication -ne 'ON_INSTALL') {
+    throw 'Relewise Developer Codex marketplace policy is incomplete.'
 }
 
 $vendorMarketplaces = @(
@@ -29,18 +37,28 @@ foreach ($vendorMarketplace in $vendorMarketplaces) {
     if ($catalog.name -ne 'relewise' -or $catalog.owner.name -ne 'Relewise') {
         throw "$($vendorMarketplace.Vendor) marketplace metadata is invalid."
     }
-    if ($catalog.plugins.Count -ne 1 -or $catalog.plugins[0].name -ne 'relewise') {
-        throw "$($vendorMarketplace.Vendor) marketplace must contain exactly the Relewise plugin."
+    if ($catalog.plugins.Count -ne 2) {
+        throw "$($vendorMarketplace.Vendor) marketplace must contain the Relewise and Relewise Developer plugins."
     }
-    if ($catalog.plugins[0].source -ne './plugins/relewise') {
+    $vendorRelewise = @($catalog.plugins) | Where-Object name -eq 'relewise'
+    $vendorDeveloper = @($catalog.plugins) | Where-Object name -eq 'relewise-developer'
+    if ($vendorRelewise.Count -ne 1 -or $vendorDeveloper.Count -ne 1) {
+        throw "$($vendorMarketplace.Vendor) marketplace plugin identities are invalid."
+    }
+    if ($vendorRelewise.source -ne './plugins/relewise') {
         throw "$($vendorMarketplace.Vendor) marketplace does not reference the canonical plugin."
+    }
+    if ($vendorDeveloper.source -ne './plugins/relewise-developer') {
+        throw "$($vendorMarketplace.Vendor) marketplace does not reference the canonical Relewise Developer plugin."
     }
     if ($vendorMarketplace.Vendor -eq 'Claude Code') {
         if ([string]::IsNullOrWhiteSpace($catalog.description)) {
             throw 'Claude marketplace must provide its description at the top level.'
         }
-        if ([string]::IsNullOrWhiteSpace($catalog.plugins[0].author.name)) {
-            throw 'Claude marketplace plugin entry must include an author for Desktop compatibility.'
+        foreach ($pluginEntry in @($vendorRelewise, $vendorDeveloper)) {
+            if ([string]::IsNullOrWhiteSpace($pluginEntry.author.name)) {
+                throw 'Every Claude marketplace plugin entry must include an author for Desktop compatibility.'
+            }
         }
     }
 }
@@ -66,6 +84,40 @@ if ($manifest.version -ne $portableManifest.version -or $manifest.version -ne $c
 }
 if ($null -ne $claudeManifest.userConfig) {
     throw 'Claude Code manifest must not claim protected Agent Gateway configuration.'
+}
+
+$developerRoot = Join-Path $resolvedMarketplaceRoot 'plugins\relewise-developer'
+$developerPortableManifest = Get-Content -Raw -LiteralPath (Join-Path $developerRoot 'plugin.json') | ConvertFrom-Json
+$developerCodexManifest = Get-Content -Raw -LiteralPath (Join-Path $developerRoot '.codex-plugin\plugin.json') | ConvertFrom-Json
+$developerClaudeManifest = Get-Content -Raw -LiteralPath (Join-Path $developerRoot '.claude-plugin\plugin.json') | ConvertFrom-Json
+if ($developerPortableManifest.name -ne 'relewise-developer' -or
+    $developerCodexManifest.name -ne 'relewise-developer' -or
+    $developerClaudeManifest.name -ne 'relewise-developer') {
+    throw 'Relewise Developer manifests do not identify the canonical plugin.'
+}
+if ($developerPortableManifest.version -ne $developerCodexManifest.version -or
+    $developerPortableManifest.version -ne $developerClaudeManifest.version) {
+    throw 'Committed Relewise Developer manifest versions are not synchronized.'
+}
+if ($developerCodexManifest.mcpServers -ne './.mcp.json' -or $developerClaudeManifest.mcpServers -ne './.mcp.json') {
+    throw 'Relewise Developer vendor manifests do not declare their MCP configuration.'
+}
+$developerMcp = Get-Content -Raw -LiteralPath (Join-Path $developerRoot '.mcp.json') | ConvertFrom-Json
+$developerServer = $developerMcp.mcpServers.'relewise-developer'
+if ($developerServer.type -ne 'http' -or $developerServer.url -ne 'https://mcp.relewise.com') {
+    throw 'Relewise Developer does not configure the expected remote MCP server.'
+}
+if (-not (Test-Path -LiteralPath (Join-Path $developerRoot 'assets\logo.png') -PathType Leaf)) {
+    throw 'Relewise Developer is missing its icon.'
+}
+foreach ($forbiddenPath in @('libexec', 'scripts')) {
+    if (Test-Path -LiteralPath (Join-Path $developerRoot $forbiddenPath)) {
+        throw "Relewise Developer must not include Agent Gateway $forbiddenPath."
+    }
+}
+$developerSkills = Get-ChildItem -LiteralPath (Join-Path $developerRoot 'skills') -Directory
+if ($developerSkills.Count -ne 1 -or $developerSkills[0].Name -ne 'relewise-development') {
+    throw 'Relewise Developer must contain only the focused relewise-development skill in its baseline.'
 }
 
 $canonicalSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
@@ -110,4 +162,4 @@ if ($versionResponse.data.version -ne $runtimeVersion) {
     throw "The bundled Codex runtime version '$($versionResponse.data.version)' does not match runtime metadata '$runtimeVersion'."
 }
 
-Write-Host "Repository marketplace tests passed for Codex, Claude Code and GitHub Copilot CLI at plugin version $($manifest.version) with runtime $runtimeVersion"
+Write-Host "Repository marketplace tests passed for Relewise and Relewise Developer on Codex, Claude Code and GitHub Copilot CLI at plugin version $($manifest.version) with runtime $runtimeVersion"

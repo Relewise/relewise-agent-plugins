@@ -1,20 +1,12 @@
 {
-  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "relewise-developer",
+  "displayName": "Relewise Developer",
   "version": "0.3.0-main.33965609305",
   "description": "Build and troubleshoot Relewise integrations with current API and SDK guidance.",
   "author": {
-    "name": "Relewise",
-    "url": "https://www.relewise.com/"
+    "name": "Relewise"
   },
   "homepage": "https://docs.relewise.com/docs/developer/mcp.html",
   "repository": "https://github.com/Relewise/relewise-agent-plugins",
-  "license": "MIT",
-  "keywords": [
-    "relewise",
-    "development",
-    "search",
-    "recommendations",
-    "tracking"
-  ]
+  "mcpServers": "./.mcp.json"
 }
