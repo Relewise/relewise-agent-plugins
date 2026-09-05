@@ -21,4 +21,4 @@ gemini extensions install artifacts/google/<runtime-id>/relewise
 
 Supported runtime identifiers are `win-x64`, `linux-x64`, `linux-arm64`, `osx-x64`, and `osx-arm64`.
 
-For normal GitHub installation, Gemini CLI uses the conventionally named platform release asset and detects updates from the latest stable GitHub release tag. Gemini does not use the cross-vendor portable marketplace ZIP.
+For normal GitHub installation, Gemini CLI uses the conventionally named platform release asset and detects updates from the latest stable GitHub release tag. Gemini does not use the Claude custom-plugin ZIP.

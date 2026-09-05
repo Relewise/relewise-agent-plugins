@@ -32,7 +32,7 @@ Claude Code users add the marketplace with `claude plugin marketplace add Relewi
 
 Gemini CLI users run `gemini extensions install https://github.com/Relewise/relewise-agent-plugins`. Gemini selects the matching release asset for the current platform. The repository must also carry the `gemini-cli-extension` GitHub topic before gallery discovery can work.
 
-For installation without connecting the client directly to GitHub, download `relewise-portable-marketplace-v<version>.zip` from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases), extract it, and add the extracted folder as a local marketplace in Claude, Codex, or GitHub Copilot. This package contains all five supported runtimes and must be downloaded again for manual upgrades.
+Claude Desktop and Cowork users who do not want to connect GitHub can download `relewise-claude-plugin-v<version>.zip` from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases) and upload it as a custom plugin. The ZIP contains all five supported runtimes and must be uploaded again for manual upgrades.
 
 Make a Relewise Agent Gateway PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`, either through a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
 
@@ -44,7 +44,7 @@ The repository is versioned as one ecosystem. Pushing a semantic version tag suc
 
 The planned version is maintained manually in `version.json`. Marketplace manifests automatically use `<version>-main.<run ID>`. Executables retain the version of their most recent runtime build until their code, embedded operation catalog, project configuration, or `version.json` changes. A release tag such as `v0.4.0` must match `version.json` and rebuilds every executable and manifest as version `0.4.0`. After a release, update `version.json` in a normal pull request when the next version is decided.
 
-Each tagged release contains six intentional assets: five conventionally named, platform-specific Gemini archives used by Gemini CLI, plus one portable local-marketplace ZIP for manual Claude, Codex, or GitHub Copilot installation. The portable marketplace contains all five native runtimes and its launcher automatically selects Windows x64, Linux x64/ARM64, or macOS x64/ARM64. No executable is downloaded during plugin use.
+Each tagged release contains six intentional assets: five conventionally named, platform-specific Gemini archives used by Gemini CLI, plus `relewise-claude-plugin-v<version>.zip` for direct custom-plugin upload in Claude Desktop and Cowork. The Claude plugin contains all five native runtimes and its launcher automatically selects Windows x64, Linux x64/ARM64, or macOS x64/ARM64. No executable is downloaded during plugin use. A future Relewise Developer plugin will use its own product-specific artifact name.
 
 The release workflow applies that version to the executable and every packaged manifest; maintainers do not update the individual manifests.
 

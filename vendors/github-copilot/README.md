@@ -2,7 +2,7 @@
 
 This adapter packages `Relewise`: work with your Relewise configuration, analytics and optimization using AI. `Relewise Developer` is a separate product and is not included.
 
-The adapter packages the canonical Relewise Agent Plugin with the `relewise-agent` NativeAOT executable. Its manifest and skills remain under `plugins/relewise`; the package script copies them and adds only the Copilot-specific executable-location instruction. Local adapter packaging can target one runtime for validation. Tagged releases instead provide one portable marketplace containing every supported runtime for manual installation across Claude, Codex, and GitHub Copilot.
+The adapter packages the canonical Relewise Agent Plugin with the `relewise-agent` NativeAOT executable. Its manifest and skills remain under `plugins/relewise`; the package script copies them and adds only the Copilot-specific executable-location instruction. Local adapter packaging can target one runtime for validation; normal distribution uses the repository marketplace.
 
 Copilot CLI does not define protected plugin configuration in `plugin.json`. Set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment used to start Copilot, preferably through your operating system or secret manager, and redact it from Copilot's shell and MCP environments:
 
@@ -30,4 +30,4 @@ copilot plugin install relewise@relewise
 
 The root `.github/plugin/marketplace.json` points directly to `plugins/relewise`; the package path remains useful for testing release archives.
 
-For manual distribution, use `relewise-portable-marketplace-v<version>.zip` from the GitHub release. Extract it and add the resulting `relewise-agent-plugins` folder as a local marketplace. Local packages must be downloaded again for upgrades. Repository-installed plugins continue to update through Copilot's marketplace mechanism.
+Installed plugins update through Copilot's marketplace mechanism. The Claude custom-plugin ZIP is not a Copilot distribution artifact.

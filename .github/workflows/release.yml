@@ -169,8 +169,8 @@ jobs:
           path: artifacts/${{ matrix.rid }}/${{ matrix.executable }}
           if-no-files-found: error
 
-  assemble-portable:
-    name: Assemble portable marketplace
+  assemble-claude-plugin:
+    name: Assemble Claude plugin archive
     needs: package
     runs-on: ubuntu-latest
 
@@ -184,49 +184,48 @@ jobs:
           pattern: native-*
           path: artifacts/native
 
-      - name: Assemble and validate packages
+      - name: Assemble and validate vendor packages
         shell: pwsh
         run: |
           $version = '${{ github.ref_name }}'.Substring(1)
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
           ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
-          ./tools/package/create-portable-marketplace.ps1 -ExecutablesRoot artifacts/native -Version $version
-          ./tests/package/portable-marketplace.ps1 -MarketplaceRoot artifacts/portable-marketplace/relewise-agent-plugins -Version $version
-          ./tools/package/create-portable-marketplace-archive.ps1 -Version $version
+          ./tools/package/create-claude-plugin-archive.ps1 -PluginName relewise -Version $version -PluginRoot artifacts/universal/claude/relewise
 
       - name: Install Claude Code validator
         run: npm install --global @anthropic-ai/claude-code@2.1.260
 
-      - name: Validate portable marketplace with Claude Code
+      - name: Extract and verify Claude plugin archive
         shell: bash
         run: |
-          claude plugin validate artifacts/portable-marketplace/relewise-agent-plugins
-          claude plugin validate artifacts/portable-marketplace/relewise-agent-plugins/plugins/relewise
+          mkdir -p artifacts/extracted/relewise
+          unzip -q "artifacts/release-plugin/relewise-claude-plugin-v${GITHUB_REF_NAME#v}.zip" -d artifacts/extracted/relewise
+          test -x artifacts/extracted/relewise/scripts/relewise-agent
+          test -x artifacts/extracted/relewise/libexec/linux-x64/relewise-agent
 
-      - name: Extract and verify portable marketplace archive
-        shell: bash
+      - name: Validate extracted Claude plugin
+        shell: pwsh
         run: |
-          mkdir -p artifacts/extracted
-          unzip -q "artifacts/release-portable/relewise-portable-marketplace-v${GITHUB_REF_NAME#v}.zip" -d artifacts/extracted
-          test -x artifacts/extracted/relewise-agent-plugins/plugins/relewise/scripts/relewise-agent
-          test -x artifacts/extracted/relewise-agent-plugins/plugins/relewise/libexec/linux-x64/relewise-agent
+          $version = '${{ github.ref_name }}'.Substring(1)
+          ./tests/package/claude-plugin-archive.ps1 -PluginRoot artifacts/extracted/relewise -Version $version
+          claude plugin validate artifacts/extracted/relewise
 
-      - name: Smoke-test portable marketplace launcher
+      - name: Smoke-test Claude plugin launcher
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/extracted/relewise-agent-plugins/plugins/relewise/scripts/relewise-agent --version
+        run: artifacts/extracted/relewise/scripts/relewise-agent --version
 
-      - name: Upload portable marketplace archive
+      - name: Upload Claude plugin archive
         uses: actions/upload-artifact@v7
         with:
-          name: release-portable
-          path: artifacts/release-portable/*
+          name: release-plugin
+          path: artifacts/release-plugin/*
           if-no-files-found: error
 
   publish:
     name: Publish GitHub release
-    needs: [package, assemble-portable]
+    needs: [package, assemble-claude-plugin]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -252,7 +251,7 @@ jobs:
             linux.arm64.relewise.tar.gz
             linux.x64.relewise.tar.gz
             win32.x64.relewise.zip
-            "relewise-portable-marketplace-v${version}.zip"
+            "relewise-claude-plugin-v${version}.zip"
           )
           mapfile -t actual < <(find release-assets -maxdepth 1 -type f -printf '%f\n' | sort)
           mapfile -t wanted < <(printf '%s\n' "${expected[@]}" | sort)
