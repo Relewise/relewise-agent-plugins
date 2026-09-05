@@ -1,9 +1,9 @@
 ---
-name: release-agent-plugins
+name: release-relewise-agent-plugins
 description: Prepare and publish a versioned relewise-agent-plugins release, including its release pull request, synchronized marketplace payload, required Trello tracking, tag, GitHub prerelease or release, and artifact verification. Use only for releases of this repository.
 ---
 
-# Release Agent Plugins
+# Release Relewise Agent Plugins
 
 Run the repeatable two-phase release process for this repository. Resume safely when a phase was partially completed instead of duplicating branches, pull requests, Trello cards, checklist items, tags, or releases.
 
