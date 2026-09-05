@@ -135,8 +135,8 @@ jobs:
           path: artifacts/ci-native/${{ matrix.rid }}/${{ matrix.executable }}
           if-no-files-found: error
 
-  universal-package:
-    name: Validate universal packages
+  portable-marketplace:
+    name: Validate portable marketplace
     needs: build
     runs-on: ubuntu-latest
 
@@ -150,17 +150,29 @@ jobs:
           pattern: ci-native-*
           path: artifacts/native
 
-      - name: Assemble and validate universal packages
+      - name: Assemble and validate packages
         shell: pwsh
         run: |
           $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
           $version = "$versionCore-main.${{ github.run_id }}"
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot artifacts/native -Version $version
           ./tests/package/universal.ps1 -PackagesRoot artifacts/universal -Version $version
-          ./tools/package/create-universal-release-archives.ps1 -Version $version
+          ./tools/package/create-portable-marketplace.ps1 -ExecutablesRoot artifacts/native -Version $version
+          ./tests/package/portable-marketplace.ps1 -MarketplaceRoot artifacts/portable-marketplace/relewise-agent-plugins -Version $version
+          ./tools/package/create-portable-marketplace-archive.ps1 -Version $version
 
-      - name: Smoke-test universal launcher
+      - name: Extract and verify portable marketplace archive
+        shell: bash
+        run: |
+          versionCore="$(jq -r .version version.json)"
+          version="${versionCore}-main.${{ github.run_id }}"
+          mkdir -p artifacts/extracted
+          unzip -q "artifacts/release-portable/relewise-portable-marketplace-v${version}.zip" -d artifacts/extracted
+          test -x artifacts/extracted/relewise-agent-plugins/plugins/relewise/scripts/relewise-agent
+          test -x artifacts/extracted/relewise-agent-plugins/plugins/relewise/libexec/linux-x64/relewise-agent
+
+      - name: Smoke-test portable marketplace launcher
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/universal/openai/relewise/scripts/relewise-agent --version
+        run: artifacts/extracted/relewise-agent-plugins/plugins/relewise/scripts/relewise-agent --version

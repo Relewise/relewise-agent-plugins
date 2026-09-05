@@ -32,14 +32,9 @@ Claude Code users add the marketplace with `claude plugin marketplace add Relewi
 
 Gemini CLI users run `gemini extensions install https://github.com/Relewise/relewise-agent-plugins`. Gemini selects the matching release asset for the current platform. The repository must also carry the `gemini-cli-extension` GitHub topic before gallery discovery can work.
 
-Choose the universal archive for your client:
+For installation without connecting the client directly to GitHub, download `relewise-portable-marketplace-v<version>.zip` from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases), extract it, and add the extracted folder as a local marketplace in Claude, Codex, or GitHub Copilot. This package contains all five supported runtimes and must be downloaded again for manual upgrades.
 
-- `relewise-claude-universal-v<version>.tar.gz`
-- `relewise-github-copilot-universal-v<version>.tar.gz`
-- `relewise-openai-universal-v<version>.tar.gz`
-- `relewise-google-universal-v<version>.tar.gz`
-
-Each archive supports Windows x64, Linux x64/ARM64, and macOS x64/ARM64. Make a Relewise Agent Gateway PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`, either through a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
+Make a Relewise Agent Gateway PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`, either through a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
 
 Packaged skills explicitly invoke `scripts/relewise-agent`, which selects the matching native executable under `libexec/<runtime>/`. Packages intentionally have no top-level `bin/` directory so hosted marketplaces do not receive an undeclared PATH executable.
 
@@ -49,7 +44,7 @@ The repository is versioned as one ecosystem. Pushing a semantic version tag suc
 
 The planned version is maintained manually in `version.json`. Marketplace manifests automatically use `<version>-main.<run ID>`. Executables retain the version of their most recent runtime build until their code, embedded operation catalog, project configuration, or `version.json` changes. A release tag such as `v0.4.0` must match `version.json` and rebuilds every executable and manifest as version `0.4.0`. After a release, update `version.json` in a normal pull request when the next version is decided.
 
-Each tagged release includes a self-contained universal archive for Claude Code, GitHub Copilot CLI, OpenAI Codex, and Google Gemini CLI. A universal archive contains all five supported native runtimes and its launcher automatically selects Windows x64, Linux x64/ARM64, or macOS x64/ARM64. No executable is downloaded during plugin use. Platform-specific archives remain available, including Gemini's conventionally named assets used for automatic platform selection.
+Each tagged release contains six intentional assets: five conventionally named, platform-specific Gemini archives used by Gemini CLI, plus one portable local-marketplace ZIP for manual Claude, Codex, or GitHub Copilot installation. The portable marketplace contains all five native runtimes and its launcher automatically selects Windows x64, Linux x64/ARM64, or macOS x64/ARM64. No executable is downloaded during plugin use.
 
 The release workflow applies that version to the executable and every packaged manifest; maintainers do not update the individual manifests.
 
