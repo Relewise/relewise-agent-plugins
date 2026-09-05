@@ -43,8 +43,8 @@ Keep the card description concise and preserve existing content. Record material
 
 Proceed only after the user explicitly confirms the phase-1 pull request was merged.
 
-1. Fetch the remote and verify the pull request is merged, its merge is reachable from `origin/main`, and `origin/main` contains the requested value in `version.json`.
-2. Check whether the exact tag and GitHub release already exist. If neither exists, create the annotated tag from the verified `origin/main` commit and push that exact tag. Never move or replace an existing tag.
+1. Fetch the remote and retrieve the merged pull request from GitHub. Require its state to be merged, read GitHub's recorded `mergeCommit.oid`, verify that exact merge commit is reachable from `origin/main`, and verify that commit contains the requested value in `version.json`. This repository uses squash merging: the feature-branch head is intentionally replaced and must not be required to be an ancestor of `main`.
+2. Check whether the exact tag and GitHub release already exist. If neither exists, create the annotated tag on the verified `mergeCommit.oid` and push that exact tag. Do not substitute the current tip of `origin/main`, which may have advanced after the pull request merged. Never move or replace an existing tag.
 3. Monitor the tag-triggered **Release** workflow through completion. Derive the expected release assets and prerelease behavior from `.github/workflows/release.yml` rather than maintaining a second artifact list in this skill.
 4. Verify the GitHub release uses the exact tag, has the expected prerelease status, and contains every expected asset with no missing or unexpected files. Verify downloadable artifacts have nonzero sizes.
 5. Only after successful publication and artifact verification, mark `Publish v<version> release` complete and add a concise published-release bullet with its URL to the Trello card description.
