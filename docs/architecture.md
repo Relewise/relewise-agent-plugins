@@ -17,9 +17,11 @@ This repository provides vendor-neutral Relewise capabilities for AI agents. Can
 - A small cross-platform `relewise-agent` helper handles HTTP execution.
 - Skills describe intent, workflow, and interpretation—not HTTP mechanics.
 - Canonical Relewise content lives under `plugins/`; vendor-specific packaging lives under `vendors/`.
+- Repository-maintainer skills live under `.agents/skills/`. They assist contributors working in this repository but are not packaged or installed with a Relewise product.
 - Each canonical product is a portable Agent Plugin: `plugins/<name>/plugin.json` and `plugins/<name>/skills/` follow the Agent Plugins 1.0.0 specification.
 - Each directory below `skills/` follows the Agent Skills specification, including matching directory and frontmatter names, and is checked with the pinned reference validator.
 - The checked-in Agent Plugins schema snapshot makes manifest validation deterministic and independent of the network.
 - Vendor packages reuse the canonical manifest when their format supports it; client-specific manifests remain thin adapters where required.
 - Plugin discovery, installation, and upgrades are client responsibilities outside the portable Agent Plugins specification.
 - Vendor-specific code must remain as small as possible, with no manually duplicated skills.
+- The repository is public, so maintainer skills may not contain secrets or confidential operating procedures even though they are outside the distributed plugins.

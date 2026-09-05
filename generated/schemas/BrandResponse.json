@@ -1,0 +1,12 @@
+{
+  "required": [
+    "brand"
+  ],
+  "type": "object",
+  "properties": {
+    "brand": {
+      "$ref": "#/components/schemas/BrandDetails"
+    }
+  },
+  "description": "Response containing one Brand and its stored details."
+}

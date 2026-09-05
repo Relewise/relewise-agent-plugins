@@ -1,0 +1,12 @@
+{
+  "required": [
+    "variant"
+  ],
+  "type": "object",
+  "properties": {
+    "variant": {
+      "$ref": "#/components/schemas/ProductVariantDetails"
+    }
+  },
+  "description": "Response containing one Product Variant and its stored details."
+}

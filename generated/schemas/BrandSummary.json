@@ -1,0 +1,24 @@
+{
+  "required": [
+    "brandId",
+    "displayName",
+    "disabled"
+  ],
+  "type": "object",
+  "properties": {
+    "brandId": {
+      "type": "string",
+      "description": "ID of the Brand."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display name, or null when unavailable.",
+      "nullable": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+    }
+  },
+  "description": "A compact representation of a Brand for lists and search results."
+}

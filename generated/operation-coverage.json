@@ -1,6 +1,6 @@
 {
-  "operationCount": 41,
-  "coveredOperationCount": 41,
+  "operationCount": 52,
+  "coveredOperationCount": 52,
   "uncoveredOperationCount": 0,
   "coveragePercent": 100,
   "operations": [
@@ -146,6 +146,72 @@
       "skills": [
         "relewise/skills/relewise-compare-datasets",
         "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "operationId": "EntitiesGetBrand",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesGetContent",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesGetContentCategory",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesGetProduct",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesGetProductCategory",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesGetProductVariant",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesSearchBrands",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesSearchContent",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesSearchContentCategories",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesSearchProductCategories",
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "operationId": "EntitiesSearchProducts",
+      "skills": [
+        "relewise/skills/relewise-entities"
       ]
     },
     {

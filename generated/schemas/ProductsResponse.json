@@ -1,0 +1,22 @@
+{
+  "required": [
+    "term",
+    "products"
+  ],
+  "type": "object",
+  "properties": {
+    "term": {
+      "type": "string",
+      "description": "Search term used for the request, or null when no term was provided.",
+      "nullable": true
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ProductSummary"
+      },
+      "description": "Matching Products in the order returned by Relewise. Variant data is not searched."
+    }
+  },
+  "description": "A bounded set of Products matching a Product ID, display name, or Product data value."
+}

@@ -1,0 +1,16 @@
+{
+  "required": [
+    "categories"
+  ],
+  "type": "object",
+  "properties": {
+    "categories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ContentCategoryReference"
+      },
+      "description": "Content Categories in breadcrumb order from root to leaf."
+    }
+  },
+  "description": "One Content Category breadcrumb path from its root category to its leaf category."
+}

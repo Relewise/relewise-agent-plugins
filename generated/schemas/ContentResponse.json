@@ -1,0 +1,12 @@
+{
+  "required": [
+    "content"
+  ],
+  "type": "object",
+  "properties": {
+    "content": {
+      "$ref": "#/components/schemas/ContentDetails"
+    }
+  },
+  "description": "Response containing one Content entity and its stored details."
+}

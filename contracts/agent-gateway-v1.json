@@ -1008,6 +1008,1008 @@
         }
       }
     },
+    "/api/v1/datasets/{datasetId}/entities/products": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Searches Products.",
+        "description": "Returns a bounded list of Products matching a Product ID, display name, or Product data value. Variant data is not searched; use EntitiesGetProductVariant when both IDs are known. This operation is read-only.",
+        "operationId": "EntitiesSearchProducts",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Optional Product ID, display-name, or Product data-value search term. Matching does not inspect Variant data.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Optional case-sensitive language identifier used when searching Products and selecting their returned display names.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeDisabled",
+            "in": "query",
+            "description": "Whether disabled Products are excluded. Defaults to true.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of Products to return. Defaults to 10 and cannot exceed 25.",
+            "schema": {
+              "maximum": 25,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/products/{productId}": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Gets a Product.",
+        "description": "Returns one Product's stored properties and actual Product data values. Variant data values are not included; use EntitiesGetProductVariant when the Variant ID is known. This operation is read-only.",
+        "operationId": "EntitiesGetProduct",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "ID of the Product.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/products/{productId}/variants/{variantId}": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Gets a Product Variant.",
+        "description": "Returns one Variant's stored properties and actual Variant data values. A Variant ID is unique only within its parent Product, so both IDs are required. This operation is read-only.",
+        "operationId": "EntitiesGetProductVariant",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "ID of the parent Product.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variantId",
+            "in": "path",
+            "description": "ID within the parent Product.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductVariantResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/content": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Searches Content.",
+        "description": "Returns a bounded list of Content entities matching a Content ID, display name, Content Category display name, or string-based Content Data Value. This operation is read-only.",
+        "operationId": "EntitiesSearchContent",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Optional Content ID, display-name, Content Category display-name, or string-based Content Data Value search term.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Optional case-sensitive language identifier used when searching Content and selecting returned display names.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeDisabled",
+            "in": "query",
+            "description": "Whether disabled Content entities are excluded. Defaults to true.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of Content entities to return. Defaults to 10 and cannot exceed 25.",
+            "schema": {
+              "maximum": 25,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentEntitiesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/content/{contentId}": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Gets Content.",
+        "description": "Returns one Content entity's stored properties and actual Content Data Values. Use EntitiesSearchContent when the Content ID is unknown. This operation is read-only.",
+        "operationId": "EntitiesGetContent",
+        "parameters": [
+          {
+            "name": "contentId",
+            "in": "path",
+            "description": "ID of the Content entity.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/brands": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Searches Brands.",
+        "description": "Returns a bounded list of Brands matching a Brand ID, display name, or Brand Data Value. Use EntitiesGetBrand when the Brand ID is known. This operation is read-only.",
+        "operationId": "EntitiesSearchBrands",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Optional Brand ID, display-name, or Brand Data Value search term.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Optional case-sensitive language identifier used when searching multilingual Brand Data Values.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeDisabled",
+            "in": "query",
+            "description": "Whether disabled Brands are excluded. Defaults to true.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of Brands to return. Defaults to 10 and cannot exceed 25.",
+            "schema": {
+              "maximum": 25,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/brands/{brandId}": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Gets a Brand.",
+        "description": "Returns one Brand's stored properties and actual Brand Data Values. Use EntitiesSearchBrands when the Brand ID is unknown. This operation is read-only.",
+        "operationId": "EntitiesGetBrand",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "path",
+            "description": "ID of the Brand.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/product-categories": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Searches Product Categories.",
+        "description": "Returns a bounded list of Product Category entities matching a Product Category ID, display name, or Product Category Data Value. This finds category entities, not the Products assigned to a category. Use EntitiesGetProductCategory when the Product Category ID is known. This operation is read-only.",
+        "operationId": "EntitiesSearchProductCategories",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Optional Product Category ID, display-name, or Product Category Data Value search term.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Optional case-sensitive language identifier used when searching Product Categories and selecting returned display names.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeDisabled",
+            "in": "query",
+            "description": "Whether disabled Product Categories are excluded. Defaults to true.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of Product Categories to return. Defaults to 10 and cannot exceed 25.",
+            "schema": {
+              "maximum": 25,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCategoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/product-categories/{productCategoryId}": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Gets a Product Category.",
+        "description": "Returns one Product Category entity's stored properties and actual Data Values. This does not return Products assigned to the category. Use EntitiesSearchProductCategories when the Product Category ID is unknown. This operation is read-only.",
+        "operationId": "EntitiesGetProductCategory",
+        "parameters": [
+          {
+            "name": "productCategoryId",
+            "in": "path",
+            "description": "ID of the Product Category.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductCategoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/content-categories": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Searches Content Categories.",
+        "description": "Returns a bounded list of Content Category entities matching a Content Category ID, display name, or Content Category Data Value. This finds category entities; it does not search for Content associated with a category. Use EntitiesGetContentCategory when the Content Category ID is known. This operation is read-only.",
+        "operationId": "EntitiesSearchContentCategories",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Optional Content Category ID, display-name, or Content Category Data Value search term.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Optional case-sensitive language identifier used when searching Content Categories and selecting returned display names.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "excludeDisabled",
+            "in": "query",
+            "description": "Whether disabled Content Categories are excluded. Defaults to true.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of Content Categories to return. Defaults to 10 and cannot exceed 25.",
+            "schema": {
+              "maximum": 25,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentCategoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/entities/content-categories/{contentCategoryId}": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "Gets a Content Category.",
+        "description": "Returns one Content Category entity's stored properties and actual Data Values. This does not return Content associated with the category. Use EntitiesSearchContentCategories when the Content Category ID is unknown. This operation is read-only.",
+        "operationId": "EntitiesGetContentCategory",
+        "parameters": [
+          {
+            "name": "contentCategoryId",
+            "in": "path",
+            "description": "ID of the Content Category.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContentCategoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
     "/api/v1/datasets/{datasetId}/analytics/search/overview": {
       "post": {
         "tags": [
@@ -3587,6 +4589,67 @@
   },
   "components": {
     "schemas": {
+      "BrandDetails": {
+        "required": [
+          "brandId",
+          "displayName",
+          "created",
+          "disabled",
+          "assortments",
+          "dataKeys",
+          "dataValues",
+          "dataValuesTruncated"
+        ],
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "ID of the Brand."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name, or null when unavailable.",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "UTC date and time when it was created in Relewise.",
+            "format": "date-time"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
+          },
+          "dataKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "All Data Keys present."
+          },
+          "dataValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDataValue"
+            },
+            "description": "Up to 100 Data Values, selected by case-sensitive Data Key order. These are stored entity values, not Dataset metadata."
+          },
+          "dataValuesTruncated": {
+            "type": "boolean",
+            "description": "Whether DataValues contains fewer entries than DataKeys because Data Values are limited to 100."
+          }
+        },
+        "description": "Stored details and Data Values for one Brand."
+      },
       "BrandMetadata": {
         "required": [
           "dataKeys"
@@ -3602,6 +4665,64 @@
           }
         },
         "description": "Metadata available for brand entities."
+      },
+      "BrandResponse": {
+        "required": [
+          "brand"
+        ],
+        "type": "object",
+        "properties": {
+          "brand": {
+            "$ref": "#/components/schemas/BrandDetails"
+          }
+        },
+        "description": "Response containing one Brand and its stored details."
+      },
+      "BrandsResponse": {
+        "required": [
+          "term",
+          "brands"
+        ],
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string",
+            "description": "Search term used for the request, or null when no term was provided.",
+            "nullable": true
+          },
+          "brands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BrandSummary"
+            },
+            "description": "Matching Brands in the order returned by Relewise."
+          }
+        },
+        "description": "A bounded set of Brands matching a Brand ID, display name, or Brand Data Value."
+      },
+      "BrandSummary": {
+        "required": [
+          "brandId",
+          "displayName",
+          "disabled"
+        ],
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "ID of the Brand."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name, or null when unavailable.",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          }
+        },
+        "description": "A compact representation of a Brand for lists and search results."
       },
       "CompanyMetadata": {
         "required": [
@@ -3652,6 +4773,91 @@
         },
         "description": "A numeric metric value compared with the preceding equivalent period."
       },
+      "ContentCategoriesResponse": {
+        "required": [
+          "term",
+          "contentCategories"
+        ],
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string",
+            "description": "Search term used for the request, or null when no term was provided.",
+            "nullable": true
+          },
+          "contentCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentCategorySummary"
+            },
+            "description": "Matching Content Categories in the order returned by Relewise."
+          }
+        },
+        "description": "A bounded set of Content Categories matching a Content Category ID, display name, or Content Category Data Value."
+      },
+      "ContentCategoryDetails": {
+        "required": [
+          "contentCategoryId",
+          "displayNames",
+          "created",
+          "disabled",
+          "assortments",
+          "dataKeys",
+          "dataValues",
+          "dataValuesTruncated"
+        ],
+        "type": "object",
+        "properties": {
+          "contentCategoryId": {
+            "type": "string",
+            "description": "ID of the Content Category."
+          },
+          "displayNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDisplayName"
+            },
+            "description": "Available display names."
+          },
+          "created": {
+            "type": "string",
+            "description": "UTC date and time when it was created in Relewise.",
+            "format": "date-time"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
+          },
+          "dataKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "All Data Keys present."
+          },
+          "dataValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDataValue"
+            },
+            "description": "Up to 100 Data Values, selected by case-sensitive Data Key order. These are stored entity values, not Dataset metadata."
+          },
+          "dataValuesTruncated": {
+            "type": "boolean",
+            "description": "Whether DataValues contains fewer entries than DataKeys because Data Values are limited to 100."
+          }
+        },
+        "description": "Stored details and Data Values for one Content Category."
+      },
       "ContentCategoryMetadata": {
         "required": [
           "dataKeys"
@@ -3668,6 +4874,177 @@
         },
         "description": "Metadata available for content category entities."
       },
+      "ContentCategoryPath": {
+        "required": [
+          "categories"
+        ],
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentCategoryReference"
+            },
+            "description": "Content Categories in breadcrumb order from root to leaf."
+          }
+        },
+        "description": "One Content Category breadcrumb path from its root category to its leaf category."
+      },
+      "ContentCategoryReference": {
+        "required": [
+          "contentCategoryId",
+          "displayNames"
+        ],
+        "type": "object",
+        "properties": {
+          "contentCategoryId": {
+            "type": "string",
+            "description": "ID of the Content Category at this level of the path."
+          },
+          "displayNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDisplayName"
+            },
+            "description": "Available display names."
+          }
+        },
+        "description": "Reference to a Content Category at one level of a Content Category path."
+      },
+      "ContentCategoryResponse": {
+        "required": [
+          "contentCategory"
+        ],
+        "type": "object",
+        "properties": {
+          "contentCategory": {
+            "$ref": "#/components/schemas/ContentCategoryDetails"
+          }
+        },
+        "description": "Response containing one Content Category and its stored details."
+      },
+      "ContentCategorySummary": {
+        "required": [
+          "contentCategoryId",
+          "displayName",
+          "disabled"
+        ],
+        "type": "object",
+        "properties": {
+          "contentCategoryId": {
+            "type": "string",
+            "description": "ID of the Content Category."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name mapped by Relewise using the requested language when provided; null when unavailable.",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          }
+        },
+        "description": "A compact representation of a Content Category for lists and search results."
+      },
+      "ContentDetails": {
+        "required": [
+          "contentId",
+          "displayNames",
+          "created",
+          "disabled",
+          "deleted",
+          "assortments",
+          "categoryPaths",
+          "dataKeys",
+          "dataValues",
+          "dataValuesTruncated"
+        ],
+        "type": "object",
+        "properties": {
+          "contentId": {
+            "type": "string",
+            "description": "ID of the Content entity."
+          },
+          "displayNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDisplayName"
+            },
+            "description": "Available display names."
+          },
+          "created": {
+            "type": "string",
+            "description": "UTC date and time when it was created in Relewise.",
+            "format": "date-time"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether it is marked as deleted. It may remain retrievable by Content ID until physically removed, after which it is returned as not found."
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
+          },
+          "categoryPaths": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentCategoryPath"
+            },
+            "description": "Content Category paths, each from root to leaf."
+          },
+          "dataKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "All Data Keys present."
+          },
+          "dataValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDataValue"
+            },
+            "description": "Up to 100 Data Values, selected by case-sensitive Data Key order. These are stored entity values, not Dataset metadata."
+          },
+          "dataValuesTruncated": {
+            "type": "boolean",
+            "description": "Whether DataValues contains fewer entries than DataKeys because Data Values are limited to 100."
+          }
+        },
+        "description": "Stored details and Data Values for one Content entity."
+      },
+      "ContentEntitiesResponse": {
+        "required": [
+          "term",
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string",
+            "description": "Search term used for the request, or null when no term was provided.",
+            "nullable": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentSummary"
+            },
+            "description": "Matching Content entities in the order returned by Relewise."
+          }
+        },
+        "description": "A bounded set of Content entities matching a Content ID, display name, Content Category display name, or string-based Content Data Value."
+      },
       "ContentMetadata": {
         "required": [
           "dataKeys"
@@ -3683,6 +5060,42 @@
           }
         },
         "description": "Metadata available for content entities."
+      },
+      "ContentResponse": {
+        "required": [
+          "content"
+        ],
+        "type": "object",
+        "properties": {
+          "content": {
+            "$ref": "#/components/schemas/ContentDetails"
+          }
+        },
+        "description": "Response containing one Content entity and its stored details."
+      },
+      "ContentSummary": {
+        "required": [
+          "contentId",
+          "displayName",
+          "disabled"
+        ],
+        "type": "object",
+        "properties": {
+          "contentId": {
+            "type": "string",
+            "description": "ID of the Content entity."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name mapped by Relewise using the requested language when provided; null when unavailable.",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          }
+        },
+        "description": "A compact representation of a Content entity for lists and search results."
       },
       "CurrentUserResponse": {
         "required": [
@@ -4093,6 +5506,83 @@
           }
         },
         "description": "Compact Decompounding rule representation returned by list operations."
+      },
+      "EntityDataValue": {
+        "required": [
+          "key",
+          "type",
+          "valueJson"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Case-sensitive Data Key."
+          },
+          "type": {
+            "$ref": "#/components/schemas/EntityDataValueType"
+          },
+          "valueJson": {
+            "type": "string",
+            "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object."
+          }
+        },
+        "description": "One case-sensitive Relewise entity Data Key and its stored value."
+      },
+      "EntityDataValueType": {
+        "enum": [
+          "String",
+          "Double",
+          "Boolean",
+          "Multilingual",
+          "Money",
+          "MultiCurrency",
+          "StringList",
+          "DoubleList",
+          "BooleanList",
+          "MultilingualCollection",
+          "Object",
+          "ObjectList"
+        ],
+        "description": "Supported Relewise entity data value types. See https://docs.relewise.com/docs/intro/data-types.html for the corresponding value structures.",
+        "type": "string"
+      },
+      "EntityDisplayName": {
+        "required": [
+          "language",
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string",
+            "description": "Language identifier stored with the display name. It is not guaranteed to be an ISO 639 language code."
+          },
+          "text": {
+            "type": "string",
+            "description": "Localized display-name text."
+          }
+        },
+        "description": "One localized display name for an entity."
+      },
+      "EntityPrice": {
+        "required": [
+          "currency",
+          "amount"
+        ],
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "Currency identifier stored with the price. It is not guaranteed to be an ISO 4217 currency code."
+          },
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "description": "Monetary amount in Currency.",
+            "format": "double"
+          }
+        },
+        "description": "One monetary amount in a specific currency."
       },
       "HttpValidationProblemDetails": {
         "type": "object",
@@ -4760,6 +6250,110 @@
           }
         }
       },
+      "ProductBrandReference": {
+        "required": [
+          "brandId",
+          "displayName"
+        ],
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "description": "ID of the Brand associated with the Product."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name, when present.",
+            "nullable": true
+          }
+        },
+        "description": "Brand associated with a Product."
+      },
+      "ProductCategoriesResponse": {
+        "required": [
+          "term",
+          "productCategories"
+        ],
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string",
+            "description": "Search term used for the request, or null when no term was provided.",
+            "nullable": true
+          },
+          "productCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategorySummary"
+            },
+            "description": "Matching Product Categories in the order returned by Relewise."
+          }
+        },
+        "description": "A bounded set of Product Categories matching a Product Category ID, display name, or Product Category Data Value."
+      },
+      "ProductCategoryDetails": {
+        "required": [
+          "productCategoryId",
+          "displayNames",
+          "created",
+          "disabled",
+          "assortments",
+          "dataKeys",
+          "dataValues",
+          "dataValuesTruncated"
+        ],
+        "type": "object",
+        "properties": {
+          "productCategoryId": {
+            "type": "string",
+            "description": "ID of the Product Category."
+          },
+          "displayNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDisplayName"
+            },
+            "description": "Available display names."
+          },
+          "created": {
+            "type": "string",
+            "description": "UTC date and time when it was created in Relewise.",
+            "format": "date-time"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
+          },
+          "dataKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "All Data Keys present."
+          },
+          "dataValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDataValue"
+            },
+            "description": "Up to 100 Data Values, selected by case-sensitive Data Key order. These are stored entity values, not Dataset metadata."
+          },
+          "dataValuesTruncated": {
+            "type": "boolean",
+            "description": "Whether DataValues contains fewer entries than DataKeys because Data Values are limited to 100."
+          }
+        },
+        "description": "Stored details and Data Values for one Product Category."
+      },
       "ProductCategoryMetadata": {
         "required": [
           "dataKeys"
@@ -4776,6 +6370,202 @@
         },
         "description": "Metadata available for product category entities."
       },
+      "ProductCategoryPath": {
+        "required": [
+          "categories"
+        ],
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategoryReference"
+            },
+            "description": "Product Categories in breadcrumb order from root to leaf."
+          }
+        },
+        "description": "One Product category breadcrumb path from its root category to its leaf category."
+      },
+      "ProductCategoryReference": {
+        "required": [
+          "productCategoryId",
+          "displayNames"
+        ],
+        "type": "object",
+        "properties": {
+          "productCategoryId": {
+            "type": "string",
+            "description": "ID of the Product Category at this level of the path."
+          },
+          "displayNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDisplayName"
+            },
+            "description": "Available display names."
+          }
+        },
+        "description": "Reference to a Product Category at one level of a Product category path."
+      },
+      "ProductCategoryResponse": {
+        "required": [
+          "productCategory"
+        ],
+        "type": "object",
+        "properties": {
+          "productCategory": {
+            "$ref": "#/components/schemas/ProductCategoryDetails"
+          }
+        },
+        "description": "Response containing one Product Category and its stored details."
+      },
+      "ProductCategorySummary": {
+        "required": [
+          "productCategoryId",
+          "displayName",
+          "disabled"
+        ],
+        "type": "object",
+        "properties": {
+          "productCategoryId": {
+            "type": "string",
+            "description": "ID of the Product Category."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name mapped by Relewise using the requested language when provided; null when unavailable.",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          }
+        },
+        "description": "A compact representation of a Product Category for lists and search results."
+      },
+      "ProductDetails": {
+        "required": [
+          "productId",
+          "displayNames",
+          "brand",
+          "created",
+          "disabled",
+          "deleted",
+          "assortments",
+          "listPrices",
+          "salesPrices",
+          "categoryPaths",
+          "dataKeys",
+          "dataValues",
+          "dataValuesTruncated",
+          "variantIds",
+          "variants",
+          "variantsTruncated"
+        ],
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "description": "ID of the Product."
+          },
+          "displayNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDisplayName"
+            },
+            "description": "Available display names."
+          },
+          "brand": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ProductBrandReference"
+              }
+            ],
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "UTC date and time when it was created in Relewise.",
+            "format": "date-time"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether it is marked as deleted. It may remain retrievable by Product ID until physically removed, after which it is returned as not found."
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
+          },
+          "listPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityPrice"
+            },
+            "description": "Stored list prices."
+          },
+          "salesPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityPrice"
+            },
+            "description": "Stored sales prices."
+          },
+          "categoryPaths": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductCategoryPath"
+            },
+            "description": "Product Category paths, each from root to leaf."
+          },
+          "dataKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "All Data Keys present."
+          },
+          "dataValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDataValue"
+            },
+            "description": "Up to 100 Data Values, selected by case-sensitive Data Key order. These are stored entity values, not Dataset metadata."
+          },
+          "dataValuesTruncated": {
+            "type": "boolean",
+            "description": "Whether DataValues contains fewer entries than DataKeys because Data Values are limited to 100."
+          },
+          "variantIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of all Variants."
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductVariantSummary"
+            },
+            "description": "Up to 50 Variant summaries, corresponding to the first Variant IDs in VariantIds. Fetch a Variant by Product ID and Variant ID to inspect its full details and Data Values."
+          },
+          "variantsTruncated": {
+            "type": "boolean",
+            "description": "Whether Variants contains fewer entries than VariantIds because Variant summaries are limited to 50."
+          }
+        },
+        "description": "Stored details, Data Values, Variant IDs, and Variant summaries for one Product."
+      },
       "ProductMetadata": {
         "required": [
           "dataKeys"
@@ -4791,6 +6581,202 @@
           }
         },
         "description": "Metadata available for product entities."
+      },
+      "ProductResponse": {
+        "required": [
+          "product"
+        ],
+        "type": "object",
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/ProductDetails"
+          }
+        },
+        "description": "Response containing one Product and its stored details."
+      },
+      "ProductsResponse": {
+        "required": [
+          "term",
+          "products"
+        ],
+        "type": "object",
+        "properties": {
+          "term": {
+            "type": "string",
+            "description": "Search term used for the request, or null when no term was provided.",
+            "nullable": true
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductSummary"
+            },
+            "description": "Matching Products in the order returned by Relewise. Variant data is not searched."
+          }
+        },
+        "description": "A bounded set of Products matching a Product ID, display name, or Product data value."
+      },
+      "ProductSummary": {
+        "required": [
+          "productId",
+          "displayName",
+          "disabled"
+        ],
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "description": "ID of the Product."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name mapped by Relewise using the requested language when provided; null when unavailable.",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          }
+        },
+        "description": "A compact representation of a Product for lists and search results."
+      },
+      "ProductVariantDetails": {
+        "required": [
+          "productId",
+          "variantId",
+          "displayNames",
+          "disabled",
+          "assortments",
+          "specifications",
+          "listPrices",
+          "salesPrices",
+          "dataKeys",
+          "dataValues",
+          "dataValuesTruncated"
+        ],
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "description": "ID of the parent Product."
+          },
+          "variantId": {
+            "type": "string",
+            "description": "ID within the parent Product."
+          },
+          "displayNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDisplayName"
+            },
+            "description": "Available display names."
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+          },
+          "assortments": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
+          },
+          "specifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductVariantSpecification"
+            },
+            "description": "Specifications such as size or color."
+          },
+          "listPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityPrice"
+            },
+            "description": "Stored list prices."
+          },
+          "salesPrices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityPrice"
+            },
+            "description": "Stored sales prices."
+          },
+          "dataKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "All Data Keys present."
+          },
+          "dataValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDataValue"
+            },
+            "description": "Up to 100 Data Values, selected by case-sensitive Data Key order. These are stored entity values, not Dataset metadata."
+          },
+          "dataValuesTruncated": {
+            "type": "boolean",
+            "description": "Whether DataValues contains fewer entries than DataKeys because Data Values are limited to 100."
+          }
+        },
+        "description": "Stored details and Data Values for one Variant of a Product."
+      },
+      "ProductVariantResponse": {
+        "required": [
+          "variant"
+        ],
+        "type": "object",
+        "properties": {
+          "variant": {
+            "$ref": "#/components/schemas/ProductVariantDetails"
+          }
+        },
+        "description": "Response containing one Product Variant and its stored details."
+      },
+      "ProductVariantSpecification": {
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Case-sensitive Variant specification key."
+          },
+          "value": {
+            "type": "string",
+            "description": "Stored Variant specification value, or null when the specification has no value.",
+            "nullable": true
+          }
+        },
+        "description": "One specification that identifies a dimension of a Product Variant, such as size or color."
+      },
+      "ProductVariantSummary": {
+        "required": [
+          "variantId",
+          "displayNames"
+        ],
+        "type": "object",
+        "properties": {
+          "variantId": {
+            "type": "string",
+            "description": "Variant ID, which is unique within the parent Product."
+          },
+          "displayNames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDisplayName"
+            },
+            "description": "Available localized Variant display names."
+          }
+        },
+        "description": "A Variant belonging to a Product."
       },
       "RedirectRule": {
         "required": [
@@ -5402,7 +7388,7 @@
         "properties": {
           "term": {
             "type": "string",
-            "description": "Normalized search term."
+            "description": "Search term associated with these performance metrics."
           },
           "searches": {
             "$ref": "#/components/schemas/ComparedValue"
@@ -5583,7 +7569,7 @@
         "properties": {
           "term": {
             "type": "string",
-            "description": "Normalized search term."
+            "description": "Search term that returned no Products."
           },
           "searchesWithoutResults": {
             "$ref": "#/components/schemas/ComparedValue"
@@ -6706,6 +8692,10 @@
     {
       "name": "Analytics",
       "description": "Read-only analysis of Search and attributed Revenue performance."
+    },
+    {
+      "name": "Entities",
+      "description": "Find and inspect data entities, such as Products and Content. To protect personal data and maintain a clear GDPR boundary, this area does not return User entities."
     },
     {
       "name": "Merchandising",

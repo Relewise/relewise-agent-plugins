@@ -1,0 +1,22 @@
+{
+  "required": [
+    "term",
+    "brands"
+  ],
+  "type": "object",
+  "properties": {
+    "term": {
+      "type": "string",
+      "description": "Search term used for the request, or null when no term was provided.",
+      "nullable": true
+    },
+    "brands": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BrandSummary"
+      },
+      "description": "Matching Brands in the order returned by Relewise."
+    }
+  },
+  "description": "A bounded set of Brands matching a Brand ID, display name, or Brand Data Value."
+}

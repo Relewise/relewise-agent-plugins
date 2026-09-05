@@ -1,0 +1,123 @@
+{
+  "required": [
+    "productId",
+    "displayNames",
+    "brand",
+    "created",
+    "disabled",
+    "deleted",
+    "assortments",
+    "listPrices",
+    "salesPrices",
+    "categoryPaths",
+    "dataKeys",
+    "dataValues",
+    "dataValuesTruncated",
+    "variantIds",
+    "variants",
+    "variantsTruncated"
+  ],
+  "type": "object",
+  "properties": {
+    "productId": {
+      "type": "string",
+      "description": "ID of the Product."
+    },
+    "displayNames": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EntityDisplayName"
+      },
+      "description": "Available display names."
+    },
+    "brand": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/ProductBrandReference"
+        }
+      ],
+      "nullable": true
+    },
+    "created": {
+      "type": "string",
+      "description": "UTC date and time when it was created in Relewise.",
+      "format": "date-time"
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+    },
+    "deleted": {
+      "type": "boolean",
+      "description": "Whether it is marked as deleted. It may remain retrievable by Product ID until physically removed, after which it is returned as not found."
+    },
+    "assortments": {
+      "type": "array",
+      "items": {
+        "pattern": "^-?(?:0|[1-9]\\d*)$",
+        "format": "int32",
+        "type": "integer"
+      },
+      "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
+    },
+    "listPrices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EntityPrice"
+      },
+      "description": "Stored list prices."
+    },
+    "salesPrices": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EntityPrice"
+      },
+      "description": "Stored sales prices."
+    },
+    "categoryPaths": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ProductCategoryPath"
+      },
+      "description": "Product Category paths, each from root to leaf."
+    },
+    "dataKeys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "All Data Keys present."
+    },
+    "dataValues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EntityDataValue"
+      },
+      "description": "Up to 100 Data Values, selected by case-sensitive Data Key order. These are stored entity values, not Dataset metadata."
+    },
+    "dataValuesTruncated": {
+      "type": "boolean",
+      "description": "Whether DataValues contains fewer entries than DataKeys because Data Values are limited to 100."
+    },
+    "variantIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of all Variants."
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ProductVariantSummary"
+      },
+      "description": "Up to 50 Variant summaries, corresponding to the first Variant IDs in VariantIds. Fetch a Variant by Product ID and Variant ID to inspect its full details and Data Values."
+    },
+    "variantsTruncated": {
+      "type": "boolean",
+      "description": "Whether Variants contains fewer entries than VariantIds because Variant summaries are limited to 50."
+    }
+  },
+  "description": "Stored details, Data Values, Variant IDs, and Variant summaries for one Product."
+}

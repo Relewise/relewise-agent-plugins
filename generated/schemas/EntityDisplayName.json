@@ -1,0 +1,18 @@
+{
+  "required": [
+    "language",
+    "text"
+  ],
+  "type": "object",
+  "properties": {
+    "language": {
+      "type": "string",
+      "description": "Language identifier stored with the display name. It is not guaranteed to be an ISO 639 language code."
+    },
+    "text": {
+      "type": "string",
+      "description": "Localized display-name text."
+    }
+  },
+  "description": "One localized display name for an entity."
+}

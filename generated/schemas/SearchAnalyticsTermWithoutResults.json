@@ -7,7 +7,7 @@
   "properties": {
     "term": {
       "type": "string",
-      "description": "Normalized search term."
+      "description": "Search term that returned no Products."
     },
     "searchesWithoutResults": {
       "$ref": "#/components/schemas/ComparedValue"

@@ -1,0 +1,21 @@
+{
+  "required": [
+    "variantId",
+    "displayNames"
+  ],
+  "type": "object",
+  "properties": {
+    "variantId": {
+      "type": "string",
+      "description": "Variant ID, which is unique within the parent Product."
+    },
+    "displayNames": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EntityDisplayName"
+      },
+      "description": "Available localized Variant display names."
+    }
+  },
+  "description": "A Variant belonging to a Product."
+}

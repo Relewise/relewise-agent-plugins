@@ -1,0 +1,19 @@
+{
+  "required": [
+    "brandId",
+    "displayName"
+  ],
+  "type": "object",
+  "properties": {
+    "brandId": {
+      "type": "string",
+      "description": "ID of the Brand associated with the Product."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display name, when present.",
+      "nullable": true
+    }
+  },
+  "description": "Brand associated with a Product."
+}

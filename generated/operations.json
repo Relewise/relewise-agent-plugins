@@ -1,9 +1,9 @@
 {
   "source": "contracts/agent-gateway-v1.json",
-  "sourceSha256": "b8a22c425d2be610589cfbf9cfd430f9249f060b8c67d1309b362b9aafd46d88",
+  "sourceSha256": "7d40cc3c638a4a6c6f905c42caedaaa32fed4cb000420649b8f1eb09f71efc45",
   "openapi": "3.0.4",
   "apiVersion": "v1",
-  "operationCount": 41,
+  "operationCount": 52,
   "operations": [
     {
       "operationId": "AnalyticsGetRevenue",
@@ -1580,6 +1580,1006 @@
           "content": {
             "application/json": {
               "$ref": "#/components/schemas/PeriodSummaryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesGetBrand",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/brands/{brandId}",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Gets a Brand.",
+      "description": "Returns one Brand's stored properties and actual Brand Data Values. Use EntitiesSearchBrands when the Brand ID is unknown. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "brandId",
+          "required": true,
+          "description": "ID of the Brand.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/BrandResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesGetContent",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/content/{contentId}",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Gets Content.",
+      "description": "Returns one Content entity's stored properties and actual Content Data Values. Use EntitiesSearchContent when the Content ID is unknown. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "contentId",
+          "required": true,
+          "description": "ID of the Content entity.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/ContentResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesGetContentCategory",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/content-categories/{contentCategoryId}",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Gets a Content Category.",
+      "description": "Returns one Content Category entity's stored properties and actual Data Values. This does not return Content associated with the category. Use EntitiesSearchContentCategories when the Content Category ID is unknown. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "contentCategoryId",
+          "required": true,
+          "description": "ID of the Content Category.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/ContentCategoryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesGetProduct",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/products/{productId}",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Gets a Product.",
+      "description": "Returns one Product's stored properties and actual Product data values. Variant data values are not included; use EntitiesGetProductVariant when the Variant ID is known. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "productId",
+          "required": true,
+          "description": "ID of the Product.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/ProductResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesGetProductCategory",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/product-categories/{productCategoryId}",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Gets a Product Category.",
+      "description": "Returns one Product Category entity's stored properties and actual Data Values. This does not return Products assigned to the category. Use EntitiesSearchProductCategories when the Product Category ID is unknown. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "productCategoryId",
+          "required": true,
+          "description": "ID of the Product Category.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/ProductCategoryResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesGetProductVariant",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/products/{productId}/variants/{variantId}",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Gets a Product Variant.",
+      "description": "Returns one Variant's stored properties and actual Variant data values. A Variant ID is unique only within its parent Product, so both IDs are required. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "productId",
+          "required": true,
+          "description": "ID of the parent Product.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "variantId",
+          "required": true,
+          "description": "ID within the parent Product.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/ProductVariantResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesSearchBrands",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/brands",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Searches Brands.",
+      "description": "Returns a bounded list of Brands matching a Brand ID, display name, or Brand Data Value. Use EntitiesGetBrand when the Brand ID is known. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional Brand ID, display-name, or Brand Data Value search term.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "language",
+          "required": false,
+          "description": "Optional case-sensitive language identifier used when searching multilingual Brand Data Values.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "excludeDisabled",
+          "required": false,
+          "description": "Whether disabled Brands are excluded. Defaults to true.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "limit",
+          "required": false,
+          "description": "Maximum number of Brands to return. Defaults to 10 and cannot exceed 25.",
+          "schema": {
+            "maximum": 25,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/BrandsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesSearchContent",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/content",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Searches Content.",
+      "description": "Returns a bounded list of Content entities matching a Content ID, display name, Content Category display name, or string-based Content Data Value. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional Content ID, display-name, Content Category display-name, or string-based Content Data Value search term.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "language",
+          "required": false,
+          "description": "Optional case-sensitive language identifier used when searching Content and selecting returned display names.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "excludeDisabled",
+          "required": false,
+          "description": "Whether disabled Content entities are excluded. Defaults to true.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "limit",
+          "required": false,
+          "description": "Maximum number of Content entities to return. Defaults to 10 and cannot exceed 25.",
+          "schema": {
+            "maximum": 25,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/ContentEntitiesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesSearchContentCategories",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/content-categories",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Searches Content Categories.",
+      "description": "Returns a bounded list of Content Category entities matching a Content Category ID, display name, or Content Category Data Value. This finds category entities; it does not search for Content associated with a category. Use EntitiesGetContentCategory when the Content Category ID is known. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional Content Category ID, display-name, or Content Category Data Value search term.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "language",
+          "required": false,
+          "description": "Optional case-sensitive language identifier used when searching Content Categories and selecting returned display names.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "excludeDisabled",
+          "required": false,
+          "description": "Whether disabled Content Categories are excluded. Defaults to true.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "limit",
+          "required": false,
+          "description": "Maximum number of Content Categories to return. Defaults to 10 and cannot exceed 25.",
+          "schema": {
+            "maximum": 25,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/ContentCategoriesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesSearchProductCategories",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/product-categories",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Searches Product Categories.",
+      "description": "Returns a bounded list of Product Category entities matching a Product Category ID, display name, or Product Category Data Value. This finds category entities, not the Products assigned to a category. Use EntitiesGetProductCategory when the Product Category ID is known. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional Product Category ID, display-name, or Product Category Data Value search term.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "language",
+          "required": false,
+          "description": "Optional case-sensitive language identifier used when searching Product Categories and selecting returned display names.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "excludeDisabled",
+          "required": false,
+          "description": "Whether disabled Product Categories are excluded. Defaults to true.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "limit",
+          "required": false,
+          "description": "Maximum number of Product Categories to return. Defaults to 10 and cannot exceed 25.",
+          "schema": {
+            "maximum": 25,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/ProductCategoriesResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "EntitiesSearchProducts",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/entities/products",
+      "tags": [
+        "Entities"
+      ],
+      "summary": "Searches Products.",
+      "description": "Returns a bounded list of Products matching a Product ID, display name, or Product data value. Variant data is not searched; use EntitiesGetProductVariant when both IDs are known. This operation is read-only.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Optional Product ID, display-name, or Product data-value search term. Matching does not inspect Variant data.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "language",
+          "required": false,
+          "description": "Optional case-sensitive language identifier used when searching Products and selecting their returned display names.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "excludeDisabled",
+          "required": false,
+          "description": "Whether disabled Products are excluded. Defaults to true.",
+          "schema": {
+            "type": "boolean"
+          }
+        },
+        {
+          "name": "limit",
+          "required": false,
+          "description": "Maximum number of Products to return. Defaults to 10 and cannot exceed 25.",
+          "schema": {
+            "maximum": 25,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/ProductsResponse"
             }
           }
         },

@@ -1,0 +1,21 @@
+{
+  "required": [
+    "productCategoryId",
+    "displayNames"
+  ],
+  "type": "object",
+  "properties": {
+    "productCategoryId": {
+      "type": "string",
+      "description": "ID of the Product Category at this level of the path."
+    },
+    "displayNames": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EntityDisplayName"
+      },
+      "description": "Available display names."
+    }
+  },
+  "description": "Reference to a Product Category at one level of a Product category path."
+}

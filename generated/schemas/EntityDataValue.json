@@ -1,0 +1,22 @@
+{
+  "required": [
+    "key",
+    "type",
+    "valueJson"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Case-sensitive Data Key."
+    },
+    "type": {
+      "$ref": "#/components/schemas/EntityDataValueType"
+    },
+    "valueJson": {
+      "type": "string",
+      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object."
+    }
+  },
+  "description": "One case-sensitive Relewise entity Data Key and its stored value."
+}

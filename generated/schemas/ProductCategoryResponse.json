@@ -1,0 +1,12 @@
+{
+  "required": [
+    "productCategory"
+  ],
+  "type": "object",
+  "properties": {
+    "productCategory": {
+      "$ref": "#/components/schemas/ProductCategoryDetails"
+    }
+  },
+  "description": "Response containing one Product Category and its stored details."
+}

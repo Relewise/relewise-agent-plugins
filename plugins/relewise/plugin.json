@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "relewise",
-  "version": "0.3.0-main.33901411418",
+  "version": "0.3.0-main.33950899779",
   "description": "Inspect and manage Relewise search, recommendations, merchandising, analytics, and consumption through Agent Gateway.",
   "author": {
     "name": "Relewise",

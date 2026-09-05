@@ -1,9 +1,25 @@
 {
-  "schemaCount": 110,
+  "schemaCount": 143,
   "schemas": [
+    {
+      "name": "BrandDetails",
+      "file": "BrandDetails.json"
+    },
     {
       "name": "BrandMetadata",
       "file": "BrandMetadata.json"
+    },
+    {
+      "name": "BrandResponse",
+      "file": "BrandResponse.json"
+    },
+    {
+      "name": "BrandSummary",
+      "file": "BrandSummary.json"
+    },
+    {
+      "name": "BrandsResponse",
+      "file": "BrandsResponse.json"
     },
     {
       "name": "CompanyMetadata",
@@ -14,12 +30,52 @@
       "file": "ComparedValue.json"
     },
     {
+      "name": "ContentCategoriesResponse",
+      "file": "ContentCategoriesResponse.json"
+    },
+    {
+      "name": "ContentCategoryDetails",
+      "file": "ContentCategoryDetails.json"
+    },
+    {
       "name": "ContentCategoryMetadata",
       "file": "ContentCategoryMetadata.json"
     },
     {
+      "name": "ContentCategoryPath",
+      "file": "ContentCategoryPath.json"
+    },
+    {
+      "name": "ContentCategoryReference",
+      "file": "ContentCategoryReference.json"
+    },
+    {
+      "name": "ContentCategoryResponse",
+      "file": "ContentCategoryResponse.json"
+    },
+    {
+      "name": "ContentCategorySummary",
+      "file": "ContentCategorySummary.json"
+    },
+    {
+      "name": "ContentDetails",
+      "file": "ContentDetails.json"
+    },
+    {
+      "name": "ContentEntitiesResponse",
+      "file": "ContentEntitiesResponse.json"
+    },
+    {
       "name": "ContentMetadata",
       "file": "ContentMetadata.json"
+    },
+    {
+      "name": "ContentResponse",
+      "file": "ContentResponse.json"
+    },
+    {
+      "name": "ContentSummary",
+      "file": "ContentSummary.json"
     },
     {
       "name": "CurrentUserResponse",
@@ -68,6 +124,22 @@
     {
       "name": "DecompoundingRulesResponse",
       "file": "DecompoundingRulesResponse.json"
+    },
+    {
+      "name": "EntityDataValue",
+      "file": "EntityDataValue.json"
+    },
+    {
+      "name": "EntityDataValueType",
+      "file": "EntityDataValueType.json"
+    },
+    {
+      "name": "EntityDisplayName",
+      "file": "EntityDisplayName.json"
+    },
+    {
+      "name": "EntityPrice",
+      "file": "EntityPrice.json"
     },
     {
       "name": "HttpValidationProblemDetails",
@@ -170,12 +242,72 @@
       "file": "ProblemDetails.json"
     },
     {
+      "name": "ProductBrandReference",
+      "file": "ProductBrandReference.json"
+    },
+    {
+      "name": "ProductCategoriesResponse",
+      "file": "ProductCategoriesResponse.json"
+    },
+    {
+      "name": "ProductCategoryDetails",
+      "file": "ProductCategoryDetails.json"
+    },
+    {
       "name": "ProductCategoryMetadata",
       "file": "ProductCategoryMetadata.json"
     },
     {
+      "name": "ProductCategoryPath",
+      "file": "ProductCategoryPath.json"
+    },
+    {
+      "name": "ProductCategoryReference",
+      "file": "ProductCategoryReference.json"
+    },
+    {
+      "name": "ProductCategoryResponse",
+      "file": "ProductCategoryResponse.json"
+    },
+    {
+      "name": "ProductCategorySummary",
+      "file": "ProductCategorySummary.json"
+    },
+    {
+      "name": "ProductDetails",
+      "file": "ProductDetails.json"
+    },
+    {
       "name": "ProductMetadata",
       "file": "ProductMetadata.json"
+    },
+    {
+      "name": "ProductResponse",
+      "file": "ProductResponse.json"
+    },
+    {
+      "name": "ProductSummary",
+      "file": "ProductSummary.json"
+    },
+    {
+      "name": "ProductVariantDetails",
+      "file": "ProductVariantDetails.json"
+    },
+    {
+      "name": "ProductVariantResponse",
+      "file": "ProductVariantResponse.json"
+    },
+    {
+      "name": "ProductVariantSpecification",
+      "file": "ProductVariantSpecification.json"
+    },
+    {
+      "name": "ProductVariantSummary",
+      "file": "ProductVariantSummary.json"
+    },
+    {
+      "name": "ProductsResponse",
+      "file": "ProductsResponse.json"
     },
     {
       "name": "RedirectRule",

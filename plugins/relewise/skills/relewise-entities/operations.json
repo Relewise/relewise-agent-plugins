@@ -1,0 +1,15 @@
+{
+  "operationIds": [
+    "EntitiesGetBrand",
+    "EntitiesGetContent",
+    "EntitiesGetContentCategory",
+    "EntitiesGetProduct",
+    "EntitiesGetProductCategory",
+    "EntitiesGetProductVariant",
+    "EntitiesSearchBrands",
+    "EntitiesSearchContent",
+    "EntitiesSearchContentCategories",
+    "EntitiesSearchProductCategories",
+    "EntitiesSearchProducts"
+  ]
+}

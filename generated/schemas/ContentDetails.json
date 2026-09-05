@@ -1,0 +1,76 @@
+{
+  "required": [
+    "contentId",
+    "displayNames",
+    "created",
+    "disabled",
+    "deleted",
+    "assortments",
+    "categoryPaths",
+    "dataKeys",
+    "dataValues",
+    "dataValuesTruncated"
+  ],
+  "type": "object",
+  "properties": {
+    "contentId": {
+      "type": "string",
+      "description": "ID of the Content entity."
+    },
+    "displayNames": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EntityDisplayName"
+      },
+      "description": "Available display names."
+    },
+    "created": {
+      "type": "string",
+      "description": "UTC date and time when it was created in Relewise.",
+      "format": "date-time"
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+    },
+    "deleted": {
+      "type": "boolean",
+      "description": "Whether it is marked as deleted. It may remain retrievable by Content ID until physically removed, after which it is returned as not found."
+    },
+    "assortments": {
+      "type": "array",
+      "items": {
+        "pattern": "^-?(?:0|[1-9]\\d*)$",
+        "format": "int32",
+        "type": "integer"
+      },
+      "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
+    },
+    "categoryPaths": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ContentCategoryPath"
+      },
+      "description": "Content Category paths, each from root to leaf."
+    },
+    "dataKeys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "All Data Keys present."
+    },
+    "dataValues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/EntityDataValue"
+      },
+      "description": "Up to 100 Data Values, selected by case-sensitive Data Key order. These are stored entity values, not Dataset metadata."
+    },
+    "dataValuesTruncated": {
+      "type": "boolean",
+      "description": "Whether DataValues contains fewer entries than DataKeys because Data Values are limited to 100."
+    }
+  },
+  "description": "Stored details and Data Values for one Content entity."
+}
