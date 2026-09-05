@@ -1,0 +1,22 @@
+{
+  "required": [
+    "term",
+    "content"
+  ],
+  "type": "object",
+  "properties": {
+    "term": {
+      "type": "string",
+      "description": "Search term used for the request, or null when no term was provided.",
+      "nullable": true
+    },
+    "content": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ContentSummary"
+      },
+      "description": "Matching Content entities in the order returned by Relewise."
+    }
+  },
+  "description": "A bounded set of Content entities matching a Content ID, display name, Content Category display name, or string-based Content Data Value."
+}

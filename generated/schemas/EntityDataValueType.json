@@ -1,0 +1,18 @@
+{
+  "enum": [
+    "String",
+    "Double",
+    "Boolean",
+    "Multilingual",
+    "Money",
+    "MultiCurrency",
+    "StringList",
+    "DoubleList",
+    "BooleanList",
+    "MultilingualCollection",
+    "Object",
+    "ObjectList"
+  ],
+  "description": "Supported Relewise entity data value types. See https://docs.relewise.com/docs/intro/data-types.html for the corresponding value structures.",
+  "type": "string"
+}

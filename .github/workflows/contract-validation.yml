@@ -127,7 +127,9 @@ jobs:
 
       - name: Validate Agent Skills specification
         shell: pwsh
-        run: ./tools/validate-agent-skills/validate-agent-skills.ps1
+        run: |
+          ./tools/validate-agent-skills/validate-agent-skills.ps1
+          ./tools/validate-agent-skills/validate-agent-skills.ps1 -PluginsRoot .agents/skills
 
       - name: Validate portable plugin manifests
         run: dotnet run --project tools/validate-agent-plugins/validate-agent-plugins.csproj --configuration Release

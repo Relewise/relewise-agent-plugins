@@ -1,0 +1,19 @@
+{
+  "required": [
+    "key",
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Case-sensitive Variant specification key."
+    },
+    "value": {
+      "type": "string",
+      "description": "Stored Variant specification value, or null when the specification has no value.",
+      "nullable": true
+    }
+  },
+  "description": "One specification that identifies a dimension of a Product Variant, such as size or color."
+}

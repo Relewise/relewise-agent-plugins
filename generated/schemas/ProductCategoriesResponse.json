@@ -1,0 +1,22 @@
+{
+  "required": [
+    "term",
+    "productCategories"
+  ],
+  "type": "object",
+  "properties": {
+    "term": {
+      "type": "string",
+      "description": "Search term used for the request, or null when no term was provided.",
+      "nullable": true
+    },
+    "productCategories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ProductCategorySummary"
+      },
+      "description": "Matching Product Categories in the order returned by Relewise."
+    }
+  },
+  "description": "A bounded set of Product Categories matching a Product Category ID, display name, or Product Category Data Value."
+}

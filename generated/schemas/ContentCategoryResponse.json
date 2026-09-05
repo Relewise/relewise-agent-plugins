@@ -1,0 +1,12 @@
+{
+  "required": [
+    "contentCategory"
+  ],
+  "type": "object",
+  "properties": {
+    "contentCategory": {
+      "$ref": "#/components/schemas/ContentCategoryDetails"
+    }
+  },
+  "description": "Response containing one Content Category and its stored details."
+}

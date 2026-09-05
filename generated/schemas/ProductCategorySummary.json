@@ -1,0 +1,24 @@
+{
+  "required": [
+    "productCategoryId",
+    "displayName",
+    "disabled"
+  ],
+  "type": "object",
+  "properties": {
+    "productCategoryId": {
+      "type": "string",
+      "description": "ID of the Product Category."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Display name mapped by Relewise using the requested language when provided; null when unavailable.",
+      "nullable": true
+    },
+    "disabled": {
+      "type": "boolean",
+      "description": "Whether it is disabled and therefore normally excluded from Search and Recommendations."
+    }
+  },
+  "description": "A compact representation of a Product Category for lists and search results."
+}

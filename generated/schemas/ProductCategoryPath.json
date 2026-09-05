@@ -1,0 +1,16 @@
+{
+  "required": [
+    "categories"
+  ],
+  "type": "object",
+  "properties": {
+    "categories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ProductCategoryReference"
+      },
+      "description": "Product Categories in breadcrumb order from root to leaf."
+    }
+  },
+  "description": "One Product category breadcrumb path from its root category to its leaf category."
+}

@@ -1,0 +1,22 @@
+{
+  "required": [
+    "term",
+    "contentCategories"
+  ],
+  "type": "object",
+  "properties": {
+    "term": {
+      "type": "string",
+      "description": "Search term used for the request, or null when no term was provided.",
+      "nullable": true
+    },
+    "contentCategories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ContentCategorySummary"
+      },
+      "description": "Matching Content Categories in the order returned by Relewise."
+    }
+  },
+  "description": "A bounded set of Content Categories matching a Content Category ID, display name, or Content Category Data Value."
+}

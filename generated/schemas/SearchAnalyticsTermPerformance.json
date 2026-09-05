@@ -9,7 +9,7 @@
   "properties": {
     "term": {
       "type": "string",
-      "description": "Normalized search term."
+      "description": "Search term associated with these performance metrics."
     },
     "searches": {
       "$ref": "#/components/schemas/ComparedValue"

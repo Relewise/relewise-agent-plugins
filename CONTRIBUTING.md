@@ -8,6 +8,7 @@ Thank you for improving the Relewise Agent Plugins. Contributions should preserv
 - Discuss product-level changes with Relewise before investing in a large implementation.
 - Report security concerns privately as described in [SECURITY.md](SECURITY.md).
 - Keep canonical plugin manifests and skills under `plugins/`; keep client-specific packaging under `vendors/`.
+- Keep repository-maintainer skills under `.agents/skills/`. These are contributor instructions and must not be referenced by a public plugin manifest or vendor package.
 - Do not duplicate canonical `SKILL.md` files in vendor adapters.
 
 ## Development requirements
@@ -62,6 +63,7 @@ Run the checks relevant to your change. The complete local validation set is:
 dotnet run --project tools/generate-contract
 dotnet run --project tools/validate-skills
 ./tools/validate-agent-skills/validate-agent-skills.ps1
+./tools/validate-agent-skills/validate-agent-skills.ps1 -PluginsRoot .agents/skills
 dotnet run --project tools/validate-agent-plugins
 dotnet run --project tools/generate-coverage
 dotnet build src/relewise-agent/relewise-agent.csproj --configuration Release
