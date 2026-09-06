@@ -11,22 +11,42 @@ $ErrorActionPreference = 'Stop'
 $packageRoot = (Resolve-Path -LiteralPath $PackagePath).Path
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'gemini-extension.json') | ConvertFrom-Json
+$sourceManifest = Get-Content -Raw -LiteralPath (Join-Path $repositoryRoot 'gemini-extension.json') | ConvertFrom-Json
+$plannedVersion = (Get-Content -Raw -LiteralPath (Join-Path $repositoryRoot 'version.json') | ConvertFrom-Json).version
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'Package is missing its license.' }
 
 if ($manifest.version -notmatch '^\d+\.\d+\.\d+$') { throw 'Gemini extension manifest version is not semantic.' }
+if ($sourceManifest.version -ne $plannedVersion) { throw 'Root Gemini extension manifest version does not match version.json.' }
 $tokenSetting = @($manifest.settings) | Where-Object envVar -eq 'RELEWISE_AGENT_GATEWAY_TOKEN'
 if ($tokenSetting.Count -ne 1 -or -not $tokenSetting.sensitive) { throw 'Agent Gateway PAT must be declared as one sensitive Gemini setting.' }
 
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
 $packagedSkills = Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory
 if ($sourceSkills.Count -ne $packagedSkills.Count) { throw 'Package does not contain every canonical skill.' }
+$canonicalLauncherInstruction = 'When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.'
+$windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to this file, resolve it to an absolute path and use that PowerShell launcher. On other platforms, when `../../scripts/relewise-agent` exists, resolve it to an absolute path and use that launcher. Fall back to `relewise-agent` from `PATH` only when the platform-specific packaged launcher does not exist.'
 foreach ($sourceSkill in $sourceSkills) {
     $packagedSkill = Join-Path $packageRoot "skills\$($sourceSkill.Name)\SKILL.md"
     if (-not (Test-Path -LiteralPath $packagedSkill)) { throw "Package is missing skill '$($sourceSkill.Name)'." }
     $content = Get-Content -Raw -LiteralPath $packagedSkill
-    if (-not $content.Contains('../../scripts/relewise-agent')) { throw "Packaged skill '$($sourceSkill.Name)' does not locate the bundled CLI." }
-    if (-not $content.StartsWith((Get-Content -Raw -LiteralPath (Join-Path $sourceSkill.FullName 'SKILL.md')))) {
-        throw "Packaged skill '$($sourceSkill.Name)' does not preserve its canonical source."
+    $sourceContent = Get-Content -Raw -LiteralPath (Join-Path $sourceSkill.FullName 'SKILL.md')
+    $expectedContent = if ($RuntimeIdentifier -eq 'win-x64') {
+        if (-not $sourceContent.Contains($canonicalLauncherInstruction)) {
+            throw "Canonical skill '$($sourceSkill.Name)' does not contain the expected launcher instruction."
+        }
+        $sourceContent.Replace($canonicalLauncherInstruction, $windowsLauncherInstruction)
+    }
+    else {
+        $sourceContent
+    }
+    if ($content -cne $expectedContent) {
+        throw "Packaged skill '$($sourceSkill.Name)' differs from its expected vendor-specific content."
+    }
+    if ($RuntimeIdentifier -eq 'win-x64' -and -not $content.Contains($windowsLauncherInstruction)) {
+        throw "Packaged skill '$($sourceSkill.Name)' does not use the Windows PowerShell launcher."
+    }
+    if ($RuntimeIdentifier -ne 'win-x64' -and $content.Contains($windowsLauncherInstruction)) {
+        throw "Packaged skill '$($sourceSkill.Name)' unexpectedly contains the Windows PowerShell instruction."
     }
 }
 
@@ -34,5 +54,10 @@ $expectedExecutable = if ($RuntimeIdentifier -eq 'win-x64') { 'relewise-agent.ex
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "libexec\$RuntimeIdentifier\$expectedExecutable"))) { throw 'Package is missing its native executable.' }
 $launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'scripts\relewise-agent')
 if (-not $launcher.Contains('runtime_id="win-x64"') -or -not $launcher.Contains('runtime_id="osx-arm64"')) { throw 'Launcher does not select a native executable by platform.' }
+if ($RuntimeIdentifier -eq 'win-x64') {
+    $windowsLauncher = Join-Path $packageRoot 'scripts\relewise-agent.ps1'
+    if (-not (Test-Path -LiteralPath $windowsLauncher -PathType Leaf)) { throw 'Package is missing its Windows PowerShell launcher.' }
+    if (-not (Get-Content -Raw -LiteralPath $windowsLauncher).Contains('libexec\win-x64\relewise-agent.exe')) { throw 'Windows launcher does not select the native Windows executable.' }
+}
 
 Write-Host "Google Gemini CLI package smoke tests passed for $RuntimeIdentifier"
