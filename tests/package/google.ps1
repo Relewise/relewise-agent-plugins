@@ -24,7 +24,7 @@ $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\r
 $packagedSkills = Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory
 if ($sourceSkills.Count -ne $packagedSkills.Count) { throw 'Package does not contain every canonical skill.' }
 $canonicalLauncherInstruction = 'When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.'
-$windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to this file, resolve it to an absolute path and use that PowerShell launcher. Otherwise, use `relewise-agent` from `PATH`.'
+$windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to this file, resolve it to an absolute path and use that PowerShell launcher. On other platforms, when `../../scripts/relewise-agent` exists, resolve it to an absolute path and use that launcher. Fall back to `relewise-agent` from `PATH` only when the platform-specific packaged launcher does not exist.'
 foreach ($sourceSkill in $sourceSkills) {
     $packagedSkill = Join-Path $packageRoot "skills\$($sourceSkill.Name)\SKILL.md"
     if (-not (Test-Path -LiteralPath $packagedSkill)) { throw "Package is missing skill '$($sourceSkill.Name)'." }

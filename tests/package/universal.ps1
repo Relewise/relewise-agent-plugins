@@ -34,6 +34,16 @@ foreach ($vendor in $manifestPaths.Keys) {
     if ($vendor -eq 'google' -and -not (Test-Path -LiteralPath (Join-Path $packageRoot 'scripts\relewise-agent.ps1') -PathType Leaf)) {
         throw 'Google package is missing its Windows PowerShell launcher.'
     }
+    if ($vendor -eq 'google') {
+        $windowsInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to this file, resolve it to an absolute path and use that PowerShell launcher.'
+        $otherPlatformsInstruction = 'On other platforms, when `../../scripts/relewise-agent` exists, resolve it to an absolute path and use that launcher.'
+        foreach ($skillFile in Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Filter 'SKILL.md' -File -Recurse) {
+            $skillContent = Get-Content -Raw -LiteralPath $skillFile.FullName
+            if (-not $skillContent.Contains($windowsInstruction) -or -not $skillContent.Contains($otherPlatformsInstruction)) {
+                throw "Universal Google skill '$($skillFile.FullName)' does not direct both Windows and non-Windows platforms to their bundled launchers."
+            }
+        }
+    }
 }
 
 Write-Host 'Universal package tests passed.'
