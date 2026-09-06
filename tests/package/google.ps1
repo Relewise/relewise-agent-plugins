@@ -23,13 +23,30 @@ if ($tokenSetting.Count -ne 1 -or -not $tokenSetting.sensitive) { throw 'Agent G
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
 $packagedSkills = Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory
 if ($sourceSkills.Count -ne $packagedSkills.Count) { throw 'Package does not contain every canonical skill.' }
+$canonicalLauncherInstruction = 'When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.'
+$windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to this file, resolve it to an absolute path and use that PowerShell launcher. Otherwise, use `relewise-agent` from `PATH`.'
 foreach ($sourceSkill in $sourceSkills) {
     $packagedSkill = Join-Path $packageRoot "skills\$($sourceSkill.Name)\SKILL.md"
     if (-not (Test-Path -LiteralPath $packagedSkill)) { throw "Package is missing skill '$($sourceSkill.Name)'." }
     $content = Get-Content -Raw -LiteralPath $packagedSkill
-    if (-not $content.Contains('../../scripts/relewise-agent')) { throw "Packaged skill '$($sourceSkill.Name)' does not locate the bundled CLI." }
-    if (-not $content.StartsWith((Get-Content -Raw -LiteralPath (Join-Path $sourceSkill.FullName 'SKILL.md')))) {
-        throw "Packaged skill '$($sourceSkill.Name)' does not preserve its canonical source."
+    $sourceContent = Get-Content -Raw -LiteralPath (Join-Path $sourceSkill.FullName 'SKILL.md')
+    $expectedContent = if ($RuntimeIdentifier -eq 'win-x64') {
+        if (-not $sourceContent.Contains($canonicalLauncherInstruction)) {
+            throw "Canonical skill '$($sourceSkill.Name)' does not contain the expected launcher instruction."
+        }
+        $sourceContent.Replace($canonicalLauncherInstruction, $windowsLauncherInstruction)
+    }
+    else {
+        $sourceContent
+    }
+    if ($content -cne $expectedContent) {
+        throw "Packaged skill '$($sourceSkill.Name)' differs from its expected vendor-specific content."
+    }
+    if ($RuntimeIdentifier -eq 'win-x64' -and -not $content.Contains($windowsLauncherInstruction)) {
+        throw "Packaged skill '$($sourceSkill.Name)' does not use the Windows PowerShell launcher."
+    }
+    if ($RuntimeIdentifier -ne 'win-x64' -and $content.Contains($windowsLauncherInstruction)) {
+        throw "Packaged skill '$($sourceSkill.Name)' unexpectedly contains the Windows PowerShell instruction."
     }
 }
 

@@ -36,7 +36,7 @@ Claude Desktop and Cowork users who do not want to connect GitHub can download e
 
 Make a Relewise Agent Gateway PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`, either through a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
 
-Packaged skills explicitly invoke `scripts/relewise-agent.ps1` on Windows or `scripts/relewise-agent` on other platforms. The launcher selects the matching native executable under `libexec/<runtime>/`. Packages intentionally have no top-level `bin/` directory so hosted marketplaces do not receive an undeclared PATH executable.
+The Gemini packaging adapter changes only the launcher instruction in its Windows artifact so skills invoke `scripts/relewise-agent.ps1`; canonical skills and all other vendor packages remain unchanged. Platform launchers select the matching native executable under `libexec/<runtime>/`. Packages intentionally have no top-level `bin/` directory so hosted marketplaces do not receive an undeclared PATH executable.
 
 ## Releases
 

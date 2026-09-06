@@ -47,6 +47,19 @@ $windowsLauncherPath = Join-Path $packageRoot 'scripts\relewise-agent.ps1'
 if ($RuntimeIdentifier -eq 'win-x64') {
     $windowsLauncher = Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'scripts\relewise-agent.ps1')
     [IO.File]::WriteAllText($windowsLauncherPath, $windowsLauncher, [Text.UTF8Encoding]::new($false))
+
+    $canonicalLauncherInstruction = 'When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.'
+    $windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to this file, resolve it to an absolute path and use that PowerShell launcher. Otherwise, use `relewise-agent` from `PATH`.'
+    foreach ($skillFile in Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Filter 'SKILL.md' -File -Recurse) {
+        $content = Get-Content -Raw -LiteralPath $skillFile.FullName
+        if ($content.Contains($canonicalLauncherInstruction)) {
+            $content = $content.Replace($canonicalLauncherInstruction, $windowsLauncherInstruction)
+            [IO.File]::WriteAllText($skillFile.FullName, $content, [Text.UTF8Encoding]::new($false))
+        }
+        elseif (-not $content.Contains($windowsLauncherInstruction)) {
+            throw "Skill '$($skillFile.FullName)' does not contain the expected launcher instruction."
+        }
+    }
 }
 elseif ((Test-Path -LiteralPath $windowsLauncherPath) -and -not $Merge) {
     Remove-Item -LiteralPath $windowsLauncherPath -Force
