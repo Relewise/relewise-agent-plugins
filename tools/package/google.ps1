@@ -35,13 +35,21 @@ if ((Test-Path -LiteralPath $packageRoot) -and -not $Merge) {
 $adapterRoot = Join-Path $repositoryRoot 'vendors\google\relewise'
 if (-not (Test-Path -LiteralPath $packageRoot)) {
 New-Item -ItemType Directory -Path $packageRoot | Out-Null
-Copy-Item -LiteralPath (Join-Path $adapterRoot 'gemini-extension.json') -Destination $packageRoot
+Copy-Item -LiteralPath (Join-Path $repositoryRoot 'gemini-extension.json') -Destination $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
 New-Item -ItemType Directory -Path (Join-Path $packageRoot 'scripts'), (Join-Path $packageRoot 'libexec') | Out-Null
 
 $launcher = (Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'scripts\relewise-agent')).Replace("`r`n", "`n")
 [IO.File]::WriteAllText((Join-Path $packageRoot 'scripts\relewise-agent'), $launcher, [Text.UTF8Encoding]::new($false))
+}
+$windowsLauncherPath = Join-Path $packageRoot 'scripts\relewise-agent.ps1'
+if ($RuntimeIdentifier -eq 'win-x64') {
+    $windowsLauncher = Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'scripts\relewise-agent.ps1')
+    [IO.File]::WriteAllText($windowsLauncherPath, $windowsLauncher, [Text.UTF8Encoding]::new($false))
+}
+elseif ((Test-Path -LiteralPath $windowsLauncherPath) -and -not $Merge) {
+    Remove-Item -LiteralPath $windowsLauncherPath -Force
 }
 $runtimeDirectory = Join-Path $packageRoot "libexec\$RuntimeIdentifier"
 New-Item -ItemType Directory -Force -Path $runtimeDirectory | Out-Null

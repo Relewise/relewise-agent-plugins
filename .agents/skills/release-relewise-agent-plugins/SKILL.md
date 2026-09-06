@@ -31,9 +31,9 @@ Keep the card description concise and preserve existing content. Record material
 
 ## Phase 1: prepare
 
-1. Inspect `README.md`, `CONTRIBUTING.md`, `version.json`, `.github/workflows/refresh-marketplace.yml`, and `.github/workflows/release.yml` so the repository remains the source of truth.
+1. Inspect `README.md`, `CONTRIBUTING.md`, `version.json`, `gemini-extension.json`, `.github/workflows/refresh-marketplace.yml`, and `.github/workflows/release.yml` so the repository remains the source of truth.
 2. Verify the worktree is clean, fetch the remote, and confirm local `main` is current with `origin/main`. Confirm the requested tag and an open release pull request for the version do not already exist. When they do, inspect and resume the existing work rather than creating duplicates.
-3. Create or reuse `release/v<version>` from `main`. Change only the planned version in `version.json` initially, then commit and push the branch.
+3. Create or reuse `release/v<version>` from `main`. Change the planned version in both `version.json` and the root `gemini-extension.json` initially, then commit and push the branch. These values must match; the root manifest is Gemini CLI's gallery metadata.
 4. Create or update a concise release-preparation pull request targeting `main`. Its description must include the canonical Trello card URL and explain the version change, marketplace refresh, expected release packaging, and validation. Do not add reviewers.
 5. Dispatch **Refresh marketplace payload** on the release branch. Wait for its generated commit, pull it locally, and review the resulting manifest, fingerprint, runtime-version, and executable changes. A version change is a runtime input, so all supported executables are expected to rebuild.
 6. Approve only the protected CI runs triggered for the generated pull-request head, then wait for every required check. Investigate failures; never weaken validation to make the release pass.

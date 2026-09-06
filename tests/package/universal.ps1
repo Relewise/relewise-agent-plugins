@@ -31,6 +31,9 @@ foreach ($vendor in $manifestPaths.Keys) {
     foreach ($runtime in $runtimes) {
         if (-not $launcher.Contains("runtime_id=`"$runtime`"")) { throw "$vendor launcher does not select $runtime." }
     }
+    if ($vendor -eq 'google' -and -not (Test-Path -LiteralPath (Join-Path $packageRoot 'scripts\relewise-agent.ps1') -PathType Leaf)) {
+        throw 'Google package is missing its Windows PowerShell launcher.'
+    }
 }
 
 Write-Host 'Universal package tests passed.'

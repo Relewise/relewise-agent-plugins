@@ -2,7 +2,7 @@
 
 This adapter packages `Relewise`: work with your Relewise configuration, analytics and optimization using AI. `Relewise Developer` is a separate product and is not included.
 
-The adapter packages the canonical Relewise skills with the `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; the package script copies them and adds only the Gemini-specific executable-location instruction. Tagged releases provide Gemini's five conventionally named platform archives so Gemini CLI can select the smallest correct asset automatically.
+The adapter packages the canonical Relewise skills with the `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`, while the gallery manifest remains at the repository root as required by Gemini CLI. Tagged releases provide Gemini's five conventionally named platform archives so Gemini CLI can select the smallest correct asset automatically. Windows uses the PowerShell launcher; the other platforms use the shell launcher.
 
 During extension installation, Gemini CLI asks for the Relewise Agent Gateway PAT declared in `gemini-extension.json`. The setting is marked sensitive, so Gemini stores it in the system keychain, obfuscates it in the UI, and exposes it to the extension as `RELEWISE_AGENT_GATEWAY_TOKEN`. The PAT is never placed in command arguments or package files.
 

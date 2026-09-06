@@ -123,10 +123,25 @@ jobs:
         run: artifacts/openai/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
 
       - name: Run Google Gemini launcher smoke test
+        if: matrix.rid != 'win-x64'
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
         run: artifacts/google/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
+
+      - name: Run Google Gemini Windows launcher smoke test
+        if: matrix.rid == 'win-x64'
+        shell: pwsh
+        env:
+          RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
+        run: ./artifacts/google/win-x64/relewise/scripts/relewise-agent.ps1 --version
+
+      - name: Validate Google Gemini extension
+        if: matrix.rid == 'win-x64'
+        shell: pwsh
+        run: |
+          npx --yes @google/gemini-cli@0.58.0 extensions validate .
+          npx --yes @google/gemini-cli@0.58.0 extensions validate artifacts/google/win-x64/relewise
 
       - name: Upload native executable for universal package test
         uses: actions/upload-artifact@v7

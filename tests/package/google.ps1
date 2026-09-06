@@ -11,9 +11,12 @@ $ErrorActionPreference = 'Stop'
 $packageRoot = (Resolve-Path -LiteralPath $PackagePath).Path
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'gemini-extension.json') | ConvertFrom-Json
+$sourceManifest = Get-Content -Raw -LiteralPath (Join-Path $repositoryRoot 'gemini-extension.json') | ConvertFrom-Json
+$plannedVersion = (Get-Content -Raw -LiteralPath (Join-Path $repositoryRoot 'version.json') | ConvertFrom-Json).version
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'Package is missing its license.' }
 
 if ($manifest.version -notmatch '^\d+\.\d+\.\d+$') { throw 'Gemini extension manifest version is not semantic.' }
+if ($sourceManifest.version -ne $plannedVersion) { throw 'Root Gemini extension manifest version does not match version.json.' }
 $tokenSetting = @($manifest.settings) | Where-Object envVar -eq 'RELEWISE_AGENT_GATEWAY_TOKEN'
 if ($tokenSetting.Count -ne 1 -or -not $tokenSetting.sensitive) { throw 'Agent Gateway PAT must be declared as one sensitive Gemini setting.' }
 
@@ -34,5 +37,10 @@ $expectedExecutable = if ($RuntimeIdentifier -eq 'win-x64') { 'relewise-agent.ex
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "libexec\$RuntimeIdentifier\$expectedExecutable"))) { throw 'Package is missing its native executable.' }
 $launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'scripts\relewise-agent')
 if (-not $launcher.Contains('runtime_id="win-x64"') -or -not $launcher.Contains('runtime_id="osx-arm64"')) { throw 'Launcher does not select a native executable by platform.' }
+if ($RuntimeIdentifier -eq 'win-x64') {
+    $windowsLauncher = Join-Path $packageRoot 'scripts\relewise-agent.ps1'
+    if (-not (Test-Path -LiteralPath $windowsLauncher -PathType Leaf)) { throw 'Package is missing its Windows PowerShell launcher.' }
+    if (-not (Get-Content -Raw -LiteralPath $windowsLauncher).Contains('libexec\win-x64\relewise-agent.exe')) { throw 'Windows launcher does not select the native Windows executable.' }
+}
 
 Write-Host "Google Gemini CLI package smoke tests passed for $RuntimeIdentifier"

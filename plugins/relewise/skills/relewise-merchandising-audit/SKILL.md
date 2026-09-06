@@ -5,7 +5,7 @@ description: Audit Relewise merchandising and Search Tools configuration without
 
 # Audit Relewise Merchandising
 
-When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
+When `../../scripts/relewise-agent.ps1` exists on Windows, resolve it to an absolute path and use it. Otherwise, when `../../scripts/relewise-agent` exists, resolve and use that launcher. Fall back to `relewise-agent` from `PATH` only when neither packaged launcher exists.
 
 Use `relewise-agent` for execution. Never invent Dataset or rule IDs, construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. An audit authorizes reads only; do not update or patch rules.
 

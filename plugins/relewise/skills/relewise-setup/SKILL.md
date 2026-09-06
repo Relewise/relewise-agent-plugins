@@ -5,7 +5,7 @@ description: Set up, verify, or repair Relewise Agent Gateway authentication. Us
 
 # Relewise Setup
 
-When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
+When `../../scripts/relewise-agent.ps1` exists on Windows, resolve it to an absolute path and use it. Otherwise, when `../../scripts/relewise-agent` exists, resolve and use that launcher. Fall back to `relewise-agent` from `PATH` only when neither packaged launcher exists.
 
 Never ask the user to paste a Personal Access Token into the conversation. Do not print, repeat, inspect, or place a token in command text, command arguments, output, logs, or repository files.
 
