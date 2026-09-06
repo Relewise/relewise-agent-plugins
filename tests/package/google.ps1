@@ -17,8 +17,7 @@ if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'P
 
 if ($manifest.version -notmatch '^\d+\.\d+\.\d+$') { throw 'Gemini extension manifest version is not semantic.' }
 if ($sourceManifest.version -ne $plannedVersion) { throw 'Root Gemini extension manifest version does not match version.json.' }
-$tokenSetting = @($manifest.settings) | Where-Object envVar -eq 'RELEWISE_AGENT_GATEWAY_TOKEN'
-if ($tokenSetting.Count -ne 1 -or -not $tokenSetting.sensitive) { throw 'Agent Gateway PAT must be declared as one sensitive Gemini setting.' }
+if ($null -ne $manifest.settings) { throw 'Gemini must not request a PAT setting that cannot reach skill shell subprocesses.' }
 
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
 $packagedSkills = Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory

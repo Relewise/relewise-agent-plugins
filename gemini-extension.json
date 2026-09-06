@@ -1,13 +1,5 @@
 {
   "name": "relewise",
   "version": "0.4.1",
-  "description": "Work with your Relewise configuration, analytics and optimization using AI.",
-  "settings": [
-    {
-      "name": "Relewise Agent Gateway PAT",
-      "description": "Personal Access Token used to access the Relewise Agent Gateway.",
-      "envVar": "RELEWISE_AGENT_GATEWAY_TOKEN",
-      "sensitive": true
-    }
-  ]
+  "description": "Work with your Relewise configuration, analytics and optimization using AI."
 }

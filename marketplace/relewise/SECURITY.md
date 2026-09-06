@@ -3,7 +3,7 @@
 The Relewise plugin runs a platform-specific helper executable on the user's device. It sends requests only to the Relewise Agent Gateway at `https://my.relewise.com/agents` for operations selected by the user or their AI agent.
 
 - Authentication uses a Relewise Personal Access Token.
-- The token is passed through protected platform configuration or the `RELEWISE_AGENT_GATEWAY_TOKEN` process environment variable. It is never passed as a command-line argument.
+- The token reaches `relewise-agent` only through the `RELEWISE_AGENT_GATEWAY_TOKEN` process environment variable, whether injected by a secure credential provider or inherited from the user's environment. It is never passed as a command-line argument.
 - The plugin does not store the token, add telemetry, or send requests to a separate plugin service.
 - Relewise authorizes every request using the token's Dataset scope, the user's permissions, and each Dataset's enabled connection methods and allowed areas.
 - Responses are returned to the host AI agent. The host platform's own data handling and privacy terms also apply.

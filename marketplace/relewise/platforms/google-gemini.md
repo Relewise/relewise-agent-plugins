@@ -11,7 +11,7 @@ Use the detailed description, requirements, examples, and security text from the
 
 ## Installation and authentication copy
 
-Install the Relewise extension from its GitHub release. Make the Personal Access Token available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`. Use a secure credential provider that can inject it into the `relewise-agent` process on every invocation, or configure it as a persistent user or system environment variable. Gemini CLI's sensitive extension setting implements the credential-provider route. Never place the PAT in a prompt, command argument, repository file, or log.
+Install the Relewise extension from its GitHub release. Make the Personal Access Token available to Gemini CLI as `RELEWISE_AGENT_GATEWAY_TOKEN`. Use a secure credential provider that injects it whenever Gemini starts, or configure it as a persistent user or system environment variable and restart Gemini CLI. The packaged `relewise-agent` process inherits it from Gemini. Never place the PAT in a prompt, command argument, repository file, or log.
 
 The final command will use the public repository URL:
 
