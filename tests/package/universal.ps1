@@ -43,6 +43,19 @@ foreach ($vendor in $manifestPaths.Keys) {
         }
         $server = $manifest.mcpServers.'relewise-agent-gateway'
         if ($server.httpUrl -ne 'https://my.relewise.com/agents/mcp') { throw 'Universal Google package has the wrong Agent Gateway MCP endpoint.' }
+    } elseif ($vendor -eq 'claude') {
+        if ($manifest.mcpServers -ne './.claude-plugin/mcp.json') {
+            throw 'Claude universal package does not reference its protected MCP configuration.'
+        }
+        $mcpPath = Join-Path $packageRoot '.claude-plugin\mcp.json'
+        if (-not (Test-Path -LiteralPath $mcpPath -PathType Leaf)) {
+            throw 'Claude universal package is missing its protected Agent Gateway MCP configuration.'
+        }
+        $mcp = Get-Content -Raw -LiteralPath $mcpPath | ConvertFrom-Json
+        if ($mcp.mcpServers.'relewise-agent-gateway'.url -ne 'https://my.relewise.com/agents/mcp' -or
+            $mcp.mcpServers.'relewise-agent-gateway'.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
+            throw 'Claude universal package has the wrong protected Agent Gateway MCP configuration.'
+        }
     } else {
         if (-not (Test-Path -LiteralPath (Join-Path $packageRoot '.mcp.json') -PathType Leaf)) {
             throw "$vendor universal package is missing its Agent Gateway MCP configuration."

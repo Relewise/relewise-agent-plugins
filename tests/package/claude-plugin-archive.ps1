@@ -29,7 +29,7 @@ foreach ($runtime in @('win-x64', 'linux-x64', 'linux-arm64', 'osx-x64', 'osx-ar
         throw "Claude plugin archive is missing its $runtime executable."
     }
 }
-foreach ($requiredPath in @('.mcp.json', 'skills\relewise-core\SKILL.md', 'references\agent-gateway-transports.md', 'scripts\relewise-agent', 'LICENSE')) {
+foreach ($requiredPath in @('.claude-plugin\mcp.json', 'skills\relewise-core\SKILL.md', 'references\agent-gateway-transports.md', 'scripts\relewise-agent', 'LICENSE')) {
     if (-not (Test-Path -LiteralPath (Join-Path $resolvedPluginRoot $requiredPath) -PathType Leaf)) {
         throw "Claude plugin archive is missing $requiredPath."
     }

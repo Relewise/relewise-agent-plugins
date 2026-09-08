@@ -129,6 +129,7 @@ jobs:
           $target = 'plugins/relewise'
           Copy-Item -LiteralPath "$candidate/openai/relewise/.codex-plugin/plugin.json" -Destination "$target/.codex-plugin/plugin.json" -Force
           Copy-Item -LiteralPath "$candidate/claude/relewise/.claude-plugin/plugin.json" -Destination "$target/.claude-plugin/plugin.json" -Force
+          Copy-Item -LiteralPath "$candidate/claude/relewise/.claude-plugin/mcp.json" -Destination "$target/.claude-plugin/mcp.json" -Force
           Copy-Item -LiteralPath "$candidate/github-copilot/relewise/plugin.json" -Destination "$target/plugin.json" -Force
           Copy-Item -LiteralPath "$candidate/openai/relewise/scripts/relewise-agent" -Destination "$target/scripts/relewise-agent" -Force
           if ($runtimeRefreshNeeded) {

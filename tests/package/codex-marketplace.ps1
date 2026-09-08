@@ -82,10 +82,12 @@ if ($portableManifest.name -ne 'relewise' -or $claudeManifest.name -ne 'relewise
 if ($manifest.version -ne $portableManifest.version -or $manifest.version -ne $claudeManifest.version) {
     throw 'Committed vendor plugin manifest versions are not synchronized.'
 }
-if ($null -ne $claudeManifest.userConfig) {
-    throw 'Claude Code manifest must not claim protected Agent Gateway configuration.'
+if ($claudeManifest.userConfig.agent_gateway_token.type -ne 'string' -or
+    $claudeManifest.userConfig.agent_gateway_token.sensitive -ne $true -or
+    $claudeManifest.userConfig.agent_gateway_token.required -ne $true) {
+    throw 'Claude Code manifest does not request the Agent Gateway PAT as required protected configuration.'
 }
-if ($manifest.mcpServers -ne './.mcp.json' -or $claudeManifest.mcpServers -ne './.mcp.json') {
+if ($manifest.mcpServers -ne './.mcp.json' -or $claudeManifest.mcpServers -ne './.claude-plugin/mcp.json') {
     throw 'Relewise vendor manifests do not declare the Agent Gateway MCP configuration.'
 }
 $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.mcp.json') | ConvertFrom-Json
@@ -95,6 +97,14 @@ if ($businessServer.type -ne 'http' -or $businessServer.url -ne 'https://my.rele
 }
 if ($businessServer.headers.Authorization -ne 'Bearer ${RELEWISE_AGENT_GATEWAY_TOKEN:-}') {
     throw 'Relewise does not configure the shared token as its MCP authorization header.'
+}
+$claudeMcp = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.claude-plugin\mcp.json') | ConvertFrom-Json
+$claudeServer = $claudeMcp.mcpServers.'relewise-agent-gateway'
+if ($claudeServer.type -ne 'http' -or $claudeServer.url -ne 'https://my.relewise.com/agents/mcp') {
+    throw 'Relewise does not configure the expected Claude Agent Gateway MCP server.'
+}
+if ($claudeServer.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
+    throw 'Relewise does not configure Claude protected user configuration as its MCP authorization header.'
 }
 $transportReference = Join-Path $pluginRoot 'references\agent-gateway-transports.md'
 if (-not (Test-Path -LiteralPath $transportReference -PathType Leaf)) {

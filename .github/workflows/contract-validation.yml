@@ -58,7 +58,7 @@ jobs:
 
           claude plugin marketplace add $env:GITHUB_WORKSPACE --scope user
           if ($LASTEXITCODE -ne 0) { throw 'Claude failed to add the repository marketplace.' }
-          claude plugin install relewise@relewise --scope user
+          claude plugin install relewise@relewise --scope user --config agent_gateway_token=smoke-test-token
           if ($LASTEXITCODE -ne 0) { throw 'Claude failed to install the Relewise plugin.' }
           claude plugin install relewise-developer@relewise --scope user
           if ($LASTEXITCODE -ne 0) { throw 'Claude failed to install the Relewise Developer plugin.' }
@@ -79,10 +79,15 @@ jobs:
           }
 
           $env:CLAUDE_PLUGIN_ROOT = $installedRoot
-          $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.mcp.json') | ConvertFrom-Json
+          $businessManifest = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.claude-plugin/plugin.json') | ConvertFrom-Json
+          if ($businessManifest.userConfig.agent_gateway_token.sensitive -ne $true -or
+              $businessManifest.userConfig.agent_gateway_token.required -ne $true) {
+            throw 'The installed Relewise plugin does not request protected Agent Gateway configuration.'
+          }
+          $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.claude-plugin/mcp.json') | ConvertFrom-Json
           $businessServer = $businessMcp.mcpServers.'relewise-agent-gateway'
           if ($businessServer.url -ne 'https://my.relewise.com/agents/mcp' -or
-              $businessServer.headers.Authorization -ne 'Bearer ${RELEWISE_AGENT_GATEWAY_TOKEN:-}') {
+              $businessServer.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
             throw 'The installed Relewise plugin has an invalid Agent Gateway MCP configuration.'
           }
           if (-not (Test-Path -LiteralPath (Join-Path $installedRoot 'references/agent-gateway-transports.md'))) {

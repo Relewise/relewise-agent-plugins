@@ -19,6 +19,7 @@ $includedPaths = @(
     '.claude-plugin/marketplace.json',
     '.github/plugin/marketplace.json',
     'vendors/claude/relewise/.claude-plugin/plugin.json',
+    'vendors/claude/relewise/.claude-plugin/mcp.json',
     'vendors/claude/relewise-developer/.claude-plugin/plugin.json',
     'vendors/openai/relewise/.codex-plugin/plugin.json',
     'vendors/openai/relewise-developer/.codex-plugin/plugin.json',

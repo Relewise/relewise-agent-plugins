@@ -2,6 +2,14 @@
   "name": "relewise",
   "version": "0.4.2",
   "description": "Work with your Relewise configuration, analytics and optimization using AI.",
+  "settings": [
+    {
+      "name": "Relewise Agent Gateway Personal Access Token",
+      "description": "Used securely to authenticate the Relewise MCP connection.",
+      "envVar": "RELEWISE_AGENT_GATEWAY_TOKEN",
+      "sensitive": true
+    }
+  ],
   "mcpServers": {
     "relewise-agent-gateway": {
       "httpUrl": "https://my.relewise.com/agents/mcp",
