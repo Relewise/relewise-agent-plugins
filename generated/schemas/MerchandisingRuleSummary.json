@@ -5,8 +5,12 @@
     "name",
     "description",
     "enabled",
+    "priority",
+    "group",
     "schedule",
-    "status"
+    "status",
+    "created",
+    "modified"
   ],
   "type": "object",
   "properties": {
@@ -17,7 +21,7 @@
     },
     "type": {
       "type": "string",
-      "description": "Discriminator identifying the merchandising rule variant. Supported values are boostAndBury, fixedPosition, and filter."
+      "description": "Discriminator identifying the merchandising rule variant and its corresponding detail configuration. Supported values are boostAndBury, fixedPosition, filter, and inputModifier."
     },
     "name": {
       "type": "string",
@@ -32,6 +36,15 @@
       "type": "boolean",
       "description": "Whether the merchandising rule is enabled. A disabled rule is not applied to requests."
     },
+    "priority": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+      "description": "Ordering value of the merchandising rule. Lower values appear earlier in the configured rule order, and list results are returned in this order.",
+      "format": "double"
+    },
+    "group": {
+      "type": "string",
+      "description": "Group configured for the merchandising rule, or an empty string when the rule does not belong to a group."
+    },
     "schedule": {
       "$ref": "#/components/schemas/MerchandisingRuleSchedule"
     },
@@ -39,7 +52,17 @@
       "type": "string",
       "description": "Current calculated rule status, or null when no status is available. This value is informational and may gain additional values in the future.",
       "nullable": true
+    },
+    "created": {
+      "type": "string",
+      "description": "UTC date and time when the merchandising rule was created.",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "description": "UTC date and time when the merchandising rule was last modified.",
+      "format": "date-time"
     }
   },
-  "description": "Compact merchandising rule representation returned by list operations."
+  "description": "Compact merchandising rule representation returned by list operations, including identity, state, ordering, grouping, schedule, and audit timestamps without detailed conditions or configuration."
 }

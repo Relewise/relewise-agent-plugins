@@ -1,0 +1,57 @@
+{
+  "required": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "group",
+    "enabled",
+    "within",
+    "created",
+    "modified"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Trigger Configuration ID. Use configuration discovery to find this value.",
+      "format": "uuid"
+    },
+    "type": {
+      "type": "string",
+      "description": "Trigger type: abandonedCart, abandonedSearch, productInterest, productCategoryInterest, contentCategoryInterest, userActivity, productChange, or variantChange."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the configured Trigger."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description supplied for this Trigger configuration."
+    },
+    "group": {
+      "type": "string",
+      "description": "Optional configuration group; null when no group is assigned.",
+      "nullable": true
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether this configuration is enabled. Trigger evaluation also requires the global configuration to be enabled."
+    },
+    "within": {
+      "type": "string",
+      "description": "Human-readable evaluation window. This is display text, not a machine-readable duration."
+    },
+    "created": {
+      "type": "string",
+      "description": "Timestamp when the configuration was created.",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Timestamp when the configuration was last modified.",
+      "format": "date-time"
+    }
+  },
+  "description": "A configured Trigger that can call another system when its criteria are met."
+}

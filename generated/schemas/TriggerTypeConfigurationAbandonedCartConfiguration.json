@@ -1,0 +1,25 @@
+{
+  "required": [
+    "cartName",
+    "selectedPropertiesJson"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "abandonedCart"
+      ],
+      "type": "string"
+    },
+    "cartName": {
+      "type": "string",
+      "description": "Cart name selected by the configuration; null means no specific cart name is configured.",
+      "nullable": true
+    },
+    "selectedPropertiesJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise result property selection for the abandoned cart. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+      "nullable": true
+    }
+  },
+  "description": "Configuration for an abandoned-cart Trigger."
+}

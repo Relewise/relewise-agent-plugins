@@ -1,0 +1,39 @@
+{
+  "required": [
+    "considerAbandonedAfterMinutes",
+    "searchTypesInPrioritizedOrder",
+    "suppressOnEntityFromSearchResultViewed",
+    "searchTermConditionJson"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "abandonedSearch"
+      ],
+      "type": "string"
+    },
+    "considerAbandonedAfterMinutes": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Minutes of inactivity after which a search is considered abandoned.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "searchTypesInPrioritizedOrder": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Search types in configured priority order: Product, ProductCategory, or Content."
+    },
+    "suppressOnEntityFromSearchResultViewed": {
+      "type": "boolean",
+      "description": "Whether viewing an entity from the search results suppresses the Trigger."
+    },
+    "searchTermConditionJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise search-term condition, including nested AND/OR conditions. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+      "nullable": true
+    }
+  },
+  "description": "Configuration for an abandoned-search Trigger."
+}

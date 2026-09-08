@@ -1,9 +1,9 @@
 {
   "source": "contracts/agent-gateway-v1.json",
-  "sourceSha256": "7d40cc3c638a4a6c6f905c42caedaaa32fed4cb000420649b8f1eb09f71efc45",
+  "sourceSha256": "5f0cf0825b252550815969fc3c043c38d48903947c93d1d945e5336b0e7c732a",
   "openapi": "3.0.4",
   "apiVersion": "v1",
-  "operationCount": 52,
+  "operationCount": 56,
   "operations": [
     {
       "operationId": "AnalyticsGetRevenue",
@@ -18,7 +18,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -114,7 +114,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -191,7 +191,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -268,7 +268,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -345,7 +345,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -422,7 +422,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -499,7 +499,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -576,7 +576,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -653,7 +653,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -741,7 +741,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -829,7 +829,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -917,7 +917,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -986,7 +986,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1106,7 +1106,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1194,7 +1194,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1282,7 +1282,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1370,7 +1370,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1458,7 +1458,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1546,7 +1546,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1642,7 +1642,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1719,7 +1719,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1796,7 +1796,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1873,7 +1873,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -1950,7 +1950,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2035,7 +2035,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2104,7 +2104,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2210,7 +2210,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2316,7 +2316,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2422,7 +2422,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2528,7 +2528,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2672,7 +2672,7 @@
         "Merchandising"
       ],
       "summary": "Gets a merchandising rule.",
-      "description": "Returns one merchandising rule with its documented type-specific configuration. Use this operation to inspect current state before a possible change. Use MerchandisingListRules first when the Rule ID is unknown. This operation is read-only.",
+      "description": "Returns one merchandising rule with its documented type-specific configuration, complete conditions, and advanced request configuration. The conditionsJson and requestConfigurationJson properties contain JSON-encoded text that must be parsed before inspection. Use this operation to inspect current state before a possible change. Use MerchandisingListRules first when the Rule ID is unknown. This operation is read-only.",
       "pathParameters": [
         {
           "name": "ruleId",
@@ -2686,7 +2686,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2750,19 +2750,44 @@
         "Merchandising"
       ],
       "summary": "Lists merchandising rules.",
-      "description": "Returns compact merchandising rule representations for the requested Dataset. Use this operation when the intended Rule ID is unknown. Inspect a selected rule with MerchandisingGetRule before changing it. This operation is read-only.",
+      "description": "Returns one page of compact merchandising rule representations in configured priority order, including grouping and creation and modification timestamps. Actor identities, conditions, and detailed configuration are omitted. Use this operation when the intended Rule ID is unknown. Inspect a selected rule with MerchandisingGetRule before changing it. This operation is read-only.",
       "pathParameters": [
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
           }
         }
       ],
-      "queryParameters": [],
+      "queryParameters": [
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number. Defaults to 1 when omitted.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
       "requestBody": null,
       "responses": {
         "200": {
@@ -2833,7 +2858,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2910,7 +2935,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -2988,7 +3013,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3066,7 +3091,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3143,7 +3168,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3221,7 +3246,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3299,7 +3324,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3365,6 +3390,84 @@
       }
     },
     {
+      "operationId": "SearchToolsGetSynonymRule",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/synonyms/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Gets a Synonym rule.",
+      "description": "Returns one Synonym rule by Rule ID with its complete current configuration. Use this read-only operation when the Rule ID is already known.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SynonymRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
       "operationId": "SearchToolsListDecompoundingRules",
       "method": "GET",
       "path": "/api/v1/datasets/{datasetId}/search-tools/decompounding-rules",
@@ -3377,7 +3480,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3487,7 +3590,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3597,7 +3700,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3658,7 +3761,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3768,7 +3871,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3878,7 +3981,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -3983,12 +4086,12 @@
         "Search Tools"
       ],
       "summary": "Lists Synonym rules.",
-      "description": "Returns a bounded page of Synonym rules. This operation is read-only. Get-by-ID and mutations are not available until the upstream Synonym API supports the unified Search Tools model.",
+      "description": "Returns a bounded page of Synonym rules with their complete direction-specific definitions. Use this read-only operation to discover and filter rules.",
       "pathParameters": [
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -4107,7 +4210,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -4193,7 +4296,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -4279,7 +4382,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -4365,7 +4468,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -4451,7 +4554,7 @@
         {
           "name": "datasetId",
           "required": true,
-          "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
           "schema": {
             "type": "string",
             "format": "uuid"
@@ -4474,6 +4577,264 @@
           "content": {
             "application/json": {
               "$ref": "#/components/schemas/StemmingRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "SearchToolsPatchSynonymRule",
+      "method": "PATCH",
+      "path": "/api/v1/datasets/{datasetId}/search-tools/synonyms/{ruleId}",
+      "tags": [
+        "Search Tools"
+      ],
+      "summary": "Updates Synonym rule state.",
+      "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
+      "pathParameters": [
+        {
+          "name": "ruleId",
+          "required": true,
+          "description": "Rule ID to update.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/UpdateSearchToolRuleRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/SynonymRuleResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "TriggersGetConfiguration",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/triggers/configurations/{configurationId}",
+      "tags": [
+        "Triggers"
+      ],
+      "summary": "Gets a Trigger configuration.",
+      "description": "Read-only inspection by Configuration ID. Use TriggersListConfigurations to discover the ID. Inspect the typed configuration and parse the scoped condition/filter JSON documents as needed. Delivery settings and credentials are omitted. This operation never evaluates a Trigger or sends a webhook.",
+      "pathParameters": [
+        {
+          "name": "configurationId",
+          "required": true,
+          "description": "Trigger Configuration ID from TriggersListConfigurations.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/TriggerConfigurationResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "TriggersListConfigurations",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/triggers/configurations",
+      "tags": [
+        "Triggers"
+      ],
+      "summary": "Lists Trigger configurations.",
+      "description": "Read-only configuration discovery ordered by name and then Configuration ID. Use TriggersGetConfiguration to inspect a selected configuration; globallyEnabled reports Dataset-wide evaluation state.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number. Defaults to 1 when omitted.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/TriggerConfigurationsResponse"
             }
           }
         },

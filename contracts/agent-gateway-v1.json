@@ -23,7 +23,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -150,7 +150,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -239,7 +239,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -328,7 +328,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -417,7 +417,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -506,7 +506,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -595,7 +595,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -684,7 +684,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -773,7 +773,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -862,7 +862,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -951,7 +951,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1056,7 +1056,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1134,7 +1134,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1221,7 +1221,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1326,7 +1326,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1404,7 +1404,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1509,7 +1509,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1587,7 +1587,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1692,7 +1692,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1770,7 +1770,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1875,7 +1875,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1953,7 +1953,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2022,7 +2022,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2107,7 +2107,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2186,7 +2186,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2274,7 +2274,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2353,7 +2353,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2432,7 +2432,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2511,7 +2511,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2619,7 +2619,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2682,13 +2682,37 @@
           "Merchandising"
         ],
         "summary": "Lists merchandising rules.",
-        "description": "Returns compact merchandising rule representations for the requested Dataset. Use this operation when the intended Rule ID is unknown. Inspect a selected rule with MerchandisingGetRule before changing it. This operation is read-only.",
+        "description": "Returns one page of compact merchandising rule representations in configured priority order, including grouping and creation and modification timestamps. Actor identities, conditions, and detailed configuration are omitted. Use this operation when the intended Rule ID is unknown. Inspect a selected rule with MerchandisingGetRule before changing it. This operation is read-only.",
         "operationId": "MerchandisingListRules",
         "parameters": [
           {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "One-based page number. Defaults to 1 when omitted.",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "schema": {
+              "maximum": 100,
+              "minimum": 10,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2751,7 +2775,7 @@
           "Merchandising"
         ],
         "summary": "Gets a merchandising rule.",
-        "description": "Returns one merchandising rule with its documented type-specific configuration. Use this operation to inspect current state before a possible change. Use MerchandisingListRules first when the Rule ID is unknown. This operation is read-only.",
+        "description": "Returns one merchandising rule with its documented type-specific configuration, complete conditions, and advanced request configuration. The conditionsJson and requestConfigurationJson properties contain JSON-encoded text that must be parsed before inspection. Use this operation to inspect current state before a possible change. Use MerchandisingListRules first when the Rule ID is unknown. This operation is read-only.",
         "operationId": "MerchandisingGetRule",
         "parameters": [
           {
@@ -2767,7 +2791,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2844,7 +2868,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2940,7 +2964,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2999,7 +3023,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3071,13 +3095,13 @@
           "Search Tools"
         ],
         "summary": "Lists Synonym rules.",
-        "description": "Returns a bounded page of Synonym rules. This operation is read-only. Get-by-ID and mutations are not available until the upstream Synonym API supports the unified Search Tools model.",
+        "description": "Returns a bounded page of Synonym rules with their complete direction-specific definitions. Use this read-only operation to discover and filter rules.",
         "operationId": "SearchToolsListSynonymRules",
         "parameters": [
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3174,6 +3198,172 @@
         }
       }
     },
+    "/api/v1/datasets/{datasetId}/search-tools/synonyms/{ruleId}": {
+      "get": {
+        "tags": [
+          "Search Tools"
+        ],
+        "summary": "Gets a Synonym rule.",
+        "description": "Returns one Synonym rule by Rule ID with its complete current configuration. Use this read-only operation when the Rule ID is already known.",
+        "operationId": "SearchToolsGetSynonymRule",
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Rule ID.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SynonymRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Search Tools"
+        ],
+        "summary": "Updates Synonym rule state.",
+        "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
+        "operationId": "SearchToolsPatchSynonymRule",
+        "parameters": [
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Rule ID to update.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSearchToolRuleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SynonymRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
     "/api/v1/datasets/{datasetId}/search-tools/stemming-rules": {
       "get": {
         "tags": [
@@ -3186,7 +3376,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3295,7 +3485,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3382,7 +3572,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3461,7 +3651,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3570,7 +3760,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3657,7 +3847,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3736,7 +3926,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3845,7 +4035,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3932,7 +4122,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4011,7 +4201,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4120,7 +4310,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4207,7 +4397,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4286,7 +4476,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4395,7 +4585,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4482,7 +4672,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4507,6 +4697,178 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchResultModifierRuleResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/triggers/configurations": {
+      "get": {
+        "tags": [
+          "Triggers"
+        ],
+        "summary": "Lists Trigger configurations.",
+        "description": "Read-only configuration discovery ordered by name and then Configuration ID. Use TriggersGetConfiguration to inspect a selected configuration; globallyEnabled reports Dataset-wide evaluation state.",
+        "operationId": "TriggersListConfigurations",
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "One-based page number. Defaults to 1 when omitted.",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "schema": {
+              "maximum": 100,
+              "minimum": 10,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TriggerConfigurationsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/triggers/configurations/{configurationId}": {
+      "get": {
+        "tags": [
+          "Triggers"
+        ],
+        "summary": "Gets a Trigger configuration.",
+        "description": "Read-only inspection by Configuration ID. Use TriggersListConfigurations to discover the ID. Inspect the typed configuration and parse the scoped condition/filter JSON documents as needed. Delivery settings and credentials are omitted. This operation never evaluates a Trigger or sends a webhook.",
+        "operationId": "TriggersGetConfiguration",
+        "parameters": [
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Trigger Configuration ID from TriggersListConfigurations.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TriggerConfigurationResponse"
                 }
               }
             }
@@ -5680,6 +6042,9 @@
           },
           {
             "$ref": "#/components/schemas/MerchandisingRuleConfigurationFilterRuleConfiguration"
+          },
+          {
+            "$ref": "#/components/schemas/MerchandisingRuleConfigurationInputModifierRuleConfiguration"
           }
         ],
         "description": "Type-specific merchandising rule configuration selected by the stable type discriminator.",
@@ -5688,7 +6053,8 @@
           "mapping": {
             "boostAndBury": "#/components/schemas/MerchandisingRuleConfigurationBoostAndBuryRuleConfiguration",
             "fixedPosition": "#/components/schemas/MerchandisingRuleConfigurationFixedPositionRuleConfiguration",
-            "filter": "#/components/schemas/MerchandisingRuleConfigurationFilterRuleConfiguration"
+            "filter": "#/components/schemas/MerchandisingRuleConfigurationFilterRuleConfiguration",
+            "inputModifier": "#/components/schemas/MerchandisingRuleConfigurationInputModifierRuleConfiguration"
           }
         }
       },
@@ -5740,6 +6106,17 @@
         },
         "description": "Configuration for a rule that places matching entities at a fixed result position."
       },
+      "MerchandisingRuleConfigurationInputModifierRuleConfiguration": {
+        "properties": {
+          "type": {
+            "enum": [
+              "inputModifier"
+            ],
+            "type": "string"
+          }
+        },
+        "description": "Configuration marker for an Input Modifier rule, which has no additional type-specific settings."
+      },
       "MerchandisingRuleDetails": {
         "required": [
           "id",
@@ -5747,9 +6124,15 @@
           "name",
           "description",
           "enabled",
+          "priority",
+          "group",
           "schedule",
           "status",
-          "configuration"
+          "created",
+          "modified",
+          "configuration",
+          "conditionsJson",
+          "requestConfigurationJson"
         ],
         "type": "object",
         "properties": {
@@ -5760,7 +6143,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Discriminator identifying the merchandising rule variant. It matches the discriminator in configuration."
+            "description": "Discriminator identifying the merchandising rule variant and its corresponding detail configuration. Supported values are boostAndBury, fixedPosition, filter, and inputModifier."
           },
           "name": {
             "type": "string",
@@ -5775,6 +6158,15 @@
             "type": "boolean",
             "description": "Whether the merchandising rule is enabled. A disabled rule is not applied to requests."
           },
+          "priority": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "description": "Ordering value of the merchandising rule. Lower values appear earlier in the configured rule order, and list results are returned in this order.",
+            "format": "double"
+          },
+          "group": {
+            "type": "string",
+            "description": "Group configured for the merchandising rule, or an empty string when the rule does not belong to a group."
+          },
           "schedule": {
             "$ref": "#/components/schemas/MerchandisingRuleSchedule"
           },
@@ -5783,11 +6175,29 @@
             "description": "Current calculated rule status, or null when no status is available. This value is informational and may gain additional values in the future.",
             "nullable": true
           },
+          "created": {
+            "type": "string",
+            "description": "UTC date and time when the merchandising rule was created.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "UTC date and time when the merchandising rule was last modified.",
+            "format": "date-time"
+          },
           "configuration": {
             "$ref": "#/components/schemas/MerchandisingRuleConfiguration"
+          },
+          "conditionsJson": {
+            "type": "string",
+            "description": "Complete merchandising rule conditions as JSON-encoded text, including rule scope, viewing context, user conditions, request filters, and target entities. Parse this string as JSON before inspecting it. Polymorphic objects preserve their $type discriminator. See https://docs.relewise.com/docs/myrelewise/merchandising.html and https://docs.relewise.com/docs/filters/index.html."
+          },
+          "requestConfigurationJson": {
+            "type": "string",
+            "description": "Complete advanced request configuration as JSON-encoded text, including overridden request settings and filter or relevance-modifier prioritization. Parse this string as JSON before inspecting it. Polymorphic objects preserve their $type discriminator. See https://docs.relewise.com/docs/myrelewise/merchandising.html."
           }
         },
-        "description": "Detailed representation of a merchandising rule, including its type-specific configuration."
+        "description": "Detailed representation of a merchandising rule, including its type-specific configuration, complete conditions, and request configuration."
       },
       "MerchandisingRuleMultiplier": {
         "required": [
@@ -5884,7 +6294,8 @@
       },
       "MerchandisingRulesResponse": {
         "required": [
-          "rules"
+          "rules",
+          "pagination"
         ],
         "type": "object",
         "properties": {
@@ -5893,10 +6304,13 @@
             "items": {
               "$ref": "#/components/schemas/MerchandisingRuleSummary"
             },
-            "description": "Merchandising rules returned for the requested Dataset. The collection is empty when no rules are available."
+            "description": "Merchandising rules in the requested page."
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationMetadata"
           }
         },
-        "description": "List of merchandising rules the authenticated user can inspect through Agent Gateway for a Dataset."
+        "description": "One priority-ordered page of merchandising rules."
       },
       "MerchandisingRuleSummary": {
         "required": [
@@ -5905,8 +6319,12 @@
           "name",
           "description",
           "enabled",
+          "priority",
+          "group",
           "schedule",
-          "status"
+          "status",
+          "created",
+          "modified"
         ],
         "type": "object",
         "properties": {
@@ -5917,7 +6335,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Discriminator identifying the merchandising rule variant. Supported values are boostAndBury, fixedPosition, and filter."
+            "description": "Discriminator identifying the merchandising rule variant and its corresponding detail configuration. Supported values are boostAndBury, fixedPosition, filter, and inputModifier."
           },
           "name": {
             "type": "string",
@@ -5932,6 +6350,15 @@
             "type": "boolean",
             "description": "Whether the merchandising rule is enabled. A disabled rule is not applied to requests."
           },
+          "priority": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "description": "Ordering value of the merchandising rule. Lower values appear earlier in the configured rule order, and list results are returned in this order.",
+            "format": "double"
+          },
+          "group": {
+            "type": "string",
+            "description": "Group configured for the merchandising rule, or an empty string when the rule does not belong to a group."
+          },
           "schedule": {
             "$ref": "#/components/schemas/MerchandisingRuleSchedule"
           },
@@ -5939,9 +6366,19 @@
             "type": "string",
             "description": "Current calculated rule status, or null when no status is available. This value is informational and may gain additional values in the future.",
             "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "UTC date and time when the merchandising rule was created.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "UTC date and time when the merchandising rule was last modified.",
+            "format": "date-time"
           }
         },
-        "description": "Compact merchandising rule representation returned by list operations."
+        "description": "Compact merchandising rule representation returned by list operations, including identity, state, ordering, grouping, schedule, and audit timestamps without detailed conditions or configuration."
       },
       "PaginationMetadata": {
         "required": [
@@ -8477,6 +8914,50 @@
         },
         "description": "One-way Synonym definition where searches for From Words also include results matching To Words, but not the reverse."
       },
+      "SynonymRule": {
+        "required": [
+          "id",
+          "isApproved",
+          "scope",
+          "definition",
+          "allowInPredictions"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The stable Rule ID.",
+            "format": "uuid"
+          },
+          "isApproved": {
+            "type": "boolean",
+            "description": "Whether the rule is approved and active for matching searches."
+          },
+          "scope": {
+            "$ref": "#/components/schemas/SearchToolRuleScope"
+          },
+          "definition": {
+            "$ref": "#/components/schemas/SynonymDefinition"
+          },
+          "allowInPredictions": {
+            "type": "boolean",
+            "description": "Whether the Synonym rule also applies to Search Term Prediction."
+          }
+        },
+        "description": "Synonym rule representation returned by direct Rule ID lookup, including its complete direction-specific definition."
+      },
+      "SynonymRuleResponse": {
+        "required": [
+          "rule"
+        ],
+        "type": "object",
+        "properties": {
+          "rule": {
+            "$ref": "#/components/schemas/SynonymRule"
+          }
+        },
+        "description": "One Synonym rule."
+      },
       "SynonymRulesResponse": {
         "required": [
           "rules",
@@ -8527,7 +9008,519 @@
             "description": "Whether the Synonym rule also applies to Search Term Prediction."
           }
         },
-        "description": "Synonym rule representation returned by list operations."
+        "description": "Synonym rule representation returned by list operations, including its complete direction-specific definition."
+      },
+      "TriggerConfigurationDetails": {
+        "required": [
+          "id",
+          "type",
+          "name",
+          "description",
+          "group",
+          "enabled",
+          "within",
+          "created",
+          "modified",
+          "withinMinutes",
+          "configuration",
+          "userConditionsJson"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Trigger Configuration ID. Use configuration discovery to find this value.",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string",
+            "description": "Trigger type: abandonedCart, abandonedSearch, productInterest, productCategoryInterest, contentCategoryInterest, userActivity, productChange, or variantChange."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the configured Trigger."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description supplied for this Trigger configuration."
+          },
+          "group": {
+            "type": "string",
+            "description": "Optional configuration group; null when no group is assigned.",
+            "nullable": true
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether this configuration is enabled. Trigger evaluation also requires the global configuration to be enabled."
+          },
+          "within": {
+            "type": "string",
+            "description": "Human-readable evaluation window. This is display text, not a machine-readable duration."
+          },
+          "created": {
+            "type": "string",
+            "description": "Timestamp when the configuration was created.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "Timestamp when the configuration was last modified.",
+            "format": "date-time"
+          },
+          "withinMinutes": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "description": "Evaluation window in minutes within which the Trigger criteria must be met. This is not necessarily the inactivity delay; consult the type-specific configuration and user conditions.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "configuration": {
+            "$ref": "#/components/schemas/TriggerTypeConfiguration"
+          },
+          "userConditionsJson": {
+            "type": "string",
+            "description": "JSON-encoded array of Relewise user conditions, including activity and previous-trigger constraints. Parse this string as JSON and preserve $type metadata. Null when no condition collection is provided. See https://docs.relewise.com/docs/triggers/user-conditions.html.",
+            "nullable": true
+          }
+        },
+        "description": "One Trigger configuration with typed criteria and scoped Relewise condition documents."
+      },
+      "TriggerConfigurationResponse": {
+        "required": [
+          "configuration"
+        ],
+        "type": "object",
+        "properties": {
+          "configuration": {
+            "$ref": "#/components/schemas/TriggerConfigurationDetails"
+          }
+        },
+        "description": "Selected Trigger configuration."
+      },
+      "TriggerConfigurationsResponse": {
+        "required": [
+          "globallyEnabled",
+          "configurations",
+          "pagination"
+        ],
+        "type": "object",
+        "properties": {
+          "globallyEnabled": {
+            "type": "boolean",
+            "description": "Whether Trigger evaluation is enabled for the Dataset. Individual configurations must also be enabled to execute."
+          },
+          "configurations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TriggerConfigurationSummary"
+            },
+            "description": "Configuration summaries for this page; empty when none match."
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/PaginationMetadata"
+          }
+        },
+        "description": "One page of Trigger configurations ordered by name and then Configuration ID."
+      },
+      "TriggerConfigurationSummary": {
+        "required": [
+          "id",
+          "type",
+          "name",
+          "description",
+          "group",
+          "enabled",
+          "within",
+          "created",
+          "modified"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Trigger Configuration ID. Use configuration discovery to find this value.",
+            "format": "uuid"
+          },
+          "type": {
+            "type": "string",
+            "description": "Trigger type: abandonedCart, abandonedSearch, productInterest, productCategoryInterest, contentCategoryInterest, userActivity, productChange, or variantChange."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the configured Trigger."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description supplied for this Trigger configuration."
+          },
+          "group": {
+            "type": "string",
+            "description": "Optional configuration group; null when no group is assigned.",
+            "nullable": true
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether this configuration is enabled. Trigger evaluation also requires the global configuration to be enabled."
+          },
+          "within": {
+            "type": "string",
+            "description": "Human-readable evaluation window. This is display text, not a machine-readable duration."
+          },
+          "created": {
+            "type": "string",
+            "description": "Timestamp when the configuration was created.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "Timestamp when the configuration was last modified.",
+            "format": "date-time"
+          }
+        },
+        "description": "A configured Trigger that can call another system when its criteria are met."
+      },
+      "TriggerCountRange": {
+        "required": [
+          "minimum",
+          "maximum"
+        ],
+        "type": "object",
+        "properties": {
+          "minimum": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "description": "Inclusive minimum count; null means no lower bound.",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "maximum": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "description": "Inclusive maximum count; null means no upper bound.",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          }
+        },
+        "description": "Inclusive bounds on an activity count."
+      },
+      "TriggerTypeConfiguration": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/TriggerTypeConfigurationAbandonedCartConfiguration"
+          },
+          {
+            "$ref": "#/components/schemas/TriggerTypeConfigurationAbandonedSearchConfiguration"
+          },
+          {
+            "$ref": "#/components/schemas/TriggerTypeConfigurationProductInterestConfiguration"
+          },
+          {
+            "$ref": "#/components/schemas/TriggerTypeConfigurationProductCategoryInterestConfiguration"
+          },
+          {
+            "$ref": "#/components/schemas/TriggerTypeConfigurationContentCategoryInterestConfiguration"
+          },
+          {
+            "$ref": "#/components/schemas/TriggerTypeConfigurationUserActivityConfiguration"
+          },
+          {
+            "$ref": "#/components/schemas/TriggerTypeConfigurationProductChangeConfiguration"
+          },
+          {
+            "$ref": "#/components/schemas/TriggerTypeConfigurationVariantChangeConfiguration"
+          }
+        ],
+        "description": "Type-specific Trigger configuration selected by a stable type discriminator.",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "abandonedCart": "#/components/schemas/TriggerTypeConfigurationAbandonedCartConfiguration",
+            "abandonedSearch": "#/components/schemas/TriggerTypeConfigurationAbandonedSearchConfiguration",
+            "productInterest": "#/components/schemas/TriggerTypeConfigurationProductInterestConfiguration",
+            "productCategoryInterest": "#/components/schemas/TriggerTypeConfigurationProductCategoryInterestConfiguration",
+            "contentCategoryInterest": "#/components/schemas/TriggerTypeConfigurationContentCategoryInterestConfiguration",
+            "userActivity": "#/components/schemas/TriggerTypeConfigurationUserActivityConfiguration",
+            "productChange": "#/components/schemas/TriggerTypeConfigurationProductChangeConfiguration",
+            "variantChange": "#/components/schemas/TriggerTypeConfigurationVariantChangeConfiguration"
+          }
+        }
+      },
+      "TriggerTypeConfigurationAbandonedCartConfiguration": {
+        "required": [
+          "cartName",
+          "selectedPropertiesJson"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "abandonedCart"
+            ],
+            "type": "string"
+          },
+          "cartName": {
+            "type": "string",
+            "description": "Cart name selected by the configuration; null means no specific cart name is configured.",
+            "nullable": true
+          },
+          "selectedPropertiesJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise result property selection for the abandoned cart. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+            "nullable": true
+          }
+        },
+        "description": "Configuration for an abandoned-cart Trigger."
+      },
+      "TriggerTypeConfigurationAbandonedSearchConfiguration": {
+        "required": [
+          "considerAbandonedAfterMinutes",
+          "searchTypesInPrioritizedOrder",
+          "suppressOnEntityFromSearchResultViewed",
+          "searchTermConditionJson"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "abandonedSearch"
+            ],
+            "type": "string"
+          },
+          "considerAbandonedAfterMinutes": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "description": "Minutes of inactivity after which a search is considered abandoned.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "searchTypesInPrioritizedOrder": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Search types in configured priority order: Product, ProductCategory, or Content."
+          },
+          "suppressOnEntityFromSearchResultViewed": {
+            "type": "boolean",
+            "description": "Whether viewing an entity from the search results suppresses the Trigger."
+          },
+          "searchTermConditionJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise search-term condition, including nested AND/OR conditions. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+            "nullable": true
+          }
+        },
+        "description": "Configuration for an abandoned-search Trigger."
+      },
+      "TriggerTypeConfigurationContentCategoryInterestConfiguration": {
+        "required": [
+          "categoryViews",
+          "contentViews",
+          "filtersJson"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "contentCategoryInterest"
+            ],
+            "type": "string"
+          },
+          "categoryViews": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TriggerCountRange"
+              }
+            ],
+            "nullable": true
+          },
+          "contentViews": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TriggerCountRange"
+              }
+            ],
+            "nullable": true
+          },
+          "filtersJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise entity filters. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          }
+        },
+        "description": "Configuration for a content-category-interest Trigger."
+      },
+      "TriggerTypeConfigurationProductCategoryInterestConfiguration": {
+        "required": [
+          "categoryViews",
+          "productViews",
+          "filtersJson"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "productCategoryInterest"
+            ],
+            "type": "string"
+          },
+          "categoryViews": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TriggerCountRange"
+              }
+            ],
+            "nullable": true
+          },
+          "productViews": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TriggerCountRange"
+              }
+            ],
+            "nullable": true
+          },
+          "filtersJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise entity filters. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          }
+        },
+        "description": "Configuration for a product-category-interest Trigger."
+      },
+      "TriggerTypeConfigurationProductChangeConfiguration": {
+        "required": [
+          "entityPropertySelectorJson",
+          "changeJson",
+          "beforeChangeFiltersJson",
+          "afterChangeFiltersJson",
+          "resultSettingsJson"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "productChange"
+            ],
+            "type": "string"
+          },
+          "entityPropertySelectorJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise entity property selector identifying the value monitored for changes. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+            "nullable": true
+          },
+          "changeJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise change definition specifying the required change in the selected value. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+            "nullable": true
+          },
+          "beforeChangeFiltersJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise filters selecting entities before a change. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          },
+          "afterChangeFiltersJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise filters selecting entities after a change. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          },
+          "resultSettingsJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise result property selections, including any nested filters. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+            "nullable": true
+          }
+        },
+        "description": "Configuration for a product-change Trigger, such as price drops or stock changes."
+      },
+      "TriggerTypeConfigurationProductInterestConfiguration": {
+        "required": [
+          "productViews",
+          "filtersJson",
+          "resultSettingsJson"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "productInterest"
+            ],
+            "type": "string"
+          },
+          "productViews": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TriggerCountRange"
+              }
+            ],
+            "nullable": true
+          },
+          "filtersJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise entity filters. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          },
+          "resultSettingsJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise result property selections, including any nested filters. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+            "nullable": true
+          }
+        },
+        "description": "Configuration for a product-interest Trigger."
+      },
+      "TriggerTypeConfigurationUserActivityConfiguration": {
+        "properties": {
+          "type": {
+            "enum": [
+              "userActivity"
+            ],
+            "type": "string"
+          }
+        },
+        "description": "Configuration for a user-activity Trigger. Its evaluation window and user conditions are on the enclosing details."
+      },
+      "TriggerTypeConfigurationVariantChangeConfiguration": {
+        "required": [
+          "entityPropertySelectorJson",
+          "changeJson",
+          "beforeChangeFiltersJson",
+          "afterChangeFiltersJson",
+          "resultSettingsJson"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "variantChange"
+            ],
+            "type": "string"
+          },
+          "entityPropertySelectorJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise entity property selector identifying the value monitored for changes. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+            "nullable": true
+          },
+          "changeJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise change definition specifying the required change in the selected value. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+            "nullable": true
+          },
+          "beforeChangeFiltersJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise filters selecting entities before a change. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          },
+          "afterChangeFiltersJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise filters selecting entities after a change. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          },
+          "resultSettingsJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise result property selections, including any nested filters. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+            "nullable": true
+          }
+        },
+        "description": "Configuration for a variant-change Trigger."
       },
       "UpdateMerchandisingRuleRequest": {
         "type": "object",
@@ -8700,6 +9693,10 @@
     {
       "name": "Merchandising",
       "description": "Inspect and manage merchandising rules. Some operations modify live Dataset configuration."
+    },
+    {
+      "name": "Triggers",
+      "description": "View Trigger configurations for marketing automation, such as abandoned carts, product interest, and price drops. https://docs.relewise.com/docs/triggers/"
     }
   ]
 }

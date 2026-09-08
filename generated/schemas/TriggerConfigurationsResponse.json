@@ -1,0 +1,25 @@
+{
+  "required": [
+    "globallyEnabled",
+    "configurations",
+    "pagination"
+  ],
+  "type": "object",
+  "properties": {
+    "globallyEnabled": {
+      "type": "boolean",
+      "description": "Whether Trigger evaluation is enabled for the Dataset. Individual configurations must also be enabled to execute."
+    },
+    "configurations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TriggerConfigurationSummary"
+      },
+      "description": "Configuration summaries for this page; empty when none match."
+    },
+    "pagination": {
+      "$ref": "#/components/schemas/PaginationMetadata"
+    }
+  },
+  "description": "One page of Trigger configurations ordered by name and then Configuration ID."
+}

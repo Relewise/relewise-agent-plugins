@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "type": {
+      "enum": [
+        "inputModifier"
+      ],
+      "type": "string"
+    }
+  },
+  "description": "Configuration marker for an Input Modifier rule, which has no additional type-specific settings."
+}

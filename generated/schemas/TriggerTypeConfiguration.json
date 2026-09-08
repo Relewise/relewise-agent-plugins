@@ -1,0 +1,46 @@
+{
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/TriggerTypeConfigurationAbandonedCartConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/TriggerTypeConfigurationAbandonedSearchConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/TriggerTypeConfigurationProductInterestConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/TriggerTypeConfigurationProductCategoryInterestConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/TriggerTypeConfigurationContentCategoryInterestConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/TriggerTypeConfigurationUserActivityConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/TriggerTypeConfigurationProductChangeConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/TriggerTypeConfigurationVariantChangeConfiguration"
+    }
+  ],
+  "description": "Type-specific Trigger configuration selected by a stable type discriminator.",
+  "discriminator": {
+    "propertyName": "type",
+    "mapping": {
+      "abandonedCart": "#/components/schemas/TriggerTypeConfigurationAbandonedCartConfiguration",
+      "abandonedSearch": "#/components/schemas/TriggerTypeConfigurationAbandonedSearchConfiguration",
+      "productInterest": "#/components/schemas/TriggerTypeConfigurationProductInterestConfiguration",
+      "productCategoryInterest": "#/components/schemas/TriggerTypeConfigurationProductCategoryInterestConfiguration",
+      "contentCategoryInterest": "#/components/schemas/TriggerTypeConfigurationContentCategoryInterestConfiguration",
+      "userActivity": "#/components/schemas/TriggerTypeConfigurationUserActivityConfiguration",
+      "productChange": "#/components/schemas/TriggerTypeConfigurationProductChangeConfiguration",
+      "variantChange": "#/components/schemas/TriggerTypeConfigurationVariantChangeConfiguration"
+    }
+  }
+}

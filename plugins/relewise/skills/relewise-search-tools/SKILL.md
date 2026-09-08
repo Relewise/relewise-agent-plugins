@@ -13,7 +13,7 @@ Read [references/rule-workflows.md](references/rule-workflows.md) to select the 
 
 ## Inspect configuration
 
-When an ID is unknown, use the relevant list operation and then the matching get operation for complete configuration. Search Index operations and Synonym operations are currently read-only.
+When an ID is unknown, use the relevant list operation and then the matching get operation for complete configuration. Search Index operations are currently read-only.
 
 ## Modify configuration
 

@@ -1,5 +1,5 @@
 {
-  "schemaCount": 143,
+  "schemaCount": 160,
   "schemas": [
     {
       "name": "BrandDetails",
@@ -168,6 +168,10 @@
     {
       "name": "MerchandisingRuleConfigurationFixedPositionRuleConfiguration",
       "file": "MerchandisingRuleConfigurationFixedPositionRuleConfiguration.json"
+    },
+    {
+      "name": "MerchandisingRuleConfigurationInputModifierRuleConfiguration",
+      "file": "MerchandisingRuleConfigurationInputModifierRuleConfiguration.json"
     },
     {
       "name": "MerchandisingRuleDetails",
@@ -538,12 +542,76 @@
       "file": "SynonymDefinitionOneWaySynonymDefinition.json"
     },
     {
+      "name": "SynonymRule",
+      "file": "SynonymRule.json"
+    },
+    {
+      "name": "SynonymRuleResponse",
+      "file": "SynonymRuleResponse.json"
+    },
+    {
       "name": "SynonymRuleSummary",
       "file": "SynonymRuleSummary.json"
     },
     {
       "name": "SynonymRulesResponse",
       "file": "SynonymRulesResponse.json"
+    },
+    {
+      "name": "TriggerConfigurationDetails",
+      "file": "TriggerConfigurationDetails.json"
+    },
+    {
+      "name": "TriggerConfigurationResponse",
+      "file": "TriggerConfigurationResponse.json"
+    },
+    {
+      "name": "TriggerConfigurationSummary",
+      "file": "TriggerConfigurationSummary.json"
+    },
+    {
+      "name": "TriggerConfigurationsResponse",
+      "file": "TriggerConfigurationsResponse.json"
+    },
+    {
+      "name": "TriggerCountRange",
+      "file": "TriggerCountRange.json"
+    },
+    {
+      "name": "TriggerTypeConfiguration",
+      "file": "TriggerTypeConfiguration.json"
+    },
+    {
+      "name": "TriggerTypeConfigurationAbandonedCartConfiguration",
+      "file": "TriggerTypeConfigurationAbandonedCartConfiguration.json"
+    },
+    {
+      "name": "TriggerTypeConfigurationAbandonedSearchConfiguration",
+      "file": "TriggerTypeConfigurationAbandonedSearchConfiguration.json"
+    },
+    {
+      "name": "TriggerTypeConfigurationContentCategoryInterestConfiguration",
+      "file": "TriggerTypeConfigurationContentCategoryInterestConfiguration.json"
+    },
+    {
+      "name": "TriggerTypeConfigurationProductCategoryInterestConfiguration",
+      "file": "TriggerTypeConfigurationProductCategoryInterestConfiguration.json"
+    },
+    {
+      "name": "TriggerTypeConfigurationProductChangeConfiguration",
+      "file": "TriggerTypeConfigurationProductChangeConfiguration.json"
+    },
+    {
+      "name": "TriggerTypeConfigurationProductInterestConfiguration",
+      "file": "TriggerTypeConfigurationProductInterestConfiguration.json"
+    },
+    {
+      "name": "TriggerTypeConfigurationUserActivityConfiguration",
+      "file": "TriggerTypeConfigurationUserActivityConfiguration.json"
+    },
+    {
+      "name": "TriggerTypeConfigurationVariantChangeConfiguration",
+      "file": "TriggerTypeConfigurationVariantChangeConfiguration.json"
     },
     {
       "name": "UpdateMerchandisingRuleRequest",
