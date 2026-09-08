@@ -1,9 +1,7 @@
 param(
     [uri] $OpenApiSourceUri = 'https://my.relewise.com/agents/openapi/v1.json',
 
-    # TODO: Change this default to https://my.relewise.com/agents/mcp/v1.json
-    # as soon as the public MCP catalog endpoint is deployed.
-    [uri] $McpCatalogSourceUri = 'https://localhost:5100/agents/mcp/v1.json'
+    [uri] $McpCatalogSourceUri = 'https://my.relewise.com/agents/mcp/v1.json'
 )
 
 $ErrorActionPreference = 'Stop'

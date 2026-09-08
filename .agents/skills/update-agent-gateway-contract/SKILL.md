@@ -23,7 +23,7 @@ This is a repository-maintainer skill. It is not part of the installed Relewise 
 
 - Never edit files under `generated/`, `docs/api-coverage.md`, or `docs/mcp-tool-coverage.md` manually.
 - Preserve REST operation IDs and MCP tool names exactly as published by their contracts.
-- Until the production MCP catalog endpoint is deployed, the refresh script intentionally reads that catalog from `https://localhost:5100/agents/mcp/v1.json`. Do not treat the temporary source as the public MCP server URL.
+- The refresh script reads the public MCP catalog from `https://my.relewise.com/agents/mcp/v1.json`. This contract-discovery endpoint is distinct from the MCP server URL at `https://my.relewise.com/agents/mcp`.
 - Keep HTTP mechanics in the contract catalog and `relewise-agent`; keep product skills focused on intent, workflow, and interpretation.
 - Do not add credentials, customer Dataset IDs, customer data, or private operational details.
 - Do not change `version.json` unless the requested work also includes deciding the next release version.
