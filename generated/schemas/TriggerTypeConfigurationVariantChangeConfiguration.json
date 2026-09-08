@@ -1,0 +1,43 @@
+{
+  "required": [
+    "entityPropertySelectorJson",
+    "changeJson",
+    "beforeChangeFiltersJson",
+    "afterChangeFiltersJson",
+    "resultSettingsJson"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "variantChange"
+      ],
+      "type": "string"
+    },
+    "entityPropertySelectorJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise entity property selector identifying the value monitored for changes. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+      "nullable": true
+    },
+    "changeJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise change definition specifying the required change in the selected value. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+      "nullable": true
+    },
+    "beforeChangeFiltersJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise filters selecting entities before a change. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/filters/index.html.",
+      "nullable": true
+    },
+    "afterChangeFiltersJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise filters selecting entities after a change. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/filters/index.html.",
+      "nullable": true
+    },
+    "resultSettingsJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise result property selections, including any nested filters. Parse this string as JSON and preserve any $type metadata. Null when not configured. See https://docs.relewise.com/docs/triggers/.",
+      "nullable": true
+    }
+  },
+  "description": "Configuration for a variant-change Trigger."
+}

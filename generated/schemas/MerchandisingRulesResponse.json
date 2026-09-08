@@ -1,6 +1,7 @@
 {
   "required": [
-    "rules"
+    "rules",
+    "pagination"
   ],
   "type": "object",
   "properties": {
@@ -9,8 +10,11 @@
       "items": {
         "$ref": "#/components/schemas/MerchandisingRuleSummary"
       },
-      "description": "Merchandising rules returned for the requested Dataset. The collection is empty when no rules are available."
+      "description": "Merchandising rules in the requested page."
+    },
+    "pagination": {
+      "$ref": "#/components/schemas/PaginationMetadata"
     }
   },
-  "description": "List of merchandising rules the authenticated user can inspect through Agent Gateway for a Dataset."
+  "description": "One priority-ordered page of merchandising rules."
 }

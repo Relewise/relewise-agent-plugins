@@ -12,6 +12,9 @@
     },
     {
       "$ref": "#/components/schemas/MerchandisingRuleConfigurationFilterRuleConfiguration"
+    },
+    {
+      "$ref": "#/components/schemas/MerchandisingRuleConfigurationInputModifierRuleConfiguration"
     }
   ],
   "description": "Type-specific merchandising rule configuration selected by the stable type discriminator.",
@@ -20,7 +23,8 @@
     "mapping": {
       "boostAndBury": "#/components/schemas/MerchandisingRuleConfigurationBoostAndBuryRuleConfiguration",
       "fixedPosition": "#/components/schemas/MerchandisingRuleConfigurationFixedPositionRuleConfiguration",
-      "filter": "#/components/schemas/MerchandisingRuleConfigurationFilterRuleConfiguration"
+      "filter": "#/components/schemas/MerchandisingRuleConfigurationFilterRuleConfiguration",
+      "inputModifier": "#/components/schemas/MerchandisingRuleConfigurationInputModifierRuleConfiguration"
     }
   }
 }

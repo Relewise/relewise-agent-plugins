@@ -1,0 +1,12 @@
+{
+  "required": [
+    "configuration"
+  ],
+  "type": "object",
+  "properties": {
+    "configuration": {
+      "$ref": "#/components/schemas/TriggerConfigurationDetails"
+    }
+  },
+  "description": "Selected Trigger configuration."
+}

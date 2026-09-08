@@ -11,6 +11,7 @@
     "SearchToolsGetSearchResultModifierRule",
     "SearchToolsGetSearchTermModifierRule",
     "SearchToolsGetStemmingRule",
+    "SearchToolsGetSynonymRule",
     "SearchToolsListDecompoundingRules",
     "SearchToolsListRedirectRules",
     "SearchToolsListSearchIndexes",

@@ -1,6 +1,6 @@
 {
-  "operationCount": 52,
-  "coveredOperationCount": 52,
+  "operationCount": 56,
+  "coveredOperationCount": 56,
   "uncoveredOperationCount": 0,
   "coveragePercent": 100,
   "operations": [
@@ -286,6 +286,13 @@
       ]
     },
     {
+      "operationId": "SearchToolsGetSynonymRule",
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
       "operationId": "SearchToolsListDecompoundingRules",
       "skills": [
         "relewise/skills/relewise-merchandising-audit",
@@ -362,6 +369,24 @@
       "operationId": "SearchToolsPatchStemmingRule",
       "skills": [
         "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "operationId": "SearchToolsPatchSynonymRule",
+      "skills": [
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "operationId": "TriggersGetConfiguration",
+      "skills": [
+        "relewise/skills/relewise-triggers"
+      ]
+    },
+    {
+      "operationId": "TriggersListConfigurations",
+      "skills": [
+        "relewise/skills/relewise-triggers"
       ]
     }
   ]

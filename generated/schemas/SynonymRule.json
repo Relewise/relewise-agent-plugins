@@ -28,5 +28,5 @@
       "description": "Whether the Synonym rule also applies to Search Term Prediction."
     }
   },
-  "description": "Synonym rule representation returned by list operations, including its complete direction-specific definition."
+  "description": "Synonym rule representation returned by direct Rule ID lookup, including its complete direction-specific definition."
 }

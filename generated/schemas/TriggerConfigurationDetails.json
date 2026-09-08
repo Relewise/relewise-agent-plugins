@@ -1,0 +1,74 @@
+{
+  "required": [
+    "id",
+    "type",
+    "name",
+    "description",
+    "group",
+    "enabled",
+    "within",
+    "created",
+    "modified",
+    "withinMinutes",
+    "configuration",
+    "userConditionsJson"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Trigger Configuration ID. Use configuration discovery to find this value.",
+      "format": "uuid"
+    },
+    "type": {
+      "type": "string",
+      "description": "Trigger type: abandonedCart, abandonedSearch, productInterest, productCategoryInterest, contentCategoryInterest, userActivity, productChange, or variantChange."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the configured Trigger."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description supplied for this Trigger configuration."
+    },
+    "group": {
+      "type": "string",
+      "description": "Optional configuration group; null when no group is assigned.",
+      "nullable": true
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether this configuration is enabled. Trigger evaluation also requires the global configuration to be enabled."
+    },
+    "within": {
+      "type": "string",
+      "description": "Human-readable evaluation window. This is display text, not a machine-readable duration."
+    },
+    "created": {
+      "type": "string",
+      "description": "Timestamp when the configuration was created.",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Timestamp when the configuration was last modified.",
+      "format": "date-time"
+    },
+    "withinMinutes": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Evaluation window in minutes within which the Trigger criteria must be met. This is not necessarily the inactivity delay; consult the type-specific configuration and user conditions.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "configuration": {
+      "$ref": "#/components/schemas/TriggerTypeConfiguration"
+    },
+    "userConditionsJson": {
+      "type": "string",
+      "description": "JSON-encoded array of Relewise user conditions, including activity and previous-trigger constraints. Parse this string as JSON and preserve $type metadata. Null when no condition collection is provided. See https://docs.relewise.com/docs/triggers/user-conditions.html.",
+      "nullable": true
+    }
+  },
+  "description": "One Trigger configuration with typed criteria and scoped Relewise condition documents."
+}

@@ -20,7 +20,7 @@ For each in-scope rule family:
 3. Inspect unfamiliar operations with `schema` before calling them.
 4. Evaluate enabled and approval state, activation windows, scope and conditions, competing actions, and references to Dataset-specific keys or values.
 
-Synonyms and Search Indexes are read-only through the current API and may have less detail available. State such limitations instead of filling gaps by inference.
+Search Indexes are read-only through the current API. State such limitations instead of filling gaps by inference.
 
 ## Report findings
 

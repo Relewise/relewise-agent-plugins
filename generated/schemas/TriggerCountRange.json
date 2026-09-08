@@ -1,0 +1,24 @@
+{
+  "required": [
+    "minimum",
+    "maximum"
+  ],
+  "type": "object",
+  "properties": {
+    "minimum": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Inclusive minimum count; null means no lower bound.",
+      "format": "int32",
+      "nullable": true,
+      "type": "integer"
+    },
+    "maximum": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Inclusive maximum count; null means no upper bound.",
+      "format": "int32",
+      "nullable": true,
+      "type": "integer"
+    }
+  },
+  "description": "Inclusive bounds on an activity count."
+}

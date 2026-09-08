@@ -1,0 +1,11 @@
+{
+  "properties": {
+    "type": {
+      "enum": [
+        "userActivity"
+      ],
+      "type": "string"
+    }
+  },
+  "description": "Configuration for a user-activity Trigger. Its evaluation window and user conditions are on the enclosing details."
+}

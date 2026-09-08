@@ -1,0 +1,6 @@
+{
+  "operationIds": [
+    "TriggersGetConfiguration",
+    "TriggersListConfigurations"
+  ]
+}

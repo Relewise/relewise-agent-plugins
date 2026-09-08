@@ -6,6 +6,7 @@
     "SearchToolsGetSearchResultModifierRule",
     "SearchToolsGetSearchTermModifierRule",
     "SearchToolsGetStemmingRule",
+    "SearchToolsGetSynonymRule",
     "SearchToolsListDecompoundingRules",
     "SearchToolsListRedirectRules",
     "SearchToolsListSearchIndexes",
@@ -17,6 +18,7 @@
     "SearchToolsPatchRedirectRule",
     "SearchToolsPatchSearchResultModifierRule",
     "SearchToolsPatchSearchTermModifierRule",
-    "SearchToolsPatchStemmingRule"
+    "SearchToolsPatchStemmingRule",
+    "SearchToolsPatchSynonymRule"
   ]
 }
