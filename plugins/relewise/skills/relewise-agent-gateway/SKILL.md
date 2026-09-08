@@ -22,7 +22,7 @@ Do not recursively search the filesystem, home directory, temporary directories,
 
 ## Execute an Agent Gateway operation
 
-Read [transport selection](references/transport-selection.md) before the first Agent Gateway call in a task. It defines bootstrap discovery, post-bootstrap policy selection, authentication boundaries, fallbacks, and failure classification.
+Read [transport selection](references/transport-selection.md) before the first Agent Gateway call in a task. It defines bootstrap discovery, task-, Dataset-, and operation-scoped state, post-bootstrap policy selection, authentication boundaries, fallbacks, and failure classification. Retain Dataset policies independently: one workflow may require different transports for different Datasets.
 
 When the bundled CLI is selected, read [CLI usage](references/cli.md). Use the exact REST operation ID provided by the domain skill's `operations.json`, inspect unfamiliar schemas, and preserve the domain skill's safeguards.
 

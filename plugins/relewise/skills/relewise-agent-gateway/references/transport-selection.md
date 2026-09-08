@@ -20,13 +20,25 @@ Retrieve that Dataset's details through the working bootstrap route:
 
 The effective policy reports `restApiEnabled`, `mcpEnabled`, and enabled `areas`.
 
+## Retain state at the correct scope
+
+For workflows with several calls, retain verified findings instead of repeating discovery:
+
+- **Task scope:** Retain the resolved CLI path and whether the local CLI can execute. Also retain observed availability of registered MCP and direct REST credentials or connections. A genuinely missing or incompatible local executable applies across Datasets.
+- **Dataset scope:** Retain access validation and the effective Agent Gateway policy separately for every Dataset used in the workflow. Do not apply one Dataset's transport, Area, permission, or policy result to another Dataset.
+- **Operation scope:** Confirm that the requested capability has an exact REST operation or MCP tool on the candidate transport, and use that transport's own schema.
+
+Bootstrap identity and Dataset discovery once when the retained results are sufficient. Retrieve policy once for each involved Dataset, then select and reuse a preferred transport for that Dataset and requested capability. A workflow spanning several Datasets may legitimately mix CLI, MCP, and direct REST. Re-select when the Dataset changes, the next capability is not exposed by the preferred transport, or a classified failure changes that transport's availability.
+
+Do not treat a Dataset-specific policy or permission denial as a task-wide transport failure. Conversely, do not repeatedly try a task-wide missing executable for every Dataset. Preserve call ordering when later calls depend on earlier results or when the domain skill defines a mutation workflow.
+
 ## Select the operation transport
 
 After policy discovery, use this preference order:
 
-1. Use the bundled CLI when it works, `restApiEnabled` is true, and the requested Area is enabled. It is the preferred deterministic REST adapter.
-2. Use registered MCP when it is connected, `mcpEnabled` is true, and the requested Area is enabled.
-3. Use direct REST when `restApiEnabled` is true, the requested Area is enabled, and the CLI is locally unavailable.
+1. Use the bundled CLI when it works, `restApiEnabled` is true, the requested Area is enabled, and the capability has an exact REST operation. It is the preferred deterministic REST adapter.
+2. Use registered MCP when it is connected, `mcpEnabled` is true, the requested Area is enabled, and the capability has an exact MCP tool.
+3. Use direct REST when `restApiEnabled` is true, the requested Area is enabled, the capability has an exact REST operation, and the CLI is locally unavailable.
 
 Do not infer that an operation is permitted merely because bootstrap discovery succeeded. Apply the selected Dataset's effective policy to every Dataset-scoped operation.
 
