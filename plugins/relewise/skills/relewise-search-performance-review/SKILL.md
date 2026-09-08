@@ -1,13 +1,13 @@
 ---
 name: relewise-search-performance-review
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Review Relewise product-search performance and prioritize optimization opportunities. Use when a user asks why search is underperforming, what should be optimized, or for a recurring search health review.
 ---
 
 # Review Relewise Search Performance
 
-When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
-
-Use `relewise-agent` for execution. Never invent Dataset IDs or filter values, construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. This workflow is read-only and does not authorize configuration changes.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the selected REST operation ID and/or MCP tool plus validated parameters; do not resolve the CLI, choose a transport, or handle authentication in this domain skill. Never invent Dataset IDs or filter values. This workflow is read-only and does not authorize configuration changes.
 
 ## Build the review
 
@@ -20,7 +20,7 @@ Use `relewise-agent` for execution. Never invent Dataset IDs or filter values, c
    - low click rate for weak result relevance;
    - popular terms for high-impact prioritization;
    - trending up or down for changing demand.
-6. Inspect each operation with `schema` before forming its input. Use bounded pages and avoid repeated calls that cannot change the conclusion.
+6. Inspect the selected transport's current schema before forming each input. Use bounded pages and avoid repeated calls that cannot change the conclusion.
 
 ## Prioritize findings
 

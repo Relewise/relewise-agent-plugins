@@ -1,13 +1,13 @@
 #!/usr/bin/env sh
 set -eu
 
-extension_root="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
-case "$extension_root" in
+script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+case "$script_dir" in
   [A-Za-z]:\\*)
     if command -v cygpath >/dev/null 2>&1; then
-      extension_root="$(cygpath -u "$extension_root")"
+      script_dir="$(cygpath -u "$script_dir")"
     elif command -v wslpath >/dev/null 2>&1; then
-      extension_root="$(wslpath -u "$extension_root")"
+      script_dir="$(wslpath -u "$script_dir")"
     fi
     ;;
 esac
@@ -23,4 +23,14 @@ case "$os:$arch" in
   *) echo "Unsupported platform: $os $arch" >&2; exit 3 ;;
 esac
 
-exec "$extension_root/libexec/$runtime_id/$executable" "$@"
+executable_path="$script_dir/libexec/$runtime_id/$executable"
+if [ ! -f "$executable_path" ]; then
+  echo "Relewise Agent executable not found for $runtime_id: $executable_path" >&2
+  exit 3
+fi
+if [ ! -x "$executable_path" ]; then
+  echo "Relewise Agent executable is not executable: $executable_path" >&2
+  exit 3
+fi
+
+exec "$executable_path" "$@"

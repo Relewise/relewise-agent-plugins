@@ -25,9 +25,9 @@ python -m pip install skills-ref==0.1.1
 
 ## Making changes
 
-### Agent Gateway contract
+### Agent Gateway contracts
 
-Update the checked-in contract through the repeatable script, then regenerate its derived files:
+Update the checked-in REST and MCP contracts through the repeatable script, then regenerate their derived files:
 
 ```powershell
 ./tools/update-agent-gateway-contract.ps1
@@ -35,14 +35,16 @@ dotnet run --project tools/generate-contract
 dotnet run --project tools/generate-coverage
 ```
 
-Do not edit files under `generated/` or `docs/api-coverage.md` manually.
+The refresh currently reads the MCP catalog from the local My Relewise development endpoint while its production endpoint is being deployed. Do not edit files under `generated/`, `docs/api-coverage.md`, or `docs/mcp-tool-coverage.md` manually.
 
 ### Agent Skills
 
 - Name each skill directory exactly as the `name` in its `SKILL.md` frontmatter.
 - Keep descriptions specific about what the skill does and when it applies.
 - Put mechanical API details in generated contracts and the helper, not in skill instructions.
-- Add every referenced Agent Gateway operation ID to the skill's `operations.json`.
+- Add every referenced Agent Gateway REST operation ID to the skill's `operations.json`.
+- Add `mcpToolNames` only when a skill needs an MCP tool that cannot be inferred from its related REST operations.
+- Domain skills must delegate Agent Gateway execution to `relewise-agent-gateway`; keep transport selection, authentication, CLI mechanics, and fallback rules in that shared technical skill.
 - Use relative paths for bundled references.
 
 ### CLI and packaging

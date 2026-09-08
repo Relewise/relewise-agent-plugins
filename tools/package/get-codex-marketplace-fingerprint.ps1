@@ -6,8 +6,10 @@ $includedPaths = @(
     '.github/workflows/refresh-marketplace.yml',
     'src/relewise-agent',
     'generated/operations.json',
+    'plugins/relewise/.mcp.json',
     'plugins/relewise/plugin.json',
     'plugins/relewise/assets',
+    'plugins/relewise/references',
     'plugins/relewise/skills',
     'plugins/relewise-developer/.mcp.json',
     'plugins/relewise-developer/README.md',
@@ -17,17 +19,19 @@ $includedPaths = @(
     '.claude-plugin/marketplace.json',
     '.github/plugin/marketplace.json',
     'vendors/claude/relewise/.claude-plugin/plugin.json',
+    'vendors/claude/relewise/.claude-plugin/mcp.json',
     'vendors/claude/relewise-developer/.claude-plugin/plugin.json',
     'vendors/openai/relewise/.codex-plugin/plugin.json',
     'vendors/openai/relewise-developer/.codex-plugin/plugin.json',
-    'vendors/openai/relewise/scripts/relewise-agent',
     'vendors/openai/marketplace.json',
     'tools/package/openai.ps1',
     'tools/package/relewise-developer.ps1',
     'tools/package/get-runtime-fingerprint.ps1'
 )
 
-$files = @(& git -C $repositoryRoot ls-files -- @includedPaths | Sort-Object)
+$files = @(& git -C $repositoryRoot ls-files -- @includedPaths |
+    Where-Object { $_.Replace('\', '/') -notlike 'plugins/relewise/skills/relewise-agent-gateway/scripts/libexec/*' } |
+    Sort-Object)
 if ($LASTEXITCODE -ne 0 -or $files.Count -eq 0) {
     throw 'Unable to resolve Codex marketplace source files.'
 }

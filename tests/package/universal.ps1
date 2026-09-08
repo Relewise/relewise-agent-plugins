@@ -19,30 +19,54 @@ $manifestPaths = @{
 
 foreach ($vendor in $manifestPaths.Keys) {
     $packageRoot = Join-Path $resolvedPackagesRoot "$vendor\relewise"
+    $gatewayScripts = Join-Path $packageRoot 'skills\relewise-agent-gateway\scripts'
     $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot $manifestPaths[$vendor]) | ConvertFrom-Json
     if ($manifest.version -ne $Version) { throw "$vendor manifest version is not $Version." }
     foreach ($runtime in $runtimes) {
         $executableName = if ($runtime -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }
-        if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "libexec\$runtime\$executableName") -PathType Leaf)) {
+        if (-not (Test-Path -LiteralPath (Join-Path $gatewayScripts "libexec\$runtime\$executableName") -PathType Leaf)) {
             throw "$vendor package is missing its $runtime executable."
         }
     }
-    $launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'scripts\relewise-agent')
+    $launcher = Get-Content -Raw -LiteralPath (Join-Path $gatewayScripts 'relewise-agent')
     foreach ($runtime in $runtimes) {
         if (-not $launcher.Contains("runtime_id=`"$runtime`"")) { throw "$vendor launcher does not select $runtime." }
     }
-    if ($vendor -eq 'google' -and -not (Test-Path -LiteralPath (Join-Path $packageRoot 'scripts\relewise-agent.ps1') -PathType Leaf)) {
-        throw 'Google package is missing its Windows PowerShell launcher.'
+    if (-not (Test-Path -LiteralPath (Join-Path $gatewayScripts 'relewise-agent.ps1') -PathType Leaf)) {
+        throw "$vendor package is missing its Windows PowerShell launcher."
     }
     if ($vendor -eq 'google') {
-        $windowsInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to this file, resolve it to an absolute path and use that PowerShell launcher.'
-        $otherPlatformsInstruction = 'On other platforms, when `../../scripts/relewise-agent` exists, resolve it to an absolute path and use that launcher.'
-        foreach ($skillFile in Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Filter 'SKILL.md' -File -Recurse) {
-            $skillContent = Get-Content -Raw -LiteralPath $skillFile.FullName
-            if (-not $skillContent.Contains($windowsInstruction) -or -not $skillContent.Contains($otherPlatformsInstruction)) {
-                throw "Universal Google skill '$($skillFile.FullName)' does not direct both Windows and non-Windows platforms to their bundled launchers."
-            }
+        $server = $manifest.mcpServers.'relewise-agent-gateway'
+        if ($server.httpUrl -ne 'https://my.relewise.com/agents/mcp') { throw 'Universal Google package has the wrong Agent Gateway MCP endpoint.' }
+    } elseif ($vendor -eq 'claude') {
+        if ($manifest.mcpServers -ne './.claude-plugin/mcp.json') {
+            throw 'Claude universal package does not reference its protected MCP configuration.'
         }
+        $mcpPath = Join-Path $packageRoot '.claude-plugin\mcp.json'
+        if (-not (Test-Path -LiteralPath $mcpPath -PathType Leaf)) {
+            throw 'Claude universal package is missing its protected Agent Gateway MCP configuration.'
+        }
+        $mcp = Get-Content -Raw -LiteralPath $mcpPath | ConvertFrom-Json
+        if ($mcp.mcpServers.'relewise-agent-gateway'.url -ne 'https://my.relewise.com/agents/mcp' -or
+            $mcp.mcpServers.'relewise-agent-gateway'.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
+            throw 'Claude universal package has the wrong protected Agent Gateway MCP configuration.'
+        }
+    } elseif ($vendor -eq 'openai') {
+        $server = $manifest.mcpServers.'relewise-agent-gateway'
+        if ($server.url -ne 'https://my.relewise.com/agents/mcp' -or $server.bearer_token_env_var -ne 'RELEWISE_AGENT_GATEWAY_TOKEN') {
+            throw 'OpenAI universal package has the wrong native bearer-token MCP configuration.'
+        }
+    } else {
+        if (-not (Test-Path -LiteralPath (Join-Path $packageRoot '.mcp.json') -PathType Leaf)) {
+            throw "$vendor universal package is missing its Agent Gateway MCP configuration."
+        }
+        $mcp = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.mcp.json') | ConvertFrom-Json
+        if ($mcp.mcpServers.'relewise-agent-gateway'.url -ne 'https://my.relewise.com/agents/mcp') {
+            throw "$vendor universal package has the wrong Agent Gateway MCP endpoint."
+        }
+    }
+    if ((Test-Path -LiteralPath (Join-Path $packageRoot 'scripts')) -or (Test-Path -LiteralPath (Join-Path $packageRoot 'libexec'))) {
+        throw "$vendor universal package has a duplicated plugin-level CLI payload."
     }
 }
 

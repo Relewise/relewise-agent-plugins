@@ -1,13 +1,13 @@
 ---
 name: relewise-merchandising-audit
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Audit Relewise merchandising and Search Tools configuration without changing it. Use for configuration health checks, overlapping-rule reviews, stale-rule identification, or investigating configuration behind search behavior.
 ---
 
 # Audit Relewise Merchandising
 
-When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
-
-Use `relewise-agent` for execution. Never invent Dataset or rule IDs, construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. An audit authorizes reads only; do not update or patch rules.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the selected REST operation ID and/or MCP tool plus validated parameters; do not resolve the CLI, choose a transport, or handle authentication in this domain skill. Never invent Dataset or rule IDs. An audit authorizes reads only; do not update or patch rules.
 
 ## Scope the audit
 
@@ -17,7 +17,7 @@ For each in-scope rule family:
 
 1. Use its list operation with bounded pagination.
 2. Retrieve full details for rules that are active, suspicious, overlapping, or needed to answer the request.
-3. Inspect unfamiliar operations with `schema` before calling them.
+3. Inspect the selected transport's schema before calling an unfamiliar operation or related MCP tool.
 4. Evaluate enabled and approval state, activation windows, scope and conditions, competing actions, and references to Dataset-specific keys or values.
 
 Search Indexes are read-only through the current API. State such limitations instead of filling gaps by inference.

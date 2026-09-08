@@ -1,6 +1,6 @@
 {
   "name": "relewise",
-  "version": "0.4.2-main.34197469313",
+  "version": "0.4.2-main.34227498266",
   "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "author": {
     "name": "Relewise",
@@ -15,6 +15,13 @@
     "merchandising"
   ],
   "skills": "./skills/",
+  "mcpServers": {
+    "relewise-agent-gateway": {
+      "type": "http",
+      "url": "https://my.relewise.com/agents/mcp",
+      "bearer_token_env_var": "RELEWISE_AGENT_GATEWAY_TOKEN"
+    }
+  },
   "interface": {
     "displayName": "Relewise",
     "shortDescription": "Configure, analyze and optimize Relewise",

@@ -24,6 +24,8 @@ Both products use the portable [Agent Plugins](https://agent-plugins.org/) struc
 
 The project is currently distributed as a prerelease. Codex, Claude Code, and GitHub Copilot CLI users can add this repository directly as a marketplace. Gemini CLI installs the platform package selected from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases).
 
+The business-facing Relewise plugin supports the same Agent Gateway capabilities through its bundled REST CLI, the unified remote MCP connection, or authenticated direct REST. Domain skills retain focused Relewise knowledge and delegate execution to the shared `relewise-agent-gateway` skill, which selects an available transport permitted by the Dataset's Agent Gateway policy.
+
 To add the Codex marketplace, use `https://github.com/Relewise/relewise-agent-plugins.git` as the source, `main` as the Git ref, and leave **Sparse paths** empty. The marketplace points directly at the canonical Relewise plugin and includes all five native runtimes.
 
 Marketplace updates are atomic with their source changes. Required fingerprints separately track plugin content and executable inputs. A maintainer runs **Refresh marketplace payload** on a stale feature branch: runtime changes rebuild and commit all five NativeAOT executables, while skill, metadata, asset, launcher, or packaging-only changes reuse the existing executables. Both paths package and smoke-test the complete plugin before committing synchronized metadata back to the branch. Workflows on `main` only verify committed content and never create repair commits or follow-up pull requests.
@@ -36,7 +38,7 @@ Claude Desktop and Cowork users who do not want to connect GitHub can download e
 
 Make a Relewise Agent Gateway PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`, either through a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
 
-The Gemini packaging adapter changes only the launcher instruction in artifacts that include Windows: skills invoke `scripts/relewise-agent.ps1` on Windows and retain `scripts/relewise-agent` on macOS and Linux. Canonical skills and all other vendor packages remain unchanged. Platform launchers select the matching native executable under `libexec/<runtime>/`. Packages intentionally have no top-level `bin/` directory so hosted marketplaces do not receive an undeclared PATH executable.
+The shared `relewise-agent-gateway` skill contains both platform launchers and the native executables. It invokes `scripts/relewise-agent.ps1` on Windows and `scripts/relewise-agent` on macOS and Linux; the launchers select the matching executable under their skill-local `scripts/libexec/<runtime>/`. Platform-specific artifacts contain one runtime, while universal Claude and repository marketplace installations contain all supported runtimes. Packages intentionally have no top-level `bin/`, `scripts/`, or `libexec/` directory.
 
 ## Releases
 

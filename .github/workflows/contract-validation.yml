@@ -58,7 +58,7 @@ jobs:
 
           claude plugin marketplace add $env:GITHUB_WORKSPACE --scope user
           if ($LASTEXITCODE -ne 0) { throw 'Claude failed to add the repository marketplace.' }
-          claude plugin install relewise@relewise --scope user
+          claude plugin install relewise@relewise --scope user --config agent_gateway_token=smoke-test-token
           if ($LASTEXITCODE -ne 0) { throw 'Claude failed to install the Relewise plugin.' }
           claude plugin install relewise-developer@relewise --scope user
           if ($LASTEXITCODE -ne 0) { throw 'Claude failed to install the Relewise Developer plugin.' }
@@ -79,7 +79,21 @@ jobs:
           }
 
           $env:CLAUDE_PLUGIN_ROOT = $installedRoot
-          $launcher = Join-Path $installedRoot 'scripts/relewise-agent'
+          $businessManifest = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.claude-plugin/plugin.json') | ConvertFrom-Json
+          if ($businessManifest.userConfig.agent_gateway_token.sensitive -ne $true -or
+              $businessManifest.userConfig.agent_gateway_token.required -ne $true) {
+            throw 'The installed Relewise plugin does not request protected Agent Gateway configuration.'
+          }
+          $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.claude-plugin/mcp.json') | ConvertFrom-Json
+          $businessServer = $businessMcp.mcpServers.'relewise-agent-gateway'
+          if ($businessServer.url -ne 'https://my.relewise.com/agents/mcp' -or
+              $businessServer.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
+            throw 'The installed Relewise plugin has an invalid Agent Gateway MCP configuration.'
+          }
+          if (-not (Test-Path -LiteralPath (Join-Path $installedRoot 'skills/relewise-agent-gateway/references/transport-selection.md'))) {
+            throw 'The installed Relewise plugin is missing its shared transport-selection reference.'
+          }
+          $launcher = Join-Path $installedRoot 'skills/relewise-agent-gateway/scripts/relewise-agent'
           $versionResponse = (& $launcher --version | Out-String) | ConvertFrom-Json
           if (-not $versionResponse.success -or $versionResponse.data.name -ne 'relewise-agent') {
             throw 'The installed Claude launcher did not return a valid version response.'
@@ -166,11 +180,11 @@ jobs:
       - name: Verify API coverage files are current
         shell: bash
         run: |
-          status="$(git status --porcelain --untracked-files=all -- generated/operation-coverage.json docs/api-coverage.md)"
+          status="$(git status --porcelain --untracked-files=all -- generated/operation-coverage.json generated/mcp-tool-coverage.json docs/api-coverage.md docs/mcp-tool-coverage.md)"
           if [[ -n "$status" ]]; then
             echo "API coverage files are not current. Run:"
             echo "dotnet run --project tools/generate-coverage"
             echo "$status"
-            git diff -- generated/operation-coverage.json docs/api-coverage.md
+            git diff -- generated/operation-coverage.json generated/mcp-tool-coverage.json docs/api-coverage.md docs/mcp-tool-coverage.md
             exit 1
           fi
