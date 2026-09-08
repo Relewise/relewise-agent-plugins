@@ -5,9 +5,7 @@ description: Audit Relewise merchandising and Search Tools configuration without
 
 # Audit Relewise Merchandising
 
-When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
-
-Use `relewise-agent` for execution. Never invent Dataset or rule IDs, construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. An audit authorizes reads only; do not update or patch rules.
+Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Never invent Dataset or rule IDs. An audit authorizes reads only; do not update or patch rules.
 
 ## Scope the audit
 
@@ -17,7 +15,7 @@ For each in-scope rule family:
 
 1. Use its list operation with bounded pagination.
 2. Retrieve full details for rules that are active, suspicious, overlapping, or needed to answer the request.
-3. Inspect unfamiliar operations with `schema` before calling them.
+3. Inspect the selected transport's schema before calling an unfamiliar operation or related MCP tool.
 4. Evaluate enabled and approval state, activation windows, scope and conditions, competing actions, and references to Dataset-specific keys or values.
 
 Search Indexes are read-only through the current API. State such limitations instead of filling gaps by inference.

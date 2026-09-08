@@ -1,0 +1,627 @@
+{
+  "toolCount": 57,
+  "coveredToolCount": 57,
+  "uncoveredToolCount": 0,
+  "coveragePercent": 100,
+  "tools": [
+    {
+      "name": "fetch_analyzer_consumption_summary",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetAnalyzerConsumptionSummary"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "name": "fetch_behavioral_tracking_consumption_summary",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetBehavioralTrackingConsumptionSummary"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "name": "fetch_brand_by_id",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesGetBrand"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "fetch_content_by_id",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesGetContent"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "fetch_content_category_by_id",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesGetContentCategory"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "fetch_content_delivery_consumption_summary",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetContentDeliveryConsumptionSummary"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "name": "fetch_integrations_consumption_summary",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetIntegrationsConsumptionSummary"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "name": "fetch_low_click_rate_searches",
+      "area": "Analytics",
+      "relatedRestOperationIds": [
+        "AnalyticsListLowClickRateSearches"
+      ],
+      "skills": [
+        "relewise/skills/relewise-analytics",
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "fetch_marketing_automation_consumption_summary",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetMarketingAutomationConsumptionSummary"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "name": "fetch_popular_searches",
+      "area": "Analytics",
+      "relatedRestOperationIds": [
+        "AnalyticsListPopularSearches"
+      ],
+      "skills": [
+        "relewise/skills/relewise-analytics",
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "fetch_product_by_id",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesGetProduct"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "fetch_product_category_by_id",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesGetProductCategory"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "fetch_product_variant_by_id",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesGetProductVariant"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "fetch_recommendations_consumption_summary",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetRecommendationsConsumptionSummary"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "name": "fetch_retail_media_consumption_summary",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetRetailMediaConsumptionSummary"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "name": "fetch_revenue_analytics",
+      "area": "Analytics",
+      "relatedRestOperationIds": [
+        "AnalyticsGetRevenue"
+      ],
+      "skills": [
+        "relewise/skills/relewise-analytics",
+        "relewise/skills/relewise-compare-datasets"
+      ]
+    },
+    {
+      "name": "fetch_search_analytics_filter_options",
+      "area": "Analytics",
+      "relatedRestOperationIds": [
+        "AnalyticsGetSearchFilterOptions"
+      ],
+      "skills": [
+        "relewise/skills/relewise-analytics",
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "fetch_search_analytics_overview",
+      "area": "Analytics",
+      "relatedRestOperationIds": [
+        "AnalyticsGetSearchOverview"
+      ],
+      "skills": [
+        "relewise/skills/relewise-analytics",
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "fetch_search_consumption_summary",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetSearchConsumptionSummary"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "name": "fetch_searches_trending_down",
+      "area": "Analytics",
+      "relatedRestOperationIds": [
+        "AnalyticsListTrendingDownSearches"
+      ],
+      "skills": [
+        "relewise/skills/relewise-analytics",
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "fetch_searches_trending_up",
+      "area": "Analytics",
+      "relatedRestOperationIds": [
+        "AnalyticsListTrendingUpSearches"
+      ],
+      "skills": [
+        "relewise/skills/relewise-analytics",
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "fetch_searches_without_results",
+      "area": "Analytics",
+      "relatedRestOperationIds": [
+        "AnalyticsListSearchesWithoutResults"
+      ],
+      "skills": [
+        "relewise/skills/relewise-analytics",
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "fetch_shoppertainment_consumption_summary",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetShoppertainmentConsumptionSummary"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-consumption"
+      ]
+    },
+    {
+      "name": "get_dataset_details",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetDataset"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-core",
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "get_dataset_metadata",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "CoreGetDatasetMetadata"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-core",
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "get_decompounding_rule",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsGetDecompoundingRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "get_me",
+      "area": "Core",
+      "relatedRestOperationIds": [
+        "IdentityGetCurrentUser"
+      ],
+      "skills": [
+        "relewise/skills/relewise-compare-datasets",
+        "relewise/skills/relewise-core",
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-performance-review"
+      ]
+    },
+    {
+      "name": "get_merchandising_rule",
+      "area": "Merchandising",
+      "relatedRestOperationIds": [
+        "MerchandisingGetRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising",
+        "relewise/skills/relewise-merchandising-audit"
+      ]
+    },
+    {
+      "name": "get_redirect_rule",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsGetRedirectRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "get_search_index",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsGetSearchIndex"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "get_search_result_modifier_rule",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsGetSearchResultModifierRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "get_search_term_modifier_rule",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsGetSearchTermModifierRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "get_stemming_rule",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsGetStemmingRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "get_synonym_rule",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsGetSynonymRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "get_trigger_configuration",
+      "area": "Triggers",
+      "relatedRestOperationIds": [
+        "TriggersGetConfiguration"
+      ],
+      "skills": [
+        "relewise/skills/relewise-triggers"
+      ]
+    },
+    {
+      "name": "list_decompounding_rules",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsListDecompoundingRules"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_merchandising_rules",
+      "area": "Merchandising",
+      "relatedRestOperationIds": [
+        "MerchandisingListRules"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising",
+        "relewise/skills/relewise-merchandising-audit"
+      ]
+    },
+    {
+      "name": "list_redirect_rules",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsListRedirectRules"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_search_indexes",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsListSearchIndexes"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_search_result_modifier_rules",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsListSearchResultModifierRules"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_search_term_modifier_rules",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsListSearchTermModifierRules"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_stemming_rules",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsListStemmingRules"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_synonym_rules",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsListSynonymRules"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising-audit",
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_trigger_configurations",
+      "area": "Triggers",
+      "relatedRestOperationIds": [
+        "TriggersListConfigurations"
+      ],
+      "skills": [
+        "relewise/skills/relewise-triggers"
+      ]
+    },
+    {
+      "name": "search_brands",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesSearchBrands"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "search_content",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesSearchContent"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "search_content_categories",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesSearchContentCategories"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "search_product_categories",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesSearchProductCategories"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "search_products",
+      "area": "Entities",
+      "relatedRestOperationIds": [
+        "EntitiesSearchProducts"
+      ],
+      "skills": [
+        "relewise/skills/relewise-entities"
+      ]
+    },
+    {
+      "name": "set_decompounding_rule_approved",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsPatchDecompoundingRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "set_merchandising_rule_enabled",
+      "area": "Merchandising",
+      "relatedRestOperationIds": [
+        "MerchandisingUpdateRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising"
+      ]
+    },
+    {
+      "name": "set_merchandising_rule_schedule",
+      "area": "Merchandising",
+      "relatedRestOperationIds": [
+        "MerchandisingUpdateRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-merchandising"
+      ]
+    },
+    {
+      "name": "set_redirect_rule_approved",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsPatchRedirectRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "set_search_result_modifier_rule_approved",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsPatchSearchResultModifierRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "set_search_term_modifier_rule_approved",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsPatchSearchTermModifierRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "set_stemming_rule_approved",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsPatchStemmingRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "set_synonym_rule_approved",
+      "area": "SearchTools",
+      "relatedRestOperationIds": [
+        "SearchToolsPatchSynonymRule"
+      ],
+      "skills": [
+        "relewise/skills/relewise-search-tools"
+      ]
+    }
+  ]
+}

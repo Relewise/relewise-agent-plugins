@@ -79,6 +79,15 @@ jobs:
           }
 
           $env:CLAUDE_PLUGIN_ROOT = $installedRoot
+          $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.mcp.json') | ConvertFrom-Json
+          $businessServer = $businessMcp.mcpServers.'relewise-agent-gateway'
+          if ($businessServer.url -ne 'https://my.relewise.com/agents/mcp' -or
+              $businessServer.headers.Authorization -ne 'Bearer ${RELEWISE_AGENT_GATEWAY_TOKEN:-}') {
+            throw 'The installed Relewise plugin has an invalid Agent Gateway MCP configuration.'
+          }
+          if (-not (Test-Path -LiteralPath (Join-Path $installedRoot 'references/agent-gateway-transports.md'))) {
+            throw 'The installed Relewise plugin is missing its shared transport-selection reference.'
+          }
           $launcher = Join-Path $installedRoot 'scripts/relewise-agent'
           $versionResponse = (& $launcher --version | Out-String) | ConvertFrom-Json
           if (-not $versionResponse.success -or $versionResponse.data.name -ne 'relewise-agent') {
@@ -166,11 +175,11 @@ jobs:
       - name: Verify API coverage files are current
         shell: bash
         run: |
-          status="$(git status --porcelain --untracked-files=all -- generated/operation-coverage.json docs/api-coverage.md)"
+          status="$(git status --porcelain --untracked-files=all -- generated/operation-coverage.json generated/mcp-tool-coverage.json docs/api-coverage.md docs/mcp-tool-coverage.md)"
           if [[ -n "$status" ]]; then
             echo "API coverage files are not current. Run:"
             echo "dotnet run --project tools/generate-coverage"
             echo "$status"
-            git diff -- generated/operation-coverage.json docs/api-coverage.md
+            git diff -- generated/operation-coverage.json generated/mcp-tool-coverage.json docs/api-coverage.md docs/mcp-tool-coverage.md
             exit 1
           fi

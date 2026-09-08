@@ -37,6 +37,7 @@ if (-not (Test-Path -LiteralPath $packageRoot)) {
 New-Item -ItemType Directory -Path $packageRoot | Out-Null
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'gemini-extension.json') -Destination $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
+Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\references') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
 New-Item -ItemType Directory -Path (Join-Path $packageRoot 'scripts'), (Join-Path $packageRoot 'libexec') | Out-Null
 
@@ -48,18 +49,15 @@ if ($RuntimeIdentifier -eq 'win-x64') {
     $windowsLauncher = Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'scripts\relewise-agent.ps1')
     [IO.File]::WriteAllText($windowsLauncherPath, $windowsLauncher, [Text.UTF8Encoding]::new($false))
 
-    $canonicalLauncherInstruction = 'When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.'
-    $windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to this file, resolve it to an absolute path and use that PowerShell launcher. On other platforms, when `../../scripts/relewise-agent` exists, resolve it to an absolute path and use that launcher. Fall back to `relewise-agent` from `PATH` only when the platform-specific packaged launcher does not exist.'
-    foreach ($skillFile in Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Filter 'SKILL.md' -File -Recurse) {
-        $content = Get-Content -Raw -LiteralPath $skillFile.FullName
-        if ($content.Contains($canonicalLauncherInstruction)) {
-            $content = $content.Replace($canonicalLauncherInstruction, $windowsLauncherInstruction)
-            [IO.File]::WriteAllText($skillFile.FullName, $content, [Text.UTF8Encoding]::new($false))
-        }
-        elseif (-not $content.Contains($windowsLauncherInstruction)) {
-            throw "Skill '$($skillFile.FullName)' does not contain the expected launcher instruction."
-        }
+$canonicalLauncherInstruction = 'When `../../scripts/relewise-agent` exists relative to the calling `SKILL.md`, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.'
+    $windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to the calling `SKILL.md`, resolve it to an absolute path and use that PowerShell launcher. On other platforms, when `../../scripts/relewise-agent` exists relative to the calling `SKILL.md`, resolve it to an absolute path and use that launcher. Fall back to `relewise-agent` from `PATH` only when the platform-specific packaged launcher does not exist.'
+    $transportReferencePath = Join-Path $packageRoot 'references\agent-gateway-transports.md'
+    $content = Get-Content -Raw -LiteralPath $transportReferencePath
+    if (-not $content.Contains($canonicalLauncherInstruction)) {
+        throw "Transport reference '$transportReferencePath' does not contain the expected launcher instruction."
     }
+    $content = $content.Replace($canonicalLauncherInstruction, $windowsLauncherInstruction)
+    [IO.File]::WriteAllText($transportReferencePath, $content, [Text.UTF8Encoding]::new($false))
 }
 elseif ((Test-Path -LiteralPath $windowsLauncherPath) -and -not $Merge) {
     Remove-Item -LiteralPath $windowsLauncherPath -Force

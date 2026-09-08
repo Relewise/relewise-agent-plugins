@@ -85,6 +85,21 @@ if ($manifest.version -ne $portableManifest.version -or $manifest.version -ne $c
 if ($null -ne $claudeManifest.userConfig) {
     throw 'Claude Code manifest must not claim protected Agent Gateway configuration.'
 }
+if ($manifest.mcpServers -ne './.mcp.json' -or $claudeManifest.mcpServers -ne './.mcp.json') {
+    throw 'Relewise vendor manifests do not declare the Agent Gateway MCP configuration.'
+}
+$businessMcp = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.mcp.json') | ConvertFrom-Json
+$businessServer = $businessMcp.mcpServers.'relewise-agent-gateway'
+if ($businessServer.type -ne 'http' -or $businessServer.url -ne 'https://my.relewise.com/agents/mcp') {
+    throw 'Relewise does not configure the expected Agent Gateway MCP server.'
+}
+if ($businessServer.headers.Authorization -ne 'Bearer ${RELEWISE_AGENT_GATEWAY_TOKEN:-}') {
+    throw 'Relewise does not configure the shared token as its MCP authorization header.'
+}
+$transportReference = Join-Path $pluginRoot 'references\agent-gateway-transports.md'
+if (-not (Test-Path -LiteralPath $transportReference -PathType Leaf)) {
+    throw 'Relewise is missing its shared transport-selection reference.'
+}
 
 $developerRoot = Join-Path $resolvedMarketplaceRoot 'plugins\relewise-developer'
 $developerPortableManifest = Get-Content -Raw -LiteralPath (Join-Path $developerRoot 'plugin.json') | ConvertFrom-Json
@@ -129,7 +144,10 @@ foreach ($canonicalSkill in $canonicalSkills) {
     $canonicalContent = Get-Content -Raw -LiteralPath (Join-Path $canonicalSkill.FullName 'SKILL.md')
     $installedContent = Get-Content -Raw -LiteralPath $installedSkillPath
     if (-not $installedContent.StartsWith($canonicalContent)) { throw "Codex skill '$($canonicalSkill.Name)' is stale." }
-    if (-not $installedContent.Contains('../../scripts/relewise-agent')) { throw "Codex skill '$($canonicalSkill.Name)' cannot locate its bundled CLI." }
+    if (-not $installedContent.Contains('../../references/agent-gateway-transports.md')) { throw "Codex skill '$($canonicalSkill.Name)' does not use the shared transport rules." }
+}
+if (-not (Test-Path -LiteralPath (Join-Path $pluginRoot 'references\agent-gateway-transports.md') -PathType Leaf)) {
+    throw 'Repository-backed Codex plugin is missing its shared transport-selection reference.'
 }
 
 $runtimeFiles = @(

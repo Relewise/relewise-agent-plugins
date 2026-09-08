@@ -7,14 +7,16 @@ This repository provides vendor-neutral Relewise capabilities for AI agents. Can
 - Agent Skills are the reusable instruction format.
 - `Relewise` is the business-facing plugin.
 - `Relewise Developer` is the developer-facing plugin.
-- Business functionality is REST-first and does not require Agent Gateway MCP.
+- Business skills are transport-neutral and may use the bundled REST CLI, the unified Agent Gateway MCP server, or authenticated direct REST.
 - Developer MCP belongs primarily to `Relewise Developer`.
 - Personal Access Token (PAT) authentication is the supported authentication method.
 - PATs must never be passed as command-line arguments.
 - Multi-Dataset workflows must be supported; the architecture must not rely on one globally configured Dataset.
 - Dataset IDs must be discovered and validated, never invented by an LLM.
-- The versioned Agent Gateway OpenAPI specification is the API contract.
+- The versioned Agent Gateway OpenAPI specification and MCP tool catalog are the checked-in API contracts.
 - A small cross-platform `relewise-agent` helper handles HTTP execution.
+- Shared transport rules choose only transports enabled by the selected Dataset policy; an unavailable transport must not be treated as authorization to bypass that policy.
+- MCP tools and REST operations are related capabilities, not interchangeable wire schemas.
 - Skills describe intent, workflow, and interpretation—not HTTP mechanics.
 - Canonical Relewise content lives under `plugins/`; vendor-specific packaging lives under `vendors/`.
 - Repository-maintainer skills live under `.agents/skills/`. They assist contributors working in this repository but are not packaged or installed with a Relewise product.

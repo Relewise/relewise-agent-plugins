@@ -38,6 +38,8 @@ New-Item -ItemType Directory -Path $packageRoot | Out-Null
 Copy-Item -LiteralPath (Join-Path $adapterRoot '.codex-plugin') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\assets') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
+Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\references') -Destination $packageRoot -Recurse
+Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\.mcp.json') -Destination $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
 New-Item -ItemType Directory -Path (Join-Path $packageRoot 'scripts'), (Join-Path $packageRoot 'libexec') | Out-Null
 

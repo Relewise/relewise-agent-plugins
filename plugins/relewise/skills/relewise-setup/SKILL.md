@@ -5,20 +5,18 @@ description: Set up, verify, or repair Relewise Agent Gateway authentication. Us
 
 # Relewise Setup
 
-When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
-
 Never ask the user to paste a Personal Access Token into the conversation. Do not print, repeat, inspect, or place a token in command text, command arguments, output, logs, or repository files.
+
+Read [the shared transport-selection rules](../../references/agent-gateway-transports.md). This setup is idempotent: verify existing authentication before changing anything, and stop as soon as a reusable route works.
 
 ## Set up or repair authentication
 
-1. Run `relewise-agent me` without changing the current configuration.
-2. If it succeeds, explain that Relewise is already connected and make no changes. Include the accessible Dataset display names only when useful.
-3. If it returns `authentication_error`, distinguish a missing token from a rejected, expired, or regenerated token using the error code and message.
-4. Treat the initial ordinary invocation as the check for an existing `RELEWISE_AGENT_GATEWAY_TOKEN`; do not inspect or print the variable. If the token is missing, use this order:
-   1. If the AI client has access to a secure credential provider containing the user's Relewise Agent Gateway PAT, retrieve it and inject it only into the `relewise-agent` child process as `RELEWISE_AGENT_GATEWAY_TOKEN`. Use this route only when it can be repeated automatically for future Relewise invocations.
-   2. If no reusable credential-provider route is available, explain the two supported setup choices from [authentication setup](references/authentication-setup.md): configure such a provider, or configure a persistent user or system environment variable named `RELEWISE_AGENT_GATEWAY_TOKEN`.
+1. Verify identity without changing configuration. Prefer `relewise-agent me` when the CLI resolves; otherwise call the registered MCP server's `get_me` tool, or use direct REST `IdentityGetCurrentUser` when authenticated HTTP is available.
+2. If identity discovery succeeds, explain that Relewise is already connected and make no changes. Include accessible Dataset display names only when useful.
+3. If authentication fails, distinguish a missing token from a rejected, expired, revoked, or regenerated token using the returned error. Do not inspect or print the environment variable itself.
+4. Follow [authentication setup](references/authentication-setup.md). Prefer a reusable secure credential-provider route; otherwise guide the user to a persistent user or system environment variable named `RELEWISE_AGENT_GATEWAY_TOKEN`.
 5. Let the user create, store, or replace the token outside the conversation and wait for confirmation when their action is required. If they ask for concrete configuration steps, use current official documentation for their environment rather than relying on fixed vendor UI navigation stored in this skill.
-6. Run `relewise-agent me` again using the configured authentication route. Confirm success without exposing token metadata that is not needed. If authentication still fails, explain the specific next corrective action; do not repeatedly ask the user to redo unchanged steps.
+6. Verify identity again through an available transport. For MCP, the AI client may need to restart after its environment changes before the registered server can authenticate. Confirm success without exposing token metadata that is not needed. If authentication still fails, explain the specific next corrective action; do not repeatedly ask the user to redo unchanged steps.
 
 The workflow is idempotent: every invocation starts by verifying the current configuration, and a working setup is never replaced merely because the skill was invoked again. A setup is complete only when future Relewise commands can receive the PAT without the user re-entering or re-exporting it each time.
 

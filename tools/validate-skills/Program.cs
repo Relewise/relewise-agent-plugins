@@ -10,6 +10,12 @@ try
         .EnumerateArray()
         .Select(operation => operation.GetProperty("operationId").GetString()!)
         .ToHashSet(StringComparer.Ordinal);
+    using var mcpCatalog = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(repositoryRoot, "generated", "mcp-tools.json")));
+    var availableMcpToolNames = mcpCatalog.RootElement
+        .GetProperty("tools")
+        .EnumerateArray()
+        .Select(tool => tool.GetProperty("name").GetString()!)
+        .ToHashSet(StringComparer.Ordinal);
 
     var skillFiles = Directory.EnumerateFiles(
         Path.Combine(repositoryRoot, "plugins"),
@@ -79,9 +85,28 @@ try
                 throw new InvalidDataException($"'{Relative(manifestPath)}' references unknown operation '{operationId}'.");
             }
         }
+
+        var mcpToolNames = manifest.RootElement.TryGetProperty("mcpToolNames", out var mcpToolNamesElement)
+            ? mcpToolNamesElement.EnumerateArray()
+                .Select(value => value.GetString() ?? throw new InvalidDataException("MCP tool names must be strings."))
+                .ToArray()
+            : [];
+        var duplicateMcpToolName = mcpToolNames.GroupBy(value => value, StringComparer.Ordinal)
+            .FirstOrDefault(group => group.Count() > 1)?.Key;
+        if (duplicateMcpToolName is not null)
+        {
+            throw new InvalidDataException($"'{Relative(manifestPath)}' references MCP tool '{duplicateMcpToolName}' more than once.");
+        }
+        foreach (var mcpToolName in mcpToolNames)
+        {
+            if (!availableMcpToolNames.Contains(mcpToolName))
+            {
+                throw new InvalidDataException($"'{Relative(manifestPath)}' references unknown MCP tool '{mcpToolName}'.");
+            }
+        }
     }
 
-    Console.WriteLine($"Validated {skillFiles.Length} skill definition(s) and {manifests.Length} operation manifest(s).");
+    Console.WriteLine($"Validated {skillFiles.Length} skill definition(s) and {manifests.Length} REST/MCP capability manifest(s).");
     return 0;
 
     string Relative(string path) => Path.GetRelativePath(repositoryRoot, path).Replace('\\', '/');

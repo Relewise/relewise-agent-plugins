@@ -25,10 +25,14 @@ internal static class GenerateContract
         {
             var repositoryRoot = FindRepositoryRoot();
             var contractPath = Path.Combine(repositoryRoot, "contracts", "agent-gateway-v1.json");
+            var mcpContractPath = Path.Combine(repositoryRoot, "contracts", "agent-gateway-mcp-v1.json");
             var generatedRoot = Path.Combine(repositoryRoot, "generated");
 
-            ParseArguments(args, ref contractPath, ref generatedRoot);
-            Generate(Path.GetFullPath(contractPath), Path.GetFullPath(generatedRoot));
+            ParseArguments(args, ref contractPath, ref mcpContractPath, ref generatedRoot);
+            Generate(
+                Path.GetFullPath(contractPath),
+                Path.GetFullPath(mcpContractPath),
+                Path.GetFullPath(generatedRoot));
             return 0;
         }
         catch (Exception exception)
@@ -38,15 +42,22 @@ internal static class GenerateContract
         }
     }
 
-    private static void Generate(string contractPath, string generatedRoot)
+    private static void Generate(string contractPath, string mcpContractPath, string generatedRoot)
     {
         var sourceBytes = File.ReadAllBytes(contractPath);
         var document = JsonNode.Parse(sourceBytes)?.AsObject()
             ?? throw new InvalidDataException("The OpenAPI contract is empty.");
+        var mcpSourceBytes = File.ReadAllBytes(mcpContractPath);
+        var mcpDocument = JsonNode.Parse(mcpSourceBytes)?.AsObject()
+            ?? throw new InvalidDataException("The MCP tool catalog is empty.");
 
         RequireObject(document, "paths");
         var schemas = RequireObject(RequireObject(document, "components"), "schemas");
         var operations = ExtractOperations(document);
+        var operationIds = operations
+            .Select(operation => operation!["operationId"]!.GetValue<string>())
+            .ToHashSet(StringComparer.Ordinal);
+        var mcpTools = ExtractMcpTools(mcpDocument, operationIds);
 
         Directory.CreateDirectory(generatedRoot);
         var schemasDirectory = Path.Combine(generatedRoot, "schemas");
@@ -58,13 +69,10 @@ internal static class GenerateContract
         }
 
         var schemaIndex = GenerateSchemas(schemas, schemasDirectory);
-        var normalizedSource = Encoding.UTF8.GetBytes(
-            Encoding.UTF8.GetString(sourceBytes).Replace("\r\n", "\n").Replace("\r", "\n"));
-        var sourceHash = Convert.ToHexString(SHA256.HashData(normalizedSource)).ToLowerInvariant();
         var catalog = new JsonObject
         {
             ["source"] = "contracts/agent-gateway-v1.json",
-            ["sourceSha256"] = sourceHash,
+            ["sourceSha256"] = SourceHash(sourceBytes),
             ["openapi"] = document["openapi"]?.GetValue<string>(),
             ["apiVersion"] = document["info"]?["version"]?.GetValue<string>(),
             ["operationCount"] = operations.Count,
@@ -72,13 +80,113 @@ internal static class GenerateContract
         };
 
         WriteJson(Path.Combine(generatedRoot, "operations.json"), catalog);
+        WriteJson(Path.Combine(generatedRoot, "mcp-tools.json"), new JsonObject
+        {
+            ["source"] = "contracts/agent-gateway-mcp-v1.json",
+            ["sourceSha256"] = SourceHash(mcpSourceBytes),
+            ["toolCount"] = mcpTools.Count,
+            ["tools"] = mcpTools
+        });
         WriteJson(Path.Combine(schemasDirectory, "index.json"), new JsonObject
         {
             ["schemaCount"] = schemaIndex.Count,
             ["schemas"] = schemaIndex
         });
 
-        Console.WriteLine($"Generated {operations.Count} operations and {schemaIndex.Count} schemas.");
+        Console.WriteLine($"Generated {operations.Count} REST operations, {mcpTools.Count} MCP tools, and {schemaIndex.Count} schemas.");
+    }
+
+    private static JsonArray ExtractMcpTools(JsonObject document, IReadOnlySet<string> operationIds)
+    {
+        var sourceTools = document["tools"]?.AsArray()
+            ?? throw new InvalidDataException("The MCP catalog has no 'tools' array.");
+        var names = new HashSet<string>(StringComparer.Ordinal);
+        var tools = new List<JsonObject>();
+
+        foreach (var toolNode in sourceTools)
+        {
+            var tool = toolNode?.AsObject()
+                ?? throw new InvalidDataException("An MCP catalog tool is not an object.");
+            var name = tool["name"]?.GetValue<string>();
+            if (string.IsNullOrWhiteSpace(name) || !names.Add(name))
+            {
+                throw new InvalidDataException(string.IsNullOrWhiteSpace(name)
+                    ? "An MCP catalog tool has no name."
+                    : $"Duplicate MCP tool name '{name}'.");
+            }
+
+            var description = tool["description"]?.GetValue<string>();
+            var area = tool["area"]?.GetValue<string>();
+            if (string.IsNullOrWhiteSpace(description) || string.IsNullOrWhiteSpace(area))
+            {
+                throw new InvalidDataException($"MCP tool '{name}' must declare a description and area.");
+            }
+
+            var inputSchema = tool["inputSchema"]?.AsObject()
+                ?? throw new InvalidDataException($"MCP tool '{name}' has no input schema.");
+            if (!string.Equals(inputSchema["type"]?.GetValue<string>(), "object", StringComparison.Ordinal))
+            {
+                throw new InvalidDataException($"MCP tool '{name}' must use an object input schema.");
+            }
+
+            var relatedSource = tool["relatedRestOperationIds"]?.AsArray()
+                ?? throw new InvalidDataException($"MCP tool '{name}' has no related REST operation list.");
+            var related = relatedSource
+                .Select(value => value?.GetValue<string>()
+                    ?? throw new InvalidDataException($"MCP tool '{name}' has an invalid related REST operation."))
+                .ToArray();
+            var duplicateOperation = related.GroupBy(value => value, StringComparer.Ordinal)
+                .FirstOrDefault(group => group.Count() > 1)?.Key;
+            if (duplicateOperation is not null)
+            {
+                throw new InvalidDataException($"MCP tool '{name}' references REST operation '{duplicateOperation}' more than once.");
+            }
+            foreach (var operationId in related)
+            {
+                if (!operationIds.Contains(operationId))
+                {
+                    throw new InvalidDataException($"MCP tool '{name}' references unknown REST operation '{operationId}'.");
+                }
+            }
+
+            var normalized = new JsonObject
+            {
+                ["name"] = name
+            };
+            AddWhenPresent(normalized, "title", tool["title"]);
+            normalized["description"] = description;
+            normalized["inputSchema"] = inputSchema.DeepClone();
+            AddWhenPresent(normalized, "outputSchema", tool["outputSchema"]);
+            AddWhenPresent(normalized, "annotations", tool["annotations"]);
+            normalized["area"] = area;
+            normalized["relatedRestOperationIds"] = new JsonArray(
+                related.Order(StringComparer.Ordinal)
+                    .Select(value => (JsonNode?)JsonValue.Create(value))
+                    .ToArray());
+            tools.Add(normalized);
+        }
+
+        var result = new JsonArray();
+        foreach (var tool in tools.OrderBy(item => item["name"]!.GetValue<string>(), StringComparer.Ordinal))
+        {
+            result.Add(tool);
+        }
+        return result;
+    }
+
+    private static void AddWhenPresent(JsonObject destination, string propertyName, JsonNode? value)
+    {
+        if (value is not null)
+        {
+            destination[propertyName] = value.DeepClone();
+        }
+    }
+
+    private static string SourceHash(byte[] sourceBytes)
+    {
+        var normalizedSource = Encoding.UTF8.GetBytes(
+            Encoding.UTF8.GetString(sourceBytes).Replace("\r\n", "\n").Replace("\r", "\n"));
+        return Convert.ToHexString(SHA256.HashData(normalizedSource)).ToLowerInvariant();
     }
 
     private static JsonArray ExtractOperations(JsonObject document)
@@ -285,7 +393,11 @@ internal static class GenerateContract
 
     private static JsonNode CloneOrDefault(JsonNode? node, JsonNode defaultValue) => node?.DeepClone() ?? defaultValue;
 
-    private static void ParseArguments(string[] args, ref string contractPath, ref string generatedRoot)
+    private static void ParseArguments(
+        string[] args,
+        ref string contractPath,
+        ref string mcpContractPath,
+        ref string generatedRoot)
     {
         for (var index = 0; index < args.Length; index++)
         {
@@ -294,11 +406,14 @@ internal static class GenerateContract
                 case "--contract" when index + 1 < args.Length:
                     contractPath = args[++index];
                     break;
+                case "--mcp-contract" when index + 1 < args.Length:
+                    mcpContractPath = args[++index];
+                    break;
                 case "--output" when index + 1 < args.Length:
                     generatedRoot = args[++index];
                     break;
                 default:
-                    throw new ArgumentException($"Unknown or incomplete argument '{args[index]}'. Use --contract <path> or --output <directory>.");
+                    throw new ArgumentException($"Unknown or incomplete argument '{args[index]}'. Use --contract <path>, --mcp-contract <path>, or --output <directory>.");
             }
         }
     }

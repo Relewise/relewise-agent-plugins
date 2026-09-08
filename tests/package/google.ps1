@@ -18,35 +18,35 @@ if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'P
 if ($manifest.version -notmatch '^\d+\.\d+\.\d+$') { throw 'Gemini extension manifest version is not semantic.' }
 if ($sourceManifest.version -ne $plannedVersion) { throw 'Root Gemini extension manifest version does not match version.json.' }
 if ($null -ne $manifest.settings) { throw 'Gemini must not request a PAT setting that cannot reach skill shell subprocesses.' }
+$server = $manifest.mcpServers.'relewise-agent-gateway'
+if ($server.httpUrl -ne 'https://my.relewise.com/agents/mcp') { throw 'Gemini package has the wrong Agent Gateway MCP endpoint.' }
+if ($server.headers.Authorization -ne 'Bearer ${RELEWISE_AGENT_GATEWAY_TOKEN:-}') { throw 'Gemini package has the wrong Agent Gateway MCP authorization header.' }
+if ($server.env.RELEWISE_AGENT_GATEWAY_TOKEN -ne '${RELEWISE_AGENT_GATEWAY_TOKEN:-}') { throw 'Gemini package does not explicitly expose the shared token to the MCP server.' }
 
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
 $packagedSkills = Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory
 if ($sourceSkills.Count -ne $packagedSkills.Count) { throw 'Package does not contain every canonical skill.' }
-$canonicalLauncherInstruction = 'When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.'
-$windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to this file, resolve it to an absolute path and use that PowerShell launcher. On other platforms, when `../../scripts/relewise-agent` exists, resolve it to an absolute path and use that launcher. Fall back to `relewise-agent` from `PATH` only when the platform-specific packaged launcher does not exist.'
+$canonicalLauncherInstruction = 'When `../../scripts/relewise-agent` exists relative to the calling `SKILL.md`, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.'
+$windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to the calling `SKILL.md`, resolve it to an absolute path and use that PowerShell launcher. On other platforms, when `../../scripts/relewise-agent` exists relative to the calling `SKILL.md`, resolve it to an absolute path and use that launcher. Fall back to `relewise-agent` from `PATH` only when the platform-specific packaged launcher does not exist.'
 foreach ($sourceSkill in $sourceSkills) {
     $packagedSkill = Join-Path $packageRoot "skills\$($sourceSkill.Name)\SKILL.md"
     if (-not (Test-Path -LiteralPath $packagedSkill)) { throw "Package is missing skill '$($sourceSkill.Name)'." }
     $content = Get-Content -Raw -LiteralPath $packagedSkill
     $sourceContent = Get-Content -Raw -LiteralPath (Join-Path $sourceSkill.FullName 'SKILL.md')
-    $expectedContent = if ($RuntimeIdentifier -eq 'win-x64') {
-        if (-not $sourceContent.Contains($canonicalLauncherInstruction)) {
-            throw "Canonical skill '$($sourceSkill.Name)' does not contain the expected launcher instruction."
-        }
-        $sourceContent.Replace($canonicalLauncherInstruction, $windowsLauncherInstruction)
-    }
-    else {
-        $sourceContent
-    }
-    if ($content -cne $expectedContent) {
+    if ($content -cne $sourceContent) {
         throw "Packaged skill '$($sourceSkill.Name)' differs from its expected vendor-specific content."
     }
-    if ($RuntimeIdentifier -eq 'win-x64' -and -not $content.Contains($windowsLauncherInstruction)) {
-        throw "Packaged skill '$($sourceSkill.Name)' does not use the Windows PowerShell launcher."
-    }
-    if ($RuntimeIdentifier -ne 'win-x64' -and $content.Contains($windowsLauncherInstruction)) {
-        throw "Packaged skill '$($sourceSkill.Name)' unexpectedly contains the Windows PowerShell instruction."
-    }
+}
+
+$sourceTransportReference = Get-Content -Raw -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\references\agent-gateway-transports.md')
+$packagedTransportReference = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'references\agent-gateway-transports.md')
+$expectedTransportReference = if ($RuntimeIdentifier -eq 'win-x64') {
+    $sourceTransportReference.Replace($canonicalLauncherInstruction, $windowsLauncherInstruction)
+} else {
+    $sourceTransportReference
+}
+if ($packagedTransportReference -cne $expectedTransportReference) {
+    throw 'Packaged transport-selection reference differs from its expected platform-specific content.'
 }
 
 $expectedExecutable = if ($RuntimeIdentifier -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }

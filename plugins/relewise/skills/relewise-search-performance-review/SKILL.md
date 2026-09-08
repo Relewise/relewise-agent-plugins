@@ -5,9 +5,7 @@ description: Review Relewise product-search performance and prioritize optimizat
 
 # Review Relewise Search Performance
 
-When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
-
-Use `relewise-agent` for execution. Never invent Dataset IDs or filter values, construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. This workflow is read-only and does not authorize configuration changes.
+Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Never invent Dataset IDs or filter values. This workflow is read-only and does not authorize configuration changes.
 
 ## Build the review
 
@@ -20,7 +18,7 @@ Use `relewise-agent` for execution. Never invent Dataset IDs or filter values, c
    - low click rate for weak result relevance;
    - popular terms for high-impact prioritization;
    - trending up or down for changing demand.
-6. Inspect each operation with `schema` before forming its input. Use bounded pages and avoid repeated calls that cannot change the conclusion.
+6. Inspect the selected transport's current schema before forming each input. Use bounded pages and avoid repeated calls that cannot change the conclusion.
 
 ## Prioritize findings
 

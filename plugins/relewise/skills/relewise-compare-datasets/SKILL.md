@@ -5,9 +5,7 @@ description: Compare two or more Relewise Datasets using consistent metadata, an
 
 # Compare Relewise Datasets
 
-When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
-
-Use `relewise-agent` for execution. Never invent Dataset IDs, construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. This workflow is read-only.
+Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Never invent Dataset IDs. This workflow is read-only.
 
 ## Establish a fair comparison
 
@@ -15,7 +13,7 @@ Use `relewise-agent` for execution. Never invent Dataset IDs, construct Agent Ga
 2. Validate each selected Dataset and its effective Agent Gateway policy. Explain and omit a Dataset when the required area is unavailable; do not silently replace it.
 3. Identify the smallest common set of measures that answers the question. Use Dataset metadata for configuration context, analytics for performance, and consumption summaries for usage.
 4. Keep inputs equivalent across Datasets: the same inclusive period, currency, filters, pagination, and measurement definition. Surface unavoidable differences before interpreting results.
-5. Inspect each unfamiliar operation with `schema`, then execute it once per Dataset with `call`.
+5. Inspect the selected transport's schema for each unfamiliar capability, then execute it once per Dataset. With the CLI, use `schema` and `call`.
 
 Do not compare formatted strings. Calculate from numeric values and preserve units. Do not infer that a configuration difference caused a performance difference without supporting evidence.
 

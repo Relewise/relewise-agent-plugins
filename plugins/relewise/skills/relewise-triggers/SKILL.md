@@ -1,13 +1,11 @@
 ---
 name: relewise-triggers
-description: Inspect Relewise Trigger configurations through the relewise-agent CLI. Use when a user wants to list Triggers, inspect their criteria, or understand whether Trigger evaluation is enabled.
+description: Inspect Relewise Trigger configurations. Use when a user wants to list Triggers, inspect their criteria, or understand whether Trigger evaluation is enabled.
 ---
 
 # Relewise Triggers
 
-When `../../scripts/relewise-agent` exists relative to this file, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.
-
-Use `relewise-agent` for execution. Do not construct Agent Gateway URLs, send HTTP directly, or ask for a PAT in chat. Discover and validate the intended Dataset before making a Triggers call. These operations are read-only and never evaluate a Trigger or send a webhook.
+Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Discover and validate the intended Dataset before making a Triggers call. These operations are read-only and never evaluate a Trigger or send a webhook.
 
 ## Inspect configurations
 

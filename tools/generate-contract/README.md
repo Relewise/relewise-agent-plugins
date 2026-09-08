@@ -1,6 +1,6 @@
 # Agent Gateway contract generator
 
-The generator converts the complete, versioned Agent Gateway OpenAPI snapshot into smaller files that are easier for skills and tooling to discover and consume.
+The generator converts the complete Agent Gateway REST and MCP snapshots into smaller files that are easier for skills and tooling to discover and consume.
 
 ## Default input and output
 
@@ -9,7 +9,9 @@ The generator locates the repository root automatically, so it can be run from a
 | Purpose | Default location |
 | --- | --- |
 | OpenAPI input | `contracts/agent-gateway-v1.json` |
+| MCP catalog input | `contracts/agent-gateway-mcp-v1.json` |
 | Operation catalog | `generated/operations.json` |
+| MCP tool catalog | `generated/mcp-tools.json` |
 | Component schemas | `generated/schemas/*.json` |
 | Schema index | `generated/schemas/index.json` |
 
@@ -22,7 +24,7 @@ dotnet run --project tools/generate-contract
 Optional arguments override the defaults:
 
 ```shell
-dotnet run --project tools/generate-contract -- --contract path/to/openapi.json --output path/to/generated
+dotnet run --project tools/generate-contract -- --contract path/to/openapi.json --mcp-contract path/to/mcp-catalog.json --output path/to/generated
 ```
 
 Relative override paths are resolved from the current working directory.
@@ -39,6 +41,8 @@ Relative override paths are resolved from the current working directory.
 - response schemas by status code and content type
 
 The catalog also records the OpenAPI version, Agent Gateway API version, operation count, source-contract path, and source-contract SHA-256 hash.
+
+`generated/mcp-tools.json` is a deterministic catalog of every MCP tool. It retains each tool's schemas, annotations, Agent Gateway area, and related REST operation IDs. Generation fails if names or relationships are invalid or a related REST operation does not exist.
 
 `generated/schemas/` contains one JSON file for each schema under `components.schemas` in the OpenAPI contract. These files preserve the schema definitions used by operation requests and responses.
 

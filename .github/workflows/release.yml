@@ -76,7 +76,7 @@ jobs:
       - name: Validate API coverage files
         shell: bash
         run: |
-          status="$(git status --porcelain --untracked-files=all -- generated/operation-coverage.json docs/api-coverage.md)"
+          status="$(git status --porcelain --untracked-files=all -- generated/operation-coverage.json generated/mcp-tool-coverage.json docs/api-coverage.md docs/mcp-tool-coverage.md)"
           if [[ -n "$status" ]]; then
             echo "API coverage files are not current."
             echo "$status"
