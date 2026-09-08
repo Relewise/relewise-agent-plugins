@@ -1,6 +1,6 @@
 {
   "name": "relewise",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "settings": [
     {
