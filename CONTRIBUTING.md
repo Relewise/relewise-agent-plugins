@@ -35,7 +35,7 @@ dotnet run --project tools/generate-contract
 dotnet run --project tools/generate-coverage
 ```
 
-The refresh currently reads the MCP catalog from the local My Relewise development endpoint while its production endpoint is being deployed. Do not edit files under `generated/`, `docs/api-coverage.md`, or `docs/mcp-tool-coverage.md` manually.
+The refresh reads the MCP catalog from the public My Relewise endpoint. Do not edit files under `generated/`, `docs/api-coverage.md`, or `docs/mcp-tool-coverage.md` manually.
 
 ### Agent Skills
 
