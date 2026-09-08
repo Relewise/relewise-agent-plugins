@@ -1,11 +1,13 @@
 ---
 name: relewise-search-performance-review
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Review Relewise product-search performance and prioritize optimization opportunities. Use when a user asks why search is underperforming, what should be optimized, or for a recurring search health review.
 ---
 
 # Review Relewise Search Performance
 
-Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Never invent Dataset IDs or filter values. This workflow is read-only and does not authorize configuration changes.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the selected REST operation ID and/or MCP tool plus validated parameters; do not resolve the CLI, choose a transport, or handle authentication in this domain skill. Never invent Dataset IDs or filter values. This workflow is read-only and does not authorize configuration changes.
 
 ## Build the review
 

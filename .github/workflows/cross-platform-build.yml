@@ -87,7 +87,7 @@ jobs:
             $executable = "artifacts/${{ matrix.rid }}/${{ matrix.executable }}"
           } else {
             $expectedVersion = (Get-Content -Raw plugins/relewise/.codex-plugin/runtime-version.txt).Trim()
-            $executable = "plugins/relewise/libexec/${{ matrix.rid }}/${{ matrix.executable }}"
+            $executable = "plugins/relewise/skills/relewise-agent-gateway/scripts/libexec/${{ matrix.rid }}/${{ matrix.executable }}"
           }
           ./tests/cli/smoke.ps1 -ExecutablePath $executable -ExpectedVersion $expectedVersion
           ./tools/package/claude.ps1 -RuntimeIdentifier "${{ matrix.rid }}" -ExecutablePath $executable
@@ -103,38 +103,46 @@ jobs:
           Copy-Item -LiteralPath $executable -Destination $stagedExecutable
 
       - name: Run Claude launcher smoke test
+        if: matrix.rid != 'win-x64'
         shell: bash
         env:
-          CLAUDE_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/claude/${{ matrix.rid }}/relewise
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/claude/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
+        run: artifacts/claude/${{ matrix.rid }}/relewise/skills/relewise-agent-gateway/scripts/relewise-agent --version
 
       - name: Run GitHub Copilot launcher smoke test
+        if: matrix.rid != 'win-x64'
         shell: bash
         env:
-          COPILOT_PLUGIN_ROOT: ${{ github.workspace }}/artifacts/github-copilot/${{ matrix.rid }}/relewise
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/github-copilot/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
+        run: artifacts/github-copilot/${{ matrix.rid }}/relewise/skills/relewise-agent-gateway/scripts/relewise-agent --version
 
       - name: Run OpenAI Codex launcher smoke test
+        if: matrix.rid != 'win-x64'
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/openai/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
+        run: artifacts/openai/${{ matrix.rid }}/relewise/skills/relewise-agent-gateway/scripts/relewise-agent --version
 
       - name: Run Google Gemini launcher smoke test
         if: matrix.rid != 'win-x64'
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/google/${{ matrix.rid }}/relewise/scripts/relewise-agent --version
+        run: artifacts/google/${{ matrix.rid }}/relewise/skills/relewise-agent-gateway/scripts/relewise-agent --version
 
-      - name: Run Google Gemini Windows launcher smoke test
+      - name: Run every Windows launcher in PowerShell 5.1 and 7
         if: matrix.rid == 'win-x64'
         shell: pwsh
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: ./artifacts/google/win-x64/relewise/scripts/relewise-agent.ps1 --version
+        run: |
+          foreach ($vendor in @('claude', 'github-copilot', 'google', 'openai')) {
+            $launcher = "./artifacts/$vendor/win-x64/relewise/skills/relewise-agent-gateway/scripts/relewise-agent.ps1"
+            & powershell.exe -NoProfile -File $launcher --version
+            if ($LASTEXITCODE -ne 0) { throw "$vendor Windows PowerShell launcher failed." }
+            & pwsh -NoProfile -File $launcher --version
+            if ($LASTEXITCODE -ne 0) { throw "$vendor PowerShell 7 launcher failed." }
+          }
 
       - name: Validate Google Gemini extension
         if: matrix.rid == 'win-x64'
@@ -181,8 +189,8 @@ jobs:
           version="${versionCore}-main.${{ github.run_id }}"
           mkdir -p artifacts/extracted/relewise
           unzip -q "artifacts/release-plugin/relewise-claude-plugin-v${version}.zip" -d artifacts/extracted/relewise
-          test -x artifacts/extracted/relewise/scripts/relewise-agent
-          test -x artifacts/extracted/relewise/libexec/linux-x64/relewise-agent
+          test -x artifacts/extracted/relewise/skills/relewise-agent-gateway/scripts/relewise-agent
+          test -x artifacts/extracted/relewise/skills/relewise-agent-gateway/scripts/libexec/linux-x64/relewise-agent
 
       - name: Validate extracted Claude plugin
         shell: pwsh
@@ -195,4 +203,4 @@ jobs:
         shell: bash
         env:
           RELEWISE_AGENT_GATEWAY_TOKEN: smoke-test-token
-        run: artifacts/extracted/relewise/scripts/relewise-agent --version
+        run: artifacts/extracted/relewise/skills/relewise-agent-gateway/scripts/relewise-agent --version

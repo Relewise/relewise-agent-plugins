@@ -37,9 +37,9 @@ try {
             $relative = [IO.Path]::GetRelativePath($resolvedPluginRoot, $file.FullName).Replace('\', '/')
             $entry = $archive.CreateEntry($relative, [IO.Compression.CompressionLevel]::Optimal)
             $isExecutable =
-                $relative -eq 'scripts/relewise-agent' -or
-                $relative -like 'libexec/*/relewise-agent' -or
-                $relative -like 'libexec/*/relewise-agent.exe'
+                $relative -eq 'skills/relewise-agent-gateway/scripts/relewise-agent' -or
+                $relative -like 'skills/relewise-agent-gateway/scripts/libexec/*/relewise-agent' -or
+                $relative -like 'skills/relewise-agent-gateway/scripts/libexec/*/relewise-agent.exe'
             $unixMode = if ($isExecutable) { 0x81ED } else { 0x81A4 }
             $entry.ExternalAttributes = $unixMode -shl 16
 

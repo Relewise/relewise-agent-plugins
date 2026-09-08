@@ -1,11 +1,13 @@
 ---
 name: relewise-search-tools
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Inspect and update Relewise Search Tools configuration. Use for Search Indexes and decompounding, redirect, result-modifier, search-term-modifier, stemming, or synonym rules.
 ---
 
 # Relewise Search Tools
 
-Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Discover and validate the intended Dataset first. Dataset-specific Data Keys and values are case-sensitive; retrieve metadata when they are unknown rather than guessing. Inspect the selected transport's schema before using an unfamiliar operation or related MCP tool.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the selected REST operation ID and/or MCP tool plus validated parameters; do not resolve the CLI, choose a transport, or handle authentication in this domain skill. Discover and validate the intended Dataset first. Dataset-specific Data Keys and values are case-sensitive; retrieve metadata when they are unknown rather than guessing. Inspect the selected transport's schema before using an unfamiliar operation or related MCP tool.
 
 Read [references/rule-workflows.md](references/rule-workflows.md) to select the correct rule family and operation sequence.
 

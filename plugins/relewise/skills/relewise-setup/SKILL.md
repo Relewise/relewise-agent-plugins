@@ -1,5 +1,7 @@
 ---
 name: relewise-setup
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Set up, verify, or repair Relewise Agent Gateway authentication. Use when a user wants to connect Relewise, configure a Personal Access Token, resolve a missing or rejected token, or check whether Relewise is already connected.
 ---
 
@@ -7,11 +9,11 @@ description: Set up, verify, or repair Relewise Agent Gateway authentication. Us
 
 Never ask the user to paste a Personal Access Token into the conversation. Do not print, repeat, inspect, or place a token in command text, command arguments, output, logs, or repository files.
 
-Read [the shared transport-selection rules](../../references/agent-gateway-transports.md). This setup is idempotent: verify existing authentication before changing anything, and stop as soon as a reusable route works.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the identity operation or MCP tool; do not resolve the CLI, choose a transport, or handle transport mechanics in this setup skill. This setup is idempotent: verify existing authentication before changing anything, and stop as soon as a reusable route works.
 
 ## Set up or repair authentication
 
-1. Verify identity without changing configuration. Prefer `relewise-agent me` when the CLI resolves; otherwise call the registered MCP server's `get_me` tool, or use direct REST `IdentityGetCurrentUser` when authenticated HTTP is available.
+1. Verify identity without changing configuration using REST operation `IdentityGetCurrentUser` or related MCP tool `get_me` through the Agent Gateway skill.
 2. If identity discovery succeeds, explain that Relewise is already connected and make no changes. Include accessible Dataset display names only when useful.
 3. If authentication fails, distinguish a missing token from a rejected, expired, revoked, or regenerated token using the returned error. Do not inspect or print the environment variable itself.
 4. Follow [authentication setup](references/authentication-setup.md). Prefer a reusable secure credential-provider route; otherwise guide the user to a persistent user or system environment variable named `RELEWISE_AGENT_GATEWAY_TOKEN`.

@@ -54,6 +54,43 @@ try
         }
     }
 
+    var relewiseSkillsRoot = Path.Combine(repositoryRoot, "plugins", "relewise", "skills");
+    var gatewaySkillRoot = Path.Combine(relewiseSkillsRoot, "relewise-agent-gateway");
+    var gatewaySkillPath = Path.Combine(gatewaySkillRoot, "SKILL.md");
+    if (!File.Exists(gatewaySkillPath))
+    {
+        throw new InvalidDataException("The Relewise plugin must contain the shared relewise-agent-gateway skill.");
+    }
+
+    foreach (var requiredResource in new[]
+    {
+        Path.Combine("references", "transport-selection.md"),
+        Path.Combine("references", "cli.md"),
+        Path.Combine("scripts", "relewise-agent"),
+        Path.Combine("scripts", "relewise-agent.ps1")
+    })
+    {
+        if (!File.Exists(Path.Combine(gatewaySkillRoot, requiredResource)))
+        {
+            throw new InvalidDataException($"The shared relewise-agent-gateway skill is missing '{requiredResource.Replace('\\', '/')}'.");
+        }
+    }
+
+    foreach (var domainSkillPath in Directory.EnumerateFiles(relewiseSkillsRoot, "SKILL.md", SearchOption.AllDirectories)
+                 .Where(path => !string.Equals(path, gatewaySkillPath, StringComparison.OrdinalIgnoreCase)))
+    {
+        var content = File.ReadAllText(domainSkillPath);
+        if (!content.Contains("relewise-execution-skill: relewise-agent-gateway", StringComparison.Ordinal))
+        {
+            throw new InvalidDataException($"'{Relative(domainSkillPath)}' must delegate Agent Gateway execution to the shared skill.");
+        }
+        if (content.Contains("../../references/agent-gateway-transports.md", StringComparison.Ordinal) ||
+            content.Contains("../../scripts/relewise-agent", StringComparison.Ordinal))
+        {
+            throw new InvalidDataException($"'{Relative(domainSkillPath)}' contains obsolete plugin-relative transport paths.");
+        }
+    }
+
     var manifests = Directory.EnumerateFiles(
         Path.Combine(repositoryRoot, "plugins"),
         "operations.json",

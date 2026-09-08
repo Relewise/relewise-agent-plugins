@@ -1,11 +1,13 @@
 ---
 name: relewise-merchandising
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Inspect and update existing Relewise merchandising rules. Use for listing rules, reviewing rule configuration, or explicitly requested enabled-state and activation-schedule changes.
 ---
 
 # Relewise Merchandising
 
-Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Discover and validate the intended Dataset before reading or changing rules. Do not infer a rule ID. Inspect the selected transport's schema before using an unfamiliar operation or related MCP tool.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the selected REST operation ID and/or MCP tool plus validated parameters; do not resolve the CLI, choose a transport, or handle authentication in this domain skill. Discover and validate the intended Dataset before reading or changing rules. Do not infer a rule ID. Inspect the selected transport's schema before using an unfamiliar operation or related MCP tool.
 
 ## Inspect rules
 

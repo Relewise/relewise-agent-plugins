@@ -33,18 +33,22 @@ foreach ($sourceSkill in $sourceSkills) {
     $sourceHash = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $sourceSkill.FullName 'SKILL.md')).Hash
     $packageHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $packagedSkill).Hash
     if ($sourceHash -ne $packageHash) { throw "Packaged skill '$($sourceSkill.Name)' differs from its canonical source." }
+    $content = Get-Content -Raw -LiteralPath $packagedSkill
+    if ($sourceSkill.Name -ne 'relewise-agent-gateway' -and -not $content.Contains('relewise-execution-skill: relewise-agent-gateway')) { throw "Packaged domain skill '$($sourceSkill.Name)' does not delegate execution to the shared Agent Gateway skill." }
 }
-$sourceReferenceHash = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\references\agent-gateway-transports.md')).Hash
-$packageReferenceHash = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $packageRoot 'references\agent-gateway-transports.md')).Hash
-if ($sourceReferenceHash -ne $packageReferenceHash) { throw 'Packaged transport-selection reference differs from its canonical source.' }
 
 $expectedExecutable = if ($RuntimeIdentifier -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }
-if (-not (Test-Path -LiteralPath (Join-Path $packageRoot "libexec\$RuntimeIdentifier\$expectedExecutable"))) { throw 'Package is missing its native executable.' }
+$gatewayScripts = Join-Path $packageRoot 'skills\relewise-agent-gateway\scripts'
+if (-not (Test-Path -LiteralPath (Join-Path $gatewayScripts "libexec\$RuntimeIdentifier\$expectedExecutable"))) { throw 'Shared Agent Gateway skill is missing its native executable.' }
+$packagedRuntimes = @(Get-ChildItem -LiteralPath (Join-Path $gatewayScripts 'libexec') -Directory)
+if ($packagedRuntimes.Count -ne 1 -or $packagedRuntimes[0].Name -ne $RuntimeIdentifier) { throw 'Platform package must contain exactly its requested runtime.' }
 if (Test-Path -LiteralPath (Join-Path $packageRoot 'bin')) { throw 'Claude-hosted package must not contain a top-level bin directory.' }
-$launcher = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'scripts\relewise-agent')
+$launcher = Get-Content -Raw -LiteralPath (Join-Path $gatewayScripts 'relewise-agent')
 if (-not $launcher.Contains('runtime_id="win-x64"') -or -not $launcher.Contains('runtime_id="osx-arm64"')) { throw 'Launcher does not select a native executable by platform.' }
 if ($launcher.Contains('CLAUDE_PLUGIN_OPTION_') -or $launcher.Contains('RELEWISE_AGENT_GATEWAY_TOKEN is required')) {
     throw 'Launcher must delegate authentication handling to the executable.'
 }
+if (-not (Test-Path -LiteralPath (Join-Path $gatewayScripts 'relewise-agent.ps1'))) { throw 'Shared Agent Gateway skill is missing its Windows PowerShell launcher.' }
+if ((Test-Path -LiteralPath (Join-Path $packageRoot 'scripts')) -or (Test-Path -LiteralPath (Join-Path $packageRoot 'libexec'))) { throw 'CLI payload must be skill-local, not plugin-level.' }
 
 Write-Host "Claude Code package smoke tests passed for $RuntimeIdentifier"

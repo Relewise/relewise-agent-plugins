@@ -1,11 +1,13 @@
 ---
 name: relewise-compare-datasets
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Compare two or more Relewise Datasets using consistent metadata, analytics, or consumption measures. Use when a user asks to compare stores, markets, environments, or other Dataset-backed properties.
 ---
 
 # Compare Relewise Datasets
 
-Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Never invent Dataset IDs. This workflow is read-only.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the selected REST operation ID and/or MCP tool plus validated parameters; do not resolve the CLI, choose a transport, or handle authentication in this domain skill. Never invent Dataset IDs. This workflow is read-only.
 
 ## Establish a fair comparison
 

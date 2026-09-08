@@ -15,7 +15,13 @@
     "merchandising"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
+  "mcpServers": {
+    "relewise-agent-gateway": {
+      "type": "http",
+      "url": "https://my.relewise.com/agents/mcp",
+      "bearer_token_env_var": "RELEWISE_AGENT_GATEWAY_TOKEN"
+    }
+  },
   "interface": {
     "displayName": "Relewise",
     "shortDescription": "Configure, analyze and optimize Relewise",

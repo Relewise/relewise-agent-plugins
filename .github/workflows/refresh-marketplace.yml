@@ -119,7 +119,7 @@ jobs:
           $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
           $version = "$versionCore-main.${{ github.run_id }}"
           $runtimeRefreshNeeded = '${{ needs.validate-branch.outputs.runtime-refresh-needed }}' -eq 'true'
-          $executablesRoot = if ($runtimeRefreshNeeded) { 'artifacts/native' } else { 'plugins/relewise/libexec' }
+          $executablesRoot = if ($runtimeRefreshNeeded) { 'artifacts/native' } else { 'plugins/relewise/skills/relewise-agent-gateway/scripts/libexec' }
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot $executablesRoot -Version $version
           foreach ($vendor in @('claude', 'github-copilot', 'openai')) {
             ./tools/package/relewise-developer.ps1 -Vendor $vendor -Version $version -OutputRoot "artifacts/developer/$vendor"
@@ -131,11 +131,13 @@ jobs:
           Copy-Item -LiteralPath "$candidate/claude/relewise/.claude-plugin/plugin.json" -Destination "$target/.claude-plugin/plugin.json" -Force
           Copy-Item -LiteralPath "$candidate/claude/relewise/.claude-plugin/mcp.json" -Destination "$target/.claude-plugin/mcp.json" -Force
           Copy-Item -LiteralPath "$candidate/github-copilot/relewise/plugin.json" -Destination "$target/plugin.json" -Force
-          Copy-Item -LiteralPath "$candidate/openai/relewise/scripts/relewise-agent" -Destination "$target/scripts/relewise-agent" -Force
+          $gatewayScripts = "$target/skills/relewise-agent-gateway/scripts"
+          Copy-Item -LiteralPath "$candidate/openai/relewise/skills/relewise-agent-gateway/scripts/relewise-agent" -Destination "$gatewayScripts/relewise-agent" -Force
+          Copy-Item -LiteralPath "$candidate/openai/relewise/skills/relewise-agent-gateway/scripts/relewise-agent.ps1" -Destination "$gatewayScripts/relewise-agent.ps1" -Force
           if ($runtimeRefreshNeeded) {
             foreach ($rid in @('win-x64', 'linux-x64', 'linux-arm64', 'osx-x64', 'osx-arm64')) {
               $name = if ($rid -eq 'win-x64') { 'relewise-agent.exe' } else { 'relewise-agent' }
-              Copy-Item -LiteralPath "$candidate/openai/relewise/libexec/$rid/$name" -Destination "$target/libexec/$rid/$name" -Force
+              Copy-Item -LiteralPath "$candidate/openai/relewise/skills/relewise-agent-gateway/scripts/libexec/$rid/$name" -Destination "$gatewayScripts/libexec/$rid/$name" -Force
             }
             $runtimeFingerprint = (./tools/package/get-runtime-fingerprint.ps1 | Out-String).Trim()
             [IO.File]::WriteAllText(
@@ -175,20 +177,19 @@ jobs:
             plugins/relewise/plugin.json \
             plugins/relewise/.codex-plugin \
             plugins/relewise/.claude-plugin \
-            plugins/relewise/scripts \
-            plugins/relewise/libexec \
+            plugins/relewise/skills/relewise-agent-gateway \
             plugins/relewise/LICENSE \
             plugins/relewise-developer/plugin.json \
             plugins/relewise-developer/.codex-plugin \
             plugins/relewise-developer/.claude-plugin
           git update-index --chmod=+x \
-            plugins/relewise/scripts/relewise-agent \
-            plugins/relewise/libexec/linux-x64/relewise-agent \
-            plugins/relewise/libexec/linux-arm64/relewise-agent \
-            plugins/relewise/libexec/osx-x64/relewise-agent \
-            plugins/relewise/libexec/osx-arm64/relewise-agent
+            plugins/relewise/skills/relewise-agent-gateway/scripts/relewise-agent \
+            plugins/relewise/skills/relewise-agent-gateway/scripts/libexec/linux-x64/relewise-agent \
+            plugins/relewise/skills/relewise-agent-gateway/scripts/libexec/linux-arm64/relewise-agent \
+            plugins/relewise/skills/relewise-agent-gateway/scripts/libexec/osx-x64/relewise-agent \
+            plugins/relewise/skills/relewise-agent-gateway/scripts/libexec/osx-arm64/relewise-agent
           # Artifacts are assembled on Linux, so explicitly keep the Windows binary non-executable in Git.
-          git update-index --chmod=-x plugins/relewise/libexec/win-x64/relewise-agent.exe
+          git update-index --chmod=-x plugins/relewise/skills/relewise-agent-gateway/scripts/libexec/win-x64/relewise-agent.exe
           if git diff --cached --quiet; then
             echo "Marketplace payload is already current."
             exit 0

@@ -44,7 +44,7 @@ The refresh currently reads the MCP catalog from the local My Relewise developme
 - Put mechanical API details in generated contracts and the helper, not in skill instructions.
 - Add every referenced Agent Gateway REST operation ID to the skill's `operations.json`.
 - Add `mcpToolNames` only when a skill needs an MCP tool that cannot be inferred from its related REST operations.
-- Follow `plugins/relewise/references/agent-gateway-transports.md`; do not duplicate transport-selection or authentication rules across skills.
+- Domain skills must delegate Agent Gateway execution to `relewise-agent-gateway`; keep transport selection, authentication, CLI mechanics, and fallback rules in that shared technical skill.
 - Use relative paths for bundled references.
 
 ### CLI and packaging

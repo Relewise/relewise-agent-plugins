@@ -1,11 +1,13 @@
 ---
 name: relewise-entities
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Find and inspect Relewise Products, Product Variants, Content, Brands, Product Categories, and Content Categories. Use when a user wants to locate entities or review their stored properties and Data Values.
 ---
 
 # Relewise Entities
 
-Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Discover and validate the intended Dataset before making an Entities call. These operations are read-only.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the selected REST operation ID and/or MCP tool plus validated parameters; do not resolve the CLI, choose a transport, or handle authentication in this domain skill. Discover and validate the intended Dataset before making an Entities call. These operations are read-only.
 
 ## Find an entity
 

@@ -90,10 +90,10 @@ jobs:
               $businessServer.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
             throw 'The installed Relewise plugin has an invalid Agent Gateway MCP configuration.'
           }
-          if (-not (Test-Path -LiteralPath (Join-Path $installedRoot 'references/agent-gateway-transports.md'))) {
+          if (-not (Test-Path -LiteralPath (Join-Path $installedRoot 'skills/relewise-agent-gateway/references/transport-selection.md'))) {
             throw 'The installed Relewise plugin is missing its shared transport-selection reference.'
           }
-          $launcher = Join-Path $installedRoot 'scripts/relewise-agent'
+          $launcher = Join-Path $installedRoot 'skills/relewise-agent-gateway/scripts/relewise-agent'
           $versionResponse = (& $launcher --version | Out-String) | ConvertFrom-Json
           if (-not $versionResponse.success -or $versionResponse.data.name -ne 'relewise-agent') {
             throw 'The installed Claude launcher did not return a valid version response.'

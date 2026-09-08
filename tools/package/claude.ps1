@@ -37,23 +37,18 @@ if (-not (Test-Path -LiteralPath $packageRoot)) {
     New-Item -ItemType Directory -Path $packageRoot | Out-Null
     Copy-Item -LiteralPath (Join-Path $adapterRoot '.claude-plugin') -Destination $packageRoot -Recurse
     Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
-    Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\references') -Destination $packageRoot -Recurse
     Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
-    New-Item -ItemType Directory -Path (Join-Path $packageRoot 'scripts'), (Join-Path $packageRoot 'libexec') | Out-Null
-
-    $launcher = (Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'scripts\relewise-agent')).Replace("`r`n", "`n")
-    [IO.File]::WriteAllText(
-        (Join-Path $packageRoot 'scripts\relewise-agent'),
-        $launcher,
-        [Text.UTF8Encoding]::new($false))
+    $runtimePayload = Join-Path $packageRoot 'skills\relewise-agent-gateway\scripts\libexec'
+    if (Test-Path -LiteralPath $runtimePayload) { Remove-Item -LiteralPath $runtimePayload -Recurse -Force }
 }
 
-$runtimeDirectory = Join-Path $packageRoot "libexec\$RuntimeIdentifier"
+$launcherPath = Join-Path $packageRoot 'skills\relewise-agent-gateway\scripts\relewise-agent'
+$runtimeDirectory = Join-Path $packageRoot "skills\relewise-agent-gateway\scripts\libexec\$RuntimeIdentifier"
 New-Item -ItemType Directory -Force -Path $runtimeDirectory | Out-Null
 Copy-Item -LiteralPath $resolvedExecutable -Destination (Join-Path $runtimeDirectory $expectedExecutableName) -Force
 
 if (-not $IsWindows) {
-    & chmod +x (Join-Path $packageRoot 'scripts\relewise-agent') (Join-Path $runtimeDirectory $expectedExecutableName)
+    & chmod +x $launcherPath (Join-Path $runtimeDirectory $expectedExecutableName)
 }
 
 Write-Host "Packaged Claude Code plugin for $RuntimeIdentifier at $packageRoot"

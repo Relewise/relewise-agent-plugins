@@ -87,8 +87,14 @@ if ($claudeManifest.userConfig.agent_gateway_token.type -ne 'string' -or
     $claudeManifest.userConfig.agent_gateway_token.required -ne $true) {
     throw 'Claude Code manifest does not request the Agent Gateway PAT as required protected configuration.'
 }
-if ($manifest.mcpServers -ne './.mcp.json' -or $claudeManifest.mcpServers -ne './.claude-plugin/mcp.json') {
+if ($null -eq $manifest.mcpServers.'relewise-agent-gateway' -or $claudeManifest.mcpServers -ne './.claude-plugin/mcp.json') {
     throw 'Relewise vendor manifests do not declare the Agent Gateway MCP configuration.'
+}
+$codexServer = $manifest.mcpServers.'relewise-agent-gateway'
+if ($codexServer.type -ne 'http' -or
+    $codexServer.url -ne 'https://my.relewise.com/agents/mcp' -or
+    $codexServer.bearer_token_env_var -ne 'RELEWISE_AGENT_GATEWAY_TOKEN') {
+    throw 'Relewise does not configure Codex native bearer-token MCP authentication.'
 }
 $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.mcp.json') | ConvertFrom-Json
 $businessServer = $businessMcp.mcpServers.'relewise-agent-gateway'
@@ -106,10 +112,8 @@ if ($claudeServer.type -ne 'http' -or $claudeServer.url -ne 'https://my.relewise
 if ($claudeServer.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
     throw 'Relewise does not configure Claude protected user configuration as its MCP authorization header.'
 }
-$transportReference = Join-Path $pluginRoot 'references\agent-gateway-transports.md'
-if (-not (Test-Path -LiteralPath $transportReference -PathType Leaf)) {
-    throw 'Relewise is missing its shared transport-selection reference.'
-}
+$transportReference = Join-Path $pluginRoot 'skills\relewise-agent-gateway\references\transport-selection.md'
+if (-not (Test-Path -LiteralPath $transportReference -PathType Leaf)) { throw 'Relewise Agent Gateway skill is missing its transport-selection reference.' }
 
 $developerRoot = Join-Path $resolvedMarketplaceRoot 'plugins\relewise-developer'
 $developerPortableManifest = Get-Content -Raw -LiteralPath (Join-Path $developerRoot 'plugin.json') | ConvertFrom-Json
@@ -154,18 +158,17 @@ foreach ($canonicalSkill in $canonicalSkills) {
     $canonicalContent = Get-Content -Raw -LiteralPath (Join-Path $canonicalSkill.FullName 'SKILL.md')
     $installedContent = Get-Content -Raw -LiteralPath $installedSkillPath
     if (-not $installedContent.StartsWith($canonicalContent)) { throw "Codex skill '$($canonicalSkill.Name)' is stale." }
-    if (-not $installedContent.Contains('../../references/agent-gateway-transports.md')) { throw "Codex skill '$($canonicalSkill.Name)' does not use the shared transport rules." }
-}
-if (-not (Test-Path -LiteralPath (Join-Path $pluginRoot 'references\agent-gateway-transports.md') -PathType Leaf)) {
-    throw 'Repository-backed Codex plugin is missing its shared transport-selection reference.'
+    if ($canonicalSkill.Name -ne 'relewise-agent-gateway' -and -not $installedContent.Contains('relewise-execution-skill: relewise-agent-gateway')) {
+        throw "Codex domain skill '$($canonicalSkill.Name)' does not delegate execution to the shared Agent Gateway skill."
+    }
 }
 
 $runtimeFiles = @(
-    'libexec\win-x64\relewise-agent.exe',
-    'libexec\linux-x64\relewise-agent',
-    'libexec\linux-arm64\relewise-agent',
-    'libexec\osx-x64\relewise-agent',
-    'libexec\osx-arm64\relewise-agent'
+    'skills\relewise-agent-gateway\scripts\libexec\win-x64\relewise-agent.exe',
+    'skills\relewise-agent-gateway\scripts\libexec\linux-x64\relewise-agent',
+    'skills\relewise-agent-gateway\scripts\libexec\linux-arm64\relewise-agent',
+    'skills\relewise-agent-gateway\scripts\libexec\osx-x64\relewise-agent',
+    'skills\relewise-agent-gateway\scripts\libexec\osx-arm64\relewise-agent'
 )
 foreach ($runtimeFile in $runtimeFiles) {
     $runtimePath = Join-Path $pluginRoot $runtimeFile
@@ -174,13 +177,13 @@ foreach ($runtimeFile in $runtimeFiles) {
 }
 
 $currentExecutable = if ($IsWindows) {
-    Join-Path $pluginRoot 'libexec\win-x64\relewise-agent.exe'
+    Join-Path $pluginRoot 'skills\relewise-agent-gateway\scripts\libexec\win-x64\relewise-agent.exe'
 } elseif ($IsMacOS) {
     $rid = if ([Runtime.InteropServices.RuntimeInformation]::OSArchitecture -eq 'Arm64') { 'osx-arm64' } else { 'osx-x64' }
-    Join-Path $pluginRoot "libexec\$rid\relewise-agent"
+    Join-Path $pluginRoot "skills\relewise-agent-gateway\scripts\libexec\$rid\relewise-agent"
 } else {
     $rid = if ([Runtime.InteropServices.RuntimeInformation]::OSArchitecture -eq 'Arm64') { 'linux-arm64' } else { 'linux-x64' }
-    Join-Path $pluginRoot "libexec\$rid\relewise-agent"
+    Join-Path $pluginRoot "skills\relewise-agent-gateway\scripts\libexec\$rid\relewise-agent"
 }
 $versionResponse = (& $currentExecutable --version | Out-String) | ConvertFrom-Json
 if (-not $versionResponse.success -or $versionResponse.data.name -ne 'relewise-agent') {

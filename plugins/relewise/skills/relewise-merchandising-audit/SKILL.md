@@ -1,11 +1,13 @@
 ---
 name: relewise-merchandising-audit
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Audit Relewise merchandising and Search Tools configuration without changing it. Use for configuration health checks, overlapping-rule reviews, stale-rule identification, or investigating configuration behind search behavior.
 ---
 
 # Audit Relewise Merchandising
 
-Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Never invent Dataset or rule IDs. An audit authorizes reads only; do not update or patch rules.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the selected REST operation ID and/or MCP tool plus validated parameters; do not resolve the CLI, choose a transport, or handle authentication in this domain skill. Never invent Dataset or rule IDs. An audit authorizes reads only; do not update or patch rules.
 
 ## Scope the audit
 

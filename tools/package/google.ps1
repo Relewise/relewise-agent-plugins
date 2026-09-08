@@ -32,42 +32,21 @@ if ((Test-Path -LiteralPath $packageRoot) -and -not $Merge) {
     Remove-Item -LiteralPath $packageRoot -Recurse -Force
 }
 
-$adapterRoot = Join-Path $repositoryRoot 'vendors\google\relewise'
 if (-not (Test-Path -LiteralPath $packageRoot)) {
 New-Item -ItemType Directory -Path $packageRoot | Out-Null
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'gemini-extension.json') -Destination $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
-Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\references') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
-New-Item -ItemType Directory -Path (Join-Path $packageRoot 'scripts'), (Join-Path $packageRoot 'libexec') | Out-Null
-
-$launcher = (Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'scripts\relewise-agent')).Replace("`r`n", "`n")
-[IO.File]::WriteAllText((Join-Path $packageRoot 'scripts\relewise-agent'), $launcher, [Text.UTF8Encoding]::new($false))
+$runtimePayload = Join-Path $packageRoot 'skills\relewise-agent-gateway\scripts\libexec'
+if (Test-Path -LiteralPath $runtimePayload) { Remove-Item -LiteralPath $runtimePayload -Recurse -Force }
 }
-$windowsLauncherPath = Join-Path $packageRoot 'scripts\relewise-agent.ps1'
-if ($RuntimeIdentifier -eq 'win-x64') {
-    $windowsLauncher = Get-Content -Raw -LiteralPath (Join-Path $adapterRoot 'scripts\relewise-agent.ps1')
-    [IO.File]::WriteAllText($windowsLauncherPath, $windowsLauncher, [Text.UTF8Encoding]::new($false))
-
-$canonicalLauncherInstruction = 'When `../../scripts/relewise-agent` exists relative to the calling `SKILL.md`, resolve it to an absolute path and use that executable. Otherwise, use `relewise-agent` from `PATH`.'
-    $windowsLauncherInstruction = 'On Windows, when `../../scripts/relewise-agent.ps1` exists relative to the calling `SKILL.md`, resolve it to an absolute path and use that PowerShell launcher. On other platforms, when `../../scripts/relewise-agent` exists relative to the calling `SKILL.md`, resolve it to an absolute path and use that launcher. Fall back to `relewise-agent` from `PATH` only when the platform-specific packaged launcher does not exist.'
-    $transportReferencePath = Join-Path $packageRoot 'references\agent-gateway-transports.md'
-    $content = Get-Content -Raw -LiteralPath $transportReferencePath
-    if (-not $content.Contains($canonicalLauncherInstruction)) {
-        throw "Transport reference '$transportReferencePath' does not contain the expected launcher instruction."
-    }
-    $content = $content.Replace($canonicalLauncherInstruction, $windowsLauncherInstruction)
-    [IO.File]::WriteAllText($transportReferencePath, $content, [Text.UTF8Encoding]::new($false))
-}
-elseif ((Test-Path -LiteralPath $windowsLauncherPath) -and -not $Merge) {
-    Remove-Item -LiteralPath $windowsLauncherPath -Force
-}
-$runtimeDirectory = Join-Path $packageRoot "libexec\$RuntimeIdentifier"
+$launcherPath = Join-Path $packageRoot 'skills\relewise-agent-gateway\scripts\relewise-agent'
+$runtimeDirectory = Join-Path $packageRoot "skills\relewise-agent-gateway\scripts\libexec\$RuntimeIdentifier"
 New-Item -ItemType Directory -Force -Path $runtimeDirectory | Out-Null
 Copy-Item -LiteralPath $resolvedExecutable -Destination (Join-Path $runtimeDirectory $expectedExecutableName) -Force
 
 if (-not $IsWindows) {
-    & chmod +x (Join-Path $packageRoot 'scripts\relewise-agent') (Join-Path $runtimeDirectory $expectedExecutableName)
+    & chmod +x $launcherPath (Join-Path $runtimeDirectory $expectedExecutableName)
 }
 
 Write-Host "Packaged Google Gemini CLI extension for $RuntimeIdentifier at $packageRoot"

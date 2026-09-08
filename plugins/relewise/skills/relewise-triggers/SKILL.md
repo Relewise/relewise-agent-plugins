@@ -1,11 +1,13 @@
 ---
 name: relewise-triggers
+metadata:
+  relewise-execution-skill: relewise-agent-gateway
 description: Inspect Relewise Trigger configurations. Use when a user wants to list Triggers, inspect their criteria, or understand whether Trigger evaluation is enabled.
 ---
 
 # Relewise Triggers
 
-Before calling Agent Gateway, read and follow [the shared transport-selection rules](../../references/agent-gateway-transports.md). Discover and validate the intended Dataset before making a Triggers call. These operations are read-only and never evaluate a Trigger or send a webhook.
+Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the selected REST operation ID and/or MCP tool plus validated parameters; do not resolve the CLI, choose a transport, or handle authentication in this domain skill. Discover and validate the intended Dataset before making a Triggers call. These operations are read-only and never evaluate a Trigger or send a webhook.
 
 ## Inspect configurations
 

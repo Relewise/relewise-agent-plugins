@@ -14,10 +14,11 @@ This repository provides vendor-neutral Relewise capabilities for AI agents. Can
 - Multi-Dataset workflows must be supported; the architecture must not rely on one globally configured Dataset.
 - Dataset IDs must be discovered and validated, never invented by an LLM.
 - The versioned Agent Gateway OpenAPI specification and MCP tool catalog are the checked-in API contracts.
-- A small cross-platform `relewise-agent` helper handles HTTP execution.
-- Shared transport rules choose only transports enabled by the selected Dataset policy; an unavailable transport must not be treated as authorization to bypass that policy.
+- A shared `relewise-agent-gateway` skill owns bootstrap discovery, transport selection, authentication handling, diagnostics, and the skill-local cross-platform `relewise-agent` helper.
+- Focused domain skills retain operation selection, business rules, interpretation, and mutation safeguards; they delegate execution to `relewise-agent-gateway` rather than implementing transport mechanics.
+- Shared transport rules choose only transports enabled by the selected Dataset policy after bootstrap discovery; an unavailable transport must not be treated as authorization to bypass that policy.
 - MCP tools and REST operations are related capabilities, not interchangeable wire schemas.
-- Skills describe intent, workflow, and interpretation—not HTTP mechanics.
+- Domain skills describe intent, workflow, and interpretation—not HTTP mechanics.
 - Canonical Relewise content lives under `plugins/`; vendor-specific packaging lives under `vendors/`.
 - Repository-maintainer skills live under `.agents/skills/`. They assist contributors working in this repository but are not packaged or installed with a Relewise product.
 - Each canonical product is a portable Agent Plugin: `plugins/<name>/plugin.json` and `plugins/<name>/skills/` follow the Agent Plugins 1.0.0 specification.
