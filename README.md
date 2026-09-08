@@ -40,6 +40,8 @@ The Gemini packaging adapter changes only the launcher instruction in artifacts 
 
 ## Releases
 
+Maintainers should follow [RELEASING.md](RELEASING.md) for the release procedure and vendor-specific publication requirements.
+
 The repository is versioned as one ecosystem. Pushing a semantic version tag such as `v0.1.0` validates the contracts and skills, builds and tests all supported native executables, packages every vendor adapter, and publishes the installable archives in a GitHub release. `v0.*` releases are published as prereleases; `v1.0.0` and later tags are stable releases.
 
 The planned version is maintained manually in `version.json`. Marketplace manifests automatically use `<version>-main.<run ID>`. Executables retain the version of their most recent runtime build until their code, embedded operation catalog, project configuration, or `version.json` changes. A release tag such as `v0.4.0` must match `version.json` and rebuilds every executable and manifest as version `0.4.0`. After a release, update `version.json` in a normal pull request when the next version is decided.
