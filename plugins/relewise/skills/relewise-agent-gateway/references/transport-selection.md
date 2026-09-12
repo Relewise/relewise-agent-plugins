@@ -4,10 +4,10 @@ Transport permissions are Dataset-specific and cannot be known before identity a
 
 ## Bootstrap
 
-Attempt identity discovery in this order until one route succeeds:
+Attempt identity discovery in this order until one authenticated route succeeds:
 
-1. Bundled CLI: `me` or `datasets`.
-2. Registered Agent Gateway MCP: `get_me`.
+1. Registered Agent Gateway MCP: `get_me` (prefer the host-managed OAuth connection when it is connected).
+2. Bundled CLI: `me` or `datasets`.
 3. Authenticated direct REST: `GET /api/v1/me` using operation `IdentityGetCurrentUser`.
 
 Use the successful identity response to resolve the requested Dataset without guessing its ID. If several Datasets plausibly match and the choice changes the answer, ask the user to choose.
@@ -36,9 +36,9 @@ Do not treat a Dataset-specific policy or permission denial as a task-wide trans
 
 After policy discovery, use this preference order:
 
-1. Use the bundled CLI when it works, `restApiEnabled` is true, the requested Area is enabled, and the capability has an exact REST operation. It is the preferred deterministic REST adapter.
-2. Use registered MCP when it is connected, `mcpEnabled` is true, the requested Area is enabled, and the capability has an exact MCP tool.
-3. Use direct REST when `restApiEnabled` is true, the requested Area is enabled, the capability has an exact REST operation, and the CLI is locally unavailable.
+1. Use registered MCP when it is connected, `mcpEnabled` is true, the requested Area is enabled, and the capability has an exact MCP tool. This is preferred for a host-managed OAuth connection.
+2. Use the bundled CLI when it works, `restApiEnabled` is true, the requested Area is enabled, and the capability has an exact REST operation.
+3. Use direct REST when `restApiEnabled` is true, the requested Area is enabled, the capability has an exact REST operation, and no preferred MCP or CLI route is usable.
 
 Do not infer that an operation is permitted merely because bootstrap discovery succeeded. Apply the selected Dataset's effective policy to every Dataset-scoped operation.
 
@@ -47,7 +47,7 @@ Do not infer that an operation is permitted merely because bootstrap discovery s
 - **Local CLI unavailable:** Missing launcher, unsupported OS or architecture, permission-to-execute failure, or an incompatible executable. Continue to MCP, then direct REST when available.
 - **Credential unavailable to one transport:** Another transport may be tried only when it has an independently configured credential. A protected MCP credential, for example, may work even when the CLI environment variable is absent.
 - **Network or transient transport failure:** Try another policy-permitted transport when it offers an independent connection path. Avoid identical retries; retry once only when the request warrants it.
-- **Authentication rejected:** Explain that the configured PAT is missing, malformed, expired, revoked, or rejected. Do not expose it. Trying another transport is useful only if it has an independently configured credential, not as a way to evade rejection.
+- **Authentication rejected:** Determine which credential type the transport uses. For OAuth, the connection may be expired, revoked, or require reconnecting. For PAT authentication, the PAT may be missing, malformed, expired, revoked, or rejected. Do not expose credentials. Try another transport only when it has an independently configured credential, not as a way to evade rejection.
 - **Validation error:** Correct the request from the selected transport's schema. Do not switch transports to evade validation.
 - **Dataset access, permission, Area, or policy denial:** Stop. Do not bypass the denial through another transport.
 

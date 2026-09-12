@@ -19,7 +19,7 @@ claude plugin marketplace add Relewise/relewise-agent-plugins
 claude plugin install relewise@relewise
 ```
 
-When Claude supports OAuth for the remote MCP connection, sign in to My Relewise and approve the Connected App when prompted. No Personal Access Token is needed for that MCP connection.
+Claude authenticates the Agent Gateway MCP connection through OAuth. Sign in to My Relewise and approve the Connected App when prompted. No Personal Access Token is needed for that MCP connection.
 
 To use the bundled `relewise-agent` fallback, or when OAuth is unavailable, make a PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN` through a secure credential provider or a persistent user or system environment variable, then restart Claude Code. Never place the PAT in a prompt, command argument, repository file, or log.
 

@@ -34,6 +34,8 @@ OAuth-capable MCP clients can connect through a Connected App and the My Relewis
 
 For the bundled CLI, direct REST, or MCP clients without OAuth, use a Personal Access Token.
 
+If OAuth is available, complete the client's sign-in and consent flow and skip the PAT steps below.
+
 After installation, ask the agent **Help me connect Relewise**. The `relewise-setup` skill first checks whether authentication already works and only presents setup or repair instructions when needed.
 
 1. In My Relewise, open **User > Personal Access Tokens**.
