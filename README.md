@@ -36,7 +36,7 @@ Gemini CLI users run `gemini extensions install https://github.com/Relewise/rele
 
 Claude Desktop and Cowork users who do not want to connect GitHub can download either `relewise-claude-plugin-v<version>.zip` or `relewise-developer-claude-plugin-v<version>.zip` from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases) and upload it as a custom plugin. The Relewise ZIP contains all five supported Agent Gateway runtimes; the smaller Relewise Developer ZIP contains its skill, icon, and remote MCP configuration. Manually uploaded plugins must be uploaded again for upgrades.
 
-Make a Relewise Agent Gateway PAT available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`, either through a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
+OAuth-capable MCP clients use the Agent Gateway Connected App flow and do not require a PAT. The bundled CLI, the plugin's direct REST fallback, and MCP clients without an OAuth-managed Agent Gateway connection can use a Relewise Agent Gateway PAT through `RELEWISE_AGENT_GATEWAY_TOKEN`, either via a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
 
 The shared `relewise-agent-gateway` skill contains both platform launchers and the native executables. It invokes `scripts/relewise-agent.ps1` on Windows and `scripts/relewise-agent` on macOS and Linux; the launchers select the matching executable under their skill-local `scripts/libexec/<runtime>/`. Platform-specific artifacts contain one runtime, while universal Claude and repository marketplace installations contain all supported runtimes. Packages intentionally have no top-level `bin/`, `scripts/`, or `libexec/` directory.
 
@@ -54,6 +54,6 @@ The release workflow applies that version to the executable and every packaged m
 
 Marketplace-ready copy, onboarding guidance, platform notes, and official artwork live under `marketplace/relewise/`.
 
-Installed versions update through the vendor's plugin or extension update mechanism. The Agent Gateway PAT remains external user configuration and is neither packaged nor replaced during an upgrade.
+Installed versions update through the vendor's plugin or extension update mechanism. Authentication credentials remain external user configuration and are neither packaged nor replaced during an upgrade. OAuth-capable MCP clients manage credentials through the host's Connected App flow; CLI and direct REST fallback usage can use a PAT.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes and [SECURITY.md](SECURITY.md) for private vulnerability reporting. This repository is licensed under the [MIT License](LICENSE).
