@@ -52,7 +52,7 @@ Each tagged release contains seven intentional assets: five conventionally named
 
 The release workflow applies that version to the executable and every packaged manifest; maintainers do not update the individual manifests.
 
-Marketplace-ready copy, onboarding guidance, platform notes, and official artwork live under `marketplace/relewise/`.
+Marketplace-ready copy, onboarding guidance, platform notes, and official artwork live under `marketplace/`.
 
 Installed versions update through the vendor's plugin or extension update mechanism. Authentication credentials remain external user configuration and are neither packaged nor replaced during an upgrade. OAuth-capable MCP clients manage credentials through the host's Connected App flow; CLI and direct REST fallback usage can use a PAT.
 
