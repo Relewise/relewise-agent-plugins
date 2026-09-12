@@ -58,7 +58,7 @@ jobs:
 
           claude plugin marketplace add $env:GITHUB_WORKSPACE --scope user
           if ($LASTEXITCODE -ne 0) { throw 'Claude failed to add the repository marketplace.' }
-          claude plugin install relewise@relewise --scope user --config agent_gateway_token=smoke-test-token
+          claude plugin install relewise@relewise --scope user
           if ($LASTEXITCODE -ne 0) { throw 'Claude failed to install the Relewise plugin.' }
           claude plugin install relewise-developer@relewise --scope user
           if ($LASTEXITCODE -ne 0) { throw 'Claude failed to install the Relewise Developer plugin.' }

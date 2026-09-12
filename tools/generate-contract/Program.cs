@@ -117,10 +117,17 @@ internal static class GenerateContract
 
             var description = tool["description"]?.GetValue<string>();
             var area = tool["area"]?.GetValue<string>();
-            if (string.IsNullOrWhiteSpace(description) || string.IsNullOrWhiteSpace(area))
+            var title = tool["title"]?.GetValue<string>();
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description) || string.IsNullOrWhiteSpace(area))
             {
-                throw new InvalidDataException($"MCP tool '{name}' must declare a description and area.");
+                throw new InvalidDataException($"MCP tool '{name}' must declare a title, description, and area.");
             }
+
+            var annotations = tool["annotations"]?.AsObject()
+                ?? throw new InvalidDataException($"MCP tool '{name}' has no annotations object.");
+            RequireBooleanAnnotation(annotations, name, "readOnlyHint");
+            RequireBooleanAnnotation(annotations, name, "destructiveHint");
+            RequireBooleanAnnotation(annotations, name, "openWorldHint");
 
             var inputSchema = tool["inputSchema"]?.AsObject()
                 ?? throw new InvalidDataException($"MCP tool '{name}' has no input schema.");
@@ -151,13 +158,13 @@ internal static class GenerateContract
 
             var normalized = new JsonObject
             {
-                ["name"] = name
+                ["name"] = name,
+                ["title"] = title
             };
-            AddWhenPresent(normalized, "title", tool["title"]);
             normalized["description"] = description;
             normalized["inputSchema"] = inputSchema.DeepClone();
             AddWhenPresent(normalized, "outputSchema", tool["outputSchema"]);
-            AddWhenPresent(normalized, "annotations", tool["annotations"]);
+            normalized["annotations"] = annotations.DeepClone();
             normalized["area"] = area;
             normalized["relatedRestOperationIds"] = new JsonArray(
                 related.Order(StringComparer.Ordinal)
@@ -172,6 +179,21 @@ internal static class GenerateContract
             result.Add(tool);
         }
         return result;
+    }
+
+    private static void RequireBooleanAnnotation(JsonObject annotations, string toolName, string propertyName)
+    {
+        var value = annotations[propertyName]
+            ?? throw new InvalidDataException($"MCP tool '{toolName}' annotations must declare '{propertyName}'.");
+
+        try
+        {
+            _ = value.GetValue<bool>();
+        }
+        catch (Exception exception) when (exception is InvalidOperationException or FormatException or JsonException)
+        {
+            throw new InvalidDataException($"MCP tool '{toolName}' annotation '{propertyName}' must be a boolean.", exception);
+        }
     }
 
     private static void AddWhenPresent(JsonObject destination, string propertyName, JsonNode? value)
