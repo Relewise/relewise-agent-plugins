@@ -1,0 +1,54 @@
+{
+  "required": [
+    "clientId",
+    "connectionKey",
+    "sessionKey",
+    "accessTokenExpiresAt",
+    "scopes",
+    "resource",
+    "displayName"
+  ],
+  "properties": {
+    "method": {
+      "enum": [
+        "OAuth"
+      ],
+      "type": "string"
+    },
+    "clientId": {
+      "type": "string",
+      "description": "The exact registered OAuth client identity, including the metadata URL for a client registered through client metadata discovery."
+    },
+    "connectionKey": {
+      "type": "string",
+      "description": "The stable Key of the Connected Apps connection.",
+      "format": "uuid"
+    },
+    "sessionKey": {
+      "type": "string",
+      "description": "The Key of the token family used by this request.",
+      "format": "uuid"
+    },
+    "accessTokenExpiresAt": {
+      "type": "string",
+      "description": "The expiry of the access token supplied with this request.",
+      "format": "date-time"
+    },
+    "scopes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The scopes granted to the access token supplied with this request."
+    },
+    "resource": {
+      "type": "string",
+      "description": "The protected resource authorized by the access token supplied with this request."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The Personal Access Token name or OAuth application name."
+    }
+  },
+  "description": "Non-secret metadata about the OAuth access token supplied with the request and its connection and session."
+}

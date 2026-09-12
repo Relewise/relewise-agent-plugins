@@ -8,7 +8,7 @@
 
 **Detailed description:**
 
-Relewise gives your AI agent access to the Relewise Datasets your user and Personal Access Token permit. Inspect configuration, understand performance and consumption, review merchandising and Search Tools, compare Datasets, and run guided optimization workflows without finding Dataset IDs or assembling API requests manually.
+Relewise gives your AI agent access to the Relewise Datasets the signed-in user and Agent Gateway authorization permit. Inspect configuration, understand performance and consumption, review merchandising and Search Tools, compare Datasets, and run guided optimization workflows without finding Dataset IDs or assembling API requests manually.
 
 Access stays within the permissions, Dataset scope, connection methods, and allowed areas configured in My Relewise.
 
@@ -25,7 +25,8 @@ Access stays within the permissions, Dataset scope, connection methods, and allo
 
 - Access to My Relewise.
 - The **Use Agent Gateway** permission for at least one Dataset.
-- Agent Gateway REST enabled for that Dataset.
+- Agent Gateway MCP enabled for MCP connections.
+- Agent Gateway REST additionally enabled when using the bundled CLI or the plugin's direct REST fallback.
 - OAuth support in the MCP client, or a Relewise Personal Access Token scoped to the Datasets and allowed areas needed for the task.
 
 ## Authentication

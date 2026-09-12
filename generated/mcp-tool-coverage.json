@@ -1,6 +1,6 @@
 {
-  "toolCount": 57,
-  "coveredToolCount": 57,
+  "toolCount": 61,
+  "coveredToolCount": 61,
   "uncoveredToolCount": 0,
   "coveragePercent": 100,
   "tools": [
@@ -296,6 +296,26 @@
       ]
     },
     {
+      "name": "get_job",
+      "area": "Administration",
+      "relatedRestOperationIds": [
+        "AdministrationGetJob"
+      ],
+      "skills": [
+        "relewise/skills/relewise-administration"
+      ]
+    },
+    {
+      "name": "get_job_log",
+      "area": "Administration",
+      "relatedRestOperationIds": [
+        "AdministrationGetJobLog"
+      ],
+      "skills": [
+        "relewise/skills/relewise-administration"
+      ]
+    },
+    {
       "name": "get_me",
       "area": "Core",
       "relatedRestOperationIds": [
@@ -404,6 +424,26 @@
       "skills": [
         "relewise/skills/relewise-merchandising-audit",
         "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_job_logs",
+      "area": "Administration",
+      "relatedRestOperationIds": [
+        "AdministrationListJobLogs"
+      ],
+      "skills": [
+        "relewise/skills/relewise-administration"
+      ]
+    },
+    {
+      "name": "list_jobs",
+      "area": "Administration",
+      "relatedRestOperationIds": [
+        "AdministrationListJobs"
+      ],
+      "skills": [
+        "relewise/skills/relewise-administration"
       ]
     },
     {

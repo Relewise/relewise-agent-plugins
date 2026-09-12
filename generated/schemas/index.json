@@ -1,6 +1,18 @@
 {
-  "schemaCount": 160,
+  "schemaCount": 178,
   "schemas": [
+    {
+      "name": "AuthenticationMetadata",
+      "file": "AuthenticationMetadata.json"
+    },
+    {
+      "name": "AuthenticationMetadataOAuthAuthentication",
+      "file": "AuthenticationMetadataOAuthAuthentication.json"
+    },
+    {
+      "name": "AuthenticationMetadataPersonalAccessTokenAuthentication",
+      "file": "AuthenticationMetadataPersonalAccessTokenAuthentication.json"
+    },
     {
       "name": "BrandDetails",
       "file": "BrandDetails.json"
@@ -146,6 +158,70 @@
       "file": "HttpValidationProblemDetails.json"
     },
     {
+      "name": "JobConfigurationElement",
+      "file": "JobConfigurationElement.json"
+    },
+    {
+      "name": "JobDetails",
+      "file": "JobDetails.json"
+    },
+    {
+      "name": "JobDetailsGrpcJobDetails",
+      "file": "JobDetailsGrpcJobDetails.json"
+    },
+    {
+      "name": "JobDetailsHttpRequestJobDetails",
+      "file": "JobDetailsHttpRequestJobDetails.json"
+    },
+    {
+      "name": "JobDetailsMarketingAutomationTriggersJobDetails",
+      "file": "JobDetailsMarketingAutomationTriggersJobDetails.json"
+    },
+    {
+      "name": "JobLogDetails",
+      "file": "JobLogDetails.json"
+    },
+    {
+      "name": "JobLogMessage",
+      "file": "JobLogMessage.json"
+    },
+    {
+      "name": "JobLogResponse",
+      "file": "JobLogResponse.json"
+    },
+    {
+      "name": "JobLogSummary",
+      "file": "JobLogSummary.json"
+    },
+    {
+      "name": "JobLogsResponse",
+      "file": "JobLogsResponse.json"
+    },
+    {
+      "name": "JobResponse",
+      "file": "JobResponse.json"
+    },
+    {
+      "name": "JobSummary",
+      "file": "JobSummary.json"
+    },
+    {
+      "name": "JobSummaryGrpcJobSummary",
+      "file": "JobSummaryGrpcJobSummary.json"
+    },
+    {
+      "name": "JobSummaryHttpRequestJobSummary",
+      "file": "JobSummaryHttpRequestJobSummary.json"
+    },
+    {
+      "name": "JobSummaryMarketingAutomationTriggersJobSummary",
+      "file": "JobSummaryMarketingAutomationTriggersJobSummary.json"
+    },
+    {
+      "name": "JobsResponse",
+      "file": "JobsResponse.json"
+    },
+    {
       "name": "License",
       "file": "License.json"
     },
@@ -236,10 +312,6 @@
     {
       "name": "PeriodSummaryResponse",
       "file": "PeriodSummaryResponse.json"
-    },
-    {
-      "name": "PersonalAccessTokenDetails",
-      "file": "PersonalAccessTokenDetails.json"
     },
     {
       "name": "ProblemDetails",

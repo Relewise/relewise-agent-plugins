@@ -1,0 +1,26 @@
+{
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/JobDetailsGrpcJobDetails"
+    },
+    {
+      "$ref": "#/components/schemas/JobDetailsHttpRequestJobDetails"
+    },
+    {
+      "$ref": "#/components/schemas/JobDetailsMarketingAutomationTriggersJobDetails"
+    }
+  ],
+  "description": "Job details discriminated by type: grpc, httpRequest, or marketingAutomationTriggers. All variants share metadata and custom configuration names and values; reserved settings and execution logs are excluded.",
+  "discriminator": {
+    "propertyName": "type",
+    "mapping": {
+      "grpc": "#/components/schemas/JobDetailsGrpcJobDetails",
+      "httpRequest": "#/components/schemas/JobDetailsHttpRequestJobDetails",
+      "marketingAutomationTriggers": "#/components/schemas/JobDetailsMarketingAutomationTriggersJobDetails"
+    }
+  }
+}

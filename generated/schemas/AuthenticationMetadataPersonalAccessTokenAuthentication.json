@@ -1,14 +1,15 @@
 {
   "required": [
-    "name",
     "description",
-    "expiresAt"
+    "expiresAt",
+    "displayName"
   ],
-  "type": "object",
   "properties": {
-    "name": {
-      "type": "string",
-      "description": "The name assigned to the Personal Access Token in My Relewise."
+    "method": {
+      "enum": [
+        "PersonalAccessToken"
+      ],
+      "type": "string"
     },
     "description": {
       "type": "string",
@@ -20,6 +21,10 @@
       "description": "The time when the Personal Access Token expires, or null when it has no expiration time.",
       "format": "date-time",
       "nullable": true
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The Personal Access Token name or OAuth application name."
     }
   },
   "description": "Non-secret metadata about the Personal Access Token supplied with the request."

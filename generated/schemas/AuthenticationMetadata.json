@@ -1,0 +1,22 @@
+{
+  "required": [
+    "method"
+  ],
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/AuthenticationMetadataPersonalAccessTokenAuthentication"
+    },
+    {
+      "$ref": "#/components/schemas/AuthenticationMetadataOAuthAuthentication"
+    }
+  ],
+  "description": "Non-secret authentication metadata discriminated by method: PersonalAccessToken or OAuth. Each variant describes the supplied credential and its specific expiration semantics.",
+  "discriminator": {
+    "propertyName": "method",
+    "mapping": {
+      "PersonalAccessToken": "#/components/schemas/AuthenticationMetadataPersonalAccessTokenAuthentication",
+      "OAuth": "#/components/schemas/AuthenticationMetadataOAuthAuthentication"
+    }
+  }
+}

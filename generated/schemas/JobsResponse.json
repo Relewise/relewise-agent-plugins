@@ -1,0 +1,16 @@
+{
+  "required": [
+    "jobs"
+  ],
+  "type": "object",
+  "properties": {
+    "jobs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobSummary"
+      },
+      "description": "All Jobs in this Dataset ordered by display name and then Job ID. Empty when no Jobs exist."
+    }
+  },
+  "description": "Complete list of Dataset Job summaries."
+}
