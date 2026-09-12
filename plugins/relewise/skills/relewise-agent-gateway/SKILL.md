@@ -32,6 +32,6 @@ When direct REST is selected, resolve current HTTP mechanics from `https://my.re
 
 ## Protect credentials
 
-All transports use a Relewise Agent Gateway Personal Access Token. Prefer an already configured vendor-protected credential or secure credential provider. The portable fallback for the CLI and direct REST is `RELEWISE_AGENT_GATEWAY_TOKEN`.
+OAuth-capable MCP clients should use the Agent Gateway Connected App flow. The bundled CLI and the plugin's direct REST fallback currently use PAT authentication; MCP clients without an OAuth-managed Agent Gateway connection may also require a PAT. Prefer an already configured vendor-protected credential or secure credential provider. The portable fallback is `RELEWISE_AGENT_GATEWAY_TOKEN`.
 
 Never request, print, inspect, log, or persist the token. Never place it in conversation text, command arguments, visible command text, input files, source files, URLs, or output. If user action is required to establish authentication, preserve the calling setup skill's instructions and wait for confirmation.

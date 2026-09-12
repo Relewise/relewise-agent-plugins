@@ -80,15 +80,10 @@ jobs:
 
           $env:CLAUDE_PLUGIN_ROOT = $installedRoot
           $businessManifest = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.claude-plugin/plugin.json') | ConvertFrom-Json
-          if ($businessManifest.userConfig.agent_gateway_token.sensitive -ne $true -or
-              $businessManifest.userConfig.agent_gateway_token.required -ne $true) {
-            throw 'The installed Relewise plugin does not request protected Agent Gateway configuration.'
-          }
           $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.claude-plugin/mcp.json') | ConvertFrom-Json
           $businessServer = $businessMcp.mcpServers.'relewise-agent-gateway'
-          if ($businessServer.url -ne 'https://my.relewise.com/agents/mcp' -or
-              $businessServer.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
-            throw 'The installed Relewise plugin has an invalid Agent Gateway MCP configuration.'
+          if ($businessServer.url -ne 'https://my.relewise.com/agents/mcp' -or $null -ne $businessServer.headers) {
+            throw 'The installed Relewise plugin has an invalid OAuth Agent Gateway MCP configuration.'
           }
           if (-not (Test-Path -LiteralPath (Join-Path $installedRoot 'skills/relewise-agent-gateway/references/transport-selection.md'))) {
             throw 'The installed Relewise plugin is missing its shared transport-selection reference.'

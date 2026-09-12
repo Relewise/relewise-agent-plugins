@@ -82,19 +82,12 @@ if ($portableManifest.name -ne 'relewise' -or $claudeManifest.name -ne 'relewise
 if ($manifest.version -ne $portableManifest.version -or $manifest.version -ne $claudeManifest.version) {
     throw 'Committed vendor plugin manifest versions are not synchronized.'
 }
-if ($claudeManifest.userConfig.agent_gateway_token.type -ne 'string' -or
-    $claudeManifest.userConfig.agent_gateway_token.sensitive -ne $true -or
-    $claudeManifest.userConfig.agent_gateway_token.required -ne $true) {
-    throw 'Claude Code manifest does not request the Agent Gateway PAT as required protected configuration.'
-}
 if ($null -eq $manifest.mcpServers.'relewise-agent-gateway' -or $claudeManifest.mcpServers -ne './.claude-plugin/mcp.json') {
     throw 'Relewise vendor manifests do not declare the Agent Gateway MCP configuration.'
 }
 $codexServer = $manifest.mcpServers.'relewise-agent-gateway'
-if ($codexServer.type -ne 'http' -or
-    $codexServer.url -ne 'https://my.relewise.com/agents/mcp' -or
-    $codexServer.bearer_token_env_var -ne 'RELEWISE_AGENT_GATEWAY_TOKEN') {
-    throw 'Relewise does not configure Codex native bearer-token MCP authentication.'
+if ($codexServer.type -ne 'http' -or $codexServer.url -ne 'https://my.relewise.com/agents/mcp' -or $null -ne $codexServer.bearer_token_env_var) {
+    throw 'Relewise does not configure Codex OAuth MCP authentication.'
 }
 $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.mcp.json') | ConvertFrom-Json
 $businessServer = $businessMcp.mcpServers.'relewise-agent-gateway'
@@ -109,8 +102,8 @@ $claudeServer = $claudeMcp.mcpServers.'relewise-agent-gateway'
 if ($claudeServer.type -ne 'http' -or $claudeServer.url -ne 'https://my.relewise.com/agents/mcp') {
     throw 'Relewise does not configure the expected Claude Agent Gateway MCP server.'
 }
-if ($claudeServer.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
-    throw 'Relewise does not configure Claude protected user configuration as its MCP authorization header.'
+if ($null -ne $claudeServer.headers) {
+    throw 'Relewise does not configure Claude OAuth MCP authentication.'
 }
 $transportReference = Join-Path $pluginRoot 'skills\relewise-agent-gateway\references\transport-selection.md'
 if (-not (Test-Path -LiteralPath $transportReference -PathType Leaf)) { throw 'Relewise Agent Gateway skill is missing its transport-selection reference.' }

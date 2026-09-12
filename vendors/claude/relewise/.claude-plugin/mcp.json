@@ -2,10 +2,7 @@
   "mcpServers": {
     "relewise-agent-gateway": {
       "type": "http",
-      "url": "https://my.relewise.com/agents/mcp",
-      "headers": {
-        "Authorization": "Bearer ${user_config.agent_gateway_token}"
-      }
+      "url": "https://my.relewise.com/agents/mcp"
     }
   }
 }

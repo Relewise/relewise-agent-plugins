@@ -18,8 +18,7 @@
   "mcpServers": {
     "relewise-agent-gateway": {
       "type": "http",
-      "url": "https://my.relewise.com/agents/mcp",
-      "bearer_token_env_var": "RELEWISE_AGENT_GATEWAY_TOKEN"
+      "url": "https://my.relewise.com/agents/mcp"
     }
   },
   "interface": {
