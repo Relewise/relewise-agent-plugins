@@ -2,7 +2,7 @@
   "openapi": "3.0.4",
   "info": {
     "title": "Agent Gateway API",
-    "description": "<p>Agent Gateway lets approved AI assistants, automation tools, and external apps use selected Relewise capabilities through My Relewise without sharing Dataset API Keys.</p>\r\n<p>Authenticate with a My Relewise Personal Access Token as a bearer token. Dataset-scoped operations also check the token's Dataset access, the Dataset Access Policy, enabled Agent Gateway areas, and the user's My Relewise permissions.</p>\r\n<p>Agent Gateway is designed for AI agents as well as developers. When Dataset-specific values are unknown, use the available discovery operations instead of guessing identifiers, languages, currencies, Data Keys, or Classification Values. Operation descriptions identify intended use, alternatives, and side effects.</p>\r\n<p>For setup, access control, and security details, read the <a href=\"https://docs.relewise.com/docs/myrelewise/agent-gateway/\">Agent Gateway documentation</a>.</p>\r\n<p>The raw OpenAPI document is available at <a href=\"openapi/v1.json\">openapi/v1.json</a>.</p>",
+    "description": "<p>Agent Gateway lets approved AI assistants, automation tools, and external apps use selected Relewise capabilities through My Relewise without sharing Dataset API Keys.</p>\r\n<p>Authenticate with a My Relewise Personal Access Token or OAuth access token as a bearer token. Dataset-scoped operations also check the token's Dataset access, the Dataset Access Policy, enabled Agent Gateway areas, and the user's My Relewise permissions.</p>\r\n<p>Agent Gateway is designed for AI agents as well as developers. When Dataset-specific values are unknown, use the available discovery operations instead of guessing identifiers, languages, currencies, Data Keys, or Classification Values. Operation descriptions identify intended use, alternatives, and side effects.</p>\r\n<p>For setup, access control, and security details, read the <a href=\"https://docs.relewise.com/docs/myrelewise/agent-gateway/\">Agent Gateway documentation</a>.</p>\r\n<p>The raw OpenAPI document is available at <a href=\"openapi/v1.json\">openapi/v1.json</a>.</p>",
     "version": "v1"
   },
   "servers": [
@@ -23,7 +23,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -150,7 +150,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -239,7 +239,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -328,7 +328,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -417,7 +417,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -506,7 +506,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -595,7 +595,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -684,7 +684,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -773,7 +773,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -862,7 +862,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -951,7 +951,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1056,7 +1056,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1134,7 +1134,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1221,7 +1221,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1326,7 +1326,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1404,7 +1404,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1509,7 +1509,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1587,7 +1587,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1692,7 +1692,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1770,7 +1770,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1875,7 +1875,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -1953,7 +1953,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2022,7 +2022,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2107,7 +2107,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2186,7 +2186,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2274,7 +2274,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2353,7 +2353,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2432,7 +2432,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2511,7 +2511,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2619,7 +2619,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2712,7 +2712,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2791,7 +2791,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2868,7 +2868,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2964,7 +2964,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -2979,6 +2979,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchIndexesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
                 }
               }
             }
@@ -3023,7 +3033,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3101,7 +3111,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3210,7 +3220,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3297,7 +3307,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3376,7 +3386,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3485,7 +3495,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3572,7 +3582,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3651,7 +3661,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3760,7 +3770,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3847,7 +3857,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -3926,7 +3936,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4035,7 +4045,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4122,7 +4132,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4201,7 +4211,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4310,7 +4320,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4397,7 +4407,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4476,7 +4486,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4585,7 +4595,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4672,7 +4682,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4775,7 +4785,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4854,7 +4864,7 @@
           {
             "name": "datasetId",
             "in": "path",
-            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The Personal Access Token must have access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
             "required": true,
             "schema": {
               "type": "string",
@@ -4911,13 +4921,387 @@
         }
       }
     },
+    "/api/v1/datasets/{datasetId}/administration/jobs": {
+      "get": {
+        "tags": [
+          "Administration"
+        ],
+        "summary": "Lists Dataset Jobs.",
+        "description": "Read-only list of all Jobs ordered by display name and then Job ID. Use AdministrationGetJob for configuration details. Latest execution summaries are included; execution logs are not returned.",
+        "operationId": "AdministrationListJobs",
+        "parameters": [
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/administration/jobs/{jobId}": {
+      "get": {
+        "tags": [
+          "Administration"
+        ],
+        "summary": "Gets Dataset Job details.",
+        "description": "Read-only inspection using a Job ID from AdministrationListJobs. Settings with gRPC- or httpRequest- prefixes are excluded case-insensitively; remaining custom configuration names and values are returned as stored. Does not execute or modify the Job or retrieve execution logs.",
+        "operationId": "AdministrationGetJob",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job ID discovered from AdministrationListJobs.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/administration/jobs/logs": {
+      "get": {
+        "tags": [
+          "Administration"
+        ],
+        "summary": "Lists Job executions.",
+        "description": "Read-only execution history. Discover Job IDs with AdministrationListJobs and Log IDs with AdministrationListJobLogs. Never executes or changes Jobs.",
+        "operationId": "AdministrationListJobLogs",
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "Inclusive UTC start date; normalized by DateRange.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "Inclusive UTC end date applied to execution start timestamps; normalized by DateRange.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "query",
+            "description": "Optional Job ID from AdministrationListJobs; omit for all Jobs.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "result",
+            "in": "query",
+            "description": "Optional result: completed, completedWithWarnings, or faulted.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size from 10 to 100; defaults to 50.",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "uint32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "beforeLogId",
+            "in": "query",
+            "description": "NextCursor from the previous page to retrieve older executions by start time then Log ID. Cannot combine with afterLogId.",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "afterLogId",
+            "in": "query",
+            "description": "PreviousCursor from the previous page to retrieve newer executions by start time then Log ID. Cannot combine with beforeLogId.",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobLogsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/administration/jobs/{jobId}/logs/{logId}": {
+      "get": {
+        "tags": [
+          "Administration"
+        ],
+        "summary": "Gets one Job execution.",
+        "description": "Read-only execution history. Discover Job IDs with AdministrationListJobs and Log IDs with AdministrationListJobLogs. Never executes or changes Jobs.",
+        "operationId": "AdministrationGetJobLog",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job ID from AdministrationListJobLogs.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "logId",
+            "in": "path",
+            "description": "Log ID from AdministrationListJobLogs.",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobLogResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
     "/api/v1/me": {
       "get": {
         "tags": [
           "Identity"
         ],
         "summary": "Gets the authenticated user.",
-        "description": "Returns the My Relewise user represented by the supplied Personal Access Token, non-secret metadata about that token, and License-grouped Datasets visible to the user and allowed by the token. Use CoreGetDataset to verify access and discover the effective Agent Gateway policy before making other Dataset-scoped requests. This operation is read-only.",
+        "description": "Returns the My Relewise user represented by the supplied Personal Access Token or OAuth access token, non-secret authentication metadata, and candidate Datasets grouped by License. Dataset policies are checked when a Dataset-specific operation runs. Use CoreGetDataset to verify access and discover the effective Agent Gateway policy before making other Dataset-scoped requests. This operation is read-only.",
         "operationId": "IdentityGetCurrentUser",
         "responses": {
           "200": {
@@ -4951,6 +5335,113 @@
   },
   "components": {
     "schemas": {
+      "AuthenticationMetadata": {
+        "required": [
+          "method"
+        ],
+        "type": "object",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AuthenticationMetadataPersonalAccessTokenAuthentication"
+          },
+          {
+            "$ref": "#/components/schemas/AuthenticationMetadataOAuthAuthentication"
+          }
+        ],
+        "description": "Non-secret authentication metadata discriminated by method: PersonalAccessToken or OAuth. Each variant describes the supplied credential and its specific expiration semantics.",
+        "discriminator": {
+          "propertyName": "method",
+          "mapping": {
+            "PersonalAccessToken": "#/components/schemas/AuthenticationMetadataPersonalAccessTokenAuthentication",
+            "OAuth": "#/components/schemas/AuthenticationMetadataOAuthAuthentication"
+          }
+        }
+      },
+      "AuthenticationMetadataOAuthAuthentication": {
+        "required": [
+          "clientId",
+          "connectionKey",
+          "sessionKey",
+          "accessTokenExpiresAt",
+          "scopes",
+          "resource",
+          "displayName"
+        ],
+        "properties": {
+          "method": {
+            "enum": [
+              "OAuth"
+            ],
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string",
+            "description": "The exact registered OAuth client identity, including the metadata URL for a client registered through client metadata discovery."
+          },
+          "connectionKey": {
+            "type": "string",
+            "description": "The stable Key of the Connected Apps connection.",
+            "format": "uuid"
+          },
+          "sessionKey": {
+            "type": "string",
+            "description": "The Key of the token family used by this request.",
+            "format": "uuid"
+          },
+          "accessTokenExpiresAt": {
+            "type": "string",
+            "description": "The expiry of the access token supplied with this request.",
+            "format": "date-time"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The scopes granted to the access token supplied with this request."
+          },
+          "resource": {
+            "type": "string",
+            "description": "The protected resource authorized by the access token supplied with this request."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The Personal Access Token name or OAuth application name."
+          }
+        },
+        "description": "Non-secret metadata about the OAuth access token supplied with the request and its connection and session."
+      },
+      "AuthenticationMetadataPersonalAccessTokenAuthentication": {
+        "required": [
+          "description",
+          "expiresAt",
+          "displayName"
+        ],
+        "properties": {
+          "method": {
+            "enum": [
+              "PersonalAccessToken"
+            ],
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "description": "The optional description assigned to the Personal Access Token in My Relewise.",
+            "nullable": true
+          },
+          "expiresAt": {
+            "type": "string",
+            "description": "The time when the Personal Access Token expires, or null when it has no expiration time.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The Personal Access Token name or OAuth application name."
+          }
+        },
+        "description": "Non-secret metadata about the Personal Access Token supplied with the request."
+      },
       "BrandDetails": {
         "required": [
           "brandId",
@@ -5462,7 +5953,7 @@
       "CurrentUserResponse": {
         "required": [
           "user",
-          "personalAccessToken",
+          "authentication",
           "licenses"
         ],
         "type": "object",
@@ -5470,18 +5961,18 @@
           "user": {
             "$ref": "#/components/schemas/UserDetails"
           },
-          "personalAccessToken": {
-            "$ref": "#/components/schemas/PersonalAccessTokenDetails"
+          "authentication": {
+            "$ref": "#/components/schemas/AuthenticationMetadata"
           },
           "licenses": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/LicenseReference"
             },
-            "description": "Licenses containing Datasets visible to the authenticated user and allowed by the supplied Personal Access Token. Verify a Dataset with CoreGetDataset before using it; the collection is empty when there are no datasets."
+            "description": "Licenses containing Datasets visible to the authenticated user and allowed by the current credential Dataset selection. Verify a Dataset with CoreGetDataset before using it; the collection is empty when there are no datasets."
           }
         },
-        "description": "The My Relewise user represented by the supplied Personal Access Token, non-secret metadata about that token, and License-grouped Dataset references available for access verification."
+        "description": "The authenticated My Relewise user, non-secret authentication metadata, and License-grouped Dataset references available for access verification."
       },
       "DataKey": {
         "required": [
@@ -5735,7 +6226,7 @@
             "description": "The Dataset environment type."
           }
         },
-        "description": "A Dataset visible to the authenticated user and allowed by the supplied Personal Access Token."
+        "description": "A Dataset visible to the authenticated user and allowed by the current credential Dataset selection."
       },
       "DecompoundingRulesResponse": {
         "required": [
@@ -5982,6 +6473,728 @@
           }
         }
       },
+      "JobConfigurationElement": {
+        "required": [
+          "name",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Configuration setting name."
+          },
+          "value": {
+            "type": "string",
+            "description": "Stored configuration value, without transformation or redaction. Null means the setting has no value.",
+            "nullable": true
+          }
+        },
+        "description": "A custom Job configuration setting."
+      },
+      "JobDetails": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/JobDetailsGrpcJobDetails"
+          },
+          {
+            "$ref": "#/components/schemas/JobDetailsHttpRequestJobDetails"
+          },
+          {
+            "$ref": "#/components/schemas/JobDetailsMarketingAutomationTriggersJobDetails"
+          }
+        ],
+        "description": "Job details discriminated by type: grpc, httpRequest, or marketingAutomationTriggers. All variants share metadata and custom configuration names and values; reserved settings and execution logs are excluded.",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "grpc": "#/components/schemas/JobDetailsGrpcJobDetails",
+            "httpRequest": "#/components/schemas/JobDetailsHttpRequestJobDetails",
+            "marketingAutomationTriggers": "#/components/schemas/JobDetailsMarketingAutomationTriggersJobDetails"
+          }
+        }
+      },
+      "JobDetailsGrpcJobDetails": {
+        "required": [
+          "treatMutexTimeoutAsWarning",
+          "configuration",
+          "id",
+          "displayName",
+          "enabled",
+          "cronExpression",
+          "lastStarted",
+          "lastFinished",
+          "lastResult",
+          "created",
+          "updated"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "grpc"
+            ],
+            "type": "string"
+          },
+          "treatMutexTimeoutAsWarning": {
+            "type": "boolean",
+            "description": "Whether failure to acquire the exclusive execution lock is treated as a warning rather than a failure."
+          },
+          "configuration": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobConfigurationElement"
+            },
+            "description": "Custom configuration names and values as stored. Settings whose names start with gRPC- or httpRequest- (case-insensitive) are excluded."
+          },
+          "id": {
+            "type": "string",
+            "description": "Stable Job ID used to retrieve details within this Dataset.",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Configured name of the Job."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running."
+          },
+          "cronExpression": {
+            "type": "string",
+            "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+            "nullable": true
+          },
+          "lastStarted": {
+            "type": "string",
+            "description": "Latest recorded execution start time; null when no start has been recorded.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastFinished": {
+            "type": "string",
+            "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastResult": {
+            "type": "string",
+            "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "Time the Job was created.",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "description": "Time the Job configuration was last updated.",
+            "format": "date-time"
+          }
+        },
+        "description": "gRPC Job details with common metadata and custom configuration."
+      },
+      "JobDetailsHttpRequestJobDetails": {
+        "required": [
+          "treatMutexTimeoutAsWarning",
+          "configuration",
+          "id",
+          "displayName",
+          "enabled",
+          "cronExpression",
+          "lastStarted",
+          "lastFinished",
+          "lastResult",
+          "created",
+          "updated"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "httpRequest"
+            ],
+            "type": "string"
+          },
+          "treatMutexTimeoutAsWarning": {
+            "type": "boolean",
+            "description": "Whether failure to acquire the exclusive execution lock is treated as a warning rather than a failure."
+          },
+          "configuration": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobConfigurationElement"
+            },
+            "description": "Custom configuration names and values as stored. Settings whose names start with gRPC- or httpRequest- (case-insensitive) are excluded."
+          },
+          "id": {
+            "type": "string",
+            "description": "Stable Job ID used to retrieve details within this Dataset.",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Configured name of the Job."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running."
+          },
+          "cronExpression": {
+            "type": "string",
+            "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+            "nullable": true
+          },
+          "lastStarted": {
+            "type": "string",
+            "description": "Latest recorded execution start time; null when no start has been recorded.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastFinished": {
+            "type": "string",
+            "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastResult": {
+            "type": "string",
+            "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "Time the Job was created.",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "description": "Time the Job configuration was last updated.",
+            "format": "date-time"
+          }
+        },
+        "description": "HTTP Request Job details with common metadata and custom configuration."
+      },
+      "JobDetailsMarketingAutomationTriggersJobDetails": {
+        "required": [
+          "treatMutexTimeoutAsWarning",
+          "configuration",
+          "id",
+          "displayName",
+          "enabled",
+          "cronExpression",
+          "lastStarted",
+          "lastFinished",
+          "lastResult",
+          "created",
+          "updated"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "marketingAutomationTriggers"
+            ],
+            "type": "string"
+          },
+          "treatMutexTimeoutAsWarning": {
+            "type": "boolean",
+            "description": "Whether failure to acquire the exclusive execution lock is treated as a warning rather than a failure."
+          },
+          "configuration": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobConfigurationElement"
+            },
+            "description": "Custom configuration names and values as stored. Settings whose names start with gRPC- or httpRequest- (case-insensitive) are excluded."
+          },
+          "id": {
+            "type": "string",
+            "description": "Stable Job ID used to retrieve details within this Dataset.",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Configured name of the Job."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running."
+          },
+          "cronExpression": {
+            "type": "string",
+            "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+            "nullable": true
+          },
+          "lastStarted": {
+            "type": "string",
+            "description": "Latest recorded execution start time; null when no start has been recorded.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastFinished": {
+            "type": "string",
+            "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastResult": {
+            "type": "string",
+            "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "Time the Job was created.",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "description": "Time the Job configuration was last updated.",
+            "format": "date-time"
+          }
+        },
+        "description": "Marketing Automation Triggers Job details with common metadata and custom configuration."
+      },
+      "JobLogDetails": {
+        "required": [
+          "id",
+          "jobId",
+          "result",
+          "message",
+          "started",
+          "finished",
+          "executionTimeSeconds",
+          "messages"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "description": "Execution Log ID used together with Job ID to retrieve this run.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Job ID discovered from the Job list.",
+            "format": "uuid"
+          },
+          "result": {
+            "type": "string",
+            "description": "Run result: completed, completedWithWarnings, faulted, or null while no outcome is available.",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Summary message for this execution, or null when unavailable.",
+            "nullable": true
+          },
+          "started": {
+            "type": "string",
+            "description": "Execution start timestamp in UTC.",
+            "format": "date-time"
+          },
+          "finished": {
+            "type": "string",
+            "description": "Execution finish timestamp, or null when unfinished.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "executionTimeSeconds": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "description": "Execution duration in seconds, or null when unfinished.",
+            "format": "double",
+            "nullable": true
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobLogMessage"
+            },
+            "description": "Available history messages in chronological order. Empty history does not prove that no messages were originally recorded."
+          }
+        },
+        "description": "Details of one Job execution."
+      },
+      "JobLogMessage": {
+        "required": [
+          "created",
+          "level",
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "created": {
+            "type": "string",
+            "description": "Message timestamp in UTC.",
+            "format": "date-time"
+          },
+          "level": {
+            "type": "string",
+            "description": "Message severity: Information, Warning, or Error."
+          },
+          "text": {
+            "type": "string",
+            "description": "Message text as returned by the backend, including its caller-specific runner-information filtering."
+          }
+        },
+        "description": "One execution history message returned by the backend."
+      },
+      "JobLogResponse": {
+        "required": [
+          "log"
+        ],
+        "type": "object",
+        "properties": {
+          "log": {
+            "$ref": "#/components/schemas/JobLogDetails"
+          }
+        },
+        "description": "One Job execution."
+      },
+      "JobLogsResponse": {
+        "required": [
+          "logs",
+          "previousCursor",
+          "nextCursor"
+        ],
+        "type": "object",
+        "properties": {
+          "logs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobLogSummary"
+            },
+            "description": "Execution summaries matching the requested filters."
+          },
+          "previousCursor": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "description": "Pass as afterLogId to retrieve newer executions, or null when no newer page is available.",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "nextCursor": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "description": "Pass as beforeLogId to retrieve older executions, or null when no older page is available.",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          }
+        },
+        "description": "A page of Job executions ordered by start time and Log ID descending."
+      },
+      "JobLogSummary": {
+        "required": [
+          "id",
+          "jobId",
+          "result",
+          "message",
+          "started",
+          "finished",
+          "executionTimeSeconds"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "description": "Execution Log ID used together with Job ID to retrieve this run.",
+            "format": "int32",
+            "type": "integer"
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Job ID discovered from the Job list.",
+            "format": "uuid"
+          },
+          "result": {
+            "type": "string",
+            "description": "Run result: completed, completedWithWarnings, faulted, or null while no outcome is available.",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "description": "Summary message for this execution, or null when unavailable.",
+            "nullable": true
+          },
+          "started": {
+            "type": "string",
+            "description": "Execution start timestamp in UTC.",
+            "format": "date-time"
+          },
+          "finished": {
+            "type": "string",
+            "description": "Execution finish timestamp, or null when unfinished.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "executionTimeSeconds": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "description": "Execution duration in seconds, or null when unfinished.",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "description": "Summary of one Job execution."
+      },
+      "JobResponse": {
+        "required": [
+          "job"
+        ],
+        "type": "object",
+        "properties": {
+          "job": {
+            "$ref": "#/components/schemas/JobDetails"
+          }
+        },
+        "description": "Details of one Dataset Job."
+      },
+      "JobsResponse": {
+        "required": [
+          "jobs"
+        ],
+        "type": "object",
+        "properties": {
+          "jobs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobSummary"
+            },
+            "description": "All Jobs in this Dataset ordered by display name and then Job ID. Empty when no Jobs exist."
+          }
+        },
+        "description": "Complete list of Dataset Job summaries."
+      },
+      "JobSummary": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/JobSummaryGrpcJobSummary"
+          },
+          {
+            "$ref": "#/components/schemas/JobSummaryHttpRequestJobSummary"
+          },
+          {
+            "$ref": "#/components/schemas/JobSummaryMarketingAutomationTriggersJobSummary"
+          }
+        ],
+        "description": "Dataset Job summary discriminated by type: grpc, httpRequest, or marketingAutomationTriggers. Includes identity, schedule, and latest execution summary, not execution logs.",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "grpc": "#/components/schemas/JobSummaryGrpcJobSummary",
+            "httpRequest": "#/components/schemas/JobSummaryHttpRequestJobSummary",
+            "marketingAutomationTriggers": "#/components/schemas/JobSummaryMarketingAutomationTriggersJobSummary"
+          }
+        }
+      },
+      "JobSummaryGrpcJobSummary": {
+        "required": [
+          "id",
+          "displayName",
+          "enabled",
+          "cronExpression",
+          "lastStarted",
+          "lastFinished",
+          "lastResult",
+          "created",
+          "updated"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "grpc"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Stable Job ID used to retrieve details within this Dataset.",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Configured name of the Job."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running."
+          },
+          "cronExpression": {
+            "type": "string",
+            "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+            "nullable": true
+          },
+          "lastStarted": {
+            "type": "string",
+            "description": "Latest recorded execution start time; null when no start has been recorded.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastFinished": {
+            "type": "string",
+            "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastResult": {
+            "type": "string",
+            "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "Time the Job was created.",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "description": "Time the Job configuration was last updated.",
+            "format": "date-time"
+          }
+        },
+        "description": "gRPC Job identity, schedule, and latest execution summary."
+      },
+      "JobSummaryHttpRequestJobSummary": {
+        "required": [
+          "id",
+          "displayName",
+          "enabled",
+          "cronExpression",
+          "lastStarted",
+          "lastFinished",
+          "lastResult",
+          "created",
+          "updated"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "httpRequest"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Stable Job ID used to retrieve details within this Dataset.",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Configured name of the Job."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running."
+          },
+          "cronExpression": {
+            "type": "string",
+            "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+            "nullable": true
+          },
+          "lastStarted": {
+            "type": "string",
+            "description": "Latest recorded execution start time; null when no start has been recorded.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastFinished": {
+            "type": "string",
+            "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastResult": {
+            "type": "string",
+            "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "Time the Job was created.",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "description": "Time the Job configuration was last updated.",
+            "format": "date-time"
+          }
+        },
+        "description": "HTTP Request Job identity, schedule, and latest execution summary."
+      },
+      "JobSummaryMarketingAutomationTriggersJobSummary": {
+        "required": [
+          "id",
+          "displayName",
+          "enabled",
+          "cronExpression",
+          "lastStarted",
+          "lastFinished",
+          "lastResult",
+          "created",
+          "updated"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "marketingAutomationTriggers"
+            ],
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "description": "Stable Job ID used to retrieve details within this Dataset.",
+            "format": "uuid"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Configured name of the Job."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running."
+          },
+          "cronExpression": {
+            "type": "string",
+            "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+            "nullable": true
+          },
+          "lastStarted": {
+            "type": "string",
+            "description": "Latest recorded execution start time; null when no start has been recorded.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastFinished": {
+            "type": "string",
+            "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastResult": {
+            "type": "string",
+            "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "Time the Job was created.",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "description": "Time the Job configuration was last updated.",
+            "format": "date-time"
+          }
+        },
+        "description": "Marketing Automation Triggers Job identity, schedule, and latest execution summary."
+      },
       "License": {
         "required": [
           "id",
@@ -6023,7 +7236,7 @@
             "items": {
               "$ref": "#/components/schemas/DatasetReference"
             },
-            "description": "Datasets under this License that are visible to the authenticated user and allowed by the supplied Personal Access Token."
+            "description": "Datasets under this License that are visible to the authenticated user and allowed by the current credential Dataset selection."
           }
         },
         "description": "A Relewise License containing Dataset references available for access verification."
@@ -6633,32 +7846,6 @@
           }
         },
         "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available."
-      },
-      "PersonalAccessTokenDetails": {
-        "required": [
-          "name",
-          "description",
-          "expiresAt"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name assigned to the Personal Access Token in My Relewise."
-          },
-          "description": {
-            "type": "string",
-            "description": "The optional description assigned to the Personal Access Token in My Relewise.",
-            "nullable": true
-          },
-          "expiresAt": {
-            "type": "string",
-            "description": "The time when the Personal Access Token expires, or null when it has no expiration time.",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "description": "Non-secret metadata about the Personal Access Token supplied with the request."
       },
       "ProblemDetails": {
         "type": "object",
@@ -9662,7 +10849,7 @@
     "securitySchemes": {
       "Bearer": {
         "type": "http",
-        "description": "Personal Access Token sent as a bearer token in the Authorization header.",
+        "description": "Personal Access Token or OAuth access token sent as a bearer token in the Authorization header.",
         "scheme": "bearer",
         "bearerFormat": "Bearer"
       }
@@ -9676,7 +10863,7 @@
   "tags": [
     {
       "name": "Identity",
-      "description": "Authenticated user, Personal Access Token, and available Dataset discovery."
+      "description": "Authenticated user, authentication method, and available Dataset discovery."
     },
     {
       "name": "Core",
@@ -9693,6 +10880,10 @@
     {
       "name": "Merchandising",
       "description": "Inspect and manage merchandising rules. Some operations modify live Dataset configuration."
+    },
+    {
+      "name": "Administration",
+      "description": "Read Dataset Jobs, their schedules, restricted configuration, and execution history, including execution summaries and log messages."
     },
     {
       "name": "Triggers",

@@ -1,0 +1,26 @@
+{
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/JobSummaryGrpcJobSummary"
+    },
+    {
+      "$ref": "#/components/schemas/JobSummaryHttpRequestJobSummary"
+    },
+    {
+      "$ref": "#/components/schemas/JobSummaryMarketingAutomationTriggersJobSummary"
+    }
+  ],
+  "description": "Dataset Job summary discriminated by type: grpc, httpRequest, or marketingAutomationTriggers. Includes identity, schedule, and latest execution summary, not execution logs.",
+  "discriminator": {
+    "propertyName": "type",
+    "mapping": {
+      "grpc": "#/components/schemas/JobSummaryGrpcJobSummary",
+      "httpRequest": "#/components/schemas/JobSummaryHttpRequestJobSummary",
+      "marketingAutomationTriggers": "#/components/schemas/JobSummaryMarketingAutomationTriggersJobSummary"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "required": [
+    "name",
+    "value"
+  ],
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Configuration setting name."
+    },
+    "value": {
+      "type": "string",
+      "description": "Stored configuration value, without transformation or redaction. Null means the setting has no value.",
+      "nullable": true
+    }
+  },
+  "description": "A custom Job configuration setting."
+}

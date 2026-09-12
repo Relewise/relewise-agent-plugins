@@ -1,0 +1,8 @@
+{
+  "operationIds": [
+    "AdministrationListJobs",
+    "AdministrationGetJob",
+    "AdministrationListJobLogs",
+    "AdministrationGetJobLog"
+  ]
+}

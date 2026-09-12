@@ -20,5 +20,5 @@
       "description": "The Dataset environment type."
     }
   },
-  "description": "A Dataset visible to the authenticated user and allowed by the supplied Personal Access Token."
+  "description": "A Dataset visible to the authenticated user and allowed by the current credential Dataset selection."
 }

@@ -1,0 +1,80 @@
+{
+  "required": [
+    "treatMutexTimeoutAsWarning",
+    "configuration",
+    "id",
+    "displayName",
+    "enabled",
+    "cronExpression",
+    "lastStarted",
+    "lastFinished",
+    "lastResult",
+    "created",
+    "updated"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "marketingAutomationTriggers"
+      ],
+      "type": "string"
+    },
+    "treatMutexTimeoutAsWarning": {
+      "type": "boolean",
+      "description": "Whether failure to acquire the exclusive execution lock is treated as a warning rather than a failure."
+    },
+    "configuration": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobConfigurationElement"
+      },
+      "description": "Custom configuration names and values as stored. Settings whose names start with gRPC- or httpRequest- (case-insensitive) are excluded."
+    },
+    "id": {
+      "type": "string",
+      "description": "Stable Job ID used to retrieve details within this Dataset.",
+      "format": "uuid"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Configured name of the Job."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running."
+    },
+    "cronExpression": {
+      "type": "string",
+      "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+      "nullable": true
+    },
+    "lastStarted": {
+      "type": "string",
+      "description": "Latest recorded execution start time; null when no start has been recorded.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "lastFinished": {
+      "type": "string",
+      "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "lastResult": {
+      "type": "string",
+      "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+      "nullable": true
+    },
+    "created": {
+      "type": "string",
+      "description": "Time the Job was created.",
+      "format": "date-time"
+    },
+    "updated": {
+      "type": "string",
+      "description": "Time the Job configuration was last updated.",
+      "format": "date-time"
+    }
+  },
+  "description": "Marketing Automation Triggers Job details with common metadata and custom configuration."
+}

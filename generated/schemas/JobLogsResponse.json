@@ -1,0 +1,32 @@
+{
+  "required": [
+    "logs",
+    "previousCursor",
+    "nextCursor"
+  ],
+  "type": "object",
+  "properties": {
+    "logs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/JobLogSummary"
+      },
+      "description": "Execution summaries matching the requested filters."
+    },
+    "previousCursor": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Pass as afterLogId to retrieve newer executions, or null when no newer page is available.",
+      "format": "int32",
+      "nullable": true,
+      "type": "integer"
+    },
+    "nextCursor": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Pass as beforeLogId to retrieve older executions, or null when no older page is available.",
+      "format": "int32",
+      "nullable": true,
+      "type": "integer"
+    }
+  },
+  "description": "A page of Job executions ordered by start time and Log ID descending."
+}

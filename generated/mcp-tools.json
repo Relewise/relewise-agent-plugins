@@ -1,10 +1,11 @@
 {
   "source": "contracts/agent-gateway-mcp-v1.json",
-  "sourceSha256": "be4e2fc283b9d8369f17635cf5f34331fedd12d5778c81a0aaaae49a81b37123",
-  "toolCount": 57,
+  "sourceSha256": "91490e3fb03f4f1d3620d04ba3b6242328fe8bbf7205a54e3a62039370067c09",
+  "toolCount": 61,
   "tools": [
     {
       "name": "fetch_analyzer_consumption_summary",
+      "title": "Fetch Analyzer Consumption Summary",
       "description": "Fetch the Analyzer consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
       "inputSchema": {
         "type": "object",
@@ -36,7 +37,7 @@
         "type": "object",
         "properties": {
           "summary": {
-            "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available.",
+            "description": "Aggregate measurements and comparison-period changes.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -220,7 +221,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Analyzer Consumption Summary",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -230,6 +234,7 @@
     },
     {
       "name": "fetch_behavioral_tracking_consumption_summary",
+      "title": "Fetch Behavioral Tracking Consumption Summary",
       "description": "Fetch the Behavioral Tracking consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
       "inputSchema": {
         "type": "object",
@@ -261,7 +266,7 @@
         "type": "object",
         "properties": {
           "summary": {
-            "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available.",
+            "description": "Aggregate measurements and comparison-period changes.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -445,7 +450,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Behavioral Tracking Consumption Summary",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -455,6 +463,7 @@
     },
     {
       "name": "fetch_brand_by_id",
+      "title": "Fetch Brand by ID",
       "description": "Fetches one Brand's stored properties and actual Brand Data Values by Brand ID. Use search_brands when the Brand ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -592,7 +601,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Brand by ID",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -602,6 +614,7 @@
     },
     {
       "name": "fetch_content_by_id",
+      "title": "Fetch Content by ID",
       "description": "Fetches one Content entity's stored properties and actual Content Data Values by Content ID. Use search_content when the Content ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -799,7 +812,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Content by ID",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -809,6 +825,7 @@
     },
     {
       "name": "fetch_content_category_by_id",
+      "title": "Fetch Content Category by ID",
       "description": "Fetches one Content Category entity's stored properties and actual Data Values by Content Category ID. This does not return Content associated with the category. Use search_content_categories when the Content Category ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -961,7 +978,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Content Category by ID",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -971,6 +991,7 @@
     },
     {
       "name": "fetch_content_delivery_consumption_summary",
+      "title": "Fetch Content Delivery Consumption Summary",
       "description": "Fetch the Content Delivery consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
       "inputSchema": {
         "type": "object",
@@ -1002,7 +1023,7 @@
         "type": "object",
         "properties": {
           "summary": {
-            "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available.",
+            "description": "Aggregate measurements and comparison-period changes.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -1186,7 +1207,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Content Delivery Consumption Summary",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -1196,6 +1220,7 @@
     },
     {
       "name": "fetch_integrations_consumption_summary",
+      "title": "Fetch Integrations Consumption Summary",
       "description": "Fetch the Integrations consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
       "inputSchema": {
         "type": "object",
@@ -1227,7 +1252,7 @@
         "type": "object",
         "properties": {
           "summary": {
-            "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available.",
+            "description": "Aggregate measurements and comparison-period changes.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -1411,7 +1436,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Integrations Consumption Summary",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -1421,6 +1449,7 @@
     },
     {
       "name": "fetch_low_click_rate_searches",
+      "title": "Fetch Low Click Rate Searches",
       "description": "Returns search terms ranked by Relewise's low-click-opportunity calculation for an inclusive period. Use it when results existed but attracted few clicks; use fetch_searches_without_results for terms that returned no Products. This tool is read-only and covers Product Search data from identified users.",
       "inputSchema": {
         "type": "object",
@@ -1849,7 +1878,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Low Click Rate Searches",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Analytics",
@@ -1859,6 +1891,7 @@
     },
     {
       "name": "fetch_marketing_automation_consumption_summary",
+      "title": "Fetch Marketing Automation Consumption Summary",
       "description": "Fetch the Marketing Automation consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
       "inputSchema": {
         "type": "object",
@@ -1890,7 +1923,7 @@
         "type": "object",
         "properties": {
           "summary": {
-            "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available.",
+            "description": "Aggregate measurements and comparison-period changes.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -2074,7 +2107,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Marketing Automation Consumption Summary",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -2084,6 +2120,7 @@
     },
     {
       "name": "fetch_popular_searches",
+      "title": "Fetch Popular Searches",
       "description": "Returns search terms ranked by search count for an inclusive period. Use it for high-volume terms; use fetch_searches_trending_up for terms gaining volume or fetch_search_analytics_overview for aggregate KPIs. This tool is read-only and covers Product Search data from identified users.",
       "inputSchema": {
         "type": "object",
@@ -2512,7 +2549,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Popular Searches",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Analytics",
@@ -2522,6 +2562,7 @@
     },
     {
       "name": "fetch_product_by_id",
+      "title": "Fetch Product by ID",
       "description": "Fetches one Product's stored properties and actual Product data values by Product ID. Variant data values are not included; use fetch_product_variant_by_id when both IDs are known, or search_products when the Product ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -2816,7 +2857,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Product by ID",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -2826,6 +2870,7 @@
     },
     {
       "name": "fetch_product_category_by_id",
+      "title": "Fetch Product Category by ID",
       "description": "Fetches one Product Category entity's stored properties and actual Data Values by Product Category ID. This does not return Products assigned to the category. Use search_product_categories when the Product Category ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -2978,7 +3023,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Product Category by ID",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -2988,6 +3036,7 @@
     },
     {
       "name": "fetch_product_variant_by_id",
+      "title": "Fetch Product Variant by ID",
       "description": "Fetches one Variant's stored properties and actual Variant data values by Product ID and Variant ID. A Variant ID is unique only within its parent Product, so both IDs are required. Use fetch_product_by_id to inspect the parent Product or discover its returned Variant summaries. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -3207,7 +3256,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Product Variant by ID",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -3217,6 +3269,7 @@
     },
     {
       "name": "fetch_recommendations_consumption_summary",
+      "title": "Fetch Recommendations Consumption Summary",
       "description": "Fetch the Recommendations consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
       "inputSchema": {
         "type": "object",
@@ -3248,7 +3301,7 @@
         "type": "object",
         "properties": {
           "summary": {
-            "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available.",
+            "description": "Aggregate measurements and comparison-period changes.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -3432,7 +3485,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Recommendations Consumption Summary",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -3442,6 +3498,7 @@
     },
     {
       "name": "fetch_retail_media_consumption_summary",
+      "title": "Fetch Retail Media Consumption Summary",
       "description": "Fetch the Retail Media consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
       "inputSchema": {
         "type": "object",
@@ -3473,7 +3530,7 @@
         "type": "object",
         "properties": {
           "summary": {
-            "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available.",
+            "description": "Aggregate measurements and comparison-period changes.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -3657,7 +3714,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Retail Media Consumption Summary",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -3667,6 +3727,7 @@
     },
     {
       "name": "fetch_revenue_analytics",
+      "title": "Fetch Revenue Analytics",
       "description": "Returns read-only attributed Revenue measurements and daily trends for an inclusive period and currency. Use numeric values for calculations and formatted values for presentation. Use Search Analytics tools for search-performance questions.",
       "inputSchema": {
         "type": "object",
@@ -3924,7 +3985,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Revenue Analytics",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Analytics",
@@ -3934,6 +3998,7 @@
     },
     {
       "name": "fetch_search_analytics_filter_options",
+      "title": "Fetch Search Analytics Filter Options",
       "description": "Discovers valid Search Analytics filter values for an inclusive period and current selections. Use get_dataset_metadata first when the language is unknown. After choosing a language, use this tool to discover currencies, channels, subchannels, Classification Keys, and Classification Values instead of guessing them. Options are conditional; available subchannels depend on the selected channel. This tool is read-only and covers Product Search data from identified users.",
       "inputSchema": {
         "type": "object",
@@ -4158,7 +4223,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Search Analytics Filter Options",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Analytics",
@@ -4168,6 +4236,7 @@
     },
     {
       "name": "fetch_search_analytics_overview",
+      "title": "Fetch Search Analytics Overview",
       "description": "Returns aggregate Search Analytics KPIs and daily trends for an inclusive period. Use it for an overall performance summary; use a focused search-term tool for individual terms. This tool is read-only and covers Product Search data from identified users.",
       "inputSchema": {
         "type": "object",
@@ -4708,7 +4777,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Search Analytics Overview",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Analytics",
@@ -4718,6 +4790,7 @@
     },
     {
       "name": "fetch_search_consumption_summary",
+      "title": "Fetch Search Consumption Summary",
       "description": "Fetch the Search consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
       "inputSchema": {
         "type": "object",
@@ -4749,7 +4822,7 @@
         "type": "object",
         "properties": {
           "summary": {
-            "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available.",
+            "description": "Aggregate measurements and comparison-period changes.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -4933,7 +5006,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Search Consumption Summary",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -4943,6 +5019,7 @@
     },
     {
       "name": "fetch_searches_trending_down",
+      "title": "Fetch Searches Trending Down",
       "description": "Returns search terms whose search volume decreased most compared with the preceding equivalent period. Use it for declining demand; use fetch_popular_searches for highest absolute volume or fetch_searches_trending_up for rising demand. This tool is read-only and covers Product Search data from identified users.",
       "inputSchema": {
         "type": "object",
@@ -5371,7 +5448,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Searches Trending Down",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Analytics",
@@ -5381,6 +5461,7 @@
     },
     {
       "name": "fetch_searches_trending_up",
+      "title": "Fetch Searches Trending Up",
       "description": "Returns search terms whose search volume increased most compared with the preceding equivalent period. Use it for rising demand; use fetch_popular_searches for highest absolute volume or fetch_searches_trending_down for declining demand. This tool is read-only and covers Product Search data from identified users.",
       "inputSchema": {
         "type": "object",
@@ -5809,7 +5890,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Searches Trending Up",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Analytics",
@@ -5819,6 +5903,7 @@
     },
     {
       "name": "fetch_searches_without_results",
+      "title": "Fetch Searches Without Results",
       "description": "Returns search terms that produced no Products for an inclusive period. Use it to identify result-coverage gaps; use fetch_low_click_rate_searches when Products were returned but attracted few clicks. This tool is read-only and covers Product Search data from identified users.",
       "inputSchema": {
         "type": "object",
@@ -6069,7 +6154,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Searches Without Results",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Analytics",
@@ -6079,6 +6167,7 @@
     },
     {
       "name": "fetch_shoppertainment_consumption_summary",
+      "title": "Fetch Shoppertainment Consumption Summary",
       "description": "Fetch the Shoppertainment and Adaptive Discovery consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
       "inputSchema": {
         "type": "object",
@@ -6110,7 +6199,7 @@
         "type": "object",
         "properties": {
           "summary": {
-            "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available.",
+            "description": "Aggregate measurements and comparison-period changes.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -6294,7 +6383,10 @@
         ]
       },
       "annotations": {
+        "title": "Fetch Shoppertainment Consumption Summary",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -6304,6 +6396,7 @@
     },
     {
       "name": "get_dataset_details",
+      "title": "Get Dataset Details",
       "description": "Gets identifying and operational details about the requested Dataset, its License, and its effective Agent Gateway access policy. Use get_dataset_metadata instead to discover languages, currencies, Data Keys, Classification Values, and other Dataset-specific request vocabulary. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -6323,7 +6416,7 @@
         "type": "object",
         "properties": {
           "details": {
-            "description": "Details about the requested Dataset and its effective Agent Gateway access policy.",
+            "description": "Dataset details and configuration.",
             "type": "object",
             "properties": {
               "id": {
@@ -6405,7 +6498,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Dataset Details",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -6415,6 +6511,7 @@
     },
     {
       "name": "get_dataset_metadata",
+      "title": "Get Dataset Metadata",
       "description": "Discovers Dataset languages, currencies, Data Keys, Classification Keys, and Classification Values for an inclusive period. Use it before Dataset-scoped operations when these values are unknown instead of guessing them. Catalog, Content, User, and Company metadata are optional because they can make the response large. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -6466,7 +6563,7 @@
         "type": "object",
         "properties": {
           "metadata": {
-            "description": "Languages, currencies, and optionally requested entity metadata available for a Dataset.",
+            "description": "Dataset metadata for the requested sections.",
             "type": "object",
             "properties": {
               "fromDate": {
@@ -6732,7 +6829,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Dataset Metadata",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -6742,6 +6842,7 @@
     },
     {
       "name": "get_decompounding_rule",
+      "title": "Get Decompounding Rule",
       "description": "Gets one Decompounding rule by ID. Use list_decompounding_rules when the Rule ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -6855,7 +6956,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Decompounding Rule",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -6864,14 +6968,485 @@
       ]
     },
     {
+      "name": "get_job",
+      "title": "Get Job",
+      "description": "Reads one Dataset Job using a Job ID discovered with list_jobs. Read-only; never executes or changes a Job. Settings with gRPC- or httpRequest- prefixes are excluded case-insensitively; remaining custom configuration names and values are returned as stored. Execution logs are excluded. A null Job means it was not found in the Dataset.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "jobId": {
+            "description": "Job ID discovered from the Job list.",
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "datasetId",
+          "jobId"
+        ]
+      },
+      "outputSchema": {
+        "description": "Read-only Dataset Job operation result.",
+        "type": "object",
+        "properties": {
+          "job": {
+            "description": "Job details, or null when not found in the Dataset.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "type"
+            ],
+            "anyOf": [
+              {
+                "description": "gRPC Job details with common metadata and custom configuration.",
+                "properties": {
+                  "type": {
+                    "const": "grpc"
+                  },
+                  "treatMutexTimeoutAsWarning": {
+                    "description": "Whether failure to acquire the exclusive execution lock is treated as a warning rather than a failure.",
+                    "type": "boolean"
+                  },
+                  "configuration": {
+                    "description": "Custom configuration names and values as stored. Settings whose names start with gRPC- or httpRequest- (case-insensitive) are excluded.",
+                    "type": "array",
+                    "items": {
+                      "description": "A custom Job configuration setting.",
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "description": "Configuration setting name.",
+                          "type": "string"
+                        },
+                        "value": {
+                          "description": "Stored configuration value, without transformation or redaction. Null means the setting has no value.",
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "value"
+                      ]
+                    }
+                  },
+                  "id": {
+                    "description": "Stable Job ID used to retrieve details within this Dataset.",
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "displayName": {
+                    "description": "Configured name of the Job.",
+                    "type": "string"
+                  },
+                  "enabled": {
+                    "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running.",
+                    "type": "boolean"
+                  },
+                  "cronExpression": {
+                    "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "lastStarted": {
+                    "description": "Latest recorded execution start time; null when no start has been recorded.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  },
+                  "lastFinished": {
+                    "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  },
+                  "lastResult": {
+                    "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "created": {
+                    "description": "Time the Job was created.",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "updated": {
+                    "description": "Time the Job configuration was last updated.",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "treatMutexTimeoutAsWarning",
+                  "configuration",
+                  "id",
+                  "displayName",
+                  "enabled",
+                  "cronExpression",
+                  "lastStarted",
+                  "lastFinished",
+                  "lastResult",
+                  "created",
+                  "updated"
+                ]
+              },
+              {
+                "description": "HTTP Request Job details with common metadata and custom configuration.",
+                "properties": {
+                  "type": {
+                    "const": "httpRequest"
+                  },
+                  "treatMutexTimeoutAsWarning": {
+                    "description": "Whether failure to acquire the exclusive execution lock is treated as a warning rather than a failure.",
+                    "type": "boolean"
+                  },
+                  "configuration": {
+                    "description": "Custom configuration names and values as stored. Settings whose names start with gRPC- or httpRequest- (case-insensitive) are excluded.",
+                    "type": "array",
+                    "items": {
+                      "description": "A custom Job configuration setting.",
+                      "$ref": "#/properties/job/anyOf/0/properties/configuration/items"
+                    }
+                  },
+                  "id": {
+                    "description": "Stable Job ID used to retrieve details within this Dataset.",
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "displayName": {
+                    "description": "Configured name of the Job.",
+                    "type": "string"
+                  },
+                  "enabled": {
+                    "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running.",
+                    "type": "boolean"
+                  },
+                  "cronExpression": {
+                    "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "lastStarted": {
+                    "description": "Latest recorded execution start time; null when no start has been recorded.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  },
+                  "lastFinished": {
+                    "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  },
+                  "lastResult": {
+                    "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "created": {
+                    "description": "Time the Job was created.",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "updated": {
+                    "description": "Time the Job configuration was last updated.",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "treatMutexTimeoutAsWarning",
+                  "configuration",
+                  "id",
+                  "displayName",
+                  "enabled",
+                  "cronExpression",
+                  "lastStarted",
+                  "lastFinished",
+                  "lastResult",
+                  "created",
+                  "updated"
+                ]
+              },
+              {
+                "description": "Marketing Automation Triggers Job details with common metadata and custom configuration.",
+                "properties": {
+                  "type": {
+                    "const": "marketingAutomationTriggers"
+                  },
+                  "treatMutexTimeoutAsWarning": {
+                    "description": "Whether failure to acquire the exclusive execution lock is treated as a warning rather than a failure.",
+                    "type": "boolean"
+                  },
+                  "configuration": {
+                    "description": "Custom configuration names and values as stored. Settings whose names start with gRPC- or httpRequest- (case-insensitive) are excluded.",
+                    "type": "array",
+                    "items": {
+                      "description": "A custom Job configuration setting.",
+                      "$ref": "#/properties/job/anyOf/0/properties/configuration/items"
+                    }
+                  },
+                  "id": {
+                    "description": "Stable Job ID used to retrieve details within this Dataset.",
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "displayName": {
+                    "description": "Configured name of the Job.",
+                    "type": "string"
+                  },
+                  "enabled": {
+                    "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running.",
+                    "type": "boolean"
+                  },
+                  "cronExpression": {
+                    "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "lastStarted": {
+                    "description": "Latest recorded execution start time; null when no start has been recorded.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  },
+                  "lastFinished": {
+                    "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  },
+                  "lastResult": {
+                    "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "created": {
+                    "description": "Time the Job was created.",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "updated": {
+                    "description": "Time the Job configuration was last updated.",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                },
+                "required": [
+                  "treatMutexTimeoutAsWarning",
+                  "configuration",
+                  "id",
+                  "displayName",
+                  "enabled",
+                  "cronExpression",
+                  "lastStarted",
+                  "lastFinished",
+                  "lastResult",
+                  "created",
+                  "updated"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "job"
+        ]
+      },
+      "annotations": {
+        "title": "Get Job",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "Administration",
+      "relatedRestOperationIds": [
+        "AdministrationGetJob"
+      ]
+    },
+    {
+      "name": "get_job_log",
+      "title": "Get Job Log",
+      "description": "Reads a Job execution using jobId and logId from list_job_logs. Read-only. History contains backend-filtered messages; empty history may reflect retention. A null Log means not found.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "jobId": {
+            "description": "Job ID discovered from the Job list.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "logId": {
+            "description": "Log ID discovered from list_job_logs.",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "datasetId",
+          "jobId",
+          "logId"
+        ]
+      },
+      "outputSchema": {
+        "description": "Read-only Dataset Job operation result.",
+        "type": "object",
+        "properties": {
+          "log": {
+            "description": "Execution details, or null when not found in the Dataset.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "messages": {
+                "description": "Available history messages in chronological order. Empty history does not prove that no messages were originally recorded.",
+                "type": "array",
+                "items": {
+                  "description": "One execution history message returned by the backend.",
+                  "type": "object",
+                  "properties": {
+                    "created": {
+                      "description": "Message timestamp in UTC.",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "level": {
+                      "description": "Message severity: Information, Warning, or Error.",
+                      "type": "string"
+                    },
+                    "text": {
+                      "description": "Message text as returned by the backend, including its caller-specific runner-information filtering.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "created",
+                    "level",
+                    "text"
+                  ]
+                }
+              },
+              "id": {
+                "description": "Execution Log ID used together with Job ID to retrieve this run.",
+                "type": "integer"
+              },
+              "jobId": {
+                "description": "Job ID discovered from the Job list.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "result": {
+                "description": "Run result: completed, completedWithWarnings, faulted, or null while no outcome is available.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "message": {
+                "description": "Summary message for this execution, or null when unavailable.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "started": {
+                "description": "Execution start timestamp in UTC.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "finished": {
+                "description": "Execution finish timestamp, or null when unfinished.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "executionTimeSeconds": {
+                "description": "Execution duration in seconds, or null when unfinished.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "messages",
+              "id",
+              "jobId",
+              "result",
+              "message",
+              "started",
+              "finished",
+              "executionTimeSeconds"
+            ]
+          }
+        },
+        "required": [
+          "log"
+        ]
+      },
+      "annotations": {
+        "title": "Get Job Log",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "Administration",
+      "relatedRestOperationIds": [
+        "AdministrationGetJobLog"
+      ]
+    },
+    {
       "name": "get_me",
-      "description": "Discover the authenticated user, non-secret Personal Access Token metadata, and candidate Datasets grouped by License. Dataset policies are checked when a Dataset-specific operation runs. This tool is read-only.",
+      "title": "Get My Access",
+      "description": "Discover the authenticated user, non-secret authentication metadata, and candidate Datasets grouped by License. Dataset policies are checked when a Dataset-specific operation runs. This tool is read-only.",
       "inputSchema": {
         "type": "object",
         "properties": {}
       },
       "outputSchema": {
-        "description": "The My Relewise user represented by the supplied Personal Access Token, non-secret metadata about that token, and License-grouped Dataset references available for access verification.",
+        "description": "The authenticated My Relewise user, non-secret authentication metadata, and License-grouped Dataset references available for access verification.",
         "type": "object",
         "properties": {
           "user": {
@@ -6892,38 +7467,100 @@
               "emailAddress"
             ]
           },
-          "personalAccessToken": {
-            "description": "Metadata about the Personal Access Token supplied with the request. Secret values are never returned.",
+          "authentication": {
+            "description": "The authentication method, display name, and non-secret credential details.",
             "type": "object",
-            "properties": {
-              "name": {
-                "description": "The name assigned to the Personal Access Token in My Relewise.",
-                "type": "string"
-              },
-              "description": {
-                "description": "The optional description assigned to the Personal Access Token in My Relewise.",
-                "type": [
-                  "string",
-                  "null"
+            "required": [
+              "method"
+            ],
+            "anyOf": [
+              {
+                "description": "Non-secret metadata about the Personal Access Token supplied with the request.",
+                "properties": {
+                  "method": {
+                    "const": "PersonalAccessToken"
+                  },
+                  "description": {
+                    "description": "The optional description assigned to the Personal Access Token in My Relewise.",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "expiresAt": {
+                    "description": "The time when the Personal Access Token expires, or null when it has no expiration time.",
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  },
+                  "displayName": {
+                    "description": "The Personal Access Token name or OAuth application name.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "description",
+                  "expiresAt",
+                  "displayName"
                 ]
               },
-              "expiresAt": {
-                "description": "The time when the Personal Access Token expires, or null when it has no expiration time.",
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "format": "date-time"
+              {
+                "description": "Non-secret metadata about the OAuth access token supplied with the request and its connection and session.",
+                "properties": {
+                  "method": {
+                    "const": "OAuth"
+                  },
+                  "clientId": {
+                    "description": "The exact registered OAuth client identity, including the metadata URL for a client registered through client metadata discovery.",
+                    "type": "string"
+                  },
+                  "connectionKey": {
+                    "description": "The stable Key of the Connected Apps connection.",
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "sessionKey": {
+                    "description": "The Key of the token family used by this request.",
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "accessTokenExpiresAt": {
+                    "description": "The expiry of the access token supplied with this request.",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "scopes": {
+                    "description": "The scopes granted to the access token supplied with this request.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "resource": {
+                    "description": "The protected resource authorized by the access token supplied with this request.",
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "description": "The Personal Access Token name or OAuth application name.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "clientId",
+                  "connectionKey",
+                  "sessionKey",
+                  "accessTokenExpiresAt",
+                  "scopes",
+                  "resource",
+                  "displayName"
+                ]
               }
-            },
-            "required": [
-              "name",
-              "description",
-              "expiresAt"
             ]
           },
           "licenses": {
-            "description": "Licenses containing Datasets visible to the authenticated user and allowed by the supplied Personal Access Token. Dataset policies are checked on each Dataset-scoped operation; the collection is empty when there are no datasets.",
+            "description": "Licenses containing Datasets visible to the authenticated user and allowed by the current credential Dataset selection. Dataset policies are checked on each Dataset-scoped operation; the collection is empty when there are no datasets.",
             "type": "array",
             "items": {
               "description": "A Relewise License containing Dataset references available for access verification.",
@@ -6939,10 +7576,10 @@
                   "type": "string"
                 },
                 "datasets": {
-                  "description": "Datasets under this License that are visible to the authenticated user and allowed by the supplied Personal Access Token.",
+                  "description": "Datasets under this License that are visible to the authenticated user and allowed by the current credential Dataset selection.",
                   "type": "array",
                   "items": {
-                    "description": "A Dataset visible to the authenticated user and allowed by the supplied Personal Access Token.",
+                    "description": "A Dataset visible to the authenticated user and allowed by the current credential Dataset selection.",
                     "type": "object",
                     "properties": {
                       "datasetId": {
@@ -6977,12 +7614,15 @@
         },
         "required": [
           "user",
-          "personalAccessToken",
+          "authentication",
           "licenses"
         ]
       },
       "annotations": {
+        "title": "Get My Access",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Core",
@@ -6992,6 +7632,7 @@
     },
     {
       "name": "get_merchandising_rule",
+      "title": "Get Merchandising Rule",
       "description": "Gets one merchandising rule with its type-specific configuration, complete conditions, and advanced request configuration by ID. Use list_merchandising_rules when the rule ID is unknown. This tool is read-only and should be used before changing a rule's enabled state or schedule.",
       "inputSchema": {
         "type": "object",
@@ -7225,7 +7866,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Merchandising Rule",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Merchandising",
@@ -7235,6 +7879,7 @@
     },
     {
       "name": "get_redirect_rule",
+      "title": "Get Redirect Rule",
       "description": "Gets one Redirect rule by ID. Use list_redirect_rules when the Rule ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -7480,7 +8125,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Redirect Rule",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -7490,6 +8138,7 @@
     },
     {
       "name": "get_search_index",
+      "title": "Get Search Index",
       "description": "Gets one Search Index by ID, including its languages, rebuild state, and complete JSON configuration. Use list_search_indexes when the Search Index ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -7673,7 +8322,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Search Index",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -7683,6 +8335,7 @@
     },
     {
       "name": "get_search_result_modifier_rule",
+      "title": "Get Search Result Modifier Rule",
       "description": "Gets one Search Result Modifier rule by ID. Use list_search_result_modifier_rules when its ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -7968,7 +8621,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Search Result Modifier Rule",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -7978,6 +8634,7 @@
     },
     {
       "name": "get_search_term_modifier_rule",
+      "title": "Get Search Term Modifier Rule",
       "description": "Gets one Search Term Modifier rule by ID. Use list_search_term_modifier_rules when its ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -8259,7 +8916,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Search Term Modifier Rule",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -8269,6 +8929,7 @@
     },
     {
       "name": "get_stemming_rule",
+      "title": "Get Stemming Rule",
       "description": "Gets one Stemming rule by ID. Use list_stemming_rules when the Rule ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -8372,7 +9033,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Stemming Rule",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -8382,6 +9046,7 @@
     },
     {
       "name": "get_synonym_rule",
+      "title": "Get Synonym Rule",
       "description": "Gets one Synonym rule by ID, including its complete direction-specific definition. Use list_synonym_rules when the Rule ID is unknown. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -8523,7 +9188,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Synonym Rule",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -8533,6 +9201,7 @@
     },
     {
       "name": "get_trigger_configuration",
+      "title": "Get Trigger Configuration",
       "description": "Reads one Trigger configuration. Use list_trigger_configurations to discover the Configuration ID. Inspect the typed configuration and parse scoped condition/filter JSON documents as needed. Delivery settings and credentials are omitted. This tool is read-only and never sends a webhook. A null configuration means it was not found.",
       "inputSchema": {
         "type": "object",
@@ -9020,7 +9689,10 @@
         ]
       },
       "annotations": {
+        "title": "Get Trigger Configuration",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Triggers",
@@ -9030,6 +9702,7 @@
     },
     {
       "name": "list_decompounding_rules",
+      "title": "List Decompounding Rules",
       "description": "Lists one page of compact Decompounding rule summaries for discovering Rule IDs, approval state, compound words, Heads, and behavior. Use term to narrow larger result sets and get_decompounding_rule for the complete Modifiers governed by a selected rule. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -9180,7 +9853,10 @@
         ]
       },
       "annotations": {
+        "title": "List Decompounding Rules",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -9189,7 +9865,441 @@
       ]
     },
     {
+      "name": "list_job_logs",
+      "title": "List Job Logs",
+      "description": "Lists one page of Job executions ordered by start time and Log ID descending. Required dates are inclusive UTC start-date filters. Omit jobId for all Jobs. Pass nextCursor as beforeLogId for older executions or previousCursor as afterLogId for newer executions, keeping the same filters. Null cursors indicate no further page in that direction. Use get_job_log for history. Read-only.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "fromDate": {
+            "description": "Inclusive start date in UTC.",
+            "type": "string",
+            "format": "date"
+          },
+          "toDate": {
+            "description": "Inclusive end date in UTC, filtering execution start timestamps.",
+            "type": "string",
+            "format": "date"
+          },
+          "jobId": {
+            "description": "Optional Job ID from list_jobs; omit for all Jobs.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid",
+            "default": null
+          },
+          "result": {
+            "description": "Optional result: completed, completedWithWarnings, or faulted.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "pageSize": {
+            "description": "Number of executions to request, from 10 to 100. Defaults to 50.",
+            "type": "integer",
+            "default": 50
+          },
+          "beforeLogId": {
+            "description": "Boundary Log ID for older executions, ordered by start time then Log ID. Mutually exclusive with AfterLogId.",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "default": null
+          },
+          "afterLogId": {
+            "description": "Boundary Log ID for newer executions, ordered by start time then Log ID. Mutually exclusive with BeforeLogId.",
+            "type": [
+              "integer",
+              "null"
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "datasetId",
+          "fromDate",
+          "toDate"
+        ]
+      },
+      "outputSchema": {
+        "description": "A page of Job executions ordered by start time and Log ID descending.",
+        "type": "object",
+        "properties": {
+          "logs": {
+            "description": "Execution summaries matching the requested filters.",
+            "type": "array",
+            "items": {
+              "description": "Summary of one Job execution.",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "Execution Log ID used together with Job ID to retrieve this run.",
+                  "type": "integer"
+                },
+                "jobId": {
+                  "description": "Job ID discovered from the Job list.",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "result": {
+                  "description": "Run result: completed, completedWithWarnings, faulted, or null while no outcome is available.",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "message": {
+                  "description": "Summary message for this execution, or null when unavailable.",
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "started": {
+                  "description": "Execution start timestamp in UTC.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "finished": {
+                  "description": "Execution finish timestamp, or null when unfinished.",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "executionTimeSeconds": {
+                  "description": "Execution duration in seconds, or null when unfinished.",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "jobId",
+                "result",
+                "message",
+                "started",
+                "finished",
+                "executionTimeSeconds"
+              ]
+            }
+          },
+          "previousCursor": {
+            "description": "Pass as afterLogId to retrieve newer executions, or null when no newer page is available.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "nextCursor": {
+            "description": "Pass as beforeLogId to retrieve older executions, or null when no older page is available.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "logs",
+          "previousCursor",
+          "nextCursor"
+        ]
+      },
+      "annotations": {
+        "title": "List Job Logs",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "Administration",
+      "relatedRestOperationIds": [
+        "AdministrationListJobLogs"
+      ]
+    },
+    {
+      "name": "list_jobs",
+      "title": "List Jobs",
+      "description": "Lists all Dataset Jobs ordered by display name and then Job ID. Read-only. Use get_job for details. Latest execution summaries are included, but execution logs are excluded.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "datasetId"
+        ]
+      },
+      "outputSchema": {
+        "description": "Read-only Dataset Job operation result.",
+        "type": "object",
+        "properties": {
+          "jobs": {
+            "description": "All Jobs in this Dataset ordered by display name and then Job ID. Empty when no Jobs exist.",
+            "type": "array",
+            "items": {
+              "description": "Dataset Job summary discriminated by type: grpc, httpRequest, or marketingAutomationTriggers. Includes identity, schedule, and latest execution summary, not execution logs.",
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "anyOf": [
+                {
+                  "description": "gRPC Job identity, schedule, and latest execution summary.",
+                  "properties": {
+                    "type": {
+                      "const": "grpc"
+                    },
+                    "id": {
+                      "description": "Stable Job ID used to retrieve details within this Dataset.",
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "displayName": {
+                      "description": "Configured name of the Job.",
+                      "type": "string"
+                    },
+                    "enabled": {
+                      "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running.",
+                      "type": "boolean"
+                    },
+                    "cronExpression": {
+                      "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "lastStarted": {
+                      "description": "Latest recorded execution start time; null when no start has been recorded.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "format": "date-time"
+                    },
+                    "lastFinished": {
+                      "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "format": "date-time"
+                    },
+                    "lastResult": {
+                      "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "created": {
+                      "description": "Time the Job was created.",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updated": {
+                      "description": "Time the Job configuration was last updated.",
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "displayName",
+                    "enabled",
+                    "cronExpression",
+                    "lastStarted",
+                    "lastFinished",
+                    "lastResult",
+                    "created",
+                    "updated"
+                  ]
+                },
+                {
+                  "description": "HTTP Request Job identity, schedule, and latest execution summary.",
+                  "properties": {
+                    "type": {
+                      "const": "httpRequest"
+                    },
+                    "id": {
+                      "description": "Stable Job ID used to retrieve details within this Dataset.",
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "displayName": {
+                      "description": "Configured name of the Job.",
+                      "type": "string"
+                    },
+                    "enabled": {
+                      "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running.",
+                      "type": "boolean"
+                    },
+                    "cronExpression": {
+                      "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "lastStarted": {
+                      "description": "Latest recorded execution start time; null when no start has been recorded.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "format": "date-time"
+                    },
+                    "lastFinished": {
+                      "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "format": "date-time"
+                    },
+                    "lastResult": {
+                      "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "created": {
+                      "description": "Time the Job was created.",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updated": {
+                      "description": "Time the Job configuration was last updated.",
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "displayName",
+                    "enabled",
+                    "cronExpression",
+                    "lastStarted",
+                    "lastFinished",
+                    "lastResult",
+                    "created",
+                    "updated"
+                  ]
+                },
+                {
+                  "description": "Marketing Automation Triggers Job identity, schedule, and latest execution summary.",
+                  "properties": {
+                    "type": {
+                      "const": "marketingAutomationTriggers"
+                    },
+                    "id": {
+                      "description": "Stable Job ID used to retrieve details within this Dataset.",
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "displayName": {
+                      "description": "Configured name of the Job.",
+                      "type": "string"
+                    },
+                    "enabled": {
+                      "description": "Whether the Job is enabled for scheduling and enqueueing. This does not indicate that it is currently running.",
+                      "type": "boolean"
+                    },
+                    "cronExpression": {
+                      "description": "Configured cron expression evaluated in UTC. Null means no expression was configured; an enabled Job does not necessarily run periodically.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "lastStarted": {
+                      "description": "Latest recorded execution start time; null when no start has been recorded.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "format": "date-time"
+                    },
+                    "lastFinished": {
+                      "description": "Latest recorded execution finish time; null when no finish has been recorded. This may belong to an earlier execution than lastStarted.",
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "format": "date-time"
+                    },
+                    "lastResult": {
+                      "description": "Latest recorded result: completed, completedWithWarnings, or faulted. Null means no result is recorded. It may belong to an earlier execution than lastStarted.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "created": {
+                      "description": "Time the Job was created.",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updated": {
+                      "description": "Time the Job configuration was last updated.",
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "displayName",
+                    "enabled",
+                    "cronExpression",
+                    "lastStarted",
+                    "lastFinished",
+                    "lastResult",
+                    "created",
+                    "updated"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "jobs"
+        ]
+      },
+      "annotations": {
+        "title": "List Jobs",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "Administration",
+      "relatedRestOperationIds": [
+        "AdministrationListJobs"
+      ]
+    },
+    {
       "name": "list_merchandising_rules",
+      "title": "List Merchandising Rules",
       "description": "Lists one page of read-only merchandising rule summaries in configured priority order. Use it to discover rule IDs, names, types, enabled states, groups, schedules, and audit timestamps; use get_merchandising_rule for complete conditions and configuration. Actor identities and detailed rule configuration are not included in the list.",
       "inputSchema": {
         "type": "object",
@@ -9351,7 +10461,10 @@
         ]
       },
       "annotations": {
+        "title": "List Merchandising Rules",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Merchandising",
@@ -9361,6 +10474,7 @@
     },
     {
       "name": "list_redirect_rules",
+      "title": "List Redirect Rules",
       "description": "Lists one page of compact Redirect rule summaries for discovering Rule IDs, approval state, destinations, and root conditions. Use term to narrow larger result sets and get_redirect_rule for a selected rule's complete condition tree and data. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -9539,7 +10653,10 @@
         ]
       },
       "annotations": {
+        "title": "List Redirect Rules",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -9549,6 +10666,7 @@
     },
     {
       "name": "list_search_indexes",
+      "title": "List Search Indexes",
       "description": "Lists compact Search Index summaries for discovering Search Index IDs, enabled/default state, and rebuild recency. Use get_search_index to inspect one Search Index's languages, rebuild state, and complete configuration. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -9626,7 +10744,10 @@
         ]
       },
       "annotations": {
+        "title": "List Search Indexes",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -9636,6 +10757,7 @@
     },
     {
       "name": "list_search_result_modifier_rules",
+      "title": "List Search Result Modifier Rules",
       "description": "Lists one page of compact Search Result Modifier rule summaries for discovering Rule IDs, approval state, root conditions, and action kinds. Use term to narrow larger result sets and get_search_result_modifier_rule for a selected rule's complete condition tree, actions, and filters. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -9819,7 +10941,10 @@
         ]
       },
       "annotations": {
+        "title": "List Search Result Modifier Rules",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -9829,6 +10954,7 @@
     },
     {
       "name": "list_search_term_modifier_rules",
+      "title": "List Search Term Modifier Rules",
       "description": "Lists one page of compact Search Term Modifier rule summaries for discovering Rule IDs, approval state, root conditions, and action kinds. Use term to narrow larger result sets and get_search_term_modifier_rule for a selected rule's complete condition tree and action configuration. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -10014,7 +11140,10 @@
         ]
       },
       "annotations": {
+        "title": "List Search Term Modifier Rules",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -10024,6 +11153,7 @@
     },
     {
       "name": "list_stemming_rules",
+      "title": "List Stemming Rules",
       "description": "Lists one page of compact Stemming rule summaries for discovering Rule IDs and approval state. Use term to narrow larger result sets and get_stemming_rule for the complete words governed by a selected rule. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -10164,7 +11294,10 @@
         ]
       },
       "annotations": {
+        "title": "List Stemming Rules",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -10174,6 +11307,7 @@
     },
     {
       "name": "list_synonym_rules",
+      "title": "List Synonym Rules",
       "description": "Lists one page of Synonym rules, including their one-way or multidirectional word relationships and approval state. Use term to narrow larger result sets. Use get_synonym_rule when the Rule ID is already known and a direct lookup is preferable. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -10360,7 +11494,10 @@
         ]
       },
       "annotations": {
+        "title": "List Synonym Rules",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "SearchTools",
@@ -10370,6 +11507,7 @@
     },
     {
       "name": "list_trigger_configurations",
+      "title": "List Trigger Configurations",
       "description": "Lists one page of Trigger configurations, ordered by name and then Configuration ID. This tool is read-only. Use get_trigger_configuration for typed criteria and conditions. The result includes Dataset-wide evaluation state as globallyEnabled. Pagination describes the full list; request subsequent pages to retrieve more results.",
       "inputSchema": {
         "type": "object",
@@ -10501,7 +11639,10 @@
         ]
       },
       "annotations": {
+        "title": "List Trigger Configurations",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Triggers",
@@ -10511,6 +11652,7 @@
     },
     {
       "name": "search_brands",
+      "title": "Search Brands",
       "description": "Searches Brands by Brand ID, display name, or Brand Data Value and returns up to 25 compact matches. Use fetch_brand_by_id for complete details when the Brand ID is known. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -10601,7 +11743,10 @@
         ]
       },
       "annotations": {
+        "title": "Search Brands",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -10611,6 +11756,7 @@
     },
     {
       "name": "search_content",
+      "title": "Search Content",
       "description": "Searches Content by Content ID, display name, Content Category display name, or string-based Content Data Value and returns up to 25 compact matches. Use fetch_content_by_id for complete details when the Content ID is known. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -10701,7 +11847,10 @@
         ]
       },
       "annotations": {
+        "title": "Search Content",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -10711,6 +11860,7 @@
     },
     {
       "name": "search_content_categories",
+      "title": "Search Content Categories",
       "description": "Searches Content Category entities by Content Category ID, display name, or Content Category Data Value and returns up to 25 compact matches. This finds category entities; it does not search for Content associated with a category. Use fetch_content_category_by_id for complete details when the Content Category ID is known. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -10801,7 +11951,10 @@
         ]
       },
       "annotations": {
+        "title": "Search Content Categories",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -10811,6 +11964,7 @@
     },
     {
       "name": "search_product_categories",
+      "title": "Search Product Categories",
       "description": "Searches Product Category entities by Product Category ID, display name, or Product Category Data Value and returns up to 25 compact matches. This finds category entities, not the Products assigned to a category. Use fetch_product_category_by_id for complete details when the Product Category ID is known. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -10901,7 +12055,10 @@
         ]
       },
       "annotations": {
+        "title": "Search Product Categories",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -10911,6 +12068,7 @@
     },
     {
       "name": "search_products",
+      "title": "Search Products",
       "description": "Searches Products by Product ID, display name, or Product data value and returns up to 25 compact matches. Variant data is not searched. Use fetch_product_by_id for complete details when the Product ID is known. This tool is read-only.",
       "inputSchema": {
         "type": "object",
@@ -11001,7 +12159,10 @@
         ]
       },
       "annotations": {
+        "title": "Search Products",
+        "destructiveHint": false,
         "idempotentHint": true,
+        "openWorldHint": false,
         "readOnlyHint": true
       },
       "area": "Entities",
@@ -11011,6 +12172,7 @@
     },
     {
       "name": "set_decompounding_rule_approved",
+      "title": "Set Decompounding Rule Approval",
       "description": "MODIFIES DATA. Sets the approval state of one Decompounding rule while preserving its definition and scope. Use only when the caller intends to change approval. Use get_decompounding_rule to inspect the current rule when its state is unknown.",
       "inputSchema": {
         "type": "object",
@@ -11129,8 +12291,11 @@
         ]
       },
       "annotations": {
-        "destructiveHint": false,
-        "idempotentHint": true
+        "title": "Set Decompounding Rule Approval",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
       },
       "area": "SearchTools",
       "relatedRestOperationIds": [
@@ -11139,6 +12304,7 @@
     },
     {
       "name": "set_merchandising_rule_enabled",
+      "title": "Set Merchandising Rule Enabled State",
       "description": "MODIFIES DATA. Enables or disables one merchandising rule while preserving its schedule and configuration. Use only when the caller's intent is to change the rule. Read the current rule with get_merchandising_rule first when its state is unknown.",
       "inputSchema": {
         "type": "object",
@@ -11377,8 +12543,11 @@
         ]
       },
       "annotations": {
-        "destructiveHint": false,
-        "idempotentHint": true
+        "title": "Set Merchandising Rule Enabled State",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
       },
       "area": "Merchandising",
       "relatedRestOperationIds": [
@@ -11387,6 +12556,7 @@
     },
     {
       "name": "set_merchandising_rule_schedule",
+      "title": "Set Merchandising Rule Schedule",
       "description": "MODIFIES DATA. Replaces one merchandising rule's complete schedule while preserving its enabled state and configuration. Use only when the caller's intent is to change the schedule. Omitted, null, or empty boundary values mean no bound; they do not preserve an existing boundary. Read the current rule with get_merchandising_rule first when its schedule is unknown.",
       "inputSchema": {
         "type": "object",
@@ -11666,8 +12836,11 @@
         ]
       },
       "annotations": {
-        "destructiveHint": false,
-        "idempotentHint": true
+        "title": "Set Merchandising Rule Schedule",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
       },
       "area": "Merchandising",
       "relatedRestOperationIds": [
@@ -11676,6 +12849,7 @@
     },
     {
       "name": "set_redirect_rule_approved",
+      "title": "Set Redirect Rule Approval",
       "description": "MODIFIES DATA. Sets the approval state of one Redirect rule while preserving its definition and scope. Use only when the caller intends to change approval. Use get_redirect_rule to inspect the current rule when its state is unknown.",
       "inputSchema": {
         "type": "object",
@@ -11926,8 +13100,11 @@
         ]
       },
       "annotations": {
-        "destructiveHint": false,
-        "idempotentHint": true
+        "title": "Set Redirect Rule Approval",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
       },
       "area": "SearchTools",
       "relatedRestOperationIds": [
@@ -11936,6 +13113,7 @@
     },
     {
       "name": "set_search_result_modifier_rule_approved",
+      "title": "Set Search Result Modifier Rule Approval",
       "description": "MODIFIES DATA. Sets the approval state of one Search Result Modifier rule while preserving its definition and scope. Use only when the caller intends to change approval. Use get_search_result_modifier_rule to inspect the current rule when its state is unknown.",
       "inputSchema": {
         "type": "object",
@@ -12226,8 +13404,11 @@
         ]
       },
       "annotations": {
-        "destructiveHint": false,
-        "idempotentHint": true
+        "title": "Set Search Result Modifier Rule Approval",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
       },
       "area": "SearchTools",
       "relatedRestOperationIds": [
@@ -12236,6 +13417,7 @@
     },
     {
       "name": "set_search_term_modifier_rule_approved",
+      "title": "Set Search Term Modifier Rule Approval",
       "description": "MODIFIES DATA. Sets the approval state of one Search Term Modifier rule while preserving its definition and scope. Use only when the caller intends to change approval. Use get_search_term_modifier_rule to inspect the current rule when its state is unknown.",
       "inputSchema": {
         "type": "object",
@@ -12522,8 +13704,11 @@
         ]
       },
       "annotations": {
-        "destructiveHint": false,
-        "idempotentHint": true
+        "title": "Set Search Term Modifier Rule Approval",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
       },
       "area": "SearchTools",
       "relatedRestOperationIds": [
@@ -12532,6 +13717,7 @@
     },
     {
       "name": "set_stemming_rule_approved",
+      "title": "Set Stemming Rule Approval",
       "description": "MODIFIES DATA. Sets the approval state of one Stemming rule while preserving its definition and scope. Use only when the caller intends to change approval. Use get_stemming_rule to inspect the current rule when its state is unknown.",
       "inputSchema": {
         "type": "object",
@@ -12640,8 +13826,11 @@
         ]
       },
       "annotations": {
-        "destructiveHint": false,
-        "idempotentHint": true
+        "title": "Set Stemming Rule Approval",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
       },
       "area": "SearchTools",
       "relatedRestOperationIds": [
@@ -12650,6 +13839,7 @@
     },
     {
       "name": "set_synonym_rule_approved",
+      "title": "Set Synonym Rule Approval",
       "description": "MODIFIES DATA. Sets the approval state of one Synonym rule while preserving its definition and scope. Use only when the caller intends to change approval. Use get_synonym_rule to inspect the current rule when its state is unknown.",
       "inputSchema": {
         "type": "object",
@@ -12796,8 +13986,11 @@
         ]
       },
       "annotations": {
-        "destructiveHint": false,
-        "idempotentHint": true
+        "title": "Set Synonym Rule Approval",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
       },
       "area": "SearchTools",
       "relatedRestOperationIds": [

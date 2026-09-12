@@ -1,0 +1,53 @@
+{
+  "required": [
+    "id",
+    "jobId",
+    "result",
+    "message",
+    "started",
+    "finished",
+    "executionTimeSeconds"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "description": "Execution Log ID used together with Job ID to retrieve this run.",
+      "format": "int32",
+      "type": "integer"
+    },
+    "jobId": {
+      "type": "string",
+      "description": "Job ID discovered from the Job list.",
+      "format": "uuid"
+    },
+    "result": {
+      "type": "string",
+      "description": "Run result: completed, completedWithWarnings, faulted, or null while no outcome is available.",
+      "nullable": true
+    },
+    "message": {
+      "type": "string",
+      "description": "Summary message for this execution, or null when unavailable.",
+      "nullable": true
+    },
+    "started": {
+      "type": "string",
+      "description": "Execution start timestamp in UTC.",
+      "format": "date-time"
+    },
+    "finished": {
+      "type": "string",
+      "description": "Execution finish timestamp, or null when unfinished.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "executionTimeSeconds": {
+      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+      "description": "Execution duration in seconds, or null when unfinished.",
+      "format": "double",
+      "nullable": true
+    }
+  },
+  "description": "Summary of one Job execution."
+}

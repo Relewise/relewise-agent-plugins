@@ -1,9 +1,33 @@
 {
-  "operationCount": 56,
-  "coveredOperationCount": 56,
+  "operationCount": 60,
+  "coveredOperationCount": 60,
   "uncoveredOperationCount": 0,
   "coveragePercent": 100,
   "operations": [
+    {
+      "operationId": "AdministrationGetJob",
+      "skills": [
+        "relewise/skills/relewise-administration"
+      ]
+    },
+    {
+      "operationId": "AdministrationGetJobLog",
+      "skills": [
+        "relewise/skills/relewise-administration"
+      ]
+    },
+    {
+      "operationId": "AdministrationListJobLogs",
+      "skills": [
+        "relewise/skills/relewise-administration"
+      ]
+    },
+    {
+      "operationId": "AdministrationListJobs",
+      "skills": [
+        "relewise/skills/relewise-administration"
+      ]
+    },
     {
       "operationId": "AnalyticsGetRevenue",
       "skills": [

@@ -43,8 +43,15 @@ function Get-JsonContent([uri] $uri) {
         $document = [System.Text.Json.JsonDocument]::Parse(
             [System.Text.Encoding]::UTF8.GetString($content)
         )
-        $document.Dispose()
-        return $content
+        try {
+            $options = [System.Text.Json.JsonSerializerOptions]::new()
+            $options.WriteIndented = $true
+            $options.Encoder = [System.Text.Encodings.Web.JavaScriptEncoder]::UnsafeRelaxedJsonEscaping
+            return [System.Text.Json.JsonSerializer]::SerializeToUtf8Bytes($document.RootElement, $options)
+        }
+        finally {
+            $document.Dispose()
+        }
     }
     finally {
         $httpClient.Dispose()

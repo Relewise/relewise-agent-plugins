@@ -1,0 +1,24 @@
+{
+  "required": [
+    "created",
+    "level",
+    "text"
+  ],
+  "type": "object",
+  "properties": {
+    "created": {
+      "type": "string",
+      "description": "Message timestamp in UTC.",
+      "format": "date-time"
+    },
+    "level": {
+      "type": "string",
+      "description": "Message severity: Information, Warning, or Error."
+    },
+    "text": {
+      "type": "string",
+      "description": "Message text as returned by the backend, including its caller-specific runner-information filtering."
+    }
+  },
+  "description": "One execution history message returned by the backend."
+}

@@ -1,0 +1,12 @@
+{
+  "required": [
+    "job"
+  ],
+  "type": "object",
+  "properties": {
+    "job": {
+      "$ref": "#/components/schemas/JobDetails"
+    }
+  },
+  "description": "Details of one Dataset Job."
+}

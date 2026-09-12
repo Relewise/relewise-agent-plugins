@@ -1,0 +1,12 @@
+{
+  "required": [
+    "log"
+  ],
+  "type": "object",
+  "properties": {
+    "log": {
+      "$ref": "#/components/schemas/JobLogDetails"
+    }
+  },
+  "description": "One Job execution."
+}
