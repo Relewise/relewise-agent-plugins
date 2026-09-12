@@ -16,7 +16,7 @@ If a Personal Access Token may have been exposed, revoke it immediately in My Re
 
 - The packaged helper runs on the user's device and communicates with the Relewise Agent Gateway at `https://my.relewise.com/agents`.
 - Authentication uses an OAuth Connected App where supported. The bundled CLI, the plugin's direct REST fallback, and clients without an OAuth-managed Agent Gateway connection can use a user-provided Relewise Personal Access Token.
-- The token is passed through protected client configuration or `RELEWISE_AGENT_GATEWAY_TOKEN`, never as a command-line argument.
+- PAT authentication uses a secure credential provider that injects `RELEWISE_AGENT_GATEWAY_TOKEN` into the process, or a persistent user or system environment variable. It is never passed as a command-line argument.
 - The plugin does not persist the token, add telemetry, or send requests to a separate plugin service.
 - Relewise authorizes every request using the token's Dataset scope, the user's permissions, and the Dataset's enabled connection methods and allowed areas.
 - Agent Gateway responses are returned to the host AI client, whose own data-handling and privacy terms also apply.
