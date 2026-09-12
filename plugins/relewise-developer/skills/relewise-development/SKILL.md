@@ -18,8 +18,8 @@ For implementation or troubleshooting tasks, use the focused lookups that are re
 
 - Consult `docs_search` for Relewise feature and configuration documentation when needed.
 - Use `code_search` to discover or verify unfamiliar types for the detected language.
-- Use `code_search_entity` to inspect required constructors, properties, methods, interfaces, or enums.
-- Use `code_search_parent_entities` for child members when inheritance matters, then inspect relevant base types explicitly; it does not automatically traverse the inheritance chain.
+- Use `code_search_entity` to inspect required type details and supported entity kinds (classes, interfaces, methods, constructors, enums, and PHP traits). Properties are inspected through the containing class or interface details; there is no separate Property entity kind.
+- Use `code_search_parent_entities` to retrieve supported child kinds, then inspect relevant base types explicitly when inherited members matter; it does not automatically traverse the inheritance chain.
 
 Verify signatures and request shapes against the installed SDK version where possible. Prefer supported, non-obsolete APIs for new code, taking the installed version and the user's intent into account. Do not perform redundant lookups when authoritative details are already available in context; there is no mandatory lookup sequence for every session or simple documentation question.
 
