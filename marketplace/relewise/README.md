@@ -26,9 +26,13 @@ Access stays within the permissions, Dataset scope, connection methods, and allo
 - Access to My Relewise.
 - The **Use Agent Gateway** permission for at least one Dataset.
 - Agent Gateway REST enabled for that Dataset.
-- A Relewise Personal Access Token scoped to the Datasets and allowed areas needed for the task.
+- OAuth support in the MCP client, or a Relewise Personal Access Token scoped to the Datasets and allowed areas needed for the task.
 
-## Personal Access Token onboarding
+## Authentication
+
+OAuth-capable MCP clients can connect through a Connected App and the My Relewise sign-in and consent flow. No Personal Access Token is needed for that MCP connection.
+
+For the bundled CLI, direct REST, or MCP clients without OAuth, use a Personal Access Token.
 
 After installation, ask the agent **Help me connect Relewise**. The `relewise-setup` skill first checks whether authentication already works and only presents setup or repair instructions when needed.
 

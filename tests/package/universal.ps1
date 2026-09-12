@@ -48,13 +48,13 @@ foreach ($vendor in $manifestPaths.Keys) {
         }
         $mcp = Get-Content -Raw -LiteralPath $mcpPath | ConvertFrom-Json
         if ($mcp.mcpServers.'relewise-agent-gateway'.url -ne 'https://my.relewise.com/agents/mcp' -or
-            $mcp.mcpServers.'relewise-agent-gateway'.headers.Authorization -ne 'Bearer ${user_config.agent_gateway_token}') {
-            throw 'Claude universal package has the wrong protected Agent Gateway MCP configuration.'
+            $null -ne $mcp.mcpServers.'relewise-agent-gateway'.headers) {
+            throw 'Claude universal package has the wrong OAuth Agent Gateway MCP configuration.'
         }
     } elseif ($vendor -eq 'openai') {
         $server = $manifest.mcpServers.'relewise-agent-gateway'
-        if ($server.url -ne 'https://my.relewise.com/agents/mcp' -or $server.bearer_token_env_var -ne 'RELEWISE_AGENT_GATEWAY_TOKEN') {
-            throw 'OpenAI universal package has the wrong native bearer-token MCP configuration.'
+        if ($server.url -ne 'https://my.relewise.com/agents/mcp' -or $null -ne $server.bearer_token_env_var) {
+            throw 'OpenAI universal package has the wrong OAuth MCP configuration.'
         }
     } else {
         if (-not (Test-Path -LiteralPath (Join-Path $packageRoot '.mcp.json') -PathType Leaf)) {
