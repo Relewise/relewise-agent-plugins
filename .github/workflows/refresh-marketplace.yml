@@ -118,6 +118,7 @@ jobs:
         run: |
           $versionCore = (Get-Content -Raw version.json | ConvertFrom-Json).version
           $version = "$versionCore-main.${{ github.run_id }}"
+          ./tools/package/sync-plugin-configuration.ps1 -Version $version
           $runtimeRefreshNeeded = '${{ needs.validate-branch.outputs.runtime-refresh-needed }}' -eq 'true'
           $executablesRoot = if ($runtimeRefreshNeeded) { 'artifacts/native' } else { 'plugins/relewise/skills/relewise-agent-gateway/scripts/libexec' }
           ./tools/package/create-universal-packages.ps1 -ExecutablesRoot $executablesRoot -Version $version
@@ -129,7 +130,6 @@ jobs:
           $target = 'plugins/relewise'
           Copy-Item -LiteralPath "$candidate/openai/relewise/.codex-plugin/plugin.json" -Destination "$target/.codex-plugin/plugin.json" -Force
           Copy-Item -LiteralPath "$candidate/claude/relewise/.claude-plugin/plugin.json" -Destination "$target/.claude-plugin/plugin.json" -Force
-          Copy-Item -LiteralPath "$candidate/claude/relewise/.claude-plugin/mcp.json" -Destination "$target/.claude-plugin/mcp.json" -Force
           Copy-Item -LiteralPath "$candidate/github-copilot/relewise/plugin.json" -Destination "$target/plugin.json" -Force
           $gatewayScripts = "$target/skills/relewise-agent-gateway/scripts"
           Copy-Item -LiteralPath "$candidate/openai/relewise/skills/relewise-agent-gateway/scripts/relewise-agent" -Destination "$gatewayScripts/relewise-agent" -Force
@@ -165,6 +165,7 @@ jobs:
             [Text.UTF8Encoding]::new($false))
 
           ./tests/package/marketplace-fingerprint.ps1
+          ./tests/package/configuration.ps1
           ./tests/package/codex-marketplace.ps1 -MarketplaceRoot .
           foreach ($vendor in @('claude', 'github-copilot', 'openai')) {
             ./tests/package/relewise-developer.ps1 -Vendor $vendor -PackagePath "artifacts/developer/$vendor/relewise-developer" -Version $version
@@ -174,6 +175,10 @@ jobs:
         shell: bash
         run: |
           git add -- \
+            .agents/plugins/marketplace.json \
+            gemini-extension.json \
+            plugins/relewise/mcp.json \
+            plugins/relewise-developer/mcp.json \
             plugins/relewise/plugin.json \
             plugins/relewise/.codex-plugin \
             plugins/relewise/.claude-plugin \

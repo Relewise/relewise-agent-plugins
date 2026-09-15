@@ -1,6 +1,5 @@
 {
   "name": "relewise-developer",
-  "version": "0.5.0-main.34937402974",
   "description": "Build and troubleshoot Relewise integrations with current API and SDK guidance.",
   "author": {
     "name": "Relewise",
@@ -8,6 +7,7 @@
   },
   "homepage": "https://docs.relewise.com/docs/developer/mcp.html",
   "repository": "https://github.com/Relewise/relewise-agent-plugins",
+  "license": "MIT",
   "keywords": [
     "relewise",
     "development",
@@ -15,26 +15,27 @@
     "recommendations",
     "tracking"
   ],
-  "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
+  "version": "0.5.0-main.34941691486",
   "interface": {
     "displayName": "Relewise Developer",
     "shortDescription": "Build and troubleshoot Relewise integrations",
-    "longDescription": "Build and troubleshoot Relewise integrations with current API and SDK guidance.",
-    "developerName": "Relewise",
     "category": "Developer Tools",
     "capabilities": [
       "Interactive",
       "Read",
       "Write"
     ],
-    "websiteURL": "https://docs.relewise.com/docs/developer/mcp.html",
     "defaultPrompt": [
       "Help me add Relewise Search to this project.",
       "Review this Relewise integration.",
       "Help me troubleshoot this Relewise implementation."
     ],
     "brandColor": "#3764E4",
-    "logo": "./assets/logo.png"
-  }
+    "logo": "./assets/logo.png",
+    "longDescription": "Build and troubleshoot Relewise integrations with current API and SDK guidance.",
+    "developerName": "Relewise",
+    "websiteURL": "https://docs.relewise.com/docs/developer/mcp.html"
+  },
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/"
 }

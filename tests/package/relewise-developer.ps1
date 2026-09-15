@@ -22,9 +22,11 @@ $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot $manifestRelat
 if ($manifest.name -ne 'relewise-developer') { throw 'Package manifest has the wrong plugin name.' }
 if ($manifest.version -ne $Version) { throw "Package manifest version is not $Version." }
 
-$mcp = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.mcp.json') | ConvertFrom-Json
+$mcpFile = if ($Vendor -eq 'github-copilot') { 'mcp.json' } else { '.mcp.json' }
+$transport = if ($Vendor -eq 'github-copilot') { 'streamable-http' } else { 'http' }
+$mcp = Get-Content -Raw -LiteralPath (Join-Path $packageRoot $mcpFile) | ConvertFrom-Json
 $server = $mcp.mcpServers.'relewise-developer'
-if ($server.type -ne 'http' -or $server.url -ne 'https://mcp.relewise.com') {
+if ($server.type -ne $transport -or $server.url -ne 'https://mcp.relewise.com') {
     throw 'Package does not configure the Relewise Developer MCP over HTTP.'
 }
 foreach ($requiredPath in @('skills\relewise-development\SKILL.md', 'assets\logo.png', 'LICENSE')) {

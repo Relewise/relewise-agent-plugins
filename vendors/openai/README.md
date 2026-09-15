@@ -4,7 +4,7 @@ This adapter supports two separately installable products: `Relewise` for config
 
 The adapter packages the canonical Relewise skills with the `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; the package script copies them and adds only the Codex-specific executable-location instruction. Local adapter packaging can target one runtime for validation; normal distribution uses the repository marketplace.
 
-Codex plugin manifests do not contain protected plugin configuration. Set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment available to Codex, preferably through your operating system or secret manager. The PAT is inherited by the bundled launcher and passed to the executable through its process environment. It is never placed in command arguments or package files.
+Codex references the shared `.mcp.json` and manages OAuth sign-in. For CLI or direct REST fallback only, set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment available to Codex, preferably through your operating system or secret manager. The PAT is inherited by the bundled launcher and passed to the executable through its process environment. It is never placed in command arguments or package files.
 
 Build the executable for the target runtime, then package it:
 

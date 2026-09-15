@@ -52,7 +52,8 @@ The refresh reads the MCP catalog from the public My Relewise endpoint. Do not e
 - Keep CLI output structured and deterministic.
 - Never accept the PAT as a command-line argument or include it in diagnostics.
 - Preserve Dataset access validation and effective Agent Gateway policy enforcement.
-- Change shared behavior at its canonical source; vendor adapters should remain thin.
+- Change shared behavior at its canonical source; vendor adapters should remain thin. See [plugin configuration](docs/plugin-configuration.md) for source/output ownership.
+- Run `./tests/package/configuration.ps1` to check generated adapters and credential-free MCP configuration.
 - If **Validate marketplace fingerprint** fails, ask a maintainer to run the **Refresh marketplace payload** workflow on the pull request branch. Runtime inputs rebuild all five executables; other plugin changes reuse them and update only the package metadata. Do not merge until its generated commit and the checks on that new head pass.
 - Never refresh the payload on `main`; source changes, synchronized metadata, and any required executable updates must merge atomically in the originating pull request.
 - Change `version.json` manually when the next release version is decided. Workflows add prerelease build numbers to manifests and rebuild the executables when runtime inputs change.

@@ -17,7 +17,7 @@ if ($manifest.skills -ne './skills/') { throw 'Codex plugin manifest does not ex
 if ($null -ne $manifest.userConfig) { throw 'Codex plugin manifest must not claim unsupported protected user configuration.' }
 if ($manifest.interface.logo -ne './assets/logo.png') { throw 'Codex plugin manifest does not reference the Relewise logo.' }
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'assets\logo.png'))) { throw 'Package is missing the Relewise logo.' }
-$server = $manifest.mcpServers.'relewise-agent-gateway'
+$server = (Get-Content -Raw (Join-Path $packageRoot '.mcp.json') | ConvertFrom-Json).mcpServers.'relewise-agent-gateway'
 if ($server.type -ne 'http' -or $server.url -ne 'https://my.relewise.com/agents/mcp') { throw 'Codex plugin has the wrong Agent Gateway MCP endpoint.' }
 if ($null -ne $server.bearer_token_env_var) { throw 'Codex plugin must leave MCP authentication to the client OAuth flow.' }
 

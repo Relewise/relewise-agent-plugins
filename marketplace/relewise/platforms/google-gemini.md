@@ -11,7 +11,7 @@ Use the detailed description, requirements, examples, and security text from the
 
 ## Installation and authentication copy
 
-Install the Relewise extension from its GitHub release. When prompted, enter the Personal Access Token in the sensitive extension setting. Gemini stores it securely and uses it for the Agent Gateway MCP connection.
+Install the Relewise extension from its GitHub release. Complete the OAuth sign-in when Gemini connects to Agent Gateway. No PAT setting is required for MCP.
 
 To also use the bundled `relewise-agent` fallback, make the PAT available to Gemini CLI as `RELEWISE_AGENT_GATEWAY_TOKEN` through a secure credential provider or a persistent user or system environment variable, then restart Gemini CLI. Never place the PAT in a prompt, command argument, repository file, or log.
 

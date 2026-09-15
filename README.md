@@ -18,7 +18,7 @@ This product is for developers implementing Search, Recommendations, behavioral 
 
 The two products are intentionally separate. Choose the product that matches the work you want to do; no knowledge of the underlying Relewise APIs or agent protocols is required.
 
-Both products use the portable [Agent Plugins](https://agent-plugins.org/) structure: each directory under `plugins/` contains a canonical `plugin.json` manifest and [Agent Skills](https://agentskills.io/) compliant with the open specification. Platform-specific files under `vendors/` adapt that shared source for clients that require their own format. Installation and updates remain specific to each client.
+Both products use the portable [Agent Plugins](https://agent-plugins.org/) structure: each directory under `plugins/` contains a canonical `plugin.json` manifest and [Agent Skills](https://agentskills.io/) compliant with the open specification. Platform-specific files under `vendors/` adapt that shared source for clients that require their own format. Installation and updates remain specific to each client. See [plugin configuration](docs/plugin-configuration.md) for canonical sources, generated formats, and validation limits.
 
 ## Prerelease installation
 
@@ -36,7 +36,7 @@ Gemini CLI users run `gemini extensions install https://github.com/Relewise/rele
 
 Claude Desktop and Cowork users who do not want to connect GitHub can download either `relewise-claude-plugin-v<version>.zip` or `relewise-developer-claude-plugin-v<version>.zip` from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases) and upload it as a custom plugin. The Relewise ZIP contains all five supported Agent Gateway runtimes; the smaller Relewise Developer ZIP contains its skill, icon, and remote MCP configuration. Manually uploaded plugins must be uploaded again for upgrades.
 
-OAuth-capable MCP clients use the Agent Gateway Connected App flow and do not require a PAT. The bundled CLI, the plugin's direct REST fallback, and MCP clients without an OAuth-managed Agent Gateway connection can use a Relewise Agent Gateway PAT through `RELEWISE_AGENT_GATEWAY_TOKEN`, either via a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
+OAuth-capable MCP clients use the Agent Gateway Connected App flow and do not require a PAT. The bundled CLI and the plugin's direct REST fallback can use a Relewise Agent Gateway PAT through `RELEWISE_AGENT_GATEWAY_TOKEN`, either via a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
 
 The shared `relewise-agent-gateway` skill contains both platform launchers and the native executables. It invokes `scripts/relewise-agent.ps1` on Windows and `scripts/relewise-agent` on macOS and Linux; the launchers select the matching executable under their skill-local `scripts/libexec/<runtime>/`. Platform-specific artifacts contain one runtime, while universal Claude and repository marketplace installations contain all supported runtimes. Packages intentionally have no top-level `bin/`, `scripts/`, or `libexec/` directory.
 

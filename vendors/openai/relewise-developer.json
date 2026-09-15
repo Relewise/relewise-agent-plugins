@@ -1,0 +1,19 @@
+{
+  "interface": {
+    "displayName": "Relewise Developer",
+    "shortDescription": "Build and troubleshoot Relewise integrations",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Help me add Relewise Search to this project.",
+      "Review this Relewise integration.",
+      "Help me troubleshoot this Relewise implementation."
+    ],
+    "brandColor": "#3764E4",
+    "logo": "./assets/logo.png"
+  }
+}

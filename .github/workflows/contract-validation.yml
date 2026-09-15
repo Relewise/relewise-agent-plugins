@@ -80,7 +80,7 @@ jobs:
 
           $env:CLAUDE_PLUGIN_ROOT = $installedRoot
           $businessManifest = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.claude-plugin/plugin.json') | ConvertFrom-Json
-          $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.claude-plugin/mcp.json') | ConvertFrom-Json
+          $businessMcp = Get-Content -Raw -LiteralPath (Join-Path $installedRoot '.mcp.json') | ConvertFrom-Json
           $businessServer = $businessMcp.mcpServers.'relewise-agent-gateway'
           if ($businessServer.url -ne 'https://my.relewise.com/agents/mcp' -or $null -ne $businessServer.headers) {
             throw 'The installed Relewise plugin has an invalid OAuth Agent Gateway MCP configuration.'
@@ -162,6 +162,7 @@ jobs:
       - name: Validate committed vendor marketplaces
         shell: pwsh
         run: |
+          ./tests/package/configuration.ps1
           ./tests/package/codex-marketplace.ps1 -MarketplaceRoot .
           $version = (Get-Content -Raw version.json | ConvertFrom-Json).version
           foreach ($vendor in @('claude', 'github-copilot', 'openai')) {

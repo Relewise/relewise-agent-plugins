@@ -17,14 +17,10 @@ if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'P
 
 if ($manifest.version -notmatch '^\d+\.\d+\.\d+$') { throw 'Gemini extension manifest version is not semantic.' }
 if ($sourceManifest.version -ne $plannedVersion) { throw 'Root Gemini extension manifest version does not match version.json.' }
-$tokenSettings = @($manifest.settings) | Where-Object envVar -eq 'RELEWISE_AGENT_GATEWAY_TOKEN'
-if ($tokenSettings.Count -ne 1 -or $tokenSettings[0].sensitive -ne $true) {
-    throw 'Gemini must request the Agent Gateway PAT as one sensitive extension setting.'
-}
+if ($null -ne $manifest.settings) { throw 'Gemini MCP must not request PAT installation settings.' }
 $server = $manifest.mcpServers.'relewise-agent-gateway'
 if ($server.httpUrl -ne 'https://my.relewise.com/agents/mcp') { throw 'Gemini package has the wrong Agent Gateway MCP endpoint.' }
-if ($server.headers.Authorization -ne 'Bearer ${RELEWISE_AGENT_GATEWAY_TOKEN:-}') { throw 'Gemini package has the wrong Agent Gateway MCP authorization header.' }
-if ($server.env.RELEWISE_AGENT_GATEWAY_TOKEN -ne '${RELEWISE_AGENT_GATEWAY_TOKEN:-}') { throw 'Gemini package does not explicitly expose the shared token to the MCP server.' }
+if ($null -ne $server.headers -or $null -ne $server.env) { throw 'Gemini MCP must use OAuth without PAT injection.' }
 
 $sourceSkills = Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Directory
 $packagedSkills = Get-ChildItem -LiteralPath (Join-Path $packageRoot 'skills') -Directory

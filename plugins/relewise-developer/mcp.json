@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "relewise-developer": {
+      "type": "streamable-http",
+      "url": "https://mcp.relewise.com"
+    }
+  },
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json"
+}

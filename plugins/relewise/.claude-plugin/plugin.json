@@ -1,11 +1,20 @@
 {
   "name": "relewise",
-  "version": "0.5.0-main.34937402974",
   "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "author": {
-    "name": "Relewise"
+    "name": "Relewise",
+    "url": "https://www.relewise.com/"
   },
   "homepage": "https://www.relewise.com/",
   "repository": "https://github.com/Relewise/relewise-agent-plugins",
-  "mcpServers": "./.claude-plugin/mcp.json"
+  "license": "MIT",
+  "keywords": [
+    "relewise",
+    "analytics",
+    "search",
+    "merchandising"
+  ],
+  "version": "0.5.0-main.34941691486",
+  "displayName": "Relewise",
+  "mcpServers": "./.mcp.json"
 }
