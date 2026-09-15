@@ -36,7 +36,7 @@ if (-not (Test-Path -LiteralPath $packageRoot)) {
 New-Item -ItemType Directory -Path $packageRoot | Out-Null
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\plugin.json') -Destination $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
-Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\.mcp.json') -Destination $packageRoot
+Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\mcp.json') -Destination $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
 $runtimePayload = Join-Path $packageRoot 'skills\relewise-agent-gateway\scripts\libexec'
 if (Test-Path -LiteralPath $runtimePayload) { Remove-Item -LiteralPath $runtimePayload -Recurse -Force }

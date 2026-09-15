@@ -13,8 +13,8 @@ $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.claude-plugin\plugin.json') | ConvertFrom-Json
 if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'Package is missing its license.' }
 
-if ($manifest.mcpServers -ne './.claude-plugin/mcp.json') { throw 'Claude Code manifest does not declare its protected Agent Gateway MCP configuration.' }
-$mcp = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.claude-plugin\mcp.json') | ConvertFrom-Json
+if ($manifest.mcpServers -ne './.mcp.json') { throw 'Claude Code manifest does not declare its protected Agent Gateway MCP configuration.' }
+$mcp = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.mcp.json') | ConvertFrom-Json
 $server = $mcp.mcpServers.'relewise-agent-gateway'
 if ($server.type -ne 'http' -or $server.url -ne 'https://my.relewise.com/agents/mcp') { throw 'Claude package has the wrong Agent Gateway MCP endpoint.' }
 if ($null -ne $server.headers) { throw 'Claude package must leave MCP authentication to the client OAuth flow.' }

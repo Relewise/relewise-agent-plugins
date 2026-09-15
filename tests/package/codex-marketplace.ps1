@@ -82,14 +82,14 @@ if ($portableManifest.name -ne 'relewise' -or $claudeManifest.name -ne 'relewise
 if ($manifest.version -ne $portableManifest.version -or $manifest.version -ne $claudeManifest.version) {
     throw 'Committed vendor plugin manifest versions are not synchronized.'
 }
-if ($null -eq $manifest.mcpServers.'relewise-agent-gateway' -or $claudeManifest.mcpServers -ne './.claude-plugin/mcp.json') {
+if ($null -eq $manifest.mcpServers.'relewise-agent-gateway' -or $claudeManifest.mcpServers -ne './.mcp.json') {
     throw 'Relewise vendor manifests do not declare the Agent Gateway MCP configuration.'
 }
 $codexServer = $manifest.mcpServers.'relewise-agent-gateway'
 if ($codexServer.type -ne 'http' -or $codexServer.url -ne 'https://my.relewise.com/agents/mcp' -or $null -ne $codexServer.bearer_token_env_var) {
     throw 'Relewise does not configure Codex OAuth MCP authentication.'
 }
-$businessMcp = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.mcp.json') | ConvertFrom-Json
+$businessMcp = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot 'mcp.json') | ConvertFrom-Json
 $businessServer = $businessMcp.mcpServers.'relewise-agent-gateway'
 if ($businessServer.type -ne 'http' -or $businessServer.url -ne 'https://my.relewise.com/agents/mcp') {
     throw 'Relewise does not configure the expected Agent Gateway MCP server.'
@@ -97,7 +97,7 @@ if ($businessServer.type -ne 'http' -or $businessServer.url -ne 'https://my.rele
 if ($businessServer.headers.Authorization -ne 'Bearer ${RELEWISE_AGENT_GATEWAY_TOKEN:-}') {
     throw 'Relewise does not configure the shared token as its MCP authorization header.'
 }
-$claudeMcp = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.claude-plugin\mcp.json') | ConvertFrom-Json
+$claudeMcp = Get-Content -Raw -LiteralPath (Join-Path $pluginRoot '.mcp.json') | ConvertFrom-Json
 $claudeServer = $claudeMcp.mcpServers.'relewise-agent-gateway'
 if ($claudeServer.type -ne 'http' -or $claudeServer.url -ne 'https://my.relewise.com/agents/mcp') {
     throw 'Relewise does not configure the expected Claude Agent Gateway MCP server.'

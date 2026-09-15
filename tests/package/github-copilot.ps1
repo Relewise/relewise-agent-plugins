@@ -16,7 +16,7 @@ if (-not (Test-Path -LiteralPath (Join-Path $packageRoot 'LICENSE'))) { throw 'P
 
 if ($manifest.'$schema' -ne 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json') { throw 'Copilot plugin does not opt into Agent Plugins v1.0.0.' }
 if ($null -ne $manifest.userConfig) { throw 'Copilot plugin manifest must not claim unsupported protected user configuration.' }
-$mcp = Get-Content -Raw -LiteralPath (Join-Path $packageRoot '.mcp.json') | ConvertFrom-Json
+$mcp = Get-Content -Raw -LiteralPath (Join-Path $packageRoot 'mcp.json') | ConvertFrom-Json
 $server = $mcp.mcpServers.'relewise-agent-gateway'
 if ($server.type -ne 'http' -or $server.url -ne 'https://my.relewise.com/agents/mcp') { throw 'Copilot plugin has the wrong Agent Gateway MCP endpoint.' }
 if ($server.headers.Authorization -ne 'Bearer ${RELEWISE_AGENT_GATEWAY_TOKEN:-}') { throw 'Copilot plugin does not obtain MCP authentication from the shared PAT environment variable.' }

@@ -36,6 +36,7 @@ $adapterRoot = Join-Path $repositoryRoot 'vendors\claude\relewise'
 if (-not (Test-Path -LiteralPath $packageRoot)) {
     New-Item -ItemType Directory -Path $packageRoot | Out-Null
     Copy-Item -LiteralPath (Join-Path $adapterRoot '.claude-plugin') -Destination $packageRoot -Recurse
+    Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins/relewise/.mcp.json') -Destination $packageRoot
     Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
     Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
     $runtimePayload = Join-Path $packageRoot 'skills\relewise-agent-gateway\scripts\libexec'
