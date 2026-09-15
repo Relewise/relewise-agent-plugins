@@ -8,7 +8,12 @@
   "type": "object",
   "properties": {
     "kind": {
-      "$ref": "#/components/schemas/SearchResultModifierActionKind"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchResultModifierActionKind"
+        }
+      ],
+      "description": "Action kind: AddTermFilter or AddFilters."
     },
     "term": {
       "type": "string",

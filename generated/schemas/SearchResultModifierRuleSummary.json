@@ -18,17 +18,27 @@
       "description": "Whether the rule is approved and active for matching searches."
     },
     "scope": {
-      "$ref": "#/components/schemas/SearchToolRuleScope"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchToolRuleScope"
+        }
+      ],
+      "description": "Search Index and language scope in which the rule applies."
     },
     "condition": {
-      "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+        }
+      ],
+      "description": "Summary of the root condition that activates the rule."
     },
     "actionKinds": {
       "type": "array",
       "items": {
         "$ref": "#/components/schemas/SearchResultModifierActionKind"
       },
-      "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration and filters."
+      "description": "Ordered kinds of actions applied by the rule."
     }
   },
   "description": "Compact Search Result Modifier rule representation returned by list operations."

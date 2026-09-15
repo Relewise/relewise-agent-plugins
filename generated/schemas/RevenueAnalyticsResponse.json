@@ -38,6 +38,7 @@
           "$ref": "#/components/schemas/RevenueGraph"
         }
       ],
+      "description": "Daily Revenue series aggregated across the Dataset, or null when the report is empty.",
       "nullable": true
     },
     "locations": {

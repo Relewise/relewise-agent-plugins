@@ -31,7 +31,12 @@
       "format": "date"
     },
     "filters": {
-      "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+        }
+      ],
+      "description": "Effective filters applied to the analytics query."
     },
     "terms": {
       "type": "array",
@@ -41,7 +46,12 @@
       "description": "Search terms included in this result."
     },
     "pagination": {
-      "$ref": "#/components/schemas/PaginationMetadata"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaginationMetadata"
+        }
+      ],
+      "description": "Pagination details for this term page."
     }
   },
   "description": "Search-term performance results and their effective query context."

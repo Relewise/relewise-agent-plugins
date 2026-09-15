@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "rule": {
-      "$ref": "#/components/schemas/MerchandisingRuleDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MerchandisingRuleDetails"
+        }
+      ],
+      "description": "The requested merchandising rule and its type-specific configuration."
     }
   },
   "description": "Detailed merchandising rule returned for a Dataset-scoped rule lookup."

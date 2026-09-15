@@ -18,7 +18,12 @@
       "description": "Whether the rule is approved and active for matching searches."
     },
     "scope": {
-      "$ref": "#/components/schemas/SearchToolRuleScope"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchToolRuleScope"
+        }
+      ],
+      "description": "Search Index and language scope in which the rule applies."
     },
     "stem": {
       "type": "string",
@@ -27,7 +32,7 @@
     },
     "wordCount": {
       "pattern": "^-?(?:0|[1-9]\\d*)$",
-      "description": "Number of word variants governed by the rule. Get the rule by ID to inspect the words.",
+      "description": "Number of word variants governed by the rule.",
       "format": "int32",
       "type": "integer"
     }

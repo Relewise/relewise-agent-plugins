@@ -46,7 +46,12 @@
       "description": "Group configured for the merchandising rule, or an empty string when the rule does not belong to a group."
     },
     "schedule": {
-      "$ref": "#/components/schemas/MerchandisingRuleSchedule"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MerchandisingRuleSchedule"
+        }
+      ],
+      "description": "Schedule controlling when the rule is active. Both boundaries may be null for an unbounded schedule."
     },
     "status": {
       "type": "string",

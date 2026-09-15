@@ -7,7 +7,12 @@
   "type": "object",
   "properties": {
     "kind": {
-      "$ref": "#/components/schemas/SearchTermModifierActionKind"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchTermModifierActionKind"
+        }
+      ],
+      "description": "Action kind: AppendToTerm, RemoveFromTerm, ReplaceTerm, or ReplaceWordsInTerm."
     },
     "words": {
       "type": "string",

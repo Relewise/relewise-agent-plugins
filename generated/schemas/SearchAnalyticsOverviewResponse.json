@@ -31,10 +31,20 @@
       "format": "date"
     },
     "filters": {
-      "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+        }
+      ],
+      "description": "Effective filters applied to the analytics query."
     },
     "summary": {
-      "$ref": "#/components/schemas/SearchAnalyticsSummary"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchAnalyticsSummary"
+        }
+      ],
+      "description": "Aggregate metrics for the requested and comparison periods."
     },
     "timeline": {
       "type": "array",

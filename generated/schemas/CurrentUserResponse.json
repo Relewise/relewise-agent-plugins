@@ -7,10 +7,20 @@
   "type": "object",
   "properties": {
     "user": {
-      "$ref": "#/components/schemas/UserDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UserDetails"
+        }
+      ],
+      "description": "The authenticated My Relewise user."
     },
     "authentication": {
-      "$ref": "#/components/schemas/AuthenticationMetadata"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AuthenticationMetadata"
+        }
+      ],
+      "description": "The authentication method, display name, and non-secret credential details."
     },
     "licenses": {
       "type": "array",

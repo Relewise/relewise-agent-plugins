@@ -19,7 +19,7 @@
     },
     "change": {
       "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-      "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+      "description": "Current value minus previous value; percentage-point change for rate metrics.",
       "format": "double"
     },
     "relativeChangePercent": {

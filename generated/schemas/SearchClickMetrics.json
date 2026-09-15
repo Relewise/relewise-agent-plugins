@@ -7,13 +7,28 @@
   "type": "object",
   "properties": {
     "total": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Total number of product clicks originating from searches."
     },
     "rate": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Percentage of search requests that produced a product click."
     },
     "averagePosition": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Average result position of clicked products. Lower values generally indicate better result relevance."
     }
   },
   "description": "Click-performance metrics for searches."

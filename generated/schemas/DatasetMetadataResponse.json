@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "metadata": {
-      "$ref": "#/components/schemas/DatasetMetadata"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DatasetMetadata"
+        }
+      ],
+      "description": "Languages, currencies, and requested entity metadata available for the Dataset."
     }
   },
   "description": "Dataset metadata resolved for the requested period and inclusion options."

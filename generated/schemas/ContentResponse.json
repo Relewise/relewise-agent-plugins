@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "content": {
-      "$ref": "#/components/schemas/ContentDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ContentDetails"
+        }
+      ],
+      "description": "Stored details and Data Values for one Content entity."
     }
   },
   "description": "Response containing one Content entity and its stored details."

@@ -18,6 +18,7 @@
           "$ref": "#/components/schemas/TriggerCountRange"
         }
       ],
+      "description": "Required product-view count range; null means no count constraint.",
       "nullable": true
     },
     "filtersJson": {

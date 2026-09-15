@@ -62,7 +62,12 @@
       "type": "integer"
     },
     "configuration": {
-      "$ref": "#/components/schemas/TriggerTypeConfiguration"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TriggerTypeConfiguration"
+        }
+      ],
+      "description": "Type-specific Trigger criteria and result selections. Webhook credentials, delivery settings, and infrastructure settings are omitted."
     },
     "userConditionsJson": {
       "type": "string",

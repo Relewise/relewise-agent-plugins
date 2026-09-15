@@ -37,6 +37,7 @@
           "$ref": "#/components/schemas/ProductBrandReference"
         }
       ],
+      "description": "Associated Brand, or null when none.",
       "nullable": true
     },
     "created": {

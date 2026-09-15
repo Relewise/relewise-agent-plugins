@@ -18,7 +18,12 @@
       "description": "Configuration summaries for this page; empty when none match."
     },
     "pagination": {
-      "$ref": "#/components/schemas/PaginationMetadata"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaginationMetadata"
+        }
+      ],
+      "description": "Page number, page size, and total configuration count."
     }
   },
   "description": "One page of Trigger configurations ordered by name and then Configuration ID."

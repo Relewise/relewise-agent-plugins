@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "rule": {
-      "$ref": "#/components/schemas/SynonymRule"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SynonymRule"
+        }
+      ],
+      "description": "Complete Synonym rule state."
     }
   },
   "description": "One Synonym rule."

@@ -13,7 +13,12 @@
       "description": "Synonym rules in the requested page."
     },
     "pagination": {
-      "$ref": "#/components/schemas/PaginationMetadata"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaginationMetadata"
+        }
+      ],
+      "description": "Pagination metadata for the complete filtered result set."
     }
   },
   "description": "A page of Synonym rules."

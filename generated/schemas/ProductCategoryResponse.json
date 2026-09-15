@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "productCategory": {
-      "$ref": "#/components/schemas/ProductCategoryDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ProductCategoryDetails"
+        }
+      ],
+      "description": "Stored details and Data Values for one Product Category."
     }
   },
   "description": "Response containing one Product Category and its stored details."

@@ -1,6 +1,6 @@
 {
   "source": "contracts/agent-gateway-v1.json",
-  "sourceSha256": "878a9eb1d36eb458a0c30585a5bca31fbeeca0fed583fb7e14907b38e25ab1c6",
+  "sourceSha256": "05190015ecf9ce2bdcaa589b4efd92d4f5bd8ab12a39895ae461e3ab2d2e1fe1",
   "openapi": "3.0.4",
   "apiVersion": "v1",
   "operationCount": 60,
@@ -91,7 +91,7 @@
         "Administration"
       ],
       "summary": "Gets one Job execution.",
-      "description": "Read-only execution history. Discover Job IDs with AdministrationListJobs and Log IDs with AdministrationListJobLogs. Never executes or changes Jobs.",
+      "description": "Reads one execution and its available history messages using Job ID and Log ID from AdministrationListJobLogs. History may be empty due to retention. This operation never executes or changes Jobs.",
       "pathParameters": [
         {
           "name": "jobId",
@@ -179,7 +179,7 @@
         "Administration"
       ],
       "summary": "Lists Job executions.",
-      "description": "Read-only execution history. Discover Job IDs with AdministrationListJobs and Log IDs with AdministrationListJobLogs. Never executes or changes Jobs.",
+      "description": "Lists execution summaries, newest first, with cursors for older and newer pages. Use AdministrationListJobs for Job IDs and AdministrationGetJobLog for one execution's messages. This operation never executes or changes Jobs.",
       "pathParameters": [
         {
           "name": "datasetId",
@@ -195,7 +195,7 @@
         {
           "name": "fromDate",
           "required": true,
-          "description": "Inclusive UTC start date; normalized by DateRange.",
+          "description": "Inclusive UTC start date applied to execution start timestamps. Dates are clamped to 2001-01-01 through 2099-12-31.",
           "schema": {
             "type": "string",
             "format": "date"
@@ -204,7 +204,7 @@
         {
           "name": "toDate",
           "required": true,
-          "description": "Inclusive UTC end date applied to execution start timestamps; normalized by DateRange.",
+          "description": "Inclusive UTC end date applied to execution start timestamps. Dates are clamped to 2001-01-01 through 2099-12-31.",
           "schema": {
             "type": "string",
             "format": "date"
@@ -479,7 +479,7 @@
         "Analytics"
       ],
       "summary": "Discovers filter options.",
-      "description": "Discovers valid Search Analytics filter values for the requested period and current selections. Use CoreGetDatasetMetadata first when the required language is unknown. After choosing a language, use this operation to discover or validate currencies, channels, subchannels, Classification Keys, and Classification Values instead of guessing them. Options are conditional; for example, available subchannels depend on the selected channel. This operation is read-only and covers Product Search data from identified users.",
+      "description": "Discovers valid currencies, channels, subchannels, and Classification Keys and Values for the period and current selections. Use CoreGetDatasetMetadata if the required language is unknown. Discover values instead of guessing; subchannels depend on the selected channel. Read-only Product Search data from identified users.",
       "pathParameters": [
         {
           "name": "datasetId",
@@ -555,8 +555,8 @@
       "tags": [
         "Analytics"
       ],
-      "summary": "Gets search overview.",
-      "description": "Returns aggregate Search Analytics KPIs and trends for the requested period. Use this operation for an overall performance summary. Use a term-list operation when the user asks about individual search terms. This operation is read-only.",
+      "summary": "Gets aggregate Search Analytics KPIs and trends.",
+      "description": "Read-only Product Search performance for the requested period, covering identified users. Use a term-list operation for individual search terms.",
       "pathParameters": [
         {
           "name": "datasetId",
@@ -710,7 +710,7 @@
         "Analytics"
       ],
       "summary": "Lists popular searches.",
-      "description": "Returns search terms ranked by search count for the requested period. Use this operation when the user asks what customers search for most or wants high-volume search terms. Use AnalyticsGetSearchOverview for aggregate KPIs or AnalyticsListTrendingUpSearches for terms gaining search volume. This operation is read-only.",
+      "description": "Returns search terms ranked by search count for the requested period. Use AnalyticsGetSearchOverview for aggregate KPIs or AnalyticsListTrendingUpSearches for increasing volume. Read-only Product Search data from identified users.",
       "pathParameters": [
         {
           "name": "datasetId",
@@ -1385,7 +1385,7 @@
         {
           "name": "includeCatalogMetadata",
           "required": false,
-          "description": "Whether to include metadata for products, variants, product categories, and brands.",
+          "description": "Include Product, Variant, Product Category, and Brand Data Keys, plus Variant Specification Keys.",
           "schema": {
             "type": "boolean"
           }
@@ -1393,7 +1393,7 @@
         {
           "name": "includeContentMetadata",
           "required": false,
-          "description": "Whether to include metadata for content and content categories.",
+          "description": "Include Content and Content Category Data Keys.",
           "schema": {
             "type": "boolean"
           }
@@ -1401,7 +1401,7 @@
         {
           "name": "includeUserMetadata",
           "required": false,
-          "description": "Whether to include user Data Keys and classification options.",
+          "description": "Include User Data Keys and classification options.",
           "schema": {
             "type": "boolean"
           }
@@ -1409,7 +1409,7 @@
         {
           "name": "includeCompanyMetadata",
           "required": false,
-          "description": "Whether to include company Data Keys when company entities are available for the Dataset.",
+          "description": "Include Company Data Keys when Company entities are available for the Dataset.",
           "schema": {
             "type": "boolean"
           }

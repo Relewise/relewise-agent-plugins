@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "configuration": {
-      "$ref": "#/components/schemas/TriggerConfigurationDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/TriggerConfigurationDetails"
+        }
+      ],
+      "description": "Selected Trigger configuration."
     }
   },
   "description": "Selected Trigger configuration."

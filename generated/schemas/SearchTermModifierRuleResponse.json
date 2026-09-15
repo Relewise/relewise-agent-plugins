@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "rule": {
-      "$ref": "#/components/schemas/SearchTermModifierRule"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchTermModifierRule"
+        }
+      ],
+      "description": "Complete Search Term Modifier rule state."
     }
   },
   "description": "One Search Term Modifier rule."

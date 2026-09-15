@@ -18,10 +18,20 @@
       "description": "Whether the rule is approved and active for matching searches."
     },
     "scope": {
-      "$ref": "#/components/schemas/SearchToolRuleScope"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchToolRuleScope"
+        }
+      ],
+      "description": "Search Index and language scope in which the rule applies."
     },
     "definition": {
-      "$ref": "#/components/schemas/SynonymDefinition"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SynonymDefinition"
+        }
+      ],
+      "description": "Direction-specific definition of how search words are connected."
     },
     "allowInPredictions": {
       "type": "boolean",

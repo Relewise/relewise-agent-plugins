@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "rule": {
-      "$ref": "#/components/schemas/RedirectRule"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RedirectRule"
+        }
+      ],
+      "description": "Complete Redirect rule state."
     }
   },
   "description": "One Redirect rule."
