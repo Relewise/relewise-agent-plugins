@@ -13,7 +13,12 @@
       "description": "Compact Stemming rule representations returned on this page."
     },
     "pagination": {
-      "$ref": "#/components/schemas/PaginationMetadata"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaginationMetadata"
+        }
+      ],
+      "description": "Pagination details for the returned Stemming rules."
     }
   },
   "description": "A bounded page of Stemming rules."

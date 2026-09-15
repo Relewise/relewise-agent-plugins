@@ -10,7 +10,7 @@
   "properties": {
     "language": {
       "type": "string",
-      "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery."
+      "description": "Language required to scope Search Analytics, including filter-option discovery."
     },
     "currency": {
       "type": "string",
@@ -32,7 +32,7 @@
       "additionalProperties": {
         "type": "string"
       },
-      "description": "Nonblank classification key/value selections applied to the query."
+      "description": "Nonblank, case-sensitive Classification Key and Value selections applied to the query."
     }
   },
   "description": "Effective dimensions used to scope a Search Analytics operation."

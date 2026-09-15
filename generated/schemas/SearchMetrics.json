@@ -6,10 +6,20 @@
   "type": "object",
   "properties": {
     "total": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Total number of search requests."
     },
     "uniqueTerms": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Number of distinct search terms."
     }
   },
   "description": "Search-volume metrics for the selected scope."

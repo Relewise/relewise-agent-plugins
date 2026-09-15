@@ -17,7 +17,7 @@
     },
     "text": {
       "type": "string",
-      "description": "Message text as returned by the backend, including its caller-specific runner-information filtering."
+      "description": "Message text after caller-specific filtering of runner information."
     }
   },
   "description": "One execution history message returned by the backend."

@@ -43,6 +43,7 @@
           "$ref": "#/components/schemas/PeriodGraph"
         }
       ],
+      "description": "Daily metric series for the requested period, or null when graph data is unavailable.",
       "nullable": true
     }
   },

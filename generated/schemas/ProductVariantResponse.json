@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "variant": {
-      "$ref": "#/components/schemas/ProductVariantDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ProductVariantDetails"
+        }
+      ],
+      "description": "Stored details and Data Values for one Variant of a Product."
     }
   },
   "description": "Response containing one Product Variant and its stored details."

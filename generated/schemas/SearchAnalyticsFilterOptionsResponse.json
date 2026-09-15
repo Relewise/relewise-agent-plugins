@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "filterOptions": {
-      "$ref": "#/components/schemas/SearchAnalyticsFilterOptions"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchAnalyticsFilterOptions"
+        }
+      ],
+      "description": "Languages, currencies, channels, subchannels, classifications, and earliest available data time."
     }
   },
   "description": "Available Search Analytics filter options for the requested period and current selections."

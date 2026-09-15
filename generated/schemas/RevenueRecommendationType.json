@@ -23,7 +23,12 @@
       "description": "Revenue, order, and recommendation measurements for this recommendation type."
     },
     "graph": {
-      "$ref": "#/components/schemas/RevenueGraph"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RevenueGraph"
+        }
+      ],
+      "description": "Daily Revenue series attributed to this recommendation request type."
     }
   },
   "description": "Revenue performance attributed to one recommendation request type within a location."

@@ -11,11 +11,16 @@
       "description": "Case-sensitive Data Key."
     },
     "type": {
-      "$ref": "#/components/schemas/EntityDataValueType"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/EntityDataValueType"
+        }
+      ],
+      "description": "Relewise data type of the stored value. Use it to interpret ValueJson. See https://docs.relewise.com/docs/intro/data-types.html for the supported value structures."
     },
     "valueJson": {
       "type": "string",
-      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object."
+      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object. See https://docs.relewise.com/docs/intro/data-types.html for the value structures."
     }
   },
   "description": "One case-sensitive Relewise entity Data Key and its stored value."

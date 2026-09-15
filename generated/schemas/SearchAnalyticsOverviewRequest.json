@@ -40,7 +40,7 @@
       "additionalProperties": {
         "type": "string"
       },
-      "description": "Optional classification key/value filters. Keys are matched using Search Analytics classification semantics.",
+      "description": "Optional case-sensitive Classification Key and Value filters. Blank Keys or Values are ignored. Use filter-option discovery for available selections.",
       "nullable": true
     }
   },

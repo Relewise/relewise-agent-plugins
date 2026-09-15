@@ -114,7 +114,7 @@
           {
             "name": "includeCatalogMetadata",
             "in": "query",
-            "description": "Whether to include metadata for products, variants, product categories, and brands.",
+            "description": "Include Product, Variant, Product Category, and Brand Data Keys, plus Variant Specification Keys.",
             "schema": {
               "type": "boolean"
             },
@@ -123,7 +123,7 @@
           {
             "name": "includeContentMetadata",
             "in": "query",
-            "description": "Whether to include metadata for content and content categories.",
+            "description": "Include Content and Content Category Data Keys.",
             "schema": {
               "type": "boolean"
             },
@@ -132,7 +132,7 @@
           {
             "name": "includeUserMetadata",
             "in": "query",
-            "description": "Whether to include user Data Keys and classification options.",
+            "description": "Include User Data Keys and classification options.",
             "schema": {
               "type": "boolean"
             },
@@ -141,7 +141,7 @@
           {
             "name": "includeCompanyMetadata",
             "in": "query",
-            "description": "Whether to include company Data Keys when company entities are available for the Dataset.",
+            "description": "Include Company Data Keys when Company entities are available for the Dataset.",
             "schema": {
               "type": "boolean"
             },
@@ -2015,8 +2015,8 @@
         "tags": [
           "Analytics"
         ],
-        "summary": "Gets search overview.",
-        "description": "Returns aggregate Search Analytics KPIs and trends for the requested period. Use this operation for an overall performance summary. Use a term-list operation when the user asks about individual search terms. This operation is read-only.",
+        "summary": "Gets aggregate Search Analytics KPIs and trends.",
+        "description": "Read-only Product Search performance for the requested period, covering identified users. Use a term-list operation for individual search terms.",
         "operationId": "AnalyticsGetSearchOverview",
         "parameters": [
           {
@@ -2101,7 +2101,7 @@
           "Analytics"
         ],
         "summary": "Discovers filter options.",
-        "description": "Discovers valid Search Analytics filter values for the requested period and current selections. Use CoreGetDatasetMetadata first when the required language is unknown. After choosing a language, use this operation to discover or validate currencies, channels, subchannels, Classification Keys, and Classification Values instead of guessing them. Options are conditional; for example, available subchannels depend on the selected channel. This operation is read-only and covers Product Search data from identified users.",
+        "description": "Discovers valid currencies, channels, subchannels, and Classification Keys and Values for the period and current selections. Use CoreGetDatasetMetadata if the required language is unknown. Discover values instead of guessing; subchannels depend on the selected channel. Read-only Product Search data from identified users.",
         "operationId": "AnalyticsGetSearchFilterOptions",
         "parameters": [
           {
@@ -2180,7 +2180,7 @@
           "Analytics"
         ],
         "summary": "Lists popular searches.",
-        "description": "Returns search terms ranked by search count for the requested period. Use this operation when the user asks what customers search for most or wants high-volume search terms. Use AnalyticsGetSearchOverview for aggregate KPIs or AnalyticsListTrendingUpSearches for terms gaining search volume. This operation is read-only.",
+        "description": "Returns search terms ranked by search count for the requested period. Use AnalyticsGetSearchOverview for aggregate KPIs or AnalyticsListTrendingUpSearches for increasing volume. Read-only Product Search data from identified users.",
         "operationId": "AnalyticsListPopularSearches",
         "parameters": [
           {
@@ -5075,13 +5075,13 @@
           "Administration"
         ],
         "summary": "Lists Job executions.",
-        "description": "Read-only execution history. Discover Job IDs with AdministrationListJobs and Log IDs with AdministrationListJobLogs. Never executes or changes Jobs.",
+        "description": "Lists execution summaries, newest first, with cursors for older and newer pages. Use AdministrationListJobs for Job IDs and AdministrationGetJobLog for one execution's messages. This operation never executes or changes Jobs.",
         "operationId": "AdministrationListJobLogs",
         "parameters": [
           {
             "name": "fromDate",
             "in": "query",
-            "description": "Inclusive UTC start date; normalized by DateRange.",
+            "description": "Inclusive UTC start date applied to execution start timestamps. Dates are clamped to 2001-01-01 through 2099-12-31.",
             "required": true,
             "schema": {
               "type": "string",
@@ -5091,7 +5091,7 @@
           {
             "name": "toDate",
             "in": "query",
-            "description": "Inclusive UTC end date applied to execution start timestamps; normalized by DateRange.",
+            "description": "Inclusive UTC end date applied to execution start timestamps. Dates are clamped to 2001-01-01 through 2099-12-31.",
             "required": true,
             "schema": {
               "type": "string",
@@ -5211,7 +5211,7 @@
           "Administration"
         ],
         "summary": "Gets one Job execution.",
-        "description": "Read-only execution history. Discover Job IDs with AdministrationListJobs and Log IDs with AdministrationListJobLogs. Never executes or changes Jobs.",
+        "description": "Reads one execution and its available history messages using Job ID and Log ID from AdministrationListJobLogs. History may be empty due to retention. This operation never executes or changes Jobs.",
         "operationId": "AdministrationGetJobLog",
         "parameters": [
           {
@@ -5526,7 +5526,12 @@
         "type": "object",
         "properties": {
           "brand": {
-            "$ref": "#/components/schemas/BrandDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BrandDetails"
+              }
+            ],
+            "description": "Stored details and Data Values for one Brand."
           }
         },
         "description": "Response containing one Brand and its stored details."
@@ -5614,7 +5619,7 @@
           },
           "change": {
             "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
-            "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+            "description": "Current value minus previous value; percentage-point change for rate metrics.",
             "format": "double"
           },
           "relativeChangePercent": {
@@ -5771,7 +5776,12 @@
         "type": "object",
         "properties": {
           "contentCategory": {
-            "$ref": "#/components/schemas/ContentCategoryDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentCategoryDetails"
+              }
+            ],
+            "description": "Stored details and Data Values for one Content Category."
           }
         },
         "description": "Response containing one Content Category and its stored details."
@@ -5921,7 +5931,12 @@
         "type": "object",
         "properties": {
           "content": {
-            "$ref": "#/components/schemas/ContentDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ContentDetails"
+              }
+            ],
+            "description": "Stored details and Data Values for one Content entity."
           }
         },
         "description": "Response containing one Content entity and its stored details."
@@ -5959,10 +5974,20 @@
         "type": "object",
         "properties": {
           "user": {
-            "$ref": "#/components/schemas/UserDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserDetails"
+              }
+            ],
+            "description": "The authenticated My Relewise user."
           },
           "authentication": {
-            "$ref": "#/components/schemas/AuthenticationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AuthenticationMetadata"
+              }
+            ],
+            "description": "The authentication method, display name, and non-secret credential details."
           },
           "licenses": {
             "type": "array",
@@ -6065,13 +6090,28 @@
         "type": "object",
         "properties": {
           "dataset": {
-            "$ref": "#/components/schemas/DatasetDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetDetails"
+              }
+            ],
+            "description": "Identifying and operational details about a Relewise Dataset."
           },
           "license": {
-            "$ref": "#/components/schemas/License"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/License"
+              }
+            ],
+            "description": "The License the requested Dataset belongs to."
           },
           "agentGatewayPolicy": {
-            "$ref": "#/components/schemas/DatasetAgentGatewayPolicy"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetAgentGatewayPolicy"
+              }
+            ],
+            "description": "The effective Agent Gateway access policy for this Dataset and authenticated user."
           }
         },
         "description": "Details about the requested Dataset and its effective Agent Gateway access policy."
@@ -6124,6 +6164,7 @@
                 "$ref": "#/components/schemas/ProductMetadata"
               }
             ],
+            "description": "Product metadata, or null when catalog metadata was not returned.",
             "nullable": true
           },
           "variants": {
@@ -6133,6 +6174,7 @@
                 "$ref": "#/components/schemas/VariantMetadata"
               }
             ],
+            "description": "Variant metadata, or null when catalog metadata was not returned.",
             "nullable": true
           },
           "productCategories": {
@@ -6142,6 +6184,7 @@
                 "$ref": "#/components/schemas/ProductCategoryMetadata"
               }
             ],
+            "description": "Product category metadata, or null when catalog metadata was not returned.",
             "nullable": true
           },
           "brands": {
@@ -6151,6 +6194,7 @@
                 "$ref": "#/components/schemas/BrandMetadata"
               }
             ],
+            "description": "Brand metadata, or null when catalog metadata was not returned.",
             "nullable": true
           },
           "content": {
@@ -6160,6 +6204,7 @@
                 "$ref": "#/components/schemas/ContentMetadata"
               }
             ],
+            "description": "Content metadata, or null when content metadata was not returned.",
             "nullable": true
           },
           "contentCategories": {
@@ -6169,6 +6214,7 @@
                 "$ref": "#/components/schemas/ContentCategoryMetadata"
               }
             ],
+            "description": "Content category metadata, or null when content metadata was not returned.",
             "nullable": true
           },
           "users": {
@@ -6178,6 +6224,7 @@
                 "$ref": "#/components/schemas/UserMetadata"
               }
             ],
+            "description": "User metadata, or null when user metadata was not returned.",
             "nullable": true
           },
           "companies": {
@@ -6187,6 +6234,7 @@
                 "$ref": "#/components/schemas/CompanyMetadata"
               }
             ],
+            "description": "Company metadata, or null when company metadata was not returned or is unavailable for the Dataset.",
             "nullable": true
           }
         },
@@ -6199,7 +6247,12 @@
         "type": "object",
         "properties": {
           "metadata": {
-            "$ref": "#/components/schemas/DatasetMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DatasetMetadata"
+              }
+            ],
+            "description": "Languages, currencies, and requested entity metadata available for the Dataset."
           }
         },
         "description": "Dataset metadata resolved for the requested period and inclusion options."
@@ -6243,7 +6296,12 @@
             "description": "Compact Decompounding rules in the requested page."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination metadata for the complete filtered result set."
           }
         },
         "description": "A page of compact Decompounding rule summaries."
@@ -6271,7 +6329,12 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "word": {
             "type": "string",
@@ -6284,7 +6347,7 @@
           },
           "modifierCount": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "description": "Number of terms that modify the Head. Get the rule by ID to inspect the terms.",
+            "description": "Number of terms that modify the Head.",
             "format": "int32",
             "type": "integer"
           },
@@ -6309,7 +6372,12 @@
         "type": "object",
         "properties": {
           "rule": {
-            "$ref": "#/components/schemas/DecompoundRule"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DecompoundRule"
+              }
+            ],
+            "description": "Complete Decompounding rule state."
           }
         },
         "description": "One Decompounding rule."
@@ -6336,7 +6404,12 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "word": {
             "type": "string",
@@ -6349,7 +6422,7 @@
           },
           "modifierCount": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "description": "Number of terms that modify the Head. Get the rule by ID to inspect the terms.",
+            "description": "Number of terms that modify the Head.",
             "format": "int32",
             "type": "integer"
           },
@@ -6373,11 +6446,16 @@
             "description": "Case-sensitive Data Key."
           },
           "type": {
-            "$ref": "#/components/schemas/EntityDataValueType"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EntityDataValueType"
+              }
+            ],
+            "description": "Relewise data type of the stored value. Use it to interpret ValueJson. See https://docs.relewise.com/docs/intro/data-types.html for the supported value structures."
           },
           "valueJson": {
             "type": "string",
-            "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object."
+            "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object. See https://docs.relewise.com/docs/intro/data-types.html for the value structures."
           }
         },
         "description": "One case-sensitive Relewise entity Data Key and its stored value."
@@ -6838,7 +6916,7 @@
           },
           "text": {
             "type": "string",
-            "description": "Message text as returned by the backend, including its caller-specific runner-information filtering."
+            "description": "Message text after caller-specific filtering of runner information."
           }
         },
         "description": "One execution history message returned by the backend."
@@ -6850,7 +6928,12 @@
         "type": "object",
         "properties": {
           "log": {
-            "$ref": "#/components/schemas/JobLogDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobLogDetails"
+              }
+            ],
+            "description": "Execution details."
           }
         },
         "description": "One Job execution."
@@ -6947,7 +7030,12 @@
         "type": "object",
         "properties": {
           "job": {
-            "$ref": "#/components/schemas/JobDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobDetails"
+              }
+            ],
+            "description": "Job details discriminated by type: grpc, httpRequest, or marketingAutomationTriggers. All variants share metadata and custom configuration names and values; reserved settings and execution logs are excluded."
           }
         },
         "description": "Details of one Dataset Job."
@@ -7283,7 +7371,12 @@
             "type": "string"
           },
           "multiplier": {
-            "$ref": "#/components/schemas/MerchandisingRuleMultiplier"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MerchandisingRuleMultiplier"
+              }
+            ],
+            "description": "Selector that determines the multiplier applied to matching entities."
           }
         },
         "description": "Configuration for a rule that boosts or buries matching entities."
@@ -7381,7 +7474,12 @@
             "description": "Group configured for the merchandising rule, or an empty string when the rule does not belong to a group."
           },
           "schedule": {
-            "$ref": "#/components/schemas/MerchandisingRuleSchedule"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MerchandisingRuleSchedule"
+              }
+            ],
+            "description": "Schedule controlling when the rule is active. Both boundaries may be null for an unbounded schedule."
           },
           "status": {
             "type": "string",
@@ -7399,7 +7497,12 @@
             "format": "date-time"
           },
           "configuration": {
-            "$ref": "#/components/schemas/MerchandisingRuleConfiguration"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MerchandisingRuleConfiguration"
+              }
+            ],
+            "description": "Type-specific rule configuration. The type discriminator selects one documented configuration variant."
           },
           "conditionsJson": {
             "type": "string",
@@ -7478,7 +7581,12 @@
         "type": "object",
         "properties": {
           "rule": {
-            "$ref": "#/components/schemas/MerchandisingRuleDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MerchandisingRuleDetails"
+              }
+            ],
+            "description": "The requested merchandising rule and its type-specific configuration."
           }
         },
         "description": "Detailed merchandising rule returned for a Dataset-scoped rule lookup."
@@ -7520,7 +7628,12 @@
             "description": "Merchandising rules in the requested page."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination metadata for the complete merchandising rule collection."
           }
         },
         "description": "One priority-ordered page of merchandising rules."
@@ -7573,7 +7686,12 @@
             "description": "Group configured for the merchandising rule, or an empty string when the rule does not belong to a group."
           },
           "schedule": {
-            "$ref": "#/components/schemas/MerchandisingRuleSchedule"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MerchandisingRuleSchedule"
+              }
+            ],
+            "description": "Schedule controlling when the rule is active. Both boundaries may be null for an unbounded schedule."
           },
           "status": {
             "type": "string",
@@ -7842,6 +7960,7 @@
                 "$ref": "#/components/schemas/PeriodGraph"
               }
             ],
+            "description": "Daily metric series for the requested period, or null when graph data is unavailable.",
             "nullable": true
           }
         },
@@ -8038,7 +8157,12 @@
         "type": "object",
         "properties": {
           "productCategory": {
-            "$ref": "#/components/schemas/ProductCategoryDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductCategoryDetails"
+              }
+            ],
+            "description": "Stored details and Data Values for one Product Category."
           }
         },
         "description": "Response containing one Product Category and its stored details."
@@ -8106,6 +8230,7 @@
                 "$ref": "#/components/schemas/ProductBrandReference"
               }
             ],
+            "description": "Associated Brand, or null when none.",
             "nullable": true
           },
           "created": {
@@ -8213,7 +8338,12 @@
         "type": "object",
         "properties": {
           "product": {
-            "$ref": "#/components/schemas/ProductDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductDetails"
+              }
+            ],
+            "description": "Stored details, Data Values, Variant IDs, and Variant summaries for one Product."
           }
         },
         "description": "Response containing one Product and its stored details."
@@ -8357,7 +8487,12 @@
         "type": "object",
         "properties": {
           "variant": {
-            "$ref": "#/components/schemas/ProductVariantDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ProductVariantDetails"
+              }
+            ],
+            "description": "Stored details and Data Values for one Variant of a Product."
           }
         },
         "description": "Response containing one Product Variant and its stored details."
@@ -8423,10 +8558,20 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "condition": {
-            "$ref": "#/components/schemas/SearchTermCondition"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchTermCondition"
+              }
+            ],
+            "description": "Complete condition that activates the Redirect rule."
           },
           "destination": {
             "type": "string",
@@ -8451,7 +8596,12 @@
         "type": "object",
         "properties": {
           "rule": {
-            "$ref": "#/components/schemas/RedirectRule"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RedirectRule"
+              }
+            ],
+            "description": "Complete Redirect rule state."
           }
         },
         "description": "One Redirect rule."
@@ -8471,7 +8621,12 @@
             "description": "Compact Redirect rule representations returned on this page."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination details for the returned Redirect rules."
           }
         },
         "description": "A bounded page of Redirect rules."
@@ -8496,10 +8651,20 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "condition": {
-            "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+              }
+            ],
+            "description": "Summary of the root condition that activates the Redirect rule."
           },
           "destination": {
             "type": "string",
@@ -8549,6 +8714,7 @@
                 "$ref": "#/components/schemas/RevenueGraph"
               }
             ],
+            "description": "Daily Revenue series aggregated across the Dataset, or null when the report is empty.",
             "nullable": true
           },
           "locations": {
@@ -8733,7 +8899,12 @@
             "description": "Revenue, order, and recommendation measurements for this recommendation type."
           },
           "graph": {
-            "$ref": "#/components/schemas/RevenueGraph"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RevenueGraph"
+              }
+            ],
+            "description": "Daily Revenue series attributed to this recommendation request type."
           }
         },
         "description": "Revenue performance attributed to one recommendation request type within a location."
@@ -8750,7 +8921,7 @@
         "properties": {
           "language": {
             "type": "string",
-            "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery."
+            "description": "Language required to scope Search Analytics, including filter-option discovery."
           },
           "currency": {
             "type": "string",
@@ -8772,7 +8943,7 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "Nonblank classification key/value selections applied to the query."
+            "description": "Nonblank, case-sensitive Classification Key and Value selections applied to the query."
           }
         },
         "description": "Effective dimensions used to scope a Search Analytics operation."
@@ -8823,7 +8994,12 @@
             "format": "date"
           },
           "appliedFilters": {
-            "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+              }
+            ],
+            "description": "Effective selections used to narrow dependent options."
           },
           "dataAvailableFromDate": {
             "type": "string",
@@ -8876,7 +9052,12 @@
         "type": "object",
         "properties": {
           "filterOptions": {
-            "$ref": "#/components/schemas/SearchAnalyticsFilterOptions"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchAnalyticsFilterOptions"
+              }
+            ],
+            "description": "Languages, currencies, channels, subchannels, classifications, and earliest available data time."
           }
         },
         "description": "Available Search Analytics filter options for the requested period and current selections."
@@ -8923,7 +9104,7 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "Optional classification key/value filters. Keys are matched using Search Analytics classification semantics.",
+            "description": "Optional case-sensitive Classification Key and Value filters. Blank Keys or Values are ignored. Use filter-option discovery for available selections.",
             "nullable": true
           }
         },
@@ -8962,10 +9143,20 @@
             "format": "date"
           },
           "filters": {
-            "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+              }
+            ],
+            "description": "Effective filters applied to the analytics query."
           },
           "summary": {
-            "$ref": "#/components/schemas/SearchAnalyticsSummary"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchAnalyticsSummary"
+              }
+            ],
+            "description": "Aggregate metrics for the requested and comparison periods."
           },
           "timeline": {
             "type": "array",
@@ -8987,16 +9178,36 @@
         "type": "object",
         "properties": {
           "searches": {
-            "$ref": "#/components/schemas/SearchMetrics"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchMetrics"
+              }
+            ],
+            "description": "Overall search-volume metrics."
           },
           "searchesWithoutResults": {
-            "$ref": "#/components/schemas/SearchesWithoutResultsMetrics"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchesWithoutResultsMetrics"
+              }
+            ],
+            "description": "Metrics for searches that returned no products."
           },
           "clicks": {
-            "$ref": "#/components/schemas/SearchClickMetrics"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchClickMetrics"
+              }
+            ],
+            "description": "Click-performance metrics."
           },
           "conversions": {
-            "$ref": "#/components/schemas/SearchConversionMetrics"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchConversionMetrics"
+              }
+            ],
+            "description": "Conversion-performance metrics."
           }
         },
         "description": "Search performance grouped into volume, zero-result, click, and conversion metrics."
@@ -9015,13 +9226,28 @@
             "description": "Search term associated with these performance metrics."
           },
           "searches": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Search-volume comparison for the term."
           },
           "clicks": {
-            "$ref": "#/components/schemas/SearchClickMetrics"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchClickMetrics"
+              }
+            ],
+            "description": "Click-performance comparisons for the term."
           },
           "conversions": {
-            "$ref": "#/components/schemas/SearchConversionMetrics"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchConversionMetrics"
+              }
+            ],
+            "description": "Conversion-performance comparisons for the term."
           }
         },
         "description": "One search term and its aggregate search, click, and conversion performance."
@@ -9068,7 +9294,7 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "Optional classification key/value filters. Keys are matched using Search Analytics classification semantics.",
+            "description": "Optional case-sensitive Classification Key and Value filters. Blank Keys or Values are ignored. Use filter-option discovery for available selections.",
             "nullable": true
           },
           "term": {
@@ -9083,6 +9309,7 @@
                 "$ref": "#/components/schemas/PaginationRequest"
               }
             ],
+            "description": "Optional page selection. Defaults to page 1 with 50 terms.",
             "nullable": true
           }
         },
@@ -9121,7 +9348,12 @@
             "format": "date"
           },
           "filters": {
-            "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+              }
+            ],
+            "description": "Effective filters applied to the analytics query."
           },
           "terms": {
             "type": "array",
@@ -9131,7 +9363,12 @@
             "description": "Search terms included in this result."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination details for this term page."
           }
         },
         "description": "Search-term performance results and their effective query context."
@@ -9169,7 +9406,12 @@
             "format": "date"
           },
           "filters": {
-            "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+              }
+            ],
+            "description": "Effective filters applied to the analytics query."
           },
           "terms": {
             "type": "array",
@@ -9179,7 +9421,12 @@
             "description": "Search terms without results included in this result."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination details for this term page."
           }
         },
         "description": "Search terms that returned no products and their effective query context."
@@ -9196,7 +9443,12 @@
             "description": "Search term that returned no Products."
           },
           "searchesWithoutResults": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Number of searches for the term that returned no products."
           }
         },
         "description": "One search term that returned no products and its search-volume comparison."
@@ -9259,13 +9511,28 @@
         "type": "object",
         "properties": {
           "total": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Total number of product clicks originating from searches."
           },
           "rate": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Percentage of search requests that produced a product click."
           },
           "averagePosition": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Average result position of clicked products. Lower values generally indicate better result relevance."
           }
         },
         "description": "Click-performance metrics for searches."
@@ -9278,10 +9545,20 @@
         "type": "object",
         "properties": {
           "total": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Total number of conversions attributed to searches."
           },
           "rate": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Percentage of search requests that produced a conversion."
           }
         },
         "description": "Conversion-performance metrics for searches."
@@ -9294,10 +9571,20 @@
         "type": "object",
         "properties": {
           "total": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Total number of searches that returned no products."
           },
           "rate": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Percentage of searches that returned no products."
           }
         },
         "description": "Metrics for searches that returned no products."
@@ -9357,7 +9644,12 @@
             "description": "Languages configured on the Search Index. A language must be included and match the search request language for its multilingual data to be searchable."
           },
           "rebuildStatus": {
-            "$ref": "#/components/schemas/SearchIndexRebuildStatus"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchIndexRebuildStatus"
+              }
+            ],
+            "description": "Current Search Index rebuild and stale-data state."
           },
           "indexJson": {
             "type": "string",
@@ -9467,7 +9759,12 @@
         "type": "object",
         "properties": {
           "searchIndex": {
-            "$ref": "#/components/schemas/SearchIndex"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchIndex"
+              }
+            ],
+            "description": "Detailed Search Index representation including indexed languages, rebuild state, and its complete JSON configuration."
           }
         },
         "description": "Response containing one Search Index."
@@ -9527,10 +9824,20 @@
         "type": "object",
         "properties": {
           "total": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Total number of search requests."
           },
           "uniqueTerms": {
-            "$ref": "#/components/schemas/ComparedValue"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparedValue"
+              }
+            ],
+            "description": "Number of distinct search terms."
           }
         },
         "description": "Search-volume metrics for the selected scope."
@@ -9545,7 +9852,12 @@
         "type": "object",
         "properties": {
           "kind": {
-            "$ref": "#/components/schemas/SearchResultModifierActionKind"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchResultModifierActionKind"
+              }
+            ],
+            "description": "Action kind: AddTermFilter or AddFilters."
           },
           "term": {
             "type": "string",
@@ -9593,10 +9905,20 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "condition": {
-            "$ref": "#/components/schemas/SearchTermCondition"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchTermCondition"
+              }
+            ],
+            "description": "Complete condition that activates the rule."
           },
           "actions": {
             "type": "array",
@@ -9615,7 +9937,12 @@
         "type": "object",
         "properties": {
           "rule": {
-            "$ref": "#/components/schemas/SearchResultModifierRule"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchResultModifierRule"
+              }
+            ],
+            "description": "Complete Search Result Modifier rule state."
           }
         },
         "description": "One Search Result Modifier rule."
@@ -9635,7 +9962,12 @@
             "description": "Compact Search Result Modifier rule representations returned on this page."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination details for the returned Search Result Modifier rules."
           }
         },
         "description": "A bounded page of Search Result Modifier rules."
@@ -9660,17 +9992,27 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "condition": {
-            "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+              }
+            ],
+            "description": "Summary of the root condition that activates the rule."
           },
           "actionKinds": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SearchResultModifierActionKind"
             },
-            "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration and filters."
+            "description": "Ordered kinds of actions applied by the rule."
           }
         },
         "description": "Compact Search Result Modifier rule representation returned by list operations."
@@ -9733,7 +10075,12 @@
         "type": "object",
         "properties": {
           "kind": {
-            "$ref": "#/components/schemas/SearchTermModifierActionKind"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchTermModifierActionKind"
+              }
+            ],
+            "description": "Action kind: AppendToTerm, RemoveFromTerm, ReplaceTerm, or ReplaceWordsInTerm."
           },
           "words": {
             "type": "string",
@@ -9778,10 +10125,20 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "condition": {
-            "$ref": "#/components/schemas/SearchTermCondition"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchTermCondition"
+              }
+            ],
+            "description": "Complete condition that activates the rule."
           },
           "actions": {
             "type": "array",
@@ -9800,7 +10157,12 @@
         "type": "object",
         "properties": {
           "rule": {
-            "$ref": "#/components/schemas/SearchTermModifierRule"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchTermModifierRule"
+              }
+            ],
+            "description": "Complete Search Term Modifier rule state."
           }
         },
         "description": "One Search Term Modifier rule."
@@ -9820,7 +10182,12 @@
             "description": "Compact Search Term Modifier rule representations returned on this page."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination details for the returned Search Term Modifier rules."
           }
         },
         "description": "A bounded page of Search Term Modifier rules."
@@ -9845,17 +10212,27 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "condition": {
-            "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+              }
+            ],
+            "description": "Summary of the root condition that activates the rule."
           },
           "actionKinds": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SearchTermModifierActionKind"
             },
-            "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration."
+            "description": "Ordered kinds of actions applied by the rule."
           }
         },
         "description": "Compact Search Term Modifier rule representation returned by list operations."
@@ -9893,7 +10270,7 @@
           },
           "nestedConditionCount": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+            "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
             "format": "int32",
             "type": "integer"
           }
@@ -9944,7 +10321,12 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "stem": {
             "type": "string",
@@ -9968,7 +10350,12 @@
         "type": "object",
         "properties": {
           "rule": {
-            "$ref": "#/components/schemas/StemmingRule"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StemmingRule"
+              }
+            ],
+            "description": "Complete Stemming rule state."
           }
         },
         "description": "One Stemming rule."
@@ -9988,7 +10375,12 @@
             "description": "Compact Stemming rule representations returned on this page."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination details for the returned Stemming rules."
           }
         },
         "description": "A bounded page of Stemming rules."
@@ -10013,7 +10405,12 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "stem": {
             "type": "string",
@@ -10022,7 +10419,7 @@
           },
           "wordCount": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "description": "Number of word variants governed by the rule. Get the rule by ID to inspect the words.",
+            "description": "Number of word variants governed by the rule.",
             "format": "int32",
             "type": "integer"
           }
@@ -10121,10 +10518,20 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "definition": {
-            "$ref": "#/components/schemas/SynonymDefinition"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SynonymDefinition"
+              }
+            ],
+            "description": "Direction-specific definition of how search words are connected."
           },
           "allowInPredictions": {
             "type": "boolean",
@@ -10140,7 +10547,12 @@
         "type": "object",
         "properties": {
           "rule": {
-            "$ref": "#/components/schemas/SynonymRule"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SynonymRule"
+              }
+            ],
+            "description": "Complete Synonym rule state."
           }
         },
         "description": "One Synonym rule."
@@ -10160,7 +10572,12 @@
             "description": "Synonym rules in the requested page."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination metadata for the complete filtered result set."
           }
         },
         "description": "A page of Synonym rules."
@@ -10185,10 +10602,20 @@
             "description": "Whether the rule is approved and active for matching searches."
           },
           "scope": {
-            "$ref": "#/components/schemas/SearchToolRuleScope"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SearchToolRuleScope"
+              }
+            ],
+            "description": "Search Index and language scope in which the rule applies."
           },
           "definition": {
-            "$ref": "#/components/schemas/SynonymDefinition"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SynonymDefinition"
+              }
+            ],
+            "description": "Direction-specific definition of how search words are connected."
           },
           "allowInPredictions": {
             "type": "boolean",
@@ -10261,7 +10688,12 @@
             "type": "integer"
           },
           "configuration": {
-            "$ref": "#/components/schemas/TriggerTypeConfiguration"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TriggerTypeConfiguration"
+              }
+            ],
+            "description": "Type-specific Trigger criteria and result selections. Webhook credentials, delivery settings, and infrastructure settings are omitted."
           },
           "userConditionsJson": {
             "type": "string",
@@ -10278,7 +10710,12 @@
         "type": "object",
         "properties": {
           "configuration": {
-            "$ref": "#/components/schemas/TriggerConfigurationDetails"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TriggerConfigurationDetails"
+              }
+            ],
+            "description": "Selected Trigger configuration."
           }
         },
         "description": "Selected Trigger configuration."
@@ -10303,7 +10740,12 @@
             "description": "Configuration summaries for this page; empty when none match."
           },
           "pagination": {
-            "$ref": "#/components/schemas/PaginationMetadata"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Page number, page size, and total configuration count."
           }
         },
         "description": "One page of Trigger configurations ordered by name and then Configuration ID."
@@ -10519,6 +10961,7 @@
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
+            "description": "Required category-view count range; null means no count constraint.",
             "nullable": true
           },
           "contentViews": {
@@ -10528,6 +10971,7 @@
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
+            "description": "Required content-view count range; null means no count constraint.",
             "nullable": true
           },
           "filtersJson": {
@@ -10558,6 +11002,7 @@
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
+            "description": "Required category-view count range; null means no count constraint.",
             "nullable": true
           },
           "productViews": {
@@ -10567,6 +11012,7 @@
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
+            "description": "Required product-view count range; null means no count constraint.",
             "nullable": true
           },
           "filtersJson": {
@@ -10640,6 +11086,7 @@
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
+            "description": "Required product-view count range; null means no count constraint.",
             "nullable": true
           },
           "filtersJson": {
@@ -10724,6 +11171,7 @@
                 "$ref": "#/components/schemas/UpdateMerchandisingRuleScheduleRequest"
               }
             ],
+            "description": "Schedule controlling when the rule is active. Omit this property or set it to null to preserve the entire current schedule. To change or clear schedule bounds, provide a schedule object.",
             "nullable": true
           }
         },

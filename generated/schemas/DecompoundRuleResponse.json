@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "rule": {
-      "$ref": "#/components/schemas/DecompoundRule"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DecompoundRule"
+        }
+      ],
+      "description": "Complete Decompounding rule state."
     }
   },
   "description": "One Decompounding rule."

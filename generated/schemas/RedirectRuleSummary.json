@@ -18,10 +18,20 @@
       "description": "Whether the rule is approved and active for matching searches."
     },
     "scope": {
-      "$ref": "#/components/schemas/SearchToolRuleScope"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchToolRuleScope"
+        }
+      ],
+      "description": "Search Index and language scope in which the rule applies."
     },
     "condition": {
-      "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchToolRuleConditionSummary"
+        }
+      ],
+      "description": "Summary of the root condition that activates the Redirect rule."
     },
     "destination": {
       "type": "string",

@@ -7,13 +7,28 @@
   "type": "object",
   "properties": {
     "dataset": {
-      "$ref": "#/components/schemas/DatasetDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DatasetDetails"
+        }
+      ],
+      "description": "Identifying and operational details about a Relewise Dataset."
     },
     "license": {
-      "$ref": "#/components/schemas/License"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/License"
+        }
+      ],
+      "description": "The License the requested Dataset belongs to."
     },
     "agentGatewayPolicy": {
-      "$ref": "#/components/schemas/DatasetAgentGatewayPolicy"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DatasetAgentGatewayPolicy"
+        }
+      ],
+      "description": "The effective Agent Gateway access policy for this Dataset and authenticated user."
     }
   },
   "description": "Details about the requested Dataset and its effective Agent Gateway access policy."

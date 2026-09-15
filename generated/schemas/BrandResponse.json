@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "brand": {
-      "$ref": "#/components/schemas/BrandDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/BrandDetails"
+        }
+      ],
+      "description": "Stored details and Data Values for one Brand."
     }
   },
   "description": "Response containing one Brand and its stored details."

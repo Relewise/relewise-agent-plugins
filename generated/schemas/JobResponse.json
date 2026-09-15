@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "job": {
-      "$ref": "#/components/schemas/JobDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/JobDetails"
+        }
+      ],
+      "description": "Job details discriminated by type: grpc, httpRequest, or marketingAutomationTriggers. All variants share metadata and custom configuration names and values; reserved settings and execution logs are excluded."
     }
   },
   "description": "Details of one Dataset Job."

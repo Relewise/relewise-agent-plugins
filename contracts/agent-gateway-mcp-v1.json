@@ -3,7 +3,7 @@
     {
       "name": "fetch_analyzer_consumption_summary",
       "title": "Fetch Analyzer Consumption Summary",
-      "description": "Fetch the Analyzer consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
+      "description": "Reads Analyzer consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -232,7 +232,7 @@
     {
       "name": "fetch_behavioral_tracking_consumption_summary",
       "title": "Fetch Behavioral Tracking Consumption Summary",
-      "description": "Fetch the Behavioral Tracking consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
+      "description": "Reads Behavioral Tracking consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -563,7 +563,7 @@
                       ]
                     },
                     "valueJson": {
-                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object.",
+                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object. See https://docs.relewise.com/docs/intro/data-types.html for the value structures.",
                       "type": "string"
                     }
                   },
@@ -772,7 +772,7 @@
                       ]
                     },
                     "valueJson": {
-                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object.",
+                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object. See https://docs.relewise.com/docs/intro/data-types.html for the value structures.",
                       "type": "string"
                     }
                   },
@@ -940,7 +940,7 @@
                       ]
                     },
                     "valueJson": {
-                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object.",
+                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object. See https://docs.relewise.com/docs/intro/data-types.html for the value structures.",
                       "type": "string"
                     }
                   },
@@ -989,7 +989,7 @@
     {
       "name": "fetch_content_delivery_consumption_summary",
       "title": "Fetch Content Delivery Consumption Summary",
-      "description": "Fetch the Content Delivery consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
+      "description": "Reads Content Delivery consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1218,7 +1218,7 @@
     {
       "name": "fetch_integrations_consumption_summary",
       "title": "Fetch Integrations Consumption Summary",
-      "description": "Fetch the Integrations consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
+      "description": "Reads Integrations consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1471,7 +1471,7 @@
             "type": "string"
           },
           "currency": {
-            "description": "Optional currency used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Currency filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -1479,7 +1479,7 @@
             "default": null
           },
           "channel": {
-            "description": "Optional channel used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Channel filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -1487,7 +1487,7 @@
             "default": null
           },
           "subChannel": {
-            "description": "Optional subchannel. It is ignored when channel is omitted; use fetch_search_analytics_filter_options to discover values for the selected channel.",
+            "description": "Subchannel filter; ignored when channel is omitted. Use fetch_search_analytics_filter_options to discover values for the selected channel.",
             "type": [
               "string",
               "null"
@@ -1495,7 +1495,7 @@
             "default": null
           },
           "classifications": {
-            "description": "Optional case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
+            "description": "Case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
             "type": [
               "object",
               "null"
@@ -1509,7 +1509,7 @@
             "default": null
           },
           "term": {
-            "description": "Optional case-insensitive text used to filter the returned search terms.",
+            "description": "Case-insensitive text filter for search terms.",
             "type": [
               "string",
               "null"
@@ -1563,7 +1563,7 @@
             "type": "object",
             "properties": {
               "language": {
-                "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery.",
+                "description": "Language required to scope Search Analytics, including filter-option discovery.",
                 "type": "string"
               },
               "currency": {
@@ -1588,7 +1588,7 @@
                 ]
               },
               "classifications": {
-                "description": "Nonblank classification key/value selections applied to the query.",
+                "description": "Nonblank, case-sensitive Classification Key and Value selections applied to the query.",
                 "type": "object",
                 "additionalProperties": {
                   "type": "string"
@@ -1631,7 +1631,7 @@
                       "type": "number"
                     },
                     "change": {
-                      "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                      "description": "Current value minus previous value; percentage-point change for rate metrics.",
                       "type": "number"
                     },
                     "relativeChangePercent": {
@@ -1666,7 +1666,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -1697,7 +1697,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -1728,7 +1728,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -1770,7 +1770,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -1801,7 +1801,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -1889,7 +1889,7 @@
     {
       "name": "fetch_marketing_automation_consumption_summary",
       "title": "Fetch Marketing Automation Consumption Summary",
-      "description": "Fetch the Marketing Automation consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
+      "description": "Reads Marketing Automation consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2142,7 +2142,7 @@
             "type": "string"
           },
           "currency": {
-            "description": "Optional currency used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Currency filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -2150,7 +2150,7 @@
             "default": null
           },
           "channel": {
-            "description": "Optional channel used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Channel filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -2158,7 +2158,7 @@
             "default": null
           },
           "subChannel": {
-            "description": "Optional subchannel. It is ignored when channel is omitted; use fetch_search_analytics_filter_options to discover values for the selected channel.",
+            "description": "Subchannel filter; ignored when channel is omitted. Use fetch_search_analytics_filter_options to discover values for the selected channel.",
             "type": [
               "string",
               "null"
@@ -2166,7 +2166,7 @@
             "default": null
           },
           "classifications": {
-            "description": "Optional case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
+            "description": "Case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
             "type": [
               "object",
               "null"
@@ -2180,7 +2180,7 @@
             "default": null
           },
           "term": {
-            "description": "Optional case-insensitive text used to filter the returned search terms.",
+            "description": "Case-insensitive text filter for search terms.",
             "type": [
               "string",
               "null"
@@ -2234,7 +2234,7 @@
             "type": "object",
             "properties": {
               "language": {
-                "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery.",
+                "description": "Language required to scope Search Analytics, including filter-option discovery.",
                 "type": "string"
               },
               "currency": {
@@ -2259,7 +2259,7 @@
                 ]
               },
               "classifications": {
-                "description": "Nonblank classification key/value selections applied to the query.",
+                "description": "Nonblank, case-sensitive Classification Key and Value selections applied to the query.",
                 "type": "object",
                 "additionalProperties": {
                   "type": "string"
@@ -2302,7 +2302,7 @@
                       "type": "number"
                     },
                     "change": {
-                      "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                      "description": "Current value minus previous value; percentage-point change for rate metrics.",
                       "type": "number"
                     },
                     "relativeChangePercent": {
@@ -2337,7 +2337,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -2368,7 +2368,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -2399,7 +2399,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -2441,7 +2441,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -2472,7 +2472,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -2774,7 +2774,7 @@
                       ]
                     },
                     "valueJson": {
-                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object.",
+                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object. See https://docs.relewise.com/docs/intro/data-types.html for the value structures.",
                       "type": "string"
                     }
                   },
@@ -2985,7 +2985,7 @@
                       ]
                     },
                     "valueJson": {
-                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object.",
+                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object. See https://docs.relewise.com/docs/intro/data-types.html for the value structures.",
                       "type": "string"
                     }
                   },
@@ -3214,7 +3214,7 @@
                       ]
                     },
                     "valueJson": {
-                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object.",
+                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object. See https://docs.relewise.com/docs/intro/data-types.html for the value structures.",
                       "type": "string"
                     }
                   },
@@ -3267,7 +3267,7 @@
     {
       "name": "fetch_recommendations_consumption_summary",
       "title": "Fetch Recommendations Consumption Summary",
-      "description": "Fetch the Recommendations consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
+      "description": "Reads Recommendations consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3496,7 +3496,7 @@
     {
       "name": "fetch_retail_media_consumption_summary",
       "title": "Fetch Retail Media Consumption Summary",
-      "description": "Fetch the Retail Media consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
+      "description": "Reads Retail Media consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4098,7 +4098,7 @@
                 "type": "object",
                 "properties": {
                   "language": {
-                    "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery.",
+                    "description": "Language required to scope Search Analytics, including filter-option discovery.",
                     "type": "string"
                   },
                   "currency": {
@@ -4123,7 +4123,7 @@
                     ]
                   },
                   "classifications": {
-                    "description": "Nonblank classification key/value selections applied to the query.",
+                    "description": "Nonblank, case-sensitive Classification Key and Value selections applied to the query.",
                     "type": "object",
                     "additionalProperties": {
                       "type": "string"
@@ -4258,7 +4258,7 @@
             "type": "string"
           },
           "currency": {
-            "description": "Optional currency used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Currency filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -4266,7 +4266,7 @@
             "default": null
           },
           "channel": {
-            "description": "Optional channel used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Channel filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -4274,7 +4274,7 @@
             "default": null
           },
           "subChannel": {
-            "description": "Optional subchannel. It is ignored when channel is omitted; use fetch_search_analytics_filter_options to discover values for the selected channel.",
+            "description": "Subchannel filter; ignored when channel is omitted. Use fetch_search_analytics_filter_options to discover values for the selected channel.",
             "type": [
               "string",
               "null"
@@ -4282,7 +4282,7 @@
             "default": null
           },
           "classifications": {
-            "description": "Optional case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
+            "description": "Case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
             "type": [
               "object",
               "null"
@@ -4332,7 +4332,7 @@
             "type": "object",
             "properties": {
               "language": {
-                "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery.",
+                "description": "Language required to scope Search Analytics, including filter-option discovery.",
                 "type": "string"
               },
               "currency": {
@@ -4357,7 +4357,7 @@
                 ]
               },
               "classifications": {
-                "description": "Nonblank classification key/value selections applied to the query.",
+                "description": "Nonblank, case-sensitive Classification Key and Value selections applied to the query.",
                 "type": "object",
                 "additionalProperties": {
                   "type": "string"
@@ -4393,7 +4393,7 @@
                         "type": "number"
                       },
                       "change": {
-                        "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                        "description": "Current value minus previous value; percentage-point change for rate metrics.",
                         "type": "number"
                       },
                       "relativeChangePercent": {
@@ -4424,7 +4424,7 @@
                         "type": "number"
                       },
                       "change": {
-                        "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                        "description": "Current value minus previous value; percentage-point change for rate metrics.",
                         "type": "number"
                       },
                       "relativeChangePercent": {
@@ -4465,7 +4465,7 @@
                         "type": "number"
                       },
                       "change": {
-                        "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                        "description": "Current value minus previous value; percentage-point change for rate metrics.",
                         "type": "number"
                       },
                       "relativeChangePercent": {
@@ -4496,7 +4496,7 @@
                         "type": "number"
                       },
                       "change": {
-                        "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                        "description": "Current value minus previous value; percentage-point change for rate metrics.",
                         "type": "number"
                       },
                       "relativeChangePercent": {
@@ -4537,7 +4537,7 @@
                         "type": "number"
                       },
                       "change": {
-                        "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                        "description": "Current value minus previous value; percentage-point change for rate metrics.",
                         "type": "number"
                       },
                       "relativeChangePercent": {
@@ -4568,7 +4568,7 @@
                         "type": "number"
                       },
                       "change": {
-                        "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                        "description": "Current value minus previous value; percentage-point change for rate metrics.",
                         "type": "number"
                       },
                       "relativeChangePercent": {
@@ -4599,7 +4599,7 @@
                         "type": "number"
                       },
                       "change": {
-                        "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                        "description": "Current value minus previous value; percentage-point change for rate metrics.",
                         "type": "number"
                       },
                       "relativeChangePercent": {
@@ -4641,7 +4641,7 @@
                         "type": "number"
                       },
                       "change": {
-                        "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                        "description": "Current value minus previous value; percentage-point change for rate metrics.",
                         "type": "number"
                       },
                       "relativeChangePercent": {
@@ -4672,7 +4672,7 @@
                         "type": "number"
                       },
                       "change": {
-                        "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                        "description": "Current value minus previous value; percentage-point change for rate metrics.",
                         "type": "number"
                       },
                       "relativeChangePercent": {
@@ -4788,7 +4788,7 @@
     {
       "name": "fetch_search_consumption_summary",
       "title": "Fetch Search Consumption Summary",
-      "description": "Fetch the Search consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
+      "description": "Reads Search consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5017,7 +5017,7 @@
     {
       "name": "fetch_searches_trending_down",
       "title": "Fetch Searches Trending Down",
-      "description": "Returns search terms whose search volume decreased most compared with the preceding equivalent period. Use it for declining demand; use fetch_popular_searches for highest absolute volume or fetch_searches_trending_up for rising demand. This tool is read-only and covers Product Search data from identified users.",
+      "description": "Returns search terms ranked by Relewise's trending-down calculation against the preceding equivalent period. Use it for declining demand; use fetch_popular_searches for highest absolute volume or fetch_searches_trending_up for rising demand. This tool is read-only and covers Product Search data from identified users.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5041,7 +5041,7 @@
             "type": "string"
           },
           "currency": {
-            "description": "Optional currency used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Currency filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -5049,7 +5049,7 @@
             "default": null
           },
           "channel": {
-            "description": "Optional channel used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Channel filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -5057,7 +5057,7 @@
             "default": null
           },
           "subChannel": {
-            "description": "Optional subchannel. It is ignored when channel is omitted; use fetch_search_analytics_filter_options to discover values for the selected channel.",
+            "description": "Subchannel filter; ignored when channel is omitted. Use fetch_search_analytics_filter_options to discover values for the selected channel.",
             "type": [
               "string",
               "null"
@@ -5065,7 +5065,7 @@
             "default": null
           },
           "classifications": {
-            "description": "Optional case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
+            "description": "Case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
             "type": [
               "object",
               "null"
@@ -5079,7 +5079,7 @@
             "default": null
           },
           "term": {
-            "description": "Optional case-insensitive text used to filter the returned search terms.",
+            "description": "Case-insensitive text filter for search terms.",
             "type": [
               "string",
               "null"
@@ -5133,7 +5133,7 @@
             "type": "object",
             "properties": {
               "language": {
-                "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery.",
+                "description": "Language required to scope Search Analytics, including filter-option discovery.",
                 "type": "string"
               },
               "currency": {
@@ -5158,7 +5158,7 @@
                 ]
               },
               "classifications": {
-                "description": "Nonblank classification key/value selections applied to the query.",
+                "description": "Nonblank, case-sensitive Classification Key and Value selections applied to the query.",
                 "type": "object",
                 "additionalProperties": {
                   "type": "string"
@@ -5201,7 +5201,7 @@
                       "type": "number"
                     },
                     "change": {
-                      "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                      "description": "Current value minus previous value; percentage-point change for rate metrics.",
                       "type": "number"
                     },
                     "relativeChangePercent": {
@@ -5236,7 +5236,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5267,7 +5267,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5298,7 +5298,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5340,7 +5340,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5371,7 +5371,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5459,7 +5459,7 @@
     {
       "name": "fetch_searches_trending_up",
       "title": "Fetch Searches Trending Up",
-      "description": "Returns search terms whose search volume increased most compared with the preceding equivalent period. Use it for rising demand; use fetch_popular_searches for highest absolute volume or fetch_searches_trending_down for declining demand. This tool is read-only and covers Product Search data from identified users.",
+      "description": "Returns search terms ranked by Relewise's trending-up calculation against the preceding equivalent period. Use it for rising demand; use fetch_popular_searches for highest absolute volume or fetch_searches_trending_down for declining demand. This tool is read-only and covers Product Search data from identified users.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5483,7 +5483,7 @@
             "type": "string"
           },
           "currency": {
-            "description": "Optional currency used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Currency filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -5491,7 +5491,7 @@
             "default": null
           },
           "channel": {
-            "description": "Optional channel used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Channel filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -5499,7 +5499,7 @@
             "default": null
           },
           "subChannel": {
-            "description": "Optional subchannel. It is ignored when channel is omitted; use fetch_search_analytics_filter_options to discover values for the selected channel.",
+            "description": "Subchannel filter; ignored when channel is omitted. Use fetch_search_analytics_filter_options to discover values for the selected channel.",
             "type": [
               "string",
               "null"
@@ -5507,7 +5507,7 @@
             "default": null
           },
           "classifications": {
-            "description": "Optional case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
+            "description": "Case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
             "type": [
               "object",
               "null"
@@ -5521,7 +5521,7 @@
             "default": null
           },
           "term": {
-            "description": "Optional case-insensitive text used to filter the returned search terms.",
+            "description": "Case-insensitive text filter for search terms.",
             "type": [
               "string",
               "null"
@@ -5575,7 +5575,7 @@
             "type": "object",
             "properties": {
               "language": {
-                "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery.",
+                "description": "Language required to scope Search Analytics, including filter-option discovery.",
                 "type": "string"
               },
               "currency": {
@@ -5600,7 +5600,7 @@
                 ]
               },
               "classifications": {
-                "description": "Nonblank classification key/value selections applied to the query.",
+                "description": "Nonblank, case-sensitive Classification Key and Value selections applied to the query.",
                 "type": "object",
                 "additionalProperties": {
                   "type": "string"
@@ -5643,7 +5643,7 @@
                       "type": "number"
                     },
                     "change": {
-                      "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                      "description": "Current value minus previous value; percentage-point change for rate metrics.",
                       "type": "number"
                     },
                     "relativeChangePercent": {
@@ -5678,7 +5678,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5709,7 +5709,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5740,7 +5740,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5782,7 +5782,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5813,7 +5813,7 @@
                           "type": "number"
                         },
                         "change": {
-                          "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                          "description": "Current value minus previous value; percentage-point change for rate metrics.",
                           "type": "number"
                         },
                         "relativeChangePercent": {
@@ -5925,7 +5925,7 @@
             "type": "string"
           },
           "currency": {
-            "description": "Optional currency used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Currency filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -5933,7 +5933,7 @@
             "default": null
           },
           "channel": {
-            "description": "Optional channel used to scope Search Analytics. Use fetch_search_analytics_filter_options when the correct value is unknown.",
+            "description": "Channel filter. Use fetch_search_analytics_filter_options when the correct value is unknown.",
             "type": [
               "string",
               "null"
@@ -5941,7 +5941,7 @@
             "default": null
           },
           "subChannel": {
-            "description": "Optional subchannel. It is ignored when channel is omitted; use fetch_search_analytics_filter_options to discover values for the selected channel.",
+            "description": "Subchannel filter; ignored when channel is omitted. Use fetch_search_analytics_filter_options to discover values for the selected channel.",
             "type": [
               "string",
               "null"
@@ -5949,7 +5949,7 @@
             "default": null
           },
           "classifications": {
-            "description": "Optional case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
+            "description": "Case-sensitive Classification Key and Value filters. Use fetch_search_analytics_filter_options when the correct values are unknown.",
             "type": [
               "object",
               "null"
@@ -5963,7 +5963,7 @@
             "default": null
           },
           "term": {
-            "description": "Optional case-insensitive text used to filter the returned search terms.",
+            "description": "Case-insensitive text filter for search terms.",
             "type": [
               "string",
               "null"
@@ -6017,7 +6017,7 @@
             "type": "object",
             "properties": {
               "language": {
-                "description": "Language used to scope Search Analytics. This is required for every Search Analytics operation, including filter-option discovery.",
+                "description": "Language required to scope Search Analytics, including filter-option discovery.",
                 "type": "string"
               },
               "currency": {
@@ -6042,7 +6042,7 @@
                 ]
               },
               "classifications": {
-                "description": "Nonblank classification key/value selections applied to the query.",
+                "description": "Nonblank, case-sensitive Classification Key and Value selections applied to the query.",
                 "type": "object",
                 "additionalProperties": {
                   "type": "string"
@@ -6085,7 +6085,7 @@
                       "type": "number"
                     },
                     "change": {
-                      "description": "Signed arithmetic difference calculated as current value minus previous value. For rate metrics, this is a percentage-point change.",
+                      "description": "Current value minus previous value; percentage-point change for rate metrics.",
                       "type": "number"
                     },
                     "relativeChangePercent": {
@@ -6165,7 +6165,7 @@
     {
       "name": "fetch_shoppertainment_consumption_summary",
       "title": "Fetch Shoppertainment Consumption Summary",
-      "description": "Fetch the Shoppertainment and Adaptive Discovery consumption summary for an inclusive date range, including aggregate measurements, comparison-period changes, and daily trends.",
+      "description": "Reads Shoppertainment and Adaptive Discovery consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6509,7 +6509,7 @@
     {
       "name": "get_dataset_metadata",
       "title": "Get Dataset Metadata",
-      "description": "Discovers Dataset languages, currencies, Data Keys, Classification Keys, and Classification Values for an inclusive period. Use it before Dataset-scoped operations when these values are unknown instead of guessing them. Catalog, Content, User, and Company metadata are optional because they can make the response large. This tool is read-only.",
+      "description": "Discovers Dataset languages, currencies, Data Keys, Classification Keys, and Classification Values for an inclusive period. Use it before Dataset-scoped operations when these values are unknown instead of guessing them. Select only needed Catalog, Content, User, and Company metadata groups to limit response size. This tool is read-only.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6529,22 +6529,22 @@
             "format": "date"
           },
           "includeCatalogMetadata": {
-            "description": "Whether to include Product and Variant Data Keys and Classification values. Enable only when catalog metadata is needed.",
+            "description": "Include Product, Variant, Product Category, and Brand Data Keys, plus Variant Specification Keys.",
             "type": "boolean",
             "default": false
           },
           "includeContentMetadata": {
-            "description": "Whether to include Content Data Keys and Classification values. Enable only when Content metadata is needed.",
+            "description": "Include Content and Content Category Data Keys.",
             "type": "boolean",
             "default": false
           },
           "includeUserMetadata": {
-            "description": "Whether to include User Data Keys and Classification values. Enable only when User metadata is needed.",
+            "description": "Include User Data Keys and classification options.",
             "type": "boolean",
             "default": false
           },
           "includeCompanyMetadata": {
-            "description": "Whether to include Company Data Keys and Classification values. Enable only when Company metadata is needed.",
+            "description": "Include Company Data Keys when Company entities are available for the Dataset.",
             "type": "boolean",
             "default": false
           }
@@ -6894,7 +6894,7 @@
                 ]
               },
               "modifierCount": {
-                "description": "Number of terms that modify the Head. Get the rule by ID to inspect the terms.",
+                "description": "Number of terms that modify the Head.",
                 "type": "integer"
               },
               "preventsDecompounding": {
@@ -7351,7 +7351,7 @@
                       "type": "string"
                     },
                     "text": {
-                      "description": "Message text as returned by the backend, including its caller-specific runner-information filtering.",
+                      "description": "Message text after caller-specific filtering of runner information.",
                       "type": "string"
                     }
                   },
@@ -8023,7 +8023,7 @@
                 }
               },
               "conditionSummary": {
-                "description": "Summary of the root condition that activates the Redirect rule. Get the rule by ID to inspect the complete condition tree.",
+                "description": "Summary of the root condition that activates the Redirect rule.",
                 "type": "object",
                 "properties": {
                   "kind": {
@@ -8052,7 +8052,7 @@
                     "type": "boolean"
                   },
                   "nestedConditionCount": {
-                    "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+                    "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
                     "type": "integer"
                   }
                 },
@@ -8514,7 +8514,7 @@
                 }
               },
               "conditionSummary": {
-                "description": "Summary of the root condition that activates the rule. Get the rule by ID to inspect the complete condition tree.",
+                "description": "Summary of the root condition that activates the rule.",
                 "type": "object",
                 "properties": {
                   "kind": {
@@ -8543,7 +8543,7 @@
                     "type": "boolean"
                   },
                   "nestedConditionCount": {
-                    "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+                    "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
                     "type": "integer"
                   }
                 },
@@ -8556,7 +8556,7 @@
                 ]
               },
               "actionKinds": {
-                "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration and filters.",
+                "description": "Ordered kinds of actions applied by the rule.",
                 "type": "array",
                 "items": {
                   "description": "Operation performed by a Search Result Modifier action.",
@@ -8807,7 +8807,7 @@
                 }
               },
               "conditionSummary": {
-                "description": "Summary of the root condition that activates the rule. Get the rule by ID to inspect the complete condition tree.",
+                "description": "Summary of the root condition that activates the rule.",
                 "type": "object",
                 "properties": {
                   "kind": {
@@ -8836,7 +8836,7 @@
                     "type": "boolean"
                   },
                   "nestedConditionCount": {
-                    "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+                    "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
                     "type": "integer"
                   }
                 },
@@ -8849,7 +8849,7 @@
                 ]
               },
               "actionKinds": {
-                "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration.",
+                "description": "Ordered kinds of actions applied by the rule.",
                 "type": "array",
                 "items": {
                   "description": "Operation performed by a Search Term Modifier action.",
@@ -8977,7 +8977,7 @@
                 ]
               },
               "wordCount": {
-                "description": "Number of word variants governed by the rule. Get the rule by ID to inspect the words.",
+                "description": "Number of word variants governed by the rule.",
                 "type": "integer"
               },
               "id": {
@@ -9763,7 +9763,7 @@
                   ]
                 },
                 "modifierCount": {
-                  "description": "Number of terms that modify the Head. Get the rule by ID to inspect the terms.",
+                  "description": "Number of terms that modify the Head.",
                   "type": "integer"
                 },
                 "preventsDecompounding": {
@@ -10524,7 +10524,7 @@
               "type": "object",
               "properties": {
                 "conditionSummary": {
-                  "description": "Summary of the root condition that activates the Redirect rule. Get the rule by ID to inspect the complete condition tree.",
+                  "description": "Summary of the root condition that activates the Redirect rule.",
                   "type": "object",
                   "properties": {
                     "kind": {
@@ -10553,7 +10553,7 @@
                       "type": "boolean"
                     },
                     "nestedConditionCount": {
-                      "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+                      "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
                       "type": "integer"
                     }
                   },
@@ -10807,7 +10807,7 @@
               "type": "object",
               "properties": {
                 "conditionSummary": {
-                  "description": "Summary of the root condition that activates the rule. Get the rule by ID to inspect the complete condition tree.",
+                  "description": "Summary of the root condition that activates the rule.",
                   "type": "object",
                   "properties": {
                     "kind": {
@@ -10836,7 +10836,7 @@
                       "type": "boolean"
                     },
                     "nestedConditionCount": {
-                      "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+                      "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
                       "type": "integer"
                     }
                   },
@@ -10849,7 +10849,7 @@
                   ]
                 },
                 "actionKinds": {
-                  "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration and filters.",
+                  "description": "Ordered kinds of actions applied by the rule.",
                   "type": "array",
                   "items": {
                     "description": "Operation performed by a Search Result Modifier action.",
@@ -11004,7 +11004,7 @@
               "type": "object",
               "properties": {
                 "conditionSummary": {
-                  "description": "Summary of the root condition that activates the rule. Get the rule by ID to inspect the complete condition tree.",
+                  "description": "Summary of the root condition that activates the rule.",
                   "type": "object",
                   "properties": {
                     "kind": {
@@ -11033,7 +11033,7 @@
                       "type": "boolean"
                     },
                     "nestedConditionCount": {
-                      "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+                      "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
                       "type": "integer"
                     }
                   },
@@ -11046,7 +11046,7 @@
                   ]
                 },
                 "actionKinds": {
-                  "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration.",
+                  "description": "Ordered kinds of actions applied by the rule.",
                   "type": "array",
                   "items": {
                     "description": "Operation performed by a Search Term Modifier action.",
@@ -11210,7 +11210,7 @@
                   ]
                 },
                 "wordCount": {
-                  "description": "Number of word variants governed by the rule. Get the rule by ID to inspect the words.",
+                  "description": "Number of word variants governed by the rule.",
                   "type": "integer"
                 },
                 "id": {
@@ -12229,7 +12229,7 @@
                 ]
               },
               "modifierCount": {
-                "description": "Number of terms that modify the Head. Get the rule by ID to inspect the terms.",
+                "description": "Number of terms that modify the Head.",
                 "type": "integer"
               },
               "preventsDecompounding": {
@@ -12998,7 +12998,7 @@
                 }
               },
               "conditionSummary": {
-                "description": "Summary of the root condition that activates the Redirect rule. Get the rule by ID to inspect the complete condition tree.",
+                "description": "Summary of the root condition that activates the Redirect rule.",
                 "type": "object",
                 "properties": {
                   "kind": {
@@ -13027,7 +13027,7 @@
                     "type": "boolean"
                   },
                   "nestedConditionCount": {
-                    "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+                    "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
                     "type": "integer"
                   }
                 },
@@ -13297,7 +13297,7 @@
                 }
               },
               "conditionSummary": {
-                "description": "Summary of the root condition that activates the rule. Get the rule by ID to inspect the complete condition tree.",
+                "description": "Summary of the root condition that activates the rule.",
                 "type": "object",
                 "properties": {
                   "kind": {
@@ -13326,7 +13326,7 @@
                     "type": "boolean"
                   },
                   "nestedConditionCount": {
-                    "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+                    "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
                     "type": "integer"
                   }
                 },
@@ -13339,7 +13339,7 @@
                 ]
               },
               "actionKinds": {
-                "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration and filters.",
+                "description": "Ordered kinds of actions applied by the rule.",
                 "type": "array",
                 "items": {
                   "description": "Operation performed by a Search Result Modifier action.",
@@ -13595,7 +13595,7 @@
                 }
               },
               "conditionSummary": {
-                "description": "Summary of the root condition that activates the rule. Get the rule by ID to inspect the complete condition tree.",
+                "description": "Summary of the root condition that activates the rule.",
                 "type": "object",
                 "properties": {
                   "kind": {
@@ -13624,7 +13624,7 @@
                     "type": "boolean"
                   },
                   "nestedConditionCount": {
-                    "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+                    "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
                     "type": "integer"
                   }
                 },
@@ -13637,7 +13637,7 @@
                 ]
               },
               "actionKinds": {
-                "description": "Ordered kinds of actions applied by the rule. Get the rule by ID to inspect their complete configuration.",
+                "description": "Ordered kinds of actions applied by the rule.",
                 "type": "array",
                 "items": {
                   "description": "Operation performed by a Search Term Modifier action.",
@@ -13770,7 +13770,7 @@
                 ]
               },
               "wordCount": {
-                "description": "Number of word variants governed by the rule. Get the rule by ID to inspect the words.",
+                "description": "Number of word variants governed by the rule.",
                 "type": "integer"
               },
               "id": {

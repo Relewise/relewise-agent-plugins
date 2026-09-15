@@ -13,6 +13,7 @@
           "$ref": "#/components/schemas/UpdateMerchandisingRuleScheduleRequest"
         }
       ],
+      "description": "Schedule controlling when the rule is active. Omit this property or set it to null to preserve the entire current schedule. To change or clear schedule bounds, provide a schedule object.",
       "nullable": true
     }
   },

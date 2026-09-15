@@ -53,7 +53,12 @@
       "description": "Languages configured on the Search Index. A language must be included and match the search request language for its multilingual data to be searchable."
     },
     "rebuildStatus": {
-      "$ref": "#/components/schemas/SearchIndexRebuildStatus"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchIndexRebuildStatus"
+        }
+      ],
+      "description": "Current Search Index rebuild and stale-data state."
     },
     "indexJson": {
       "type": "string",

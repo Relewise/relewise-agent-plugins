@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "log": {
-      "$ref": "#/components/schemas/JobLogDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/JobLogDetails"
+        }
+      ],
+      "description": "Execution details."
     }
   },
   "description": "One Job execution."

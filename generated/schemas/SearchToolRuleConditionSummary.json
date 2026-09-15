@@ -31,7 +31,7 @@
     },
     "nestedConditionCount": {
       "pattern": "^-?(?:0|[1-9]\\d*)$",
-      "description": "Total number of nested AND and OR conditions directly attached to the root condition. Get the rule by ID to inspect their definitions.",
+      "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
       "format": "int32",
       "type": "integer"
     }

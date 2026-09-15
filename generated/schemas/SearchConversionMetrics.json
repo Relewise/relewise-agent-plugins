@@ -6,10 +6,20 @@
   "type": "object",
   "properties": {
     "total": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Total number of conversions attributed to searches."
     },
     "rate": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Percentage of search requests that produced a conversion."
     }
   },
   "description": "Conversion-performance metrics for searches."

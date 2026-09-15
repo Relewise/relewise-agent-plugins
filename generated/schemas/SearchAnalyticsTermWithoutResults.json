@@ -10,7 +10,12 @@
       "description": "Search term that returned no Products."
     },
     "searchesWithoutResults": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Number of searches for the term that returned no products."
     }
   },
   "description": "One search term that returned no products and its search-volume comparison."

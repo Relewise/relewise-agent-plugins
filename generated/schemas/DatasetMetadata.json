@@ -46,6 +46,7 @@
           "$ref": "#/components/schemas/ProductMetadata"
         }
       ],
+      "description": "Product metadata, or null when catalog metadata was not returned.",
       "nullable": true
     },
     "variants": {
@@ -55,6 +56,7 @@
           "$ref": "#/components/schemas/VariantMetadata"
         }
       ],
+      "description": "Variant metadata, or null when catalog metadata was not returned.",
       "nullable": true
     },
     "productCategories": {
@@ -64,6 +66,7 @@
           "$ref": "#/components/schemas/ProductCategoryMetadata"
         }
       ],
+      "description": "Product category metadata, or null when catalog metadata was not returned.",
       "nullable": true
     },
     "brands": {
@@ -73,6 +76,7 @@
           "$ref": "#/components/schemas/BrandMetadata"
         }
       ],
+      "description": "Brand metadata, or null when catalog metadata was not returned.",
       "nullable": true
     },
     "content": {
@@ -82,6 +86,7 @@
           "$ref": "#/components/schemas/ContentMetadata"
         }
       ],
+      "description": "Content metadata, or null when content metadata was not returned.",
       "nullable": true
     },
     "contentCategories": {
@@ -91,6 +96,7 @@
           "$ref": "#/components/schemas/ContentCategoryMetadata"
         }
       ],
+      "description": "Content category metadata, or null when content metadata was not returned.",
       "nullable": true
     },
     "users": {
@@ -100,6 +106,7 @@
           "$ref": "#/components/schemas/UserMetadata"
         }
       ],
+      "description": "User metadata, or null when user metadata was not returned.",
       "nullable": true
     },
     "companies": {
@@ -109,6 +116,7 @@
           "$ref": "#/components/schemas/CompanyMetadata"
         }
       ],
+      "description": "Company metadata, or null when company metadata was not returned or is unavailable for the Dataset.",
       "nullable": true
     }
   },

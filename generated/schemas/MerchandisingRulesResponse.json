@@ -13,7 +13,12 @@
       "description": "Merchandising rules in the requested page."
     },
     "pagination": {
-      "$ref": "#/components/schemas/PaginationMetadata"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaginationMetadata"
+        }
+      ],
+      "description": "Pagination metadata for the complete merchandising rule collection."
     }
   },
   "description": "One priority-ordered page of merchandising rules."

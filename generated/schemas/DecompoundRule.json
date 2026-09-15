@@ -21,7 +21,12 @@
       "description": "Whether the rule is approved and active for matching searches."
     },
     "scope": {
-      "$ref": "#/components/schemas/SearchToolRuleScope"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchToolRuleScope"
+        }
+      ],
+      "description": "Search Index and language scope in which the rule applies."
     },
     "word": {
       "type": "string",
@@ -34,7 +39,7 @@
     },
     "modifierCount": {
       "pattern": "^-?(?:0|[1-9]\\d*)$",
-      "description": "Number of terms that modify the Head. Get the rule by ID to inspect the terms.",
+      "description": "Number of terms that modify the Head.",
       "format": "int32",
       "type": "integer"
     },

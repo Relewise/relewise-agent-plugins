@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "searchIndex": {
-      "$ref": "#/components/schemas/SearchIndex"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchIndex"
+        }
+      ],
+      "description": "Detailed Search Index representation including indexed languages, rebuild state, and its complete JSON configuration."
     }
   },
   "description": "Response containing one Search Index."

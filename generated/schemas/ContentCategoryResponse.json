@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "contentCategory": {
-      "$ref": "#/components/schemas/ContentCategoryDetails"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ContentCategoryDetails"
+        }
+      ],
+      "description": "Stored details and Data Values for one Content Category."
     }
   },
   "description": "Response containing one Content Category and its stored details."

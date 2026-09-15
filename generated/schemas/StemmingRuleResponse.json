@@ -5,7 +5,12 @@
   "type": "object",
   "properties": {
     "rule": {
-      "$ref": "#/components/schemas/StemmingRule"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/StemmingRule"
+        }
+      ],
+      "description": "Complete Stemming rule state."
     }
   },
   "description": "One Stemming rule."

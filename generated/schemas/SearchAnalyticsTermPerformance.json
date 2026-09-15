@@ -12,13 +12,28 @@
       "description": "Search term associated with these performance metrics."
     },
     "searches": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Search-volume comparison for the term."
     },
     "clicks": {
-      "$ref": "#/components/schemas/SearchClickMetrics"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchClickMetrics"
+        }
+      ],
+      "description": "Click-performance comparisons for the term."
     },
     "conversions": {
-      "$ref": "#/components/schemas/SearchConversionMetrics"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchConversionMetrics"
+        }
+      ],
+      "description": "Conversion-performance comparisons for the term."
     }
   },
   "description": "One search term and its aggregate search, click, and conversion performance."

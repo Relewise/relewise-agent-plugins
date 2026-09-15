@@ -10,7 +10,12 @@
       "type": "string"
     },
     "multiplier": {
-      "$ref": "#/components/schemas/MerchandisingRuleMultiplier"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/MerchandisingRuleMultiplier"
+        }
+      ],
+      "description": "Selector that determines the multiplier applied to matching entities."
     }
   },
   "description": "Configuration for a rule that boosts or buries matching entities."

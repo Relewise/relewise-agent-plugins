@@ -6,10 +6,20 @@
   "type": "object",
   "properties": {
     "total": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Total number of searches that returned no products."
     },
     "rate": {
-      "$ref": "#/components/schemas/ComparedValue"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/ComparedValue"
+        }
+      ],
+      "description": "Percentage of searches that returned no products."
     }
   },
   "description": "Metrics for searches that returned no products."

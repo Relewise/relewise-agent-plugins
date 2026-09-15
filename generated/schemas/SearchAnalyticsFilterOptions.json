@@ -23,7 +23,12 @@
       "format": "date"
     },
     "appliedFilters": {
-      "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchAnalyticsAppliedFilters"
+        }
+      ],
+      "description": "Effective selections used to narrow dependent options."
     },
     "dataAvailableFromDate": {
       "type": "string",

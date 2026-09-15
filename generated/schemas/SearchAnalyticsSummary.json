@@ -8,16 +8,36 @@
   "type": "object",
   "properties": {
     "searches": {
-      "$ref": "#/components/schemas/SearchMetrics"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchMetrics"
+        }
+      ],
+      "description": "Overall search-volume metrics."
     },
     "searchesWithoutResults": {
-      "$ref": "#/components/schemas/SearchesWithoutResultsMetrics"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchesWithoutResultsMetrics"
+        }
+      ],
+      "description": "Metrics for searches that returned no products."
     },
     "clicks": {
-      "$ref": "#/components/schemas/SearchClickMetrics"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchClickMetrics"
+        }
+      ],
+      "description": "Click-performance metrics."
     },
     "conversions": {
-      "$ref": "#/components/schemas/SearchConversionMetrics"
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SearchConversionMetrics"
+        }
+      ],
+      "description": "Conversion-performance metrics."
     }
   },
   "description": "Search performance grouped into volume, zero-result, click, and conversion metrics."
