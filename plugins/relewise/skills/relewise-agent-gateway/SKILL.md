@@ -7,7 +7,7 @@ description: Provides the shared execution layer for Relewise Agent Gateway. Use
 
 Use this skill as the technical execution capability behind the Relewise domain skill that matched the user's request. The domain skill owns operation selection, business rules, interpretation, and mutation safeguards. This skill owns connection bootstrap, transport selection, authentication handling, and invocation mechanics.
 
-Do not replace or weaken instructions from the calling domain skill.
+Do not replace or weaken instructions from the calling domain skill. Preserve explicit authentication requirements across all fallbacks. For setup or repair with missing MCP tools, perform the [MCP connection preflight](references/transport-selection.md#mcp-connection-preflight) before treating MCP as unavailable.
 
 ## Resolve the bundled CLI
 

@@ -4,11 +4,28 @@ Transport permissions are Dataset-specific and cannot be known before identity a
 
 ## Bootstrap
 
-Attempt identity discovery in this order until one authenticated route succeeds:
+Honor the user's authentication and transport requirements throughout discovery and fallback. For OAuth-only requests, use the host-managed Agent Gateway MCP connection throughout setup and verification.
+
+Attempt identity discovery in this order until one permitted authenticated route succeeds:
 
 1. Registered Agent Gateway MCP: `get_me` (prefer the host-managed OAuth connection when it is connected).
 2. Bundled CLI: `me` or `datasets`.
 3. Authenticated direct REST: `GET /api/v1/me` using operation `IdentityGetCurrentUser`.
+
+For connection setup or repair, perform the MCP connection preflight below to establish the Agent Gateway MCP connection state before selecting a setup route.
+
+### MCP connection preflight
+
+- Match the connection to the installed Relewise plugin's MCP declaration: server `relewise-agent-gateway`, endpoint `https://my.relewise.com/agents/mcp`. Find its `get_me` tool through the host's available or discoverable tools and use that tool to verify identity.
+- If tools are missing, inspect this server's registration, enabled state, and authentication status using supported host controls or CLI commands. Limit configuration reads to these non-secret fields. Determine whether the connection needs enabling, sign-in, startup repair, or tool refresh.
+- For setup, start the client's supported OAuth login/reconnect flow for this registered server. Determine current commands from host help or official documentation and reuse the existing registration. When login requires a client control available only to the user, give the precise action and keep verification pending.
+- Classify login failures from observed evidence: unsupported OAuth, sign-in/consent failure, or discovery/transport failure. For discovery failures such as redirects, invalid metadata, or network errors, keep OAuth setup pending and identify the next diagnostic or corrective action.
+- When discovery fails, inspect bounded unauthenticated responses from the declared MCP endpoint and follow its advertised `resource_metadata` URL. Record the request method, response status, redirect location, and authentication challenge. Compare GET and MCP initialization POST when their behavior matters. Ground the diagnosis in the observed responses and label any unverified explanation as a hypothesis.
+- After successful sign-in, refresh tools as supported and call this server's `get_me`. Report pending refresh/restart or a specific blocker when verification cannot yet complete. Keep OAuth tokens, authorization codes, and client secrets within the client's credential handling.
+
+### Dataset discovery
+
+Retain the returned non-secret authentication metadata with the candidate Datasets. For empty discovery or a missing expected Dataset, route to the setup skill's [Dataset access guidance](../../relewise-setup/references/dataset-access.md). For policy/access denials, use that guidance to explain the required user action while preserving the denial and current authentication method.
 
 Use the successful identity response to resolve the requested Dataset without guessing its ID. If several Datasets plausibly match and the choice changes the answer, ask the user to choose.
 
