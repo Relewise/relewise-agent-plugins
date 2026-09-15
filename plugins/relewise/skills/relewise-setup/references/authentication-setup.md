@@ -4,7 +4,11 @@
 
 When the AI client supports OAuth for remote MCP servers, connect the Relewise Agent Gateway and complete the My Relewise sign-in and consent flow. This creates a Connected App; no Personal Access Token is needed for that MCP connection. Use the client's normal reconnect or disconnect controls if the connection is revoked.
 
+If sign-in fails before consent, diagnose MCP discovery or client configuration through the Agent Gateway skill. Do not interpret this as proof that the server only supports PAT. When live OAuth metadata and documentation disagree, report the discrepancy and use observed protocol responses for the connection diagnosis. Never replace an explicit OAuth requirement with PAT setup.
+
 ## Create or replace the Personal Access Token
+
+Enter this section only when the user chooses PAT or OAuth support has been ruled out for this client/server.
 
 1. Sign in to [My Relewise](https://my.relewise.com/).
 2. Open **User > Personal Access Tokens** and select **Create New Token**.
