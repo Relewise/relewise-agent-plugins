@@ -13,7 +13,7 @@ One `relewise` marketplace exposes `relewise` and `relewise-developer`.
 | `.claude-plugin/marketplace.json` | `.agents/plugins/marketplace.json`, with Codex policy and category metadata |
 | `version.json` | Planned Gemini version and workflow-generated package versions |
 
-Claude and Copilot share the Claude marketplace catalog. Codex needs its own catalog shape. Both plugin directories include generated manifests because repository installation reads committed files directly. Vendor directories contain only overrides and documentation, never copies of skills or full manifests.
+Claude and Copilot share the repository marketplace catalog at `.claude-plugin/marketplace.json`, a location supported by both clients. Codex needs its own catalog shape. Both plugin directories include generated manifests because repository installation reads committed files directly. Vendor directories contain only overrides and documentation, never copies of skills or full manifests.
 
 The portable manifest is a source except for its workflow-managed version. `.mcp.json` is the sole maintained MCP definition for each plugin. Claude and Codex reference it directly. Agent Plugins 1.0 needs `mcp.json`, a schema declaration, and `streamable-http` instead of `http`; the generator performs that translation for both plugins. Gemini needs `httpUrl` in its extension manifest.
 
@@ -35,5 +35,3 @@ The Relewise CLI and direct REST fallback still accept a PAT through `RELEWISE_A
 - [Copilot OAuth](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference) and [Gemini OAuth](https://geminicli.com/docs/tools/mcp-server/): client-managed sign-in; Gemini uses `httpUrl` for streamable HTTP.
 
 CI checks generated consistency, endpoint/authentication invariants, portable MCP schemas, package contents, native launchers, and Claude Code marketplace installation. These checks do not reproduce Claude's online GitHub importer or prove live OAuth interoperability for every host.
-
-The partial online import at `9fe20ba` remains unexplained. Neither optional display names nor binary presence establish its cause. Keep the testing order: alignment/review/authorized merge; GitHub integration retry; separately authorized release and Relewise ZIP upload test; only then a reversible binary-free experiment if needed.

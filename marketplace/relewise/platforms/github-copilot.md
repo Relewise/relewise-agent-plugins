@@ -20,7 +20,3 @@ copilot plugin install relewise@relewise
 ```
 
 Copilot manages OAuth sign-in for MCP. For CLI or direct REST fallback only, make the Personal Access Token available to the executable as `RELEWISE_AGENT_GATEWAY_TOKEN`. Use a secure credential provider that can inject it into the `relewise-agent` process on every invocation, or configure it as a persistent user or system environment variable. Never place the PAT in a prompt, command argument, repository file, or log.
-
-## Publication route
-
-Copilot CLI discovers the root `.claude-plugin/marketplace.json`. Its Relewise entry points to the canonical `plugins/relewise` directory on `main`.
