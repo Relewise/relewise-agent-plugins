@@ -17,3 +17,7 @@ Before presenting a plugin PR as ready for review:
 Do not manually edit generated manifest versions or fingerprints. The workflow generates `<version>-main.<run ID>` versions and decides whether native executables need rebuilding. Maintainer-only documentation changes do not require a payload refresh unless they affect packaged inputs.
 
 `version.json` is the planned semantic release version, not a per-PR counter. Change it when the next release version is decided, keep the root `gemini-extension.json` version aligned, and refresh the payload afterward. For a tagged release, follow `.agents/skills/release-relewise-agent-plugins/SKILL.md` and `RELEASING.md`; a routine plugin PR does not authorize tagging or publishing a release.
+
+## Public audience and instruction scope
+
+Write shipped plugin instructions for external users of this repository's marketplace and plugins. Identify tools and connections through positive matches to the owning plugin's declared server name, endpoint, and capability. Keep examples and dependencies grounded in this repository's public plugin contents and documented interfaces. Explain the required action directly; preserve explicit credential and permission safeguards where needed.

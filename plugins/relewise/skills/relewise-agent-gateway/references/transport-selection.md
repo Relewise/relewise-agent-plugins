@@ -4,7 +4,7 @@ Transport permissions are Dataset-specific and cannot be known before identity a
 
 ## Bootstrap
 
-Honor the user's authentication and transport requirements throughout discovery and fallback. OAuth-only requests exclude the PAT-backed CLI and direct REST routes.
+Honor the user's authentication and transport requirements throughout discovery and fallback. For OAuth-only requests, use the host-managed Agent Gateway MCP connection throughout setup and verification.
 
 Attempt identity discovery in this order until one permitted authenticated route succeeds:
 
@@ -12,16 +12,16 @@ Attempt identity discovery in this order until one permitted authenticated route
 2. Bundled CLI: `me` or `datasets`.
 3. Authenticated direct REST: `GET /api/v1/me` using operation `IdentityGetCurrentUser`.
 
-For connection setup or repair, perform the MCP connection preflight below before declaring MCP unavailable or recommending a new credential. A missing CLI PAT says nothing about the MCP connection's OAuth support.
+For connection setup or repair, perform the MCP connection preflight below to establish the Agent Gateway MCP connection state before selecting a setup route.
 
 ### MCP connection preflight
 
-- Search the host's available or discoverable tools for Agent Gateway `get_me`. Relewise Hub and Relewise Developer MCP servers are separate connections and do not verify Agent Gateway access.
-- If tools are missing, inspect the installed plugin's declared MCP server and the client's server registration, enabled state, and authentication status using supported host controls or CLI commands. Read only non-secret configuration fields. Do not dump configuration, headers, credentials, or environment variables. Missing tools can mean disabled, not signed in, failed startup, or stale tool discovery.
-- For setup, use the client's supported OAuth login/reconnect flow for the existing registered server. Determine current commands from host help or official documentation; do not create a duplicate server merely because tools are absent. If no login control is available to the agent, give the user the precise client action required and keep OAuth support unverified.
-- Classify login failures separately: unsupported OAuth, sign-in/consent failure, and discovery/transport failure. A redirect, invalid metadata, or network failure during discovery is a connection blocker, not proof that OAuth is unsupported.
-- When discovery fails, inspect bounded unauthenticated protocol responses and the advertised metadata URL as needed. Record method, status, redirect location, and authentication challenge. A browser-style GET and an MCP initialization POST may behave differently; follow the advertised `resource_metadata` URL rather than assuming its path. Do not infer other clients' behavior or prescribe a server fix from a single failed request.
-- After successful sign-in, refresh tools as supported and call `get_me`. Report pending refresh/restart or a specific blocker when verification cannot yet complete. Do not expose OAuth tokens, authorization codes, or client secrets during diagnosis.
+- Match the connection to the installed Relewise plugin's MCP declaration: server `relewise-agent-gateway`, endpoint `https://my.relewise.com/agents/mcp`. Find its `get_me` tool through the host's available or discoverable tools and use that tool to verify identity.
+- If tools are missing, inspect this server's registration, enabled state, and authentication status using supported host controls or CLI commands. Limit configuration reads to these non-secret fields. Determine whether the connection needs enabling, sign-in, startup repair, or tool refresh.
+- For setup, start the client's supported OAuth login/reconnect flow for this registered server. Determine current commands from host help or official documentation and reuse the existing registration. When login requires a client control available only to the user, give the precise action and keep verification pending.
+- Classify login failures from observed evidence: unsupported OAuth, sign-in/consent failure, or discovery/transport failure. For discovery failures such as redirects, invalid metadata, or network errors, keep OAuth setup pending and identify the next diagnostic or corrective action.
+- When discovery fails, inspect bounded unauthenticated responses from the declared MCP endpoint and follow its advertised `resource_metadata` URL. Record the request method, response status, redirect location, and authentication challenge. Compare GET and MCP initialization POST when their behavior matters. Ground the diagnosis in the observed responses and label any unverified explanation as a hypothesis.
+- After successful sign-in, refresh tools as supported and call this server's `get_me`. Report pending refresh/restart or a specific blocker when verification cannot yet complete. Keep OAuth tokens, authorization codes, and client secrets within the client's credential handling.
 
 ### Dataset discovery
 
