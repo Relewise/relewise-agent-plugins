@@ -4,9 +4,9 @@ This adapter supports two separately installable products: `Relewise` for config
 
 The adapter packages the canonical Relewise skills with the `relewise-agent` NativeAOT executable. Canonical skills remain under `plugins/relewise/skills`; they are copied into packages and are not maintained here. Local adapter packaging can target one runtime for validation. Tagged releases provide a direct-upload Claude plugin ZIP containing every supported runtime.
 
-Claude's protected plugin configuration requests the Agent Gateway PAT and supplies it to the registered MCP connection. The sensitive value is stored by Claude and is not written to the plugin package.
+Claude connects Agent Gateway through OAuth and manages sign-in. The shared `.mcp.json` contains only the remote endpoint and transport type.
 
-The protected value does not replace CLI authentication. To use the bundled `relewise-agent` fallback, make the PAT available as `RELEWISE_AGENT_GATEWAY_TOKEN` through a secure credential provider or a persistent user or system environment variable. The PAT is never placed in command arguments or plugin files.
+To use the bundled `relewise-agent` fallback, make the PAT available as `RELEWISE_AGENT_GATEWAY_TOKEN` through a secure credential provider or a persistent user or system environment variable. The PAT is never placed in command arguments or plugin files.
 
 Build the executable for the target runtime, then package it:
 
@@ -39,7 +39,7 @@ The Relewise Developer package contains its focused development skill and `.mcp.
 
 ## Fresh-install acceptance test
 
-Use a machine with Claude Code installed and authenticated but without an existing Relewise plugin. Build the package for that machine, load its `relewise` directory with `claude --plugin-dir`, and enter the Agent Gateway PAT in Claude's protected plugin configuration. Configure `RELEWISE_AGENT_GATEWAY_TOKEN` in Claude Code's environment as well when testing the CLI fallback.
+Use a machine with Claude Code installed and authenticated but without an existing Relewise plugin. Build the package for that machine, load its `relewise` directory with `claude --plugin-dir`, and complete the Agent Gateway OAuth sign-in. Configure `RELEWISE_AGENT_GATEWAY_TOKEN` in Claude Code's environment as well when testing the CLI fallback.
 
 Verify these prompts in order:
 
@@ -47,4 +47,4 @@ Verify these prompts in order:
 2. `Tell me about <one returned Dataset name>.`
 3. `Compare <one returned Dataset name> and <another returned Dataset name>.`
 
-The workflow passes when Claude connects through MCP using the protected PAT, discovers and invokes the packaged skills, resolves the named Datasets without the user supplying IDs, and returns a useful comparison. Repeat with MCP unavailable and `RELEWISE_AGENT_GATEWAY_TOKEN` configured to verify the packaged CLI fallback. The PAT must not appear in command arguments, output, transcripts, or package files.
+The workflow passes when Claude connects through MCP using OAuth, discovers and invokes the packaged skills, resolves the named Datasets without the user supplying IDs, and returns a useful comparison. Repeat with MCP unavailable and `RELEWISE_AGENT_GATEWAY_TOKEN` configured to verify the packaged CLI fallback. The PAT must not appear in command arguments, output, transcripts, or package files.

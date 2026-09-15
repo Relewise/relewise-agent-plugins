@@ -29,25 +29,10 @@ New-Item -ItemType Directory -Path $packageRoot | Out-Null
 foreach ($directory in @('assets', 'skills')) {
     Copy-Item -LiteralPath (Join-Path $sourceRoot $directory) -Destination $packageRoot -Recurse
 }
-foreach ($file in @('.mcp.json', 'README.md')) {
+foreach ($file in @('README.md')) {
     Copy-Item -LiteralPath (Join-Path $sourceRoot $file) -Destination $packageRoot
 }
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot
 
-$manifestPath = switch ($Vendor) {
-    'claude' {
-        Copy-Item -LiteralPath (Join-Path $repositoryRoot 'vendors\claude\relewise-developer\.claude-plugin') -Destination $packageRoot -Recurse
-        Join-Path $packageRoot '.claude-plugin\plugin.json'
-    }
-    'openai' {
-        Copy-Item -LiteralPath (Join-Path $repositoryRoot 'vendors\openai\relewise-developer\.codex-plugin') -Destination $packageRoot -Recurse
-        Join-Path $packageRoot '.codex-plugin\plugin.json'
-    }
-    'github-copilot' {
-        Copy-Item -LiteralPath (Join-Path $sourceRoot 'plugin.json') -Destination $packageRoot
-        Join-Path $packageRoot 'plugin.json'
-    }
-}
-
-& (Join-Path $PSScriptRoot 'set-manifest-version.ps1') -ManifestPath $manifestPath -Version $Version
+& "$PSScriptRoot/write-plugin-configuration.ps1" -PluginName relewise-developer -Vendor $Vendor -OutputRoot $packageRoot -Version $Version
 Write-Host "Packaged Relewise Developer for $Vendor at $packageRoot"

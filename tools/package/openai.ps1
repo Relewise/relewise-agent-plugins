@@ -32,10 +32,9 @@ if ((Test-Path -LiteralPath $packageRoot) -and -not $Merge) {
     Remove-Item -LiteralPath $packageRoot -Recurse -Force
 }
 
-$adapterRoot = Join-Path $repositoryRoot 'vendors\openai\relewise'
 if (-not (Test-Path -LiteralPath $packageRoot)) {
 New-Item -ItemType Directory -Path $packageRoot | Out-Null
-Copy-Item -LiteralPath (Join-Path $adapterRoot '.codex-plugin') -Destination $packageRoot -Recurse
+& "$PSScriptRoot/write-plugin-configuration.ps1" -PluginName relewise -Vendor openai -OutputRoot $packageRoot
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\assets') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'plugins\relewise\skills') -Destination $packageRoot -Recurse
 Copy-Item -LiteralPath (Join-Path $repositoryRoot 'LICENSE') -Destination $packageRoot

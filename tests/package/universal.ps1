@@ -52,7 +52,7 @@ foreach ($vendor in $manifestPaths.Keys) {
             throw 'Claude universal package has the wrong OAuth Agent Gateway MCP configuration.'
         }
     } elseif ($vendor -eq 'openai') {
-        $server = $manifest.mcpServers.'relewise-agent-gateway'
+        $server = (Get-Content -Raw (Join-Path $packageRoot '.mcp.json') | ConvertFrom-Json).mcpServers.'relewise-agent-gateway'
         if ($server.url -ne 'https://my.relewise.com/agents/mcp' -or $null -ne $server.bearer_token_env_var) {
             throw 'OpenAI universal package has the wrong OAuth MCP configuration.'
         }

@@ -2,12 +2,10 @@ $ErrorActionPreference = 'Stop'
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $includedPaths = @(
     'version.json',
-    '.agents/plugins/marketplace.json',
     '.github/workflows/refresh-marketplace.yml',
     'src/relewise-agent',
     'generated/operations.json',
     'plugins/relewise/.mcp.json',
-    'plugins/relewise/mcp.json',
     'plugins/relewise/plugin.json',
     'plugins/relewise/assets',
     'plugins/relewise/references',
@@ -18,15 +16,8 @@ $includedPaths = @(
     'plugins/relewise-developer/plugin.json',
     'plugins/relewise-developer/skills',
     '.claude-plugin/marketplace.json',
-    '.github/plugin/marketplace.json',
-    'vendors/claude/relewise/.claude-plugin/plugin.json',
-    'vendors/claude/relewise-developer/.claude-plugin/plugin.json',
-    'vendors/openai/relewise/.codex-plugin/plugin.json',
-    'vendors/openai/relewise-developer/.codex-plugin/plugin.json',
-    'vendors/openai/marketplace.json',
-    'tools/package/openai.ps1',
-    'tools/package/relewise-developer.ps1',
-    'tools/package/get-runtime-fingerprint.ps1'
+    'vendors',
+    'tools/package'
 )
 
 $files = @(& git -C $repositoryRoot ls-files -- @includedPaths |

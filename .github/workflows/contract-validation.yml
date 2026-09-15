@@ -162,6 +162,7 @@ jobs:
       - name: Validate committed vendor marketplaces
         shell: pwsh
         run: |
+          ./tests/package/configuration.ps1
           ./tests/package/codex-marketplace.ps1 -MarketplaceRoot .
           $version = (Get-Content -Raw version.json | ConvertFrom-Json).version
           foreach ($vendor in @('claude', 'github-copilot', 'openai')) {

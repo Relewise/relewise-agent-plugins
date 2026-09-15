@@ -4,13 +4,9 @@ This adapter supports two separately installable products: `Relewise` for config
 
 The adapter packages the canonical Relewise Agent Plugin with the `relewise-agent` NativeAOT executable. Its manifest and skills remain under `plugins/relewise`; the package script copies them and adds only the Copilot-specific executable-location instruction. Local adapter packaging can target one runtime for validation; normal distribution uses the repository marketplace.
 
-Copilot CLI does not define protected plugin configuration in `plugin.json`. Set `RELEWISE_AGENT_GATEWAY_TOKEN` in the environment used to start Copilot, preferably through your operating system or secret manager, and redact it from Copilot's shell and MCP environments:
+Copilot connects Agent Gateway through OAuth. Use `/mcp auth relewise-agent-gateway` when sign-in is required. The generated Agent Plugins `mcp.json` contains no PAT header or token requirement.
 
-```shell
-copilot --secret-env-vars=RELEWISE_AGENT_GATEWAY_TOKEN --plugin-dir artifacts/github-copilot/<runtime-id>/relewise
-```
-
-The PAT is inherited by the bundled launcher and passed to the executable through its process environment. It is never placed in command arguments or package files.
+For the bundled CLI or direct REST fallback only, supply `RELEWISE_AGENT_GATEWAY_TOKEN` through a secure credential provider or the process environment. Never place it in command arguments or package files.
 
 Build the executable for the target runtime, then package it:
 
@@ -29,8 +25,8 @@ copilot plugin install relewise@relewise
 copilot plugin install relewise-developer@relewise
 ```
 
-The root `.github/plugin/marketplace.json` points directly to `plugins/relewise`; the package path remains useful for testing release archives.
+The root `.claude-plugin/marketplace.json` points directly to `plugins/relewise`; the package path remains useful for testing release archives.
 
 Installed plugins update through Copilot's marketplace mechanism. The Claude custom-plugin ZIP is not a Copilot distribution artifact.
 
-The Relewise Developer plugin is read directly from `plugins/relewise-developer`. Copilot discovers its `.mcp.json`, connects `https://mcp.relewise.com`, and loads the development skill without an Agent Gateway executable or PAT.
+The Relewise Developer plugin is read directly from `plugins/relewise-developer`. Copilot discovers its generated `mcp.json`, connects `https://mcp.relewise.com`, and loads the development skill without an Agent Gateway executable or PAT.
