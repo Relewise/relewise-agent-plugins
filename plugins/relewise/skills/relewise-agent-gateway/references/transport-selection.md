@@ -25,6 +25,8 @@ For connection setup or repair, perform the MCP connection preflight below to es
 
 ### Dataset discovery
 
+Retain the returned non-secret authentication metadata with the candidate Datasets. For empty discovery or a missing expected Dataset, route to the setup skill's [Dataset access guidance](../../relewise-setup/references/dataset-access.md). For policy/access denials, use that guidance to explain the required user action while preserving the denial and current authentication method.
+
 Use the successful identity response to resolve the requested Dataset without guessing its ID. If several Datasets plausibly match and the choice changes the answer, ask the user to choose.
 
 Retrieve that Dataset's details through the working bootstrap route:
