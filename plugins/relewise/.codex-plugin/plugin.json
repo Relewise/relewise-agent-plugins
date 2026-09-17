@@ -14,7 +14,7 @@
     "search",
     "merchandising"
   ],
-  "version": "0.5.0-main.34977310099",
+  "version": "0.5.0-main.35178033345",
   "interface": {
     "displayName": "Relewise",
     "shortDescription": "Configure, analyze and optimize Relewise",
@@ -28,7 +28,6 @@
       "Help me connect Relewise.",
       "What Relewise Datasets do I have access to?",
       "Review search performance for my Relewise Dataset.",
-      "Review Retail Media campaign performance for my Relewise Dataset.",
       "Audit merchandising rules for my Relewise Dataset."
     ],
     "brandColor": "#3764E4",
