@@ -20,9 +20,9 @@ The two products are intentionally separate. Choose the product that matches the
 
 Both products use the portable [Agent Plugins](https://agent-plugins.org/) structure: each directory under `plugins/` contains a canonical `plugin.json` manifest and [Agent Skills](https://agentskills.io/) compliant with the open specification. Platform-specific files under `vendors/` adapt that shared source for clients that require their own format. Installation and updates remain specific to each client. See [plugin configuration](docs/plugin-configuration.md) for canonical sources, generated formats, and validation limits.
 
-## Prerelease installation
+## Installation
 
-The project is currently distributed as a prerelease. Codex, Claude Code, and GitHub Copilot CLI users can add this repository directly as a marketplace. Gemini CLI installs the platform package selected from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases).
+Codex, Claude Code, and GitHub Copilot CLI users can add this repository directly as a marketplace. Gemini CLI installs the platform package selected from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases).
 
 The business-facing Relewise plugin supports the same Agent Gateway capabilities through its bundled REST CLI, the unified remote MCP connection, or authenticated direct REST. Domain skills retain focused Relewise knowledge and delegate execution to the shared `relewise-agent-gateway` skill, which selects an available transport permitted by the Dataset's Agent Gateway policy.
 
@@ -44,9 +44,9 @@ The shared `relewise-agent-gateway` skill contains both platform launchers and t
 
 Maintainers should follow [RELEASING.md](RELEASING.md) for the release procedure and vendor-specific publication requirements.
 
-The repository is versioned as one ecosystem. Pushing a semantic version tag such as `v0.1.0` validates the contracts and skills, builds and tests all supported native executables, packages every vendor adapter, and publishes the installable archives in a GitHub release. `v0.*` releases are published as prereleases; `v1.0.0` and later tags are stable releases.
+The repository is versioned as one ecosystem. Pushing a semantic version tag such as `v1.0.0` validates the contracts and skills, builds and tests all supported native executables, packages every vendor adapter, and publishes the installable archives in a GitHub release.
 
-The planned version is maintained manually in `version.json`. Marketplace manifests automatically use `<version>-main.<run ID>`. Executables retain the version of their most recent runtime build until their code, embedded operation catalog, project configuration, or `version.json` changes. A release tag such as `v0.4.0` must match `version.json` and rebuilds every executable and manifest as version `0.4.0`. After a release, update `version.json` in a normal pull request when the next version is decided.
+The planned version is maintained manually in `version.json`. Marketplace manifests automatically use `<version>-main.<run ID>`. Executables retain the version of their most recent runtime build until their code, embedded operation catalog, project configuration, or `version.json` changes. A release tag such as `v1.0.0` must match `version.json` and rebuilds every executable and manifest as version `1.0.0`. After a release, update `version.json` in a normal pull request when the next version is decided.
 
 Each tagged release contains seven intentional assets: five conventionally named, platform-specific Relewise archives used by Gemini CLI, plus one direct-upload Claude ZIP for each plugin. `relewise-claude-plugin-v<version>.zip` contains all five native runtimes and its launcher selects Windows x64, Linux x64/ARM64, or macOS x64/ARM64. `relewise-developer-claude-plugin-v<version>.zip` contains no native executable because it connects directly to the remote Developer MCP.
 
