@@ -34,9 +34,8 @@
     "assortments": {
       "type": "array",
       "items": {
-        "pattern": "^-?(?:0|[1-9]\\d*)$",
-        "format": "int32",
-        "type": "integer"
+        "type": "integer",
+        "format": "int32"
       },
       "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
     },

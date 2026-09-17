@@ -1,0 +1,17 @@
+{
+  "required": [
+    "advertiser"
+  ],
+  "type": "object",
+  "properties": {
+    "advertiser": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/AdvertiserDetails"
+        }
+      ],
+      "description": "Read-only advertiser configuration."
+    }
+  },
+  "description": "Read-only advertiser detail response."
+}

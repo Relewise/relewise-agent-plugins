@@ -1,0 +1,35 @@
+{
+  "required": [
+    "key",
+    "name",
+    "state",
+    "created",
+    "modified"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stable Location Key used by promotion requests."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the page or context where promotions can appear."
+    },
+    "state": {
+      "type": "string",
+      "description": "Lifecycle state: Active, Inactive, or Archived."
+    },
+    "created": {
+      "type": "string",
+      "description": "Creation timestamp with UTC offset.",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Last modification timestamp with UTC offset.",
+      "format": "date-time"
+    }
+  },
+  "description": "A Retail Media Settings location."
+}

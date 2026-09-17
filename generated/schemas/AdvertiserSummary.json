@@ -1,0 +1,36 @@
+{
+  "required": [
+    "id",
+    "name",
+    "state",
+    "created",
+    "modified"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "description": "Advertiser name as stored."
+    },
+    "state": {
+      "type": "string",
+      "description": "Advertiser lifecycle state: Active, Inactive, or Archived."
+    },
+    "created": {
+      "type": "string",
+      "description": "Time the entity was created, with UTC offset.",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Time the entity was last modified, with UTC offset.",
+      "format": "date-time"
+    }
+  },
+  "description": "Read-only advertiser summary."
+}

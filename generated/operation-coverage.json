@@ -1,6 +1,6 @@
 {
-  "operationCount": 60,
-  "coveredOperationCount": 60,
+  "operationCount": 71,
+  "coveredOperationCount": 71,
   "uncoveredOperationCount": 0,
   "coveragePercent": 100,
   "operations": [
@@ -265,6 +265,76 @@
       "operationId": "MerchandisingUpdateRule",
       "skills": [
         "relewise/skills/relewise-merchandising"
+      ]
+    },
+    {
+      "operationId": "RetailMediaGetAdvertiser",
+      "skills": [
+        "relewise/skills/relewise-retail-media",
+        "relewise/skills/relewise-retail-media-performance-review"
+      ]
+    },
+    {
+      "operationId": "RetailMediaGetCampaign",
+      "skills": [
+        "relewise/skills/relewise-retail-media",
+        "relewise/skills/relewise-retail-media-performance-review"
+      ]
+    },
+    {
+      "operationId": "RetailMediaGetCampaignPerformance",
+      "skills": [
+        "relewise/skills/relewise-retail-media-performance-review"
+      ]
+    },
+    {
+      "operationId": "RetailMediaGetDisplayAd",
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
+      "operationId": "RetailMediaGetLocation",
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
+      "operationId": "RetailMediaListAdvertisers",
+      "skills": [
+        "relewise/skills/relewise-retail-media",
+        "relewise/skills/relewise-retail-media-performance-review"
+      ]
+    },
+    {
+      "operationId": "RetailMediaListCampaigns",
+      "skills": [
+        "relewise/skills/relewise-retail-media",
+        "relewise/skills/relewise-retail-media-performance-review"
+      ]
+    },
+    {
+      "operationId": "RetailMediaListDisplayAds",
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
+      "operationId": "RetailMediaListLocations",
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
+      "operationId": "RetailMediaUpdateAdvertiser",
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
+      "operationId": "RetailMediaUpdateCampaign",
+      "skills": [
+        "relewise/skills/relewise-retail-media"
       ]
     },
     {

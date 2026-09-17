@@ -1,0 +1,26 @@
+{
+  "required": [
+    "from",
+    "promotions",
+    "clicks"
+  ],
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": "string",
+      "description": "UTC start timestamp of the source time bucket.",
+      "format": "date-time"
+    },
+    "promotions": {
+      "type": "integer",
+      "description": "Number of Display Ad promotions.",
+      "format": "int32"
+    },
+    "clicks": {
+      "type": "integer",
+      "description": "Number of Display Ad clicks.",
+      "format": "int32"
+    }
+  },
+  "description": "Display Ad metrics in a source time bucket."
+}

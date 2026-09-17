@@ -1,0 +1,9 @@
+{
+  "operationIds": [
+    "RetailMediaGetAdvertiser",
+    "RetailMediaGetCampaign",
+    "RetailMediaGetCampaignPerformance",
+    "RetailMediaListAdvertisers",
+    "RetailMediaListCampaigns"
+  ]
+}

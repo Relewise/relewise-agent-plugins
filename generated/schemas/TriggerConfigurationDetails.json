@@ -56,10 +56,9 @@
       "format": "date-time"
     },
     "withinMinutes": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "Evaluation window in minutes within which the Trigger criteria must be met. This is not necessarily the inactivity delay; consult the type-specific configuration and user conditions.",
-      "format": "int32",
-      "type": "integer"
+      "format": "int32"
     },
     "configuration": {
       "allOf": [

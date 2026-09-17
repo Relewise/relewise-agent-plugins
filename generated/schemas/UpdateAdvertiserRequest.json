@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "state": {
+      "type": "string",
+      "description": "Set Active or Inactive. Omit or set null to preserve the current state. Archived advertisers cannot be changed.",
+      "nullable": true
+    }
+  },
+  "description": "Update an existing advertiser's lifecycle state while preserving its configuration."
+}

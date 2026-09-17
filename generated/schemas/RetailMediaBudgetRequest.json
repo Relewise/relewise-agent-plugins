@@ -1,0 +1,18 @@
+{
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "anyOf": [
+    {
+      "$ref": "#/components/schemas/RetailMediaBudgetRequestCpmRetailMediaBudgetRequest"
+    }
+  ],
+  "description": "Replacement budget using the campaign's existing monetary unit. The type discriminator identifies the budget model (currently cpm).",
+  "discriminator": {
+    "propertyName": "type",
+    "mapping": {
+      "cpm": "#/components/schemas/RetailMediaBudgetRequestCpmRetailMediaBudgetRequest"
+    }
+  }
+}

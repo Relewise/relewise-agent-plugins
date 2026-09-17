@@ -1,0 +1,30 @@
+{
+  "required": [
+    "promotions",
+    "timeSeries",
+    "products"
+  ],
+  "type": "object",
+  "properties": {
+    "promotions": {
+      "type": "integer",
+      "description": "Total product promotion count in the reporting period; this is not a click count.",
+      "format": "int32"
+    },
+    "timeSeries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SponsoredProductPeriod"
+      },
+      "description": "Source time buckets ordered by start timestamp."
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PromotedProduct"
+      },
+      "description": "Per-product promotion counts."
+    }
+  },
+  "description": "Sponsored Product campaign performance."
+}

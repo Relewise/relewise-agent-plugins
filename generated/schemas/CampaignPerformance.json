@@ -1,0 +1,44 @@
+{
+  "required": [
+    "campaignId",
+    "from",
+    "to",
+    "sponsoredProducts",
+    "displayAds"
+  ],
+  "type": "object",
+  "properties": {
+    "campaignId": {
+      "type": "string",
+      "description": "Campaign whose performance is reported.",
+      "format": "uuid"
+    },
+    "from": {
+      "type": "string",
+      "description": "Inclusive UTC start of the requested period.",
+      "format": "date-time"
+    },
+    "to": {
+      "type": "string",
+      "description": "UTC end of the requested period, capped at the current time.",
+      "format": "date-time"
+    },
+    "sponsoredProducts": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/SponsoredProductPerformance"
+        }
+      ],
+      "description": "Sponsored Product promotion and commerce metrics. Revenue is separated by currency and includes all sales channels, not only ad-driven sales."
+    },
+    "displayAds": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DisplayAdPerformance"
+        }
+      ],
+      "description": "Display Ad promotion and click metrics; revenue attribution is not provided."
+    }
+  },
+  "description": "Campaign performance for the requested UTC period, separated by promotion format."
+}

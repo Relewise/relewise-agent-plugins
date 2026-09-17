@@ -1,0 +1,43 @@
+{
+  "required": [
+    "key",
+    "name",
+    "thresholds",
+    "displayAdTemplateFiltersJson",
+    "variations"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stable Placement Key within the location."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the position within the location."
+    },
+    "thresholds": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/RetailMediaScoreThresholds"
+        }
+      ],
+      "description": "Configured quality-score thresholds; null means no override at this level.",
+      "nullable": true
+    },
+    "displayAdTemplateFiltersJson": {
+      "type": "string",
+      "description": "SDK filters restricting Display Ad Types as JSON-encoded text. Parse it and preserve $type metadata. Null means no filter is configured. See https://docs.relewise.com/docs/filters/index.html.",
+      "nullable": true
+    },
+    "variations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RetailMediaVariation"
+      },
+      "description": "Configured device or layout variations; empty means none are available."
+    }
+  },
+  "description": "A placement within a Retail Media location."
+}

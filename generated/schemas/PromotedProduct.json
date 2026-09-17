@@ -1,0 +1,19 @@
+{
+  "required": [
+    "productId",
+    "promotions"
+  ],
+  "type": "object",
+  "properties": {
+    "productId": {
+      "type": "string",
+      "description": "Promoted Product ID."
+    },
+    "promotions": {
+      "type": "integer",
+      "description": "Number of times the product was promoted.",
+      "format": "int32"
+    }
+  },
+  "description": "Promotion count for a product."
+}

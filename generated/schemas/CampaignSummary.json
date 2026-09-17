@@ -1,0 +1,63 @@
+{
+  "required": [
+    "id",
+    "name",
+    "state",
+    "status",
+    "advertiserName",
+    "budget",
+    "startsAt",
+    "endsAt",
+    "modified"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "description": "Campaign name as stored."
+    },
+    "state": {
+      "type": "string",
+      "description": "Campaign approval state: Proposed, Approved, or Archived. Approved does not necessarily mean actively serving."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current serving status: Active, Inactive, ScheduleCompleted, or BudgetReached. Distinct from approval state."
+    },
+    "advertiserName": {
+      "type": "string",
+      "description": "Associated advertiser name; empty when the source cannot resolve the advertiser."
+    },
+    "budget": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RetailMediaBudget"
+        }
+      ],
+      "description": "Campaign budget, discriminated by type (currently cpm), with an optional spending cap. CPM and spending cap use the same monetary unit."
+    },
+    "startsAt": {
+      "type": "string",
+      "description": "Inclusive campaign start timestamp with UTC offset; null means no start boundary.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "endsAt": {
+      "type": "string",
+      "description": "Inclusive campaign end timestamp with UTC offset; null means no end boundary.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "modified": {
+      "type": "string",
+      "description": "Time the entity was last modified, with UTC offset.",
+      "format": "date-time"
+    }
+  },
+  "description": "Read-only campaign summary."
+}

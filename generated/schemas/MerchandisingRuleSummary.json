@@ -37,7 +37,7 @@
       "description": "Whether the merchandising rule is enabled. A disabled rule is not applied to requests."
     },
     "priority": {
-      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+      "type": "number",
       "description": "Ordering value of the merchandising rule. Lower values appear earlier in the configured rule order, and list results are returned in this order.",
       "format": "double"
     },

@@ -10,7 +10,7 @@
       "description": "Currency identifier stored with the price. It is not guaranteed to be an ISO 4217 currency code."
     },
     "amount": {
-      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "type": "number",
       "description": "Monetary amount in Currency.",
       "format": "double"
     }

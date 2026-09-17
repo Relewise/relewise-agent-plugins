@@ -1,0 +1,17 @@
+{
+  "required": [
+    "displayAd"
+  ],
+  "type": "object",
+  "properties": {
+    "displayAd": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/DisplayAdDetails"
+        }
+      ],
+      "description": "Display Ad configuration."
+    }
+  },
+  "description": "Display Ad configuration."
+}

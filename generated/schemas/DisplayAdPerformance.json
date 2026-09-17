@@ -1,0 +1,30 @@
+{
+  "required": [
+    "promotions",
+    "timeSeries",
+    "displayAds"
+  ],
+  "type": "object",
+  "properties": {
+    "promotions": {
+      "type": "integer",
+      "description": "Total Display Ad promotion count in the reporting period.",
+      "format": "int32"
+    },
+    "timeSeries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DisplayAdPeriod"
+      },
+      "description": "Source time buckets ordered by start timestamp."
+    },
+    "displayAds": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/PromotedDisplayAd"
+      },
+      "description": "Per-creative promotion and click counts."
+    }
+  },
+  "description": "Display Ad campaign performance."
+}

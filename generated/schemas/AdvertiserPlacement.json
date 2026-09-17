@@ -1,0 +1,24 @@
+{
+  "required": [
+    "key",
+    "thresholds"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stored Placement Key within the containing location."
+    },
+    "thresholds": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/RetailMediaScoreThresholds"
+        }
+      ],
+      "description": "Configured score-threshold overrides; null means no overrides at this level. These are not the resolved thresholds from other configuration levels.",
+      "nullable": true
+    }
+  },
+  "description": "A configured advertiser placement and optional score-threshold overrides."
+}

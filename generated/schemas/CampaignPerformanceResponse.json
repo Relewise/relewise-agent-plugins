@@ -1,0 +1,17 @@
+{
+  "required": [
+    "performance"
+  ],
+  "type": "object",
+  "properties": {
+    "performance": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CampaignPerformance"
+        }
+      ],
+      "description": "Campaign performance for the requested period."
+    }
+  },
+  "description": "Campaign performance for the requested period."
+}

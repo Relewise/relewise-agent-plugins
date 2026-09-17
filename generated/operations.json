@@ -1,9 +1,9 @@
 {
   "source": "contracts/agent-gateway-v1.json",
-  "sourceSha256": "05190015ecf9ce2bdcaa589b4efd92d4f5bd8ab12a39895ae461e3ab2d2e1fe1",
+  "sourceSha256": "83a74c0216a0d46e9cf3ab71bd07d303fe6061192259f769eca8e05a79c240bf",
   "openapi": "3.0.4",
   "apiVersion": "v1",
-  "operationCount": 60,
+  "operationCount": 71,
   "operations": [
     {
       "operationId": "AdministrationGetJob",
@@ -3293,6 +3293,1083 @@
       }
     },
     {
+      "operationId": "RetailMediaGetAdvertiser",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/advertisers/{advertiserId}",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Gets advertiser configuration.",
+      "description": "Read-only configuration lookup. Discover the Advertiser ID with RetailMediaListAdvertisers. Inspect typed allowedLocations and parse allowedPromotionsJson for promotion restrictions; preserve SDK $type metadata. Does not modify entities or retrieve campaign performance.",
+      "pathParameters": [
+        {
+          "name": "advertiserId",
+          "required": true,
+          "description": "Advertiser ID discovered from RetailMediaListAdvertisers.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/AdvertiserResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaGetCampaign",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/campaigns/{campaignId}",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Gets campaign configuration.",
+      "description": "Read-only configuration lookup. Discover the Campaign ID with RetailMediaListCampaigns. Parse promotionsJson and conditionsJson for promotion and targeting configuration; preserve SDK $type metadata. Does not modify entities or retrieve campaign performance.",
+      "pathParameters": [
+        {
+          "name": "campaignId",
+          "required": true,
+          "description": "Campaign ID discovered from RetailMediaListCampaigns.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/CampaignResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaGetCampaignPerformance",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/campaigns/{campaignId}/performance",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Gets campaign performance.",
+      "description": "Read-only Sponsored Product and Display Ad performance for the requested UTC period, up to 366 days. Future end times are capped at now. Includes source time buckets and entity breakdowns. Product revenue covers all sales channels and remains separated by currency; Display Ad revenue is not supplied. No UI comparison period is added.",
+      "pathParameters": [
+        {
+          "name": "campaignId",
+          "required": true,
+          "description": "Campaign ID discovered by listing campaigns.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "from",
+          "required": true,
+          "description": "Inclusive reporting-period start with UTC offset.",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        {
+          "name": "to",
+          "required": true,
+          "description": "Reporting-period end with UTC offset, capped at now. Maximum period is 366 days.",
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        {
+          "name": "productIds",
+          "required": false,
+          "description": "Optional Product IDs restricting Sponsored Product metrics; omit for all.",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "name": "displayAdIds",
+          "required": false,
+          "description": "Optional Display Ad IDs restricting Display Ad metrics; omit for all.",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/CampaignPerformanceResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaGetDisplayAd",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/advertisers/{advertiserId}/display-ads/{displayAdId}",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Gets Display Ad configuration.",
+      "description": "Read-only creative configuration. Discover IDs with RetailMediaListDisplayAds. A creative belonging to another advertiser returns 404.",
+      "pathParameters": [
+        {
+          "name": "advertiserId",
+          "required": true,
+          "description": "Owning Advertiser ID discovered by listing advertisers.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "displayAdId",
+          "required": true,
+          "description": "Display Ad ID discovered by listing the advertiser's Display Ads.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/DisplayAdResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaGetLocation",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/settings/locations/{locationKey}",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Gets location settings.",
+      "description": "Read-only location settings with nested placements and variations. Discover the Location Key with RetailMediaListLocations.",
+      "pathParameters": [
+        {
+          "name": "locationKey",
+          "required": true,
+          "description": "Location Key discovered by listing Settings locations.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/RetailMediaLocationResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaListAdvertisers",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/advertisers",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Lists advertisers.",
+      "description": "Read-only page ordered by advertiser name ascending. Use RetailMediaGetAdvertiser for configuration. Repeat with the next pageNumber while pagination.totalPages is greater than the current page.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "states",
+          "required": false,
+          "description": "Lifecycle states: Active, Inactive, Archived. Case-insensitive; omit or pass an empty list to include all states.",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number; defaults to 1.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/AdvertisersResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaListCampaigns",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/campaigns",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Lists campaigns.",
+      "description": "Read-only page ordered by campaign creation time descending. Use RetailMediaGetCampaign for configuration. Repeat with the next pageNumber while pagination.totalPages is greater than the current page.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "states",
+          "required": false,
+          "description": "Approval states: Proposed, Approved, Archived. Case-insensitive; omit or pass an empty list to include all states. Approved does not necessarily mean actively serving.",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number; defaults to 1.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "advertiserId",
+          "required": false,
+          "description": "Optional Advertiser ID discovered by listing advertisers.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/CampaignsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaListDisplayAds",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/advertisers/{advertiserId}/display-ads",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Lists Display Ads.",
+      "description": "Read-only advertiser-owned Display Ads ordered by creation time descending. Use RetailMediaGetDisplayAd for creative configuration. Request subsequent pages using pagination.totalPages.",
+      "pathParameters": [
+        {
+          "name": "advertiserId",
+          "required": true,
+          "description": "Owning Advertiser ID discovered by listing advertisers.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "states",
+          "required": false,
+          "description": "Lifecycle states: Active, Inactive, Archived. Case-insensitive; omit or pass an empty list to include all states.",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number; defaults to 1.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/DisplayAdsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaListLocations",
+      "method": "GET",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/settings/locations",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Lists Retail Media locations.",
+      "description": "Read-only Retail Media Settings locations ordered by creation time descending. Use RetailMediaGetLocation for placements and variations. Continue while hasMore is true.",
+      "pathParameters": [
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "term",
+          "required": false,
+          "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "state",
+          "required": false,
+          "description": "Lifecycle state: Active, Inactive, Archived. Case-insensitive; omit for all states.",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "pageNumber",
+          "required": false,
+          "description": "One-based page number; defaults to 1.",
+          "schema": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        {
+          "name": "pageSize",
+          "required": false,
+          "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+          "schema": {
+            "maximum": 100,
+            "minimum": 10,
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/RetailMediaLocationsResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaUpdateAdvertiser",
+      "method": "PATCH",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/advertisers/{advertiserId}",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Updates advertiser state.",
+      "description": "Changes the lifecycle state of an existing advertiser. Preserves promotion restrictions and locations. Archived advertisers cannot be changed.",
+      "pathParameters": [
+        {
+          "name": "advertiserId",
+          "required": true,
+          "description": "Owning Advertiser ID discovered by listing advertisers.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/UpdateAdvertiserRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/AdvertiserResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
+      "operationId": "RetailMediaUpdateCampaign",
+      "method": "PATCH",
+      "path": "/api/v1/datasets/{datasetId}/retail-media/campaigns/{campaignId}",
+      "tags": [
+        "Retail Media"
+      ],
+      "summary": "Updates campaign approval, schedule, or budget.",
+      "description": "Changes approval state, schedule or budget of an existing campaign. Preserves targeting and promotions. Approved permits serving but does not override schedule, budget or eligibility. Archived campaigns cannot be changed.",
+      "pathParameters": [
+        {
+          "name": "campaignId",
+          "required": true,
+          "description": "Campaign ID discovered by listing campaigns.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "datasetId",
+          "required": true,
+          "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ],
+      "queryParameters": [],
+      "requestBody": {
+        "required": true,
+        "description": null,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/UpdateCampaignRequest"
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "$ref": "#/components/schemas/CampaignResponse"
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/HttpValidationProblemDetails"
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized.",
+          "content": {}
+        },
+        "403": {
+          "description": "Forbidden.",
+          "content": {}
+        },
+        "404": {
+          "description": "Not Found",
+          "content": {
+            "application/problem+json": {
+              "$ref": "#/components/schemas/ProblemDetails"
+            }
+          }
+        },
+        "429": {
+          "description": "Too many requests.",
+          "content": {}
+        },
+        "500": {
+          "description": "An unexpected error occurred.",
+          "content": {}
+        },
+        "503": {
+          "description": "The external REST API is temporarily unavailable.",
+          "content": {}
+        }
+      }
+    },
+    {
       "operationId": "SearchToolsGetDecompoundingRule",
       "method": "GET",
       "path": "/api/v1/datasets/{datasetId}/search-tools/decompounding-rules/{ruleId}",
@@ -3869,7 +4946,7 @@
         {
           "name": "approved",
           "required": false,
-          "description": "Optional approval-state filter.",
+          "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
           "schema": {
             "type": "boolean"
           }
@@ -3979,7 +5056,7 @@
         {
           "name": "approved",
           "required": false,
-          "description": "Optional approval-state filter.",
+          "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
           "schema": {
             "type": "boolean"
           }
@@ -4158,7 +5235,7 @@
         {
           "name": "approved",
           "required": false,
-          "description": "Optional approval-state filter.",
+          "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
           "schema": {
             "type": "boolean"
           }
@@ -4268,7 +5345,7 @@
         {
           "name": "approved",
           "required": false,
-          "description": "Optional approval-state filter.",
+          "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
           "schema": {
             "type": "boolean"
           }
@@ -4378,7 +5455,7 @@
         {
           "name": "approved",
           "required": false,
-          "description": "Optional approval-state filter.",
+          "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
           "schema": {
             "type": "boolean"
           }
@@ -4488,7 +5565,7 @@
         {
           "name": "approved",
           "required": false,
-          "description": "Optional approval-state filter.",
+          "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
           "schema": {
             "type": "boolean"
           }

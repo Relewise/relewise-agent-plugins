@@ -1,0 +1,50 @@
+{
+  "required": [
+    "id",
+    "name",
+    "state",
+    "created",
+    "modified",
+    "allowedLocations",
+    "allowedPromotionsJson"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "description": "Advertiser name as stored."
+    },
+    "state": {
+      "type": "string",
+      "description": "Advertiser lifecycle state: Active, Inactive, or Archived."
+    },
+    "created": {
+      "type": "string",
+      "description": "Time the entity was created, with UTC offset.",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Time the entity was last modified, with UTC offset.",
+      "format": "date-time"
+    },
+    "allowedLocations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AdvertiserLocation"
+      },
+      "description": "Configured Location Keys and selected placements where the advertiser may promote. An empty list means no locations are allowed. These are stored settings, not a calculation of effective eligibility."
+    },
+    "allowedPromotionsJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise allowed-promotion specifications, including nested product filters. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK allowedPromotions configuration; null means no promotion specifications are configured, so the advertiser cannot make promotions. See https://docs.relewise.com/docs/retailmedia/advertisers.html for its purpose and https://docs.relewise.com/docs/filters/index.html for embedded filter structure.",
+      "nullable": true
+    }
+  },
+  "description": "Read-only advertiser configuration."
+}

@@ -1,0 +1,25 @@
+{
+  "required": [
+    "displayAds",
+    "pagination"
+  ],
+  "type": "object",
+  "properties": {
+    "displayAds": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DisplayAdSummary"
+      },
+      "description": "Display Ads ordered by creation time descending."
+    },
+    "pagination": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaginationMetadata"
+        }
+      ],
+      "description": "Pagination for the filtered result set."
+    }
+  },
+  "description": "One page of advertiser-owned Display Ads."
+}

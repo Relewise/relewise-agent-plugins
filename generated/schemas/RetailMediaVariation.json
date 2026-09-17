@@ -1,0 +1,24 @@
+{
+  "required": [
+    "key",
+    "name",
+    "supportedPromotionsJson"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stable Variation Key within the placement."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the layout or device variation."
+    },
+    "supportedPromotionsJson": {
+      "type": "string",
+      "description": "SDK supported-promotion settings as JSON-encoded text, including counts and priorities. Parse it and preserve $type metadata. Null means no settings are configured. See https://docs.relewise.com/docs/retailmedia/locations.html.",
+      "nullable": true
+    }
+  },
+  "description": "A device or layout variation of a placement."
+}
