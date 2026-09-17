@@ -9,7 +9,7 @@ description: Set up, verify, or repair Relewise Agent Gateway authentication. Us
 
 Never ask the user to paste a Personal Access Token into the conversation. Do not print, repeat, inspect, or place a token in command text, command arguments, output, logs, or repository files.
 
-My Relewise is the web portal at `https://my.relewise.com`, separate from the AI client running this skill. When directing the user to portal configuration, say explicitly that the page opens in My Relewise and provide a clickable deep link. Follow [My Relewise links](references/my-relewise-links.md) for URL construction and the setup pages.
+My Relewise is the web portal at `https://my.relewise.com`, separate from the AI client running this skill. When directing the user to portal configuration, say explicitly that the page opens in My Relewise and provide a clickable deep link. Use only the fixed [My Relewise setup links](references/my-relewise-links.md).
 
 Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the identity operation or MCP tool; do not resolve the CLI, choose a transport, or handle transport mechanics in this setup skill. This setup is idempotent: verify existing authentication before changing anything, and preserve a reusable route that works within the user's requested authentication method while checking Dataset readiness. For an explicit OAuth-only requirement, use the host-managed Agent Gateway MCP connection throughout setup and verification.
 
