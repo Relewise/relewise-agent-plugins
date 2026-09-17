@@ -270,19 +270,21 @@
     {
       "operationId": "RetailMediaGetAdvertiser",
       "skills": [
-        "relewise/skills/relewise-retail-media"
+        "relewise/skills/relewise-retail-media",
+        "relewise/skills/relewise-retail-media-performance-review"
       ]
     },
     {
       "operationId": "RetailMediaGetCampaign",
       "skills": [
-        "relewise/skills/relewise-retail-media"
+        "relewise/skills/relewise-retail-media",
+        "relewise/skills/relewise-retail-media-performance-review"
       ]
     },
     {
       "operationId": "RetailMediaGetCampaignPerformance",
       "skills": [
-        "relewise/skills/relewise-retail-media"
+        "relewise/skills/relewise-retail-media-performance-review"
       ]
     },
     {
@@ -300,13 +302,15 @@
     {
       "operationId": "RetailMediaListAdvertisers",
       "skills": [
-        "relewise/skills/relewise-retail-media"
+        "relewise/skills/relewise-retail-media",
+        "relewise/skills/relewise-retail-media-performance-review"
       ]
     },
     {
       "operationId": "RetailMediaListCampaigns",
       "skills": [
-        "relewise/skills/relewise-retail-media"
+        "relewise/skills/relewise-retail-media",
+        "relewise/skills/relewise-retail-media-performance-review"
       ]
     },
     {

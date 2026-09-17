@@ -31,9 +31,9 @@ MCP tools inherit capability-skill coverage from their related REST operations. 
 | `fetch_searches_trending_up` | Analytics | `AnalyticsListTrendingUpSearches` | `relewise/skills/relewise-analytics`, `relewise/skills/relewise-compare-datasets`, `relewise/skills/relewise-search-performance-review` |
 | `fetch_searches_without_results` | Analytics | `AnalyticsListSearchesWithoutResults` | `relewise/skills/relewise-analytics`, `relewise/skills/relewise-compare-datasets`, `relewise/skills/relewise-search-performance-review` |
 | `fetch_shoppertainment_consumption_summary` | Core | `CoreGetShoppertainmentConsumptionSummary` | `relewise/skills/relewise-compare-datasets`, `relewise/skills/relewise-consumption` |
-| `get_advertiser` | RetailMedia | `RetailMediaGetAdvertiser` | `relewise/skills/relewise-retail-media` |
-| `get_campaign` | RetailMedia | `RetailMediaGetCampaign` | `relewise/skills/relewise-retail-media` |
-| `get_campaign_performance` | RetailMedia | `RetailMediaGetCampaignPerformance` | `relewise/skills/relewise-retail-media` |
+| `get_advertiser` | RetailMedia | `RetailMediaGetAdvertiser` | `relewise/skills/relewise-retail-media`, `relewise/skills/relewise-retail-media-performance-review` |
+| `get_campaign` | RetailMedia | `RetailMediaGetCampaign` | `relewise/skills/relewise-retail-media`, `relewise/skills/relewise-retail-media-performance-review` |
+| `get_campaign_performance` | RetailMedia | `RetailMediaGetCampaignPerformance` | `relewise/skills/relewise-retail-media-performance-review` |
 | `get_dataset_details` | Core | `CoreGetDataset` | `relewise/skills/relewise-compare-datasets`, `relewise/skills/relewise-core`, `relewise/skills/relewise-merchandising-audit`, `relewise/skills/relewise-search-performance-review` |
 | `get_dataset_metadata` | Core | `CoreGetDatasetMetadata` | `relewise/skills/relewise-compare-datasets`, `relewise/skills/relewise-core`, `relewise/skills/relewise-merchandising-audit`, `relewise/skills/relewise-search-performance-review` |
 | `get_decompounding_rule` | SearchTools | `SearchToolsGetDecompoundingRule` | `relewise/skills/relewise-merchandising-audit`, `relewise/skills/relewise-search-tools` |
@@ -50,8 +50,8 @@ MCP tools inherit capability-skill coverage from their related REST operations. 
 | `get_stemming_rule` | SearchTools | `SearchToolsGetStemmingRule` | `relewise/skills/relewise-merchandising-audit`, `relewise/skills/relewise-search-tools` |
 | `get_synonym_rule` | SearchTools | `SearchToolsGetSynonymRule` | `relewise/skills/relewise-merchandising-audit`, `relewise/skills/relewise-search-tools` |
 | `get_trigger_configuration` | Triggers | `TriggersGetConfiguration` | `relewise/skills/relewise-triggers` |
-| `list_advertisers` | RetailMedia | `RetailMediaListAdvertisers` | `relewise/skills/relewise-retail-media` |
-| `list_campaigns` | RetailMedia | `RetailMediaListCampaigns` | `relewise/skills/relewise-retail-media` |
+| `list_advertisers` | RetailMedia | `RetailMediaListAdvertisers` | `relewise/skills/relewise-retail-media`, `relewise/skills/relewise-retail-media-performance-review` |
+| `list_campaigns` | RetailMedia | `RetailMediaListCampaigns` | `relewise/skills/relewise-retail-media`, `relewise/skills/relewise-retail-media-performance-review` |
 | `list_decompounding_rules` | SearchTools | `SearchToolsListDecompoundingRules` | `relewise/skills/relewise-merchandising-audit`, `relewise/skills/relewise-search-tools` |
 | `list_display_ads` | RetailMedia | `RetailMediaListDisplayAds` | `relewise/skills/relewise-retail-media` |
 | `list_job_logs` | Administration | `AdministrationListJobLogs` | `relewise/skills/relewise-administration` |

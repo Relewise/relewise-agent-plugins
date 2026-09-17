@@ -2,7 +2,6 @@
   "operationIds": [
     "RetailMediaGetAdvertiser",
     "RetailMediaGetCampaign",
-    "RetailMediaGetCampaignPerformance",
     "RetailMediaGetDisplayAd",
     "RetailMediaGetLocation",
     "RetailMediaListAdvertisers",
