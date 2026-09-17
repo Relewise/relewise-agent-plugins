@@ -9,6 +9,8 @@ description: Set up, verify, or repair Relewise Agent Gateway authentication. Us
 
 Never ask the user to paste a Personal Access Token into the conversation. Do not print, repeat, inspect, or place a token in command text, command arguments, output, logs, or repository files.
 
+My Relewise is the web portal at `https://my.relewise.com`, separate from the AI client running this skill. When directing the user to portal configuration, say explicitly that the page opens in My Relewise and provide a clickable deep link. Use only the fixed [My Relewise setup links](references/my-relewise-links.md).
+
 Before any Agent Gateway call, activate and follow the installed `relewise-agent-gateway` skill from this plugin. Pass it the identity operation or MCP tool; do not resolve the CLI, choose a transport, or handle transport mechanics in this setup skill. This setup is idempotent: verify existing authentication before changing anything, and preserve a reusable route that works within the user's requested authentication method while checking Dataset readiness. For an explicit OAuth-only requirement, use the host-managed Agent Gateway MCP connection throughout setup and verification.
 
 ## Set up or repair authentication
@@ -22,4 +24,4 @@ Before any Agent Gateway call, activate and follow the installed `relewise-agent
 
 The workflow is idempotent: every invocation starts by verifying the current configuration, and a working setup is never replaced merely because the skill was invoked again. Authentication is complete when the route is reusable without repeated sign-in or credential entry. Dataset setup remains pending until the intended Dataset and required policy are verified; use the completion states in the Dataset access reference.
 
-Do not create, regenerate, revoke, or change the scope of a Personal Access Token on the user's behalf. Explain those actions and their consequences, then let the user perform them in My Relewise.
+Do not create, regenerate, revoke, or change the scope of a Personal Access Token on the user's behalf. Explain those actions and their consequences, link to the relevant My Relewise page, then let the user perform them there.
