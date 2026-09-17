@@ -12,10 +12,9 @@
   "type": "object",
   "properties": {
     "id": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "Execution Log ID used together with Job ID to retrieve this run.",
-      "format": "int32",
-      "type": "integer"
+      "format": "int32"
     },
     "jobId": {
       "type": "string",
@@ -44,7 +43,7 @@
       "nullable": true
     },
     "executionTimeSeconds": {
-      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+      "type": "number",
       "description": "Execution duration in seconds, or null when unfinished.",
       "format": "double",
       "nullable": true

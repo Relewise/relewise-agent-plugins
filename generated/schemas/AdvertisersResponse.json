@@ -1,0 +1,25 @@
+{
+  "required": [
+    "advertisers",
+    "pagination"
+  ],
+  "type": "object",
+  "properties": {
+    "advertisers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AdvertiserSummary"
+      },
+      "description": "Matching advertisers ordered by name ascending."
+    },
+    "pagination": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaginationMetadata"
+        }
+      ],
+      "description": "Pagination of the filtered result set; an empty page does not imply no matches on earlier pages."
+    }
+  },
+  "description": "One page of matching advertisers."
+}

@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "state": {
+      "type": "string",
+      "description": "Set Approved to permit serving or Proposed to stop serving. Serving still depends on schedule, budget and eligibility. Omit or null preserves approval state. Archived campaigns cannot be changed.",
+      "nullable": true
+    },
+    "schedule": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/RetailMediaScheduleRequest"
+        }
+      ],
+      "description": "Replacement schedule. Omit or null preserves the schedule. Supply an object to replace both boundaries; null or omitted boundaries inside it are cleared.",
+      "nullable": true
+    },
+    "budget": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/RetailMediaBudgetRequest"
+        }
+      ],
+      "description": "Replacement budget using the campaign's existing monetary unit, discriminated by type (currently cpm). Omit or null preserves the budget. Supply costPerMille; null or omitted maximumTotalCost removes the spending cap.",
+      "nullable": true
+    }
+  },
+  "description": "Update approval state, schedule or budget while preserving campaign targeting and promotions."
+}

@@ -1,0 +1,17 @@
+{
+  "required": [
+    "location"
+  ],
+  "type": "object",
+  "properties": {
+    "location": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RetailMediaLocationDetails"
+        }
+      ],
+      "description": "Location with placements and variations."
+    }
+  },
+  "description": "Location with placements and variations."
+}

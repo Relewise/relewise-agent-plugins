@@ -1,6 +1,30 @@
 {
-  "schemaCount": 178,
+  "schemaCount": 215,
   "schemas": [
+    {
+      "name": "AdvertiserDetails",
+      "file": "AdvertiserDetails.json"
+    },
+    {
+      "name": "AdvertiserLocation",
+      "file": "AdvertiserLocation.json"
+    },
+    {
+      "name": "AdvertiserPlacement",
+      "file": "AdvertiserPlacement.json"
+    },
+    {
+      "name": "AdvertiserResponse",
+      "file": "AdvertiserResponse.json"
+    },
+    {
+      "name": "AdvertiserSummary",
+      "file": "AdvertiserSummary.json"
+    },
+    {
+      "name": "AdvertisersResponse",
+      "file": "AdvertisersResponse.json"
+    },
     {
       "name": "AuthenticationMetadata",
       "file": "AuthenticationMetadata.json"
@@ -32,6 +56,30 @@
     {
       "name": "BrandsResponse",
       "file": "BrandsResponse.json"
+    },
+    {
+      "name": "CampaignDetails",
+      "file": "CampaignDetails.json"
+    },
+    {
+      "name": "CampaignPerformance",
+      "file": "CampaignPerformance.json"
+    },
+    {
+      "name": "CampaignPerformanceResponse",
+      "file": "CampaignPerformanceResponse.json"
+    },
+    {
+      "name": "CampaignResponse",
+      "file": "CampaignResponse.json"
+    },
+    {
+      "name": "CampaignSummary",
+      "file": "CampaignSummary.json"
+    },
+    {
+      "name": "CampaignsResponse",
+      "file": "CampaignsResponse.json"
     },
     {
       "name": "CompanyMetadata",
@@ -136,6 +184,30 @@
     {
       "name": "DecompoundingRulesResponse",
       "file": "DecompoundingRulesResponse.json"
+    },
+    {
+      "name": "DisplayAdDetails",
+      "file": "DisplayAdDetails.json"
+    },
+    {
+      "name": "DisplayAdPerformance",
+      "file": "DisplayAdPerformance.json"
+    },
+    {
+      "name": "DisplayAdPeriod",
+      "file": "DisplayAdPeriod.json"
+    },
+    {
+      "name": "DisplayAdResponse",
+      "file": "DisplayAdResponse.json"
+    },
+    {
+      "name": "DisplayAdSummary",
+      "file": "DisplayAdSummary.json"
+    },
+    {
+      "name": "DisplayAdsResponse",
+      "file": "DisplayAdsResponse.json"
     },
     {
       "name": "EntityDataValue",
@@ -386,6 +458,14 @@
       "file": "ProductsResponse.json"
     },
     {
+      "name": "PromotedDisplayAd",
+      "file": "PromotedDisplayAd.json"
+    },
+    {
+      "name": "PromotedProduct",
+      "file": "PromotedProduct.json"
+    },
+    {
       "name": "RedirectRule",
       "file": "RedirectRule.json"
     },
@@ -400,6 +480,58 @@
     {
       "name": "RedirectRulesResponse",
       "file": "RedirectRulesResponse.json"
+    },
+    {
+      "name": "RetailMediaBudget",
+      "file": "RetailMediaBudget.json"
+    },
+    {
+      "name": "RetailMediaBudgetCpmRetailMediaBudget",
+      "file": "RetailMediaBudgetCpmRetailMediaBudget.json"
+    },
+    {
+      "name": "RetailMediaBudgetRequest",
+      "file": "RetailMediaBudgetRequest.json"
+    },
+    {
+      "name": "RetailMediaBudgetRequestCpmRetailMediaBudgetRequest",
+      "file": "RetailMediaBudgetRequestCpmRetailMediaBudgetRequest.json"
+    },
+    {
+      "name": "RetailMediaLocationDetails",
+      "file": "RetailMediaLocationDetails.json"
+    },
+    {
+      "name": "RetailMediaLocationResponse",
+      "file": "RetailMediaLocationResponse.json"
+    },
+    {
+      "name": "RetailMediaLocationSummary",
+      "file": "RetailMediaLocationSummary.json"
+    },
+    {
+      "name": "RetailMediaLocationsResponse",
+      "file": "RetailMediaLocationsResponse.json"
+    },
+    {
+      "name": "RetailMediaPlacement",
+      "file": "RetailMediaPlacement.json"
+    },
+    {
+      "name": "RetailMediaRevenue",
+      "file": "RetailMediaRevenue.json"
+    },
+    {
+      "name": "RetailMediaScheduleRequest",
+      "file": "RetailMediaScheduleRequest.json"
+    },
+    {
+      "name": "RetailMediaScoreThresholds",
+      "file": "RetailMediaScoreThresholds.json"
+    },
+    {
+      "name": "RetailMediaVariation",
+      "file": "RetailMediaVariation.json"
     },
     {
       "name": "RevenueAnalyticsResponse",
@@ -586,6 +718,14 @@
       "file": "SearchesWithoutResultsMetrics.json"
     },
     {
+      "name": "SponsoredProductPerformance",
+      "file": "SponsoredProductPerformance.json"
+    },
+    {
+      "name": "SponsoredProductPeriod",
+      "file": "SponsoredProductPeriod.json"
+    },
+    {
       "name": "StemmingRule",
       "file": "StemmingRule.json"
     },
@@ -684,6 +824,14 @@
     {
       "name": "TriggerTypeConfigurationVariantChangeConfiguration",
       "file": "TriggerTypeConfigurationVariantChangeConfiguration.json"
+    },
+    {
+      "name": "UpdateAdvertiserRequest",
+      "file": "UpdateAdvertiserRequest.json"
+    },
+    {
+      "name": "UpdateCampaignRequest",
+      "file": "UpdateCampaignRequest.json"
     },
     {
       "name": "UpdateMerchandisingRuleRequest",

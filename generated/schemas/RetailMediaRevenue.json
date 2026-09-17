@@ -1,0 +1,19 @@
+{
+  "required": [
+    "currency",
+    "revenue"
+  ],
+  "type": "object",
+  "properties": {
+    "currency": {
+      "type": "string",
+      "description": "Currency code associated with the revenue."
+    },
+    "revenue": {
+      "type": "number",
+      "description": "Total sales revenue for products included in the campaign, in this currency, across all channels; not revenue attributed to ad impressions.",
+      "format": "double"
+    }
+  },
+  "description": "Revenue in one currency."
+}

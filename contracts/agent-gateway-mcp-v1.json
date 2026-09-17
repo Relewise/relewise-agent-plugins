@@ -6392,6 +6392,597 @@
       ]
     },
     {
+      "name": "get_advertiser",
+      "title": "Get Advertiser",
+      "description": "Reads one advertiser. Use list_advertisers to discover its ID. Read-only. Inspect typed allowedLocations and parse allowedPromotionsJson for promotion restrictions, preserving SDK $type metadata. Does not retrieve campaign performance. A null advertiser means it was not found.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "advertiserId": {
+            "description": "Advertiser ID discovered from the list operation.",
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "datasetId",
+          "advertiserId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "advertiser": {
+            "description": "Advertiser configuration, or null if the advertiser was not found.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "allowedLocations": {
+                "description": "Configured Location Keys and selected placements where the advertiser may promote. An empty list means no locations are allowed. These are stored settings, not a calculation of effective eligibility.",
+                "type": "array",
+                "items": {
+                  "description": "A configured advertiser location and its placement selections.",
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "description": "Stored Location Key. This is a key, not a display name or a Location ID.",
+                      "type": "string"
+                    },
+                    "placements": {
+                      "description": "Stored placement selections for this location. An empty list means no placements are allowed at this location. No effective eligibility is inferred.",
+                      "type": "array",
+                      "items": {
+                        "description": "A configured advertiser placement and optional score-threshold overrides.",
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "description": "Stored Placement Key within the containing location.",
+                            "type": "string"
+                          },
+                          "thresholds": {
+                            "description": "Configured score-threshold overrides; null means no overrides at this level. These are not the resolved thresholds from other configuration levels.",
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "relevance": {
+                                "description": "Minimum relevance score before relevance modifiers and merchandising rules. Expected range is 0 (everything matches) through 100 (exact matches). Null means no override at this level.",
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "adjusted": {
+                                "description": "Minimum adjusted score after relevance modifiers and merchandising rules. Expected range is 0 through 100. Null means no override at this level.",
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "relevance",
+                              "adjusted"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "thresholds"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "placements"
+                  ]
+                }
+              },
+              "allowedPromotionsJson": {
+                "description": "JSON-encoded Relewise allowed-promotion specifications, including nested product filters. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK allowedPromotions configuration; null means no promotion specifications are configured, so the advertiser cannot make promotions. See https://docs.relewise.com/docs/retailmedia/advertisers.html for its purpose and https://docs.relewise.com/docs/filters/index.html for embedded filter structure.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": {
+                "description": "Advertiser name as stored.",
+                "type": "string"
+              },
+              "state": {
+                "description": "Advertiser lifecycle state: Active, Inactive, or Archived.",
+                "type": "string"
+              },
+              "created": {
+                "description": "Time the entity was created, with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "modified": {
+                "description": "Time the entity was last modified, with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "allowedLocations",
+              "allowedPromotionsJson",
+              "id",
+              "name",
+              "state",
+              "created",
+              "modified"
+            ]
+          }
+        },
+        "required": [
+          "advertiser"
+        ]
+      },
+      "annotations": {
+        "title": "Get Advertiser",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetAdvertiser"
+      ]
+    },
+    {
+      "name": "get_campaign",
+      "title": "Get Campaign",
+      "description": "Reads one campaign. Use list_campaigns to discover its ID. Read-only. Parse promotionsJson and conditionsJson for promotion and targeting configuration, preserving SDK $type metadata. Does not retrieve campaign performance. A null campaign means it was not found.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "campaignId": {
+            "description": "Campaign ID discovered from the list operation.",
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "datasetId",
+          "campaignId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "campaign": {
+            "description": "Campaign configuration, or null if the campaign was not found.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "advertiserId": {
+                "description": "Associated Advertiser ID; use the advertiser detail operation to inspect it.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "created": {
+                "description": "Time the entity was created, with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "promotionsJson": {
+                "description": "JSON-encoded Relewise promotion collection, including sponsored-product and display-ad promotions, their locations, and nested filters. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK promotions configuration; null means no collection is provided, while an empty collection contains no promotions. See https://docs.relewise.com/docs/retailmedia/campaigns.html and https://docs.relewise.com/docs/filters/index.html.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "conditionsJson": {
+                "description": "JSON-encoded Relewise campaign conditions, including language-specific search-term conditions. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK conditions configuration; null means no campaign-level conditions are configured. See https://docs.relewise.com/docs/retailmedia/campaigns.html#promoting-by-specific-search-terms and https://docs.relewise.com/docs/filters/index.html.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": {
+                "description": "Campaign name as stored.",
+                "type": "string"
+              },
+              "state": {
+                "description": "Campaign approval state: Proposed, Approved, or Archived. Approved does not necessarily mean actively serving.",
+                "type": "string"
+              },
+              "status": {
+                "description": "Current serving status: Active, Inactive, ScheduleCompleted, or BudgetReached. Distinct from approval state.",
+                "type": "string"
+              },
+              "budget": {
+                "description": "Campaign budget, discriminated by type (currently cpm), with an optional spending cap. CPM and spending cap use the same monetary unit.",
+                "type": "object",
+                "required": [
+                  "type"
+                ],
+                "anyOf": [
+                  {
+                    "description": "Campaign budget priced per thousand impressions (CPM).",
+                    "properties": {
+                      "type": {
+                        "const": "cpm"
+                      },
+                      "costPerMille": {
+                        "description": "Cost per thousand impressions (CPM).",
+                        "type": "number"
+                      },
+                      "maximumTotalCost": {
+                        "description": "Maximum total campaign spend. Null means no spending cap. This is not a remaining-budget value.",
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "costPerMille",
+                      "maximumTotalCost"
+                    ]
+                  }
+                ]
+              },
+              "startsAt": {
+                "description": "Inclusive campaign start timestamp with UTC offset; null means no start boundary.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "endsAt": {
+                "description": "Inclusive campaign end timestamp with UTC offset; null means no end boundary.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "modified": {
+                "description": "Time the entity was last modified, with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "advertiserId",
+              "created",
+              "promotionsJson",
+              "conditionsJson",
+              "id",
+              "name",
+              "state",
+              "status",
+              "budget",
+              "startsAt",
+              "endsAt",
+              "modified"
+            ]
+          }
+        },
+        "required": [
+          "campaign"
+        ]
+      },
+      "annotations": {
+        "title": "Get Campaign",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetCampaign"
+      ]
+    },
+    {
+      "name": "get_campaign_performance",
+      "title": "Get Campaign Performance",
+      "description": "Reads Sponsored Product and Display Ad campaign performance for the requested UTC period without a comparison window. Read-only. Includes source time buckets and entity breakdowns. Product revenue covers all sales channels and is separated by currency; Display Ad revenue is not supplied. Null means campaign not found.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "campaignId": {
+            "description": "Campaign ID discovered with list_campaigns.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "from": {
+            "description": "Inclusive reporting-period start with UTC offset.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "to": {
+            "description": "Reporting-period end with UTC offset, capped at now. Maximum period is 366 days.",
+            "type": "string",
+            "format": "date-time"
+          },
+          "productIds": {
+            "description": "Optional Product IDs restricting Sponsored Product metrics; omit for all.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "default": null
+          },
+          "displayAdIds": {
+            "description": "Optional Display Ad IDs restricting Display Ad metrics; omit for all.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "default": null
+          }
+        },
+        "required": [
+          "datasetId",
+          "campaignId",
+          "from",
+          "to"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "performance": {
+            "description": "Get Campaign Performance result; null means not found.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "campaignId": {
+                "description": "Campaign whose performance is reported.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "from": {
+                "description": "Inclusive UTC start of the requested period.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "to": {
+                "description": "UTC end of the requested period, capped at the current time.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "sponsoredProducts": {
+                "description": "Sponsored Product promotion and commerce metrics. Revenue is separated by currency and includes all sales channels, not only ad-driven sales.",
+                "type": "object",
+                "properties": {
+                  "promotions": {
+                    "description": "Total product promotion count in the reporting period; this is not a click count.",
+                    "type": "integer"
+                  },
+                  "timeSeries": {
+                    "description": "Source time buckets ordered by start timestamp.",
+                    "type": "array",
+                    "items": {
+                      "description": "Sponsored Product metrics in a source time bucket.",
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "description": "UTC start timestamp of the source time bucket.",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "promotions": {
+                          "description": "Number of product promotions.",
+                          "type": "integer"
+                        },
+                        "views": {
+                          "description": "Views of products included in the campaign across all channels, not only views from ad impressions.",
+                          "type": "integer"
+                        },
+                        "salesQuantity": {
+                          "description": "Quantity sold of products included in the campaign across all sales channels, not only ad-driven sales.",
+                          "type": "integer"
+                        },
+                        "revenue": {
+                          "description": "Product sales revenue across all channels, separated by currency; never sum different currencies.",
+                          "type": "array",
+                          "items": {
+                            "description": "Revenue in one currency.",
+                            "type": "object",
+                            "properties": {
+                              "currency": {
+                                "description": "Currency code associated with the revenue.",
+                                "type": "string"
+                              },
+                              "revenue": {
+                                "description": "Total sales revenue for products included in the campaign, in this currency, across all channels; not revenue attributed to ad impressions.",
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "currency",
+                              "revenue"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "from",
+                        "promotions",
+                        "views",
+                        "salesQuantity",
+                        "revenue"
+                      ]
+                    }
+                  },
+                  "products": {
+                    "description": "Per-product promotion counts.",
+                    "type": "array",
+                    "items": {
+                      "description": "Promotion count for a product.",
+                      "type": "object",
+                      "properties": {
+                        "productId": {
+                          "description": "Promoted Product ID.",
+                          "type": "string"
+                        },
+                        "promotions": {
+                          "description": "Number of times the product was promoted.",
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "productId",
+                        "promotions"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "promotions",
+                  "timeSeries",
+                  "products"
+                ]
+              },
+              "displayAds": {
+                "description": "Display Ad promotion and click metrics; revenue attribution is not provided.",
+                "type": "object",
+                "properties": {
+                  "promotions": {
+                    "description": "Total Display Ad promotion count in the reporting period.",
+                    "type": "integer"
+                  },
+                  "timeSeries": {
+                    "description": "Source time buckets ordered by start timestamp.",
+                    "type": "array",
+                    "items": {
+                      "description": "Display Ad metrics in a source time bucket.",
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "description": "UTC start timestamp of the source time bucket.",
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "promotions": {
+                          "description": "Number of Display Ad promotions.",
+                          "type": "integer"
+                        },
+                        "clicks": {
+                          "description": "Number of Display Ad clicks.",
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "from",
+                        "promotions",
+                        "clicks"
+                      ]
+                    }
+                  },
+                  "displayAds": {
+                    "description": "Per-creative promotion and click counts.",
+                    "type": "array",
+                    "items": {
+                      "description": "Promotion and click counts for a Display Ad.",
+                      "type": "object",
+                      "properties": {
+                        "displayAdId": {
+                          "description": "Promoted Display Ad ID.",
+                          "type": "string"
+                        },
+                        "promotions": {
+                          "description": "Number of times the creative was promoted.",
+                          "type": "integer"
+                        },
+                        "clicks": {
+                          "description": "Number of clicks on the creative.",
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "displayAdId",
+                        "promotions",
+                        "clicks"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "promotions",
+                  "timeSeries",
+                  "displayAds"
+                ]
+              }
+            },
+            "required": [
+              "campaignId",
+              "from",
+              "to",
+              "sponsoredProducts",
+              "displayAds"
+            ]
+          }
+        },
+        "required": [
+          "performance"
+        ]
+      },
+      "annotations": {
+        "title": "Get Campaign Performance",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetCampaignPerformance"
+      ]
+    },
+    {
       "name": "get_dataset_details",
       "title": "Get Dataset Details",
       "description": "Gets identifying and operational details about the requested Dataset, its License, and its effective Agent Gateway access policy. Use get_dataset_metadata instead to discover languages, currencies, Data Keys, Classification Values, and other Dataset-specific request vocabulary. This tool is read-only.",
@@ -6962,6 +7553,146 @@
       "area": "SearchTools",
       "relatedRestOperationIds": [
         "SearchToolsGetDecompoundingRule"
+      ]
+    },
+    {
+      "name": "get_display_ad",
+      "title": "Get Display Ad",
+      "description": "Reads creative configuration for an advertiser-owned Display Ad. Read-only. Null means not found for that advertiser. Data Values expose their Key and Type; parse each valueJson according to its Type.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "advertiserId": {
+            "description": "Owning Advertiser ID.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "displayAdId": {
+            "description": "Display Ad ID discovered with list_display_ads.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "datasetId",
+          "advertiserId",
+          "displayAdId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "displayAd": {
+            "description": "Get Display Ad result; null means not found.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "dataValues": {
+                "description": "Creative Data Values ordered by case-sensitive Data Key. Includes all configured values; empty means no data is configured.",
+                "type": "array",
+                "items": {
+                  "description": "One case-sensitive Relewise entity Data Key and its stored value.",
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "description": "Case-sensitive Data Key.",
+                      "type": "string"
+                    },
+                    "type": {
+                      "description": "Relewise data type of the stored value. Use it to interpret ValueJson. See https://docs.relewise.com/docs/intro/data-types.html for the supported value structures.",
+                      "type": "string",
+                      "enum": [
+                        "String",
+                        "Double",
+                        "Boolean",
+                        "Multilingual",
+                        "Money",
+                        "MultiCurrency",
+                        "StringList",
+                        "DoubleList",
+                        "BooleanList",
+                        "MultilingualCollection",
+                        "Object",
+                        "ObjectList"
+                      ]
+                    },
+                    "valueJson": {
+                      "description": "JSON-encoded stored value that consumers must parse according to Type. The text contains only the value payload, not the surrounding Relewise DataValue object. See https://docs.relewise.com/docs/intro/data-types.html for the value structures.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "type",
+                    "valueJson"
+                  ]
+                }
+              },
+              "id": {
+                "description": "Persistent Display Ad ID within the Dataset.",
+                "type": "string"
+              },
+              "advertiserId": {
+                "description": "Owning Advertiser ID.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": {
+                "description": "Display name of the creative.",
+                "type": "string"
+              },
+              "state": {
+                "description": "Lifecycle state: Active, Inactive, or Archived.",
+                "type": "string"
+              },
+              "templateId": {
+                "description": "Display Ad Type identifier used to interpret creative data.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "created": {
+                "description": "Creation timestamp with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "modified": {
+                "description": "Last modification timestamp with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "dataValues",
+              "id",
+              "advertiserId",
+              "name",
+              "state",
+              "templateId",
+              "created",
+              "modified"
+            ]
+          }
+        },
+        "required": [
+          "displayAd"
+        ]
+      },
+      "annotations": {
+        "title": "Get Display Ad",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetDisplayAd"
       ]
     },
     {
@@ -8131,6 +8862,176 @@
       "area": "SearchTools",
       "relatedRestOperationIds": [
         "SearchToolsGetRedirectRule"
+      ]
+    },
+    {
+      "name": "get_retail_media_location",
+      "title": "Get Retail Media Location",
+      "description": "Reads a Settings location with its placements and variations. Read-only. Null means not found. Parse JSON configuration fields and preserve SDK $type metadata.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationKey": {
+            "description": "Location Key discovered with list_retail_media_locations.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "datasetId",
+          "locationKey"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "description": "Get Retail Media Location result; null means not found.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "placements": {
+                "description": "Configured placements; empty means no placements are available.",
+                "type": "array",
+                "items": {
+                  "description": "A placement within a Retail Media location.",
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "description": "Stable Placement Key within the location.",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Display name of the position within the location.",
+                      "type": "string"
+                    },
+                    "thresholds": {
+                      "description": "Configured quality-score thresholds; null means no override at this level.",
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "relevance": {
+                          "description": "Minimum relevance score before relevance modifiers and merchandising rules. Expected range is 0 (everything matches) through 100 (exact matches). Null means no override at this level.",
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        },
+                        "adjusted": {
+                          "description": "Minimum adjusted score after relevance modifiers and merchandising rules. Expected range is 0 through 100. Null means no override at this level.",
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "relevance",
+                        "adjusted"
+                      ]
+                    },
+                    "displayAdTemplateFiltersJson": {
+                      "description": "SDK filters restricting Display Ad Types as JSON-encoded text. Parse it and preserve $type metadata. Null means no filter is configured. See https://docs.relewise.com/docs/filters/index.html.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "variations": {
+                      "description": "Configured device or layout variations; empty means none are available.",
+                      "type": "array",
+                      "items": {
+                        "description": "A device or layout variation of a placement.",
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "description": "Stable Variation Key within the placement.",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "Display name of the layout or device variation.",
+                            "type": "string"
+                          },
+                          "supportedPromotionsJson": {
+                            "description": "SDK supported-promotion settings as JSON-encoded text, including counts and priorities. Parse it and preserve $type metadata. Null means no settings are configured. See https://docs.relewise.com/docs/retailmedia/locations.html.",
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "name",
+                          "supportedPromotionsJson"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "name",
+                    "thresholds",
+                    "displayAdTemplateFiltersJson",
+                    "variations"
+                  ]
+                }
+              },
+              "key": {
+                "description": "Stable Location Key used by promotion requests.",
+                "type": "string"
+              },
+              "name": {
+                "description": "Display name of the page or context where promotions can appear.",
+                "type": "string"
+              },
+              "state": {
+                "description": "Lifecycle state: Active, Inactive, or Archived.",
+                "type": "string"
+              },
+              "created": {
+                "description": "Creation timestamp with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "modified": {
+                "description": "Last modification timestamp with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "placements",
+              "key",
+              "name",
+              "state",
+              "created",
+              "modified"
+            ]
+          }
+        },
+        "required": [
+          "location"
+        ]
+      },
+      "annotations": {
+        "title": "Get Retail Media Location",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetLocation"
       ]
     },
     {
@@ -9698,6 +10599,346 @@
       ]
     },
     {
+      "name": "list_advertisers",
+      "title": "List Advertisers",
+      "description": "Lists one page of matching advertisers ordered by name ascending. Read-only. Use get_advertiser for configuration. Request subsequent pages using pagination.totalPages.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "term": {
+            "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "states": {
+            "description": "Lifecycle states: Active, Inactive, Archived. Case-insensitive; omit or pass an empty list to include all states.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "default": null
+          },
+          "pageNumber": {
+            "description": "One-based page number; defaults to 1.",
+            "type": "integer",
+            "default": 1
+          },
+          "pageSize": {
+            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "type": "integer",
+            "default": 50
+          }
+        },
+        "required": [
+          "datasetId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "advertisers": {
+            "description": "Matching advertisers ordered by name ascending.",
+            "type": "array",
+            "items": {
+              "description": "Read-only advertiser summary.",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "name": {
+                  "description": "Advertiser name as stored.",
+                  "type": "string"
+                },
+                "state": {
+                  "description": "Advertiser lifecycle state: Active, Inactive, or Archived.",
+                  "type": "string"
+                },
+                "created": {
+                  "description": "Time the entity was created, with UTC offset.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "modified": {
+                  "description": "Time the entity was last modified, with UTC offset.",
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "state",
+                "created",
+                "modified"
+              ]
+            }
+          },
+          "pagination": {
+            "description": "Pagination of the filtered result set; an empty page does not imply no matches on earlier pages.",
+            "type": "object",
+            "properties": {
+              "pageNumber": {
+                "description": "One-based number of the returned page.",
+                "type": "integer"
+              },
+              "pageSize": {
+                "description": "Maximum number of items requested for the page.",
+                "type": "integer"
+              },
+              "totalResults": {
+                "description": "Total number of items in the complete result set.",
+                "type": "integer"
+              },
+              "totalPages": {
+                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "pageNumber",
+              "pageSize",
+              "totalResults",
+              "totalPages"
+            ]
+          }
+        },
+        "required": [
+          "advertisers",
+          "pagination"
+        ]
+      },
+      "annotations": {
+        "title": "List Advertisers",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaListAdvertisers"
+      ]
+    },
+    {
+      "name": "list_campaigns",
+      "title": "List Campaigns",
+      "description": "Lists one page of matching campaigns ordered by creation time descending. Read-only. Use get_campaign for configuration. Request subsequent pages using pagination.totalPages.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "term": {
+            "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "states": {
+            "description": "Approval states: Proposed, Approved, Archived. Case-insensitive; omit or pass an empty list to include all states. Approved does not necessarily mean actively serving.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "default": null
+          },
+          "advertiserId": {
+            "description": "Optional Advertiser ID; use list_advertisers to discover it.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid",
+            "default": null
+          },
+          "pageNumber": {
+            "description": "One-based page number; defaults to 1.",
+            "type": "integer",
+            "default": 1
+          },
+          "pageSize": {
+            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "type": "integer",
+            "default": 50
+          }
+        },
+        "required": [
+          "datasetId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "campaigns": {
+            "description": "Matching campaigns ordered by creation time descending.",
+            "type": "array",
+            "items": {
+              "description": "Read-only campaign summary.",
+              "type": "object",
+              "properties": {
+                "advertiserName": {
+                  "description": "Associated advertiser name; empty when the source cannot resolve the advertiser.",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "name": {
+                  "description": "Campaign name as stored.",
+                  "type": "string"
+                },
+                "state": {
+                  "description": "Campaign approval state: Proposed, Approved, or Archived. Approved does not necessarily mean actively serving.",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "Current serving status: Active, Inactive, ScheduleCompleted, or BudgetReached. Distinct from approval state.",
+                  "type": "string"
+                },
+                "budget": {
+                  "description": "Campaign budget, discriminated by type (currently cpm), with an optional spending cap. CPM and spending cap use the same monetary unit.",
+                  "type": "object",
+                  "required": [
+                    "type"
+                  ],
+                  "anyOf": [
+                    {
+                      "description": "Campaign budget priced per thousand impressions (CPM).",
+                      "properties": {
+                        "type": {
+                          "const": "cpm"
+                        },
+                        "costPerMille": {
+                          "description": "Cost per thousand impressions (CPM).",
+                          "type": "number"
+                        },
+                        "maximumTotalCost": {
+                          "description": "Maximum total campaign spend. Null means no spending cap. This is not a remaining-budget value.",
+                          "type": [
+                            "number",
+                            "null"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "costPerMille",
+                        "maximumTotalCost"
+                      ]
+                    }
+                  ]
+                },
+                "startsAt": {
+                  "description": "Inclusive campaign start timestamp with UTC offset; null means no start boundary.",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "endsAt": {
+                  "description": "Inclusive campaign end timestamp with UTC offset; null means no end boundary.",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "modified": {
+                  "description": "Time the entity was last modified, with UTC offset.",
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "advertiserName",
+                "id",
+                "name",
+                "state",
+                "status",
+                "budget",
+                "startsAt",
+                "endsAt",
+                "modified"
+              ]
+            }
+          },
+          "pagination": {
+            "description": "Pagination of the filtered result set; an empty page does not imply no matches on earlier pages.",
+            "type": "object",
+            "properties": {
+              "pageNumber": {
+                "description": "One-based number of the returned page.",
+                "type": "integer"
+              },
+              "pageSize": {
+                "description": "Maximum number of items requested for the page.",
+                "type": "integer"
+              },
+              "totalResults": {
+                "description": "Total number of items in the complete result set.",
+                "type": "integer"
+              },
+              "totalPages": {
+                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "pageNumber",
+              "pageSize",
+              "totalResults",
+              "totalPages"
+            ]
+          }
+        },
+        "required": [
+          "campaigns",
+          "pagination"
+        ]
+      },
+      "annotations": {
+        "title": "List Campaigns",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaListCampaigns"
+      ]
+    },
+    {
       "name": "list_decompounding_rules",
       "title": "List Decompounding Rules",
       "description": "Lists one page of compact Decompounding rule summaries for discovering Rule IDs, approval state, compound words, Heads, and behavior. Use term to narrow larger result sets and get_decompounding_rule for the complete Modifiers governed by a selected rule. This tool is read-only.",
@@ -9718,7 +10959,7 @@
             "default": null
           },
           "approved": {
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "type": [
               "boolean",
               "null"
@@ -9859,6 +11100,161 @@
       "area": "SearchTools",
       "relatedRestOperationIds": [
         "SearchToolsListDecompoundingRules"
+      ]
+    },
+    {
+      "name": "list_display_ads",
+      "title": "List Display Ads",
+      "description": "Lists advertiser-owned Display Ads ordered by creation time descending. Read-only. Use get_display_ad for creative configuration. Continue with the next page while pageNumber is below pagination.totalPages.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "advertiserId": {
+            "description": "Owning Advertiser ID; discover it with list_advertisers.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "term": {
+            "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "states": {
+            "description": "Lifecycle states: Active, Inactive, Archived. Case-insensitive; omit or pass an empty list to include all states.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "default": null
+          },
+          "pageNumber": {
+            "description": "One-based page number; defaults to 1.",
+            "type": "integer",
+            "default": 1
+          },
+          "pageSize": {
+            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "type": "integer",
+            "default": 50
+          }
+        },
+        "required": [
+          "datasetId",
+          "advertiserId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "displayAds": {
+            "description": "Display Ads ordered by creation time descending.",
+            "type": "array",
+            "items": {
+              "description": "Display Ad identity and lifecycle state.",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "Persistent Display Ad ID within the Dataset.",
+                  "type": "string"
+                },
+                "advertiserId": {
+                  "description": "Owning Advertiser ID.",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "name": {
+                  "description": "Display name of the creative.",
+                  "type": "string"
+                },
+                "state": {
+                  "description": "Lifecycle state: Active, Inactive, or Archived.",
+                  "type": "string"
+                },
+                "templateId": {
+                  "description": "Display Ad Type identifier used to interpret creative data.",
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "created": {
+                  "description": "Creation timestamp with UTC offset.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "modified": {
+                  "description": "Last modification timestamp with UTC offset.",
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "id",
+                "advertiserId",
+                "name",
+                "state",
+                "templateId",
+                "created",
+                "modified"
+              ]
+            }
+          },
+          "pagination": {
+            "description": "Pagination for the filtered result set.",
+            "type": "object",
+            "properties": {
+              "pageNumber": {
+                "description": "One-based number of the returned page.",
+                "type": "integer"
+              },
+              "pageSize": {
+                "description": "Maximum number of items requested for the page.",
+                "type": "integer"
+              },
+              "totalResults": {
+                "description": "Total number of items in the complete result set.",
+                "type": "integer"
+              },
+              "totalPages": {
+                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "pageNumber",
+              "pageSize",
+              "totalResults",
+              "totalPages"
+            ]
+          }
+        },
+        "required": [
+          "displayAds",
+          "pagination"
+        ]
+      },
+      "annotations": {
+        "title": "List Display Ads",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaListDisplayAds"
       ]
     },
     {
@@ -10490,7 +11886,7 @@
             "default": null
           },
           "approved": {
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "type": [
               "boolean",
               "null"
@@ -10662,6 +12058,137 @@
       ]
     },
     {
+      "name": "list_retail_media_locations",
+      "title": "List Retail Media Locations",
+      "description": "Lists one page of Retail Media Settings locations ordered by creation time descending. Read-only. Use get_retail_media_location for placements and variations. Increment pageNumber while it is below pagination.totalPages.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "term": {
+            "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "state": {
+            "description": "Lifecycle state: Active, Inactive, Archived. Case-insensitive; omit for all states.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "pageNumber": {
+            "description": "One-based page number; defaults to 1.",
+            "type": "integer",
+            "default": 1
+          },
+          "pageSize": {
+            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "type": "integer",
+            "default": 50
+          }
+        },
+        "required": [
+          "datasetId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "locations": {
+            "description": "Locations ordered by creation time descending.",
+            "type": "array",
+            "items": {
+              "description": "A Retail Media Settings location.",
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Stable Location Key used by promotion requests.",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Display name of the page or context where promotions can appear.",
+                  "type": "string"
+                },
+                "state": {
+                  "description": "Lifecycle state: Active, Inactive, or Archived.",
+                  "type": "string"
+                },
+                "created": {
+                  "description": "Creation timestamp with UTC offset.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "modified": {
+                  "description": "Last modification timestamp with UTC offset.",
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "key",
+                "name",
+                "state",
+                "created",
+                "modified"
+              ]
+            }
+          },
+          "pagination": {
+            "description": "Pagination of the filtered result set; an empty page does not imply no matches on earlier pages.",
+            "type": "object",
+            "properties": {
+              "pageNumber": {
+                "description": "One-based number of the returned page.",
+                "type": "integer"
+              },
+              "pageSize": {
+                "description": "Maximum number of items requested for the page.",
+                "type": "integer"
+              },
+              "totalResults": {
+                "description": "Total number of items in the complete result set.",
+                "type": "integer"
+              },
+              "totalPages": {
+                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "pageNumber",
+              "pageSize",
+              "totalResults",
+              "totalPages"
+            ]
+          }
+        },
+        "required": [
+          "locations",
+          "pagination"
+        ]
+      },
+      "annotations": {
+        "title": "List Retail Media Locations",
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaListLocations"
+      ]
+    },
+    {
       "name": "list_search_indexes",
       "title": "List Search Indexes",
       "description": "Lists compact Search Index summaries for discovering Search Index IDs, enabled/default state, and rebuild recency. Use get_search_index to inspect one Search Index's languages, rebuild state, and complete configuration. This tool is read-only.",
@@ -10773,7 +12300,7 @@
             "default": null
           },
           "approved": {
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "type": [
               "boolean",
               "null"
@@ -10970,7 +12497,7 @@
             "default": null
           },
           "approved": {
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "type": [
               "boolean",
               "null"
@@ -11169,7 +12696,7 @@
             "default": null
           },
           "approved": {
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "type": [
               "boolean",
               "null"
@@ -11323,7 +12850,7 @@
             "default": null
           },
           "approved": {
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "type": [
               "boolean",
               "null"
@@ -13992,6 +15519,398 @@
       "area": "SearchTools",
       "relatedRestOperationIds": [
         "SearchToolsPatchSynonymRule"
+      ]
+    },
+    {
+      "name": "update_advertiser",
+      "title": "Update Advertiser",
+      "description": "Changes only an existing advertiser lifecycle state, preserving promotion restrictions and locations. Writes configuration. Inspect get_advertiser first. Archived advertisers cannot be changed. Null means not found.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "advertiserId": {
+            "description": "Advertiser ID discovered with list_advertisers.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "description": "Set Active or Inactive; omit or null preserves the state. Archived advertisers cannot be changed.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "datasetId",
+          "advertiserId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "advertiser": {
+            "description": "Update Advertiser result; null means not found.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "allowedLocations": {
+                "description": "Configured Location Keys and selected placements where the advertiser may promote. An empty list means no locations are allowed. These are stored settings, not a calculation of effective eligibility.",
+                "type": "array",
+                "items": {
+                  "description": "A configured advertiser location and its placement selections.",
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "description": "Stored Location Key. This is a key, not a display name or a Location ID.",
+                      "type": "string"
+                    },
+                    "placements": {
+                      "description": "Stored placement selections for this location. An empty list means no placements are allowed at this location. No effective eligibility is inferred.",
+                      "type": "array",
+                      "items": {
+                        "description": "A configured advertiser placement and optional score-threshold overrides.",
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "description": "Stored Placement Key within the containing location.",
+                            "type": "string"
+                          },
+                          "thresholds": {
+                            "description": "Configured score-threshold overrides; null means no overrides at this level. These are not the resolved thresholds from other configuration levels.",
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "relevance": {
+                                "description": "Minimum relevance score before relevance modifiers and merchandising rules. Expected range is 0 (everything matches) through 100 (exact matches). Null means no override at this level.",
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "adjusted": {
+                                "description": "Minimum adjusted score after relevance modifiers and merchandising rules. Expected range is 0 through 100. Null means no override at this level.",
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "relevance",
+                              "adjusted"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "thresholds"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "placements"
+                  ]
+                }
+              },
+              "allowedPromotionsJson": {
+                "description": "JSON-encoded Relewise allowed-promotion specifications, including nested product filters. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK allowedPromotions configuration; null means no promotion specifications are configured, so the advertiser cannot make promotions. See https://docs.relewise.com/docs/retailmedia/advertisers.html for its purpose and https://docs.relewise.com/docs/filters/index.html for embedded filter structure.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": {
+                "description": "Advertiser name as stored.",
+                "type": "string"
+              },
+              "state": {
+                "description": "Advertiser lifecycle state: Active, Inactive, or Archived.",
+                "type": "string"
+              },
+              "created": {
+                "description": "Time the entity was created, with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "modified": {
+                "description": "Time the entity was last modified, with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "allowedLocations",
+              "allowedPromotionsJson",
+              "id",
+              "name",
+              "state",
+              "created",
+              "modified"
+            ]
+          }
+        },
+        "required": [
+          "advertiser"
+        ]
+      },
+      "annotations": {
+        "title": "Update Advertiser",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaUpdateAdvertiser"
+      ]
+    },
+    {
+      "name": "update_campaign",
+      "title": "Update Campaign",
+      "description": "Changes approval state, schedule or budget, preserving campaign targeting and promotions. Writes configuration. Inspect get_campaign first. Approved permits serving subject to schedule, budget and eligibility. Archived campaigns cannot be changed. Null means not found.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "datasetId": {
+            "description": "Dataset ID to target. If unknown, use get_me to discover it. If ambiguous, ask the user. Do not guess.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "campaignId": {
+            "description": "Campaign ID discovered with list_campaigns.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "description": "Set Approved to permit serving or Proposed to stop serving. Omit or null preserves the state.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": null
+          },
+          "schedule": {
+            "description": "Omit or null preserves schedule. A supplied object replaces both boundaries; null or omitted inner boundaries are cleared.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "startsAt": {
+                "description": "Inclusive start boundary. Within a supplied schedule, null or omission clears this boundary.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "endsAt": {
+                "description": "Inclusive end boundary. Within a supplied schedule, null or omission clears this boundary.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              }
+            },
+            "default": null
+          },
+          "budget": {
+            "description": "Omit or null preserves budget. A supplied object replaces the budget; type must be cpm. A null cap removes the limit.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "type"
+            ],
+            "anyOf": [
+              {
+                "description": "Replacement campaign budget priced per thousand impressions (CPM).",
+                "properties": {
+                  "type": {
+                    "const": "cpm"
+                  },
+                  "costPerMille": {
+                    "description": "Replacement cost per thousand impressions (CPM).",
+                    "type": "number"
+                  },
+                  "maximumTotalCost": {
+                    "description": "Replacement spending cap. Null removes the cap when a budget object is supplied.",
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "costPerMille",
+                  "maximumTotalCost"
+                ]
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "datasetId",
+          "campaignId"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "campaign": {
+            "description": "Update Campaign result; null means not found.",
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "advertiserId": {
+                "description": "Associated Advertiser ID; use the advertiser detail operation to inspect it.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "created": {
+                "description": "Time the entity was created, with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              },
+              "promotionsJson": {
+                "description": "JSON-encoded Relewise promotion collection, including sponsored-product and display-ad promotions, their locations, and nested filters. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK promotions configuration; null means no collection is provided, while an empty collection contains no promotions. See https://docs.relewise.com/docs/retailmedia/campaigns.html and https://docs.relewise.com/docs/filters/index.html.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "conditionsJson": {
+                "description": "JSON-encoded Relewise campaign conditions, including language-specific search-term conditions. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK conditions configuration; null means no campaign-level conditions are configured. See https://docs.relewise.com/docs/retailmedia/campaigns.html#promoting-by-specific-search-terms and https://docs.relewise.com/docs/filters/index.html.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "name": {
+                "description": "Campaign name as stored.",
+                "type": "string"
+              },
+              "state": {
+                "description": "Campaign approval state: Proposed, Approved, or Archived. Approved does not necessarily mean actively serving.",
+                "type": "string"
+              },
+              "status": {
+                "description": "Current serving status: Active, Inactive, ScheduleCompleted, or BudgetReached. Distinct from approval state.",
+                "type": "string"
+              },
+              "budget": {
+                "description": "Campaign budget, discriminated by type (currently cpm), with an optional spending cap. CPM and spending cap use the same monetary unit.",
+                "type": "object",
+                "required": [
+                  "type"
+                ],
+                "anyOf": [
+                  {
+                    "description": "Campaign budget priced per thousand impressions (CPM).",
+                    "properties": {
+                      "type": {
+                        "const": "cpm"
+                      },
+                      "costPerMille": {
+                        "description": "Cost per thousand impressions (CPM).",
+                        "type": "number"
+                      },
+                      "maximumTotalCost": {
+                        "description": "Maximum total campaign spend. Null means no spending cap. This is not a remaining-budget value.",
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "costPerMille",
+                      "maximumTotalCost"
+                    ]
+                  }
+                ]
+              },
+              "startsAt": {
+                "description": "Inclusive campaign start timestamp with UTC offset; null means no start boundary.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "endsAt": {
+                "description": "Inclusive campaign end timestamp with UTC offset; null means no end boundary.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "modified": {
+                "description": "Time the entity was last modified, with UTC offset.",
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "advertiserId",
+              "created",
+              "promotionsJson",
+              "conditionsJson",
+              "id",
+              "name",
+              "state",
+              "status",
+              "budget",
+              "startsAt",
+              "endsAt",
+              "modified"
+            ]
+          }
+        },
+        "required": [
+          "campaign"
+        ]
+      },
+      "annotations": {
+        "title": "Update Campaign",
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaUpdateCampaign"
       ]
     }
   ]

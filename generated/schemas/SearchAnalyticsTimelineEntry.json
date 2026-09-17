@@ -15,31 +15,31 @@
       "format": "date"
     },
     "searches": {
-      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "type": "number",
       "description": "Total searches on the date, or null when the upstream series has no value for the date.",
       "format": "double",
       "nullable": true
     },
     "searchesWithoutResults": {
-      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "type": "number",
       "description": "Searches returning no products on the date, or null when unavailable.",
       "format": "double",
       "nullable": true
     },
     "clicks": {
-      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "type": "number",
       "description": "Product clicks originating from searches on the date, or null when unavailable.",
       "format": "double",
       "nullable": true
     },
     "averageClickPosition": {
-      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "type": "number",
       "description": "Average position of clicked products on the date, or null when unavailable.",
       "format": "double",
       "nullable": true
     },
     "conversions": {
-      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "type": "number",
       "description": "Conversions attributed to searches on the date, or null when unavailable.",
       "format": "double",
       "nullable": true

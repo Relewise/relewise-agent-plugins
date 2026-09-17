@@ -8,28 +8,24 @@
   "type": "object",
   "properties": {
     "pageNumber": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "One-based number of the returned page.",
-      "format": "uint32",
-      "type": "integer"
+      "format": "uint32"
     },
     "pageSize": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "Maximum number of items requested for the page.",
-      "format": "uint32",
-      "type": "integer"
+      "format": "uint32"
     },
     "totalResults": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "Total number of items matching the request across all pages.",
-      "format": "uint32",
-      "type": "integer"
+      "format": "uint32"
     },
     "totalPages": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "Total number of pages required to return all matching items at the requested page size.",
-      "format": "uint32",
-      "type": "integer"
+      "format": "uint32"
     }
   },
   "description": "Pagination details for one page of a collection."

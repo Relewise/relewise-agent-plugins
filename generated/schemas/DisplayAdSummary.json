@@ -1,0 +1,47 @@
+{
+  "required": [
+    "id",
+    "advertiserId",
+    "name",
+    "state",
+    "templateId",
+    "created",
+    "modified"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Persistent Display Ad ID within the Dataset."
+    },
+    "advertiserId": {
+      "type": "string",
+      "description": "Owning Advertiser ID.",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the creative."
+    },
+    "state": {
+      "type": "string",
+      "description": "Lifecycle state: Active, Inactive, or Archived."
+    },
+    "templateId": {
+      "type": "string",
+      "description": "Display Ad Type identifier used to interpret creative data.",
+      "format": "uuid"
+    },
+    "created": {
+      "type": "string",
+      "description": "Creation timestamp with UTC offset.",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Last modification timestamp with UTC offset.",
+      "format": "date-time"
+    }
+  },
+  "description": "Display Ad identity and lifecycle state."
+}

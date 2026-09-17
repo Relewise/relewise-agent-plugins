@@ -1,0 +1,21 @@
+{
+  "required": [
+    "key",
+    "placements"
+  ],
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stored Location Key. This is a key, not a display name or a Location ID."
+    },
+    "placements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AdvertiserPlacement"
+      },
+      "description": "Stored placement selections for this location. An empty list means no placements are allowed at this location. No effective eligibility is inferred."
+    }
+  },
+  "description": "A configured advertiser location and its placement selections."
+}

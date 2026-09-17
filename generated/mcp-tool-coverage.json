@@ -1,6 +1,6 @@
 {
-  "toolCount": 61,
-  "coveredToolCount": 61,
+  "toolCount": 72,
+  "coveredToolCount": 72,
   "uncoveredToolCount": 0,
   "coveragePercent": 100,
   "tools": [
@@ -259,6 +259,36 @@
       ]
     },
     {
+      "name": "get_advertiser",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetAdvertiser"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
+      "name": "get_campaign",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetCampaign"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
+      "name": "get_campaign_performance",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetCampaignPerformance"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
       "name": "get_dataset_details",
       "area": "Core",
       "relatedRestOperationIds": [
@@ -293,6 +323,16 @@
       "skills": [
         "relewise/skills/relewise-merchandising-audit",
         "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "get_display_ad",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetDisplayAd"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
       ]
     },
     {
@@ -348,6 +388,16 @@
       "skills": [
         "relewise/skills/relewise-merchandising-audit",
         "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "get_retail_media_location",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaGetLocation"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
       ]
     },
     {
@@ -416,6 +466,26 @@
       ]
     },
     {
+      "name": "list_advertisers",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaListAdvertisers"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
+      "name": "list_campaigns",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaListCampaigns"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
       "name": "list_decompounding_rules",
       "area": "SearchTools",
       "relatedRestOperationIds": [
@@ -424,6 +494,16 @@
       "skills": [
         "relewise/skills/relewise-merchandising-audit",
         "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_display_ads",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaListDisplayAds"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
       ]
     },
     {
@@ -466,6 +546,16 @@
       "skills": [
         "relewise/skills/relewise-merchandising-audit",
         "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "list_retail_media_locations",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaListLocations"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
       ]
     },
     {
@@ -661,6 +751,26 @@
       ],
       "skills": [
         "relewise/skills/relewise-search-tools"
+      ]
+    },
+    {
+      "name": "update_advertiser",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaUpdateAdvertiser"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
+      ]
+    },
+    {
+      "name": "update_campaign",
+      "area": "RetailMedia",
+      "relatedRestOperationIds": [
+        "RetailMediaUpdateCampaign"
+      ],
+      "skills": [
+        "relewise/skills/relewise-retail-media"
       ]
     }
   ]

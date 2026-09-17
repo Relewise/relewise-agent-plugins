@@ -10,10 +10,9 @@
       "type": "string"
     },
     "position": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "One-based result position assigned to matching entities.",
-      "format": "int32",
-      "type": "integer"
+      "format": "int32"
     }
   },
   "description": "Configuration for a rule that places matching entities at a fixed result position."

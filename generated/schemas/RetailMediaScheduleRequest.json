@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "startsAt": {
+      "type": "string",
+      "description": "Inclusive start boundary. Within a supplied schedule, null or omission clears this boundary.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "endsAt": {
+      "type": "string",
+      "description": "Inclusive end boundary. Within a supplied schedule, null or omission clears this boundary.",
+      "format": "date-time",
+      "nullable": true
+    }
+  },
+  "description": "Replacement campaign schedule."
+}

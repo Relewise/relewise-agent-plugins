@@ -1,0 +1,40 @@
+{
+  "required": [
+    "from",
+    "promotions",
+    "views",
+    "salesQuantity",
+    "revenue"
+  ],
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": "string",
+      "description": "UTC start timestamp of the source time bucket.",
+      "format": "date-time"
+    },
+    "promotions": {
+      "type": "integer",
+      "description": "Number of product promotions.",
+      "format": "int32"
+    },
+    "views": {
+      "type": "integer",
+      "description": "Views of products included in the campaign across all channels, not only views from ad impressions.",
+      "format": "int32"
+    },
+    "salesQuantity": {
+      "type": "integer",
+      "description": "Quantity sold of products included in the campaign across all sales channels, not only ad-driven sales.",
+      "format": "int32"
+    },
+    "revenue": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/RetailMediaRevenue"
+      },
+      "description": "Product sales revenue across all channels, separated by currency; never sum different currencies."
+    }
+  },
+  "description": "Sponsored Product metrics in a source time bucket."
+}

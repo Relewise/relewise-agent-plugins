@@ -38,10 +38,9 @@
       "nullable": true
     },
     "modifierCount": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "Number of terms that modify the Head.",
-      "format": "int32",
-      "type": "integer"
+      "format": "int32"
     },
     "preventsDecompounding": {
       "type": "boolean",

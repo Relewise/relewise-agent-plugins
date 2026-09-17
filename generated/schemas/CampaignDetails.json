@@ -1,0 +1,82 @@
+{
+  "required": [
+    "id",
+    "name",
+    "state",
+    "status",
+    "advertiserId",
+    "budget",
+    "startsAt",
+    "endsAt",
+    "created",
+    "modified",
+    "promotionsJson",
+    "conditionsJson"
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "description": "Campaign name as stored."
+    },
+    "state": {
+      "type": "string",
+      "description": "Campaign approval state: Proposed, Approved, or Archived. Approved does not necessarily mean actively serving."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current serving status: Active, Inactive, ScheduleCompleted, or BudgetReached. Distinct from approval state."
+    },
+    "advertiserId": {
+      "type": "string",
+      "description": "Associated Advertiser ID; use the advertiser detail operation to inspect it.",
+      "format": "uuid"
+    },
+    "budget": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/RetailMediaBudget"
+        }
+      ],
+      "description": "Campaign budget, discriminated by type (currently cpm), with an optional spending cap. CPM and spending cap use the same monetary unit."
+    },
+    "startsAt": {
+      "type": "string",
+      "description": "Inclusive campaign start timestamp with UTC offset; null means no start boundary.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "endsAt": {
+      "type": "string",
+      "description": "Inclusive campaign end timestamp with UTC offset; null means no end boundary.",
+      "format": "date-time",
+      "nullable": true
+    },
+    "created": {
+      "type": "string",
+      "description": "Time the entity was created, with UTC offset.",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Time the entity was last modified, with UTC offset.",
+      "format": "date-time"
+    },
+    "promotionsJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise promotion collection, including sponsored-product and display-ad promotions, their locations, and nested filters. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK promotions configuration; null means no collection is provided, while an empty collection contains no promotions. See https://docs.relewise.com/docs/retailmedia/campaigns.html and https://docs.relewise.com/docs/filters/index.html.",
+      "nullable": true
+    },
+    "conditionsJson": {
+      "type": "string",
+      "description": "JSON-encoded Relewise campaign conditions, including language-specific search-term conditions. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK conditions configuration; null means no campaign-level conditions are configured. See https://docs.relewise.com/docs/retailmedia/campaigns.html#promoting-by-specific-search-terms and https://docs.relewise.com/docs/filters/index.html.",
+      "nullable": true
+    }
+  },
+  "description": "Read-only campaign configuration."
+}

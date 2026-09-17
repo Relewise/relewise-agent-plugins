@@ -45,7 +45,7 @@
     },
     "term": {
       "type": "string",
-      "description": "Optional case-insensitive text used to filter returned search terms.",
+      "description": "Case-insensitive text filter for search terms.",
       "nullable": true
     },
     "pagination": {

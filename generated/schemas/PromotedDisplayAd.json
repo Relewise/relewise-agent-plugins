@@ -1,0 +1,25 @@
+{
+  "required": [
+    "displayAdId",
+    "promotions",
+    "clicks"
+  ],
+  "type": "object",
+  "properties": {
+    "displayAdId": {
+      "type": "string",
+      "description": "Promoted Display Ad ID."
+    },
+    "promotions": {
+      "type": "integer",
+      "description": "Number of times the creative was promoted.",
+      "format": "int32"
+    },
+    "clicks": {
+      "type": "integer",
+      "description": "Number of clicks on the creative.",
+      "format": "int32"
+    }
+  },
+  "description": "Promotion and click counts for a Display Ad."
+}

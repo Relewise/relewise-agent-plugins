@@ -13,10 +13,9 @@
       "type": "string"
     },
     "considerAbandonedAfterMinutes": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "Minutes of inactivity after which a search is considered abandoned.",
-      "format": "int32",
-      "type": "integer"
+      "format": "int32"
     },
     "searchTypesInPrioritizedOrder": {
       "type": "array",

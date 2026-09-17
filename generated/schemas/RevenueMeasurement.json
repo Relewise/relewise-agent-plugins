@@ -20,7 +20,7 @@
       "description": "Display-ready value including applicable formatting, units, or currency. Use this value when presenting the metric to users."
     },
     "numericValue": {
-      "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+      "type": "number",
       "description": "Raw numeric value. Use this value for calculations instead of parsing the formatted value.",
       "format": "double"
     }

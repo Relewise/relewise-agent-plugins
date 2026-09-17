@@ -1,0 +1,17 @@
+{
+  "required": [
+    "campaign"
+  ],
+  "type": "object",
+  "properties": {
+    "campaign": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/CampaignDetails"
+        }
+      ],
+      "description": "Read-only campaign configuration."
+    }
+  },
+  "description": "Read-only campaign detail response."
+}

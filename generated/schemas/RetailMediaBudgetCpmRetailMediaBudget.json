@@ -1,0 +1,26 @@
+{
+  "required": [
+    "costPerMille",
+    "maximumTotalCost"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "cpm"
+      ],
+      "type": "string"
+    },
+    "costPerMille": {
+      "type": "number",
+      "description": "Cost per thousand impressions (CPM).",
+      "format": "double"
+    },
+    "maximumTotalCost": {
+      "type": "number",
+      "description": "Maximum total campaign spend. Null means no spending cap. This is not a remaining-budget value.",
+      "format": "double",
+      "nullable": true
+    }
+  },
+  "description": "Campaign budget priced per thousand impressions (CPM)."
+}

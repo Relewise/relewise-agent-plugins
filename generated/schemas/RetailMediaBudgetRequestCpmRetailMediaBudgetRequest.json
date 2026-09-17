@@ -1,0 +1,26 @@
+{
+  "required": [
+    "costPerMille"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "cpm"
+      ],
+      "type": "string"
+    },
+    "costPerMille": {
+      "type": "number",
+      "description": "Required replacement cost per thousand impressions; must not be negative.",
+      "format": "double",
+      "nullable": true
+    },
+    "maximumTotalCost": {
+      "type": "number",
+      "description": "Replacement spending cap. Null or omission removes the cap when a budget object is supplied.",
+      "format": "double",
+      "nullable": true
+    }
+  },
+  "description": "Replacement campaign budget priced per thousand impressions (CPM)."
+}

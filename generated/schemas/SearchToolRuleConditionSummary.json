@@ -30,10 +30,9 @@
       "description": "Whether the condition result is inverted."
     },
     "nestedConditionCount": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
-      "format": "int32",
-      "type": "integer"
+      "format": "int32"
     }
   },
   "description": "Compact representation of the root Search Term condition without its nested condition definitions."

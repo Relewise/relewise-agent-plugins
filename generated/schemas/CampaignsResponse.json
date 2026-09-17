@@ -1,0 +1,25 @@
+{
+  "required": [
+    "campaigns",
+    "pagination"
+  ],
+  "type": "object",
+  "properties": {
+    "campaigns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/CampaignSummary"
+      },
+      "description": "Matching campaigns ordered by creation time descending."
+    },
+    "pagination": {
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/PaginationMetadata"
+        }
+      ],
+      "description": "Pagination of the filtered result set; an empty page does not imply no matches on earlier pages."
+    }
+  },
+  "description": "One page of matching campaigns."
+}

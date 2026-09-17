@@ -1,0 +1,22 @@
+{
+  "required": [
+    "relevance",
+    "adjusted"
+  ],
+  "type": "object",
+  "properties": {
+    "relevance": {
+      "type": "number",
+      "description": "Minimum relevance score before relevance modifiers and merchandising rules. Expected range is 0 (everything matches) through 100 (exact matches). Null means no override at this level.",
+      "format": "float",
+      "nullable": true
+    },
+    "adjusted": {
+      "type": "number",
+      "description": "Minimum adjusted score after relevance modifiers and merchandising rules. Expected range is 0 through 100. Null means no override at this level.",
+      "format": "float",
+      "nullable": true
+    }
+  },
+  "description": "Configured relevance score thresholds for Retail Media promotion eligibility."
+}

@@ -31,10 +31,9 @@
       "nullable": true
     },
     "wordCount": {
-      "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "type": "integer",
       "description": "Number of word variants governed by the rule.",
-      "format": "int32",
-      "type": "integer"
+      "format": "int32"
     }
   },
   "description": "Compact Stemming rule representation returned by list operations."

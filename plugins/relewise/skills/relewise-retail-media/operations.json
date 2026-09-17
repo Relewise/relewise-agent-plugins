@@ -1,0 +1,15 @@
+{
+  "operationIds": [
+    "RetailMediaGetAdvertiser",
+    "RetailMediaGetCampaign",
+    "RetailMediaGetCampaignPerformance",
+    "RetailMediaGetDisplayAd",
+    "RetailMediaGetLocation",
+    "RetailMediaListAdvertisers",
+    "RetailMediaListCampaigns",
+    "RetailMediaListDisplayAds",
+    "RetailMediaListLocations",
+    "RetailMediaUpdateAdvertiser",
+    "RetailMediaUpdateCampaign"
+  ]
+}

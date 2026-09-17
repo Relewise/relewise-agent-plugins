@@ -3129,7 +3129,7 @@
           {
             "name": "approved",
             "in": "query",
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "schema": {
               "type": "boolean"
             }
@@ -3404,7 +3404,7 @@
           {
             "name": "approved",
             "in": "query",
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "schema": {
               "type": "boolean"
             }
@@ -3679,7 +3679,7 @@
           {
             "name": "approved",
             "in": "query",
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "schema": {
               "type": "boolean"
             }
@@ -3954,7 +3954,7 @@
           {
             "name": "approved",
             "in": "query",
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "schema": {
               "type": "boolean"
             }
@@ -4229,7 +4229,7 @@
           {
             "name": "approved",
             "in": "query",
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "schema": {
               "type": "boolean"
             }
@@ -4504,7 +4504,7 @@
           {
             "name": "approved",
             "in": "query",
-            "description": "Optional approval-state filter.",
+            "description": "Optional approval-state filter. True returns approved rules, false returns unapproved rules, and null returns both.",
             "schema": {
               "type": "boolean"
             }
@@ -5295,6 +5295,1089 @@
         }
       }
     },
+    "/api/v1/datasets/{datasetId}/retail-media/advertisers": {
+      "get": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Lists advertisers.",
+        "description": "Read-only page ordered by advertiser name ascending. Use RetailMediaGetAdvertiser for configuration. Repeat with the next pageNumber while pagination.totalPages is greater than the current page.",
+        "operationId": "RetailMediaListAdvertisers",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "states",
+            "in": "query",
+            "description": "Lifecycle states: Active, Inactive, Archived. Case-insensitive; omit or pass an empty list to include all states.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "One-based page number; defaults to 1.",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "schema": {
+              "maximum": 100,
+              "minimum": 10,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdvertisersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/retail-media/advertisers/{advertiserId}": {
+      "get": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Gets advertiser configuration.",
+        "description": "Read-only configuration lookup. Discover the Advertiser ID with RetailMediaListAdvertisers. Inspect typed allowedLocations and parse allowedPromotionsJson for promotion restrictions; preserve SDK $type metadata. Does not modify entities or retrieve campaign performance.",
+        "operationId": "RetailMediaGetAdvertiser",
+        "parameters": [
+          {
+            "name": "advertiserId",
+            "in": "path",
+            "description": "Advertiser ID discovered from RetailMediaListAdvertisers.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdvertiserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Updates advertiser state.",
+        "description": "Changes the lifecycle state of an existing advertiser. Preserves promotion restrictions and locations. Archived advertisers cannot be changed.",
+        "operationId": "RetailMediaUpdateAdvertiser",
+        "parameters": [
+          {
+            "name": "advertiserId",
+            "in": "path",
+            "description": "Owning Advertiser ID discovered by listing advertisers.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAdvertiserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdvertiserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/retail-media/campaigns": {
+      "get": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Lists campaigns.",
+        "description": "Read-only page ordered by campaign creation time descending. Use RetailMediaGetCampaign for configuration. Repeat with the next pageNumber while pagination.totalPages is greater than the current page.",
+        "operationId": "RetailMediaListCampaigns",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "states",
+            "in": "query",
+            "description": "Approval states: Proposed, Approved, Archived. Case-insensitive; omit or pass an empty list to include all states. Approved does not necessarily mean actively serving.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "One-based page number; defaults to 1.",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "schema": {
+              "maximum": 100,
+              "minimum": 10,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "advertiserId",
+            "in": "query",
+            "description": "Optional Advertiser ID discovered by listing advertisers.",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/retail-media/campaigns/{campaignId}": {
+      "get": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Gets campaign configuration.",
+        "description": "Read-only configuration lookup. Discover the Campaign ID with RetailMediaListCampaigns. Parse promotionsJson and conditionsJson for promotion and targeting configuration; preserve SDK $type metadata. Does not modify entities or retrieve campaign performance.",
+        "operationId": "RetailMediaGetCampaign",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "description": "Campaign ID discovered from RetailMediaListCampaigns.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Updates campaign approval, schedule, or budget.",
+        "description": "Changes approval state, schedule or budget of an existing campaign. Preserves targeting and promotions. Approved permits serving but does not override schedule, budget or eligibility. Archived campaigns cannot be changed.",
+        "operationId": "RetailMediaUpdateCampaign",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "description": "Campaign ID discovered by listing campaigns.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCampaignRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/retail-media/advertisers/{advertiserId}/display-ads": {
+      "get": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Lists Display Ads.",
+        "description": "Read-only advertiser-owned Display Ads ordered by creation time descending. Use RetailMediaGetDisplayAd for creative configuration. Request subsequent pages using pagination.totalPages.",
+        "operationId": "RetailMediaListDisplayAds",
+        "parameters": [
+          {
+            "name": "advertiserId",
+            "in": "path",
+            "description": "Owning Advertiser ID discovered by listing advertisers.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "states",
+            "in": "query",
+            "description": "Lifecycle states: Active, Inactive, Archived. Case-insensitive; omit or pass an empty list to include all states.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "One-based page number; defaults to 1.",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "schema": {
+              "maximum": 100,
+              "minimum": 10,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplayAdsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/retail-media/advertisers/{advertiserId}/display-ads/{displayAdId}": {
+      "get": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Gets Display Ad configuration.",
+        "description": "Read-only creative configuration. Discover IDs with RetailMediaListDisplayAds. A creative belonging to another advertiser returns 404.",
+        "operationId": "RetailMediaGetDisplayAd",
+        "parameters": [
+          {
+            "name": "advertiserId",
+            "in": "path",
+            "description": "Owning Advertiser ID discovered by listing advertisers.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "displayAdId",
+            "in": "path",
+            "description": "Display Ad ID discovered by listing the advertiser's Display Ads.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplayAdResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/retail-media/settings/locations": {
+      "get": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Lists Retail Media locations.",
+        "description": "Read-only Retail Media Settings locations ordered by creation time descending. Use RetailMediaGetLocation for placements and variations. Continue while hasMore is true.",
+        "operationId": "RetailMediaListLocations",
+        "parameters": [
+          {
+            "name": "term",
+            "in": "query",
+            "description": "Name search term. Leading and trailing whitespace is trimmed; omit or leave blank to apply no name filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "Lifecycle state: Active, Inactive, Archived. Case-insensitive; omit for all states.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "One-based page number; defaults to 1.",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "schema": {
+              "maximum": 100,
+              "minimum": 10,
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetailMediaLocationsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/retail-media/settings/locations/{locationKey}": {
+      "get": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Gets location settings.",
+        "description": "Read-only location settings with nested placements and variations. Discover the Location Key with RetailMediaListLocations.",
+        "operationId": "RetailMediaGetLocation",
+        "parameters": [
+          {
+            "name": "locationKey",
+            "in": "path",
+            "description": "Location Key discovered by listing Settings locations.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetailMediaLocationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
+    "/api/v1/datasets/{datasetId}/retail-media/campaigns/{campaignId}/performance": {
+      "get": {
+        "tags": [
+          "Retail Media"
+        ],
+        "summary": "Gets campaign performance.",
+        "description": "Read-only Sponsored Product and Display Ad performance for the requested UTC period, up to 366 days. Future end times are capped at now. Includes source time buckets and entity breakdowns. Product revenue covers all sales channels and remains separated by currency; Display Ad revenue is not supplied. No UI comparison period is added.",
+        "operationId": "RetailMediaGetCampaignPerformance",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "description": "Campaign ID discovered by listing campaigns.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Inclusive reporting-period start with UTC offset.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Reporting-period end with UTC offset, capped at now. Maximum period is 366 days.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "productIds",
+            "in": "query",
+            "description": "Optional Product IDs restricting Sponsored Product metrics; omit for all.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "displayAdIds",
+            "in": "query",
+            "description": "Optional Display Ad IDs restricting Display Ad metrics; omit for all.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "Dataset ID that scopes the request. If unknown, use GET /api/v1/me to discover it. If ambiguous, ask the user. Do not guess. The supplied Personal Access Token or OAuth access token must allow access to this Dataset, and the Dataset Access Policy must allow the requested Agent Gateway operation.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignPerformanceResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HttpValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized."
+          },
+          "403": {
+            "description": "Forbidden."
+          },
+          "429": {
+            "description": "Too many requests."
+          },
+          "503": {
+            "description": "The external REST API is temporarily unavailable."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        }
+      }
+    },
     "/api/v1/me": {
       "get": {
         "tags": [
@@ -5335,6 +6418,179 @@
   },
   "components": {
     "schemas": {
+      "AdvertiserDetails": {
+        "required": [
+          "id",
+          "name",
+          "state",
+          "created",
+          "modified",
+          "allowedLocations",
+          "allowedPromotionsJson"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Advertiser name as stored."
+          },
+          "state": {
+            "type": "string",
+            "description": "Advertiser lifecycle state: Active, Inactive, or Archived."
+          },
+          "created": {
+            "type": "string",
+            "description": "Time the entity was created, with UTC offset.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "Time the entity was last modified, with UTC offset.",
+            "format": "date-time"
+          },
+          "allowedLocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvertiserLocation"
+            },
+            "description": "Configured Location Keys and selected placements where the advertiser may promote. An empty list means no locations are allowed. These are stored settings, not a calculation of effective eligibility."
+          },
+          "allowedPromotionsJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise allowed-promotion specifications, including nested product filters. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK allowedPromotions configuration; null means no promotion specifications are configured, so the advertiser cannot make promotions. See https://docs.relewise.com/docs/retailmedia/advertisers.html for its purpose and https://docs.relewise.com/docs/filters/index.html for embedded filter structure.",
+            "nullable": true
+          }
+        },
+        "description": "Read-only advertiser configuration."
+      },
+      "AdvertiserLocation": {
+        "required": [
+          "key",
+          "placements"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Stored Location Key. This is a key, not a display name or a Location ID."
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvertiserPlacement"
+            },
+            "description": "Stored placement selections for this location. An empty list means no placements are allowed at this location. No effective eligibility is inferred."
+          }
+        },
+        "description": "A configured advertiser location and its placement selections."
+      },
+      "AdvertiserPlacement": {
+        "required": [
+          "key",
+          "thresholds"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Stored Placement Key within the containing location."
+          },
+          "thresholds": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RetailMediaScoreThresholds"
+              }
+            ],
+            "description": "Configured score-threshold overrides; null means no overrides at this level. These are not the resolved thresholds from other configuration levels.",
+            "nullable": true
+          }
+        },
+        "description": "A configured advertiser placement and optional score-threshold overrides."
+      },
+      "AdvertiserResponse": {
+        "required": [
+          "advertiser"
+        ],
+        "type": "object",
+        "properties": {
+          "advertiser": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AdvertiserDetails"
+              }
+            ],
+            "description": "Read-only advertiser configuration."
+          }
+        },
+        "description": "Read-only advertiser detail response."
+      },
+      "AdvertisersResponse": {
+        "required": [
+          "advertisers",
+          "pagination"
+        ],
+        "type": "object",
+        "properties": {
+          "advertisers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdvertiserSummary"
+            },
+            "description": "Matching advertisers ordered by name ascending."
+          },
+          "pagination": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination of the filtered result set; an empty page does not imply no matches on earlier pages."
+          }
+        },
+        "description": "One page of matching advertisers."
+      },
+      "AdvertiserSummary": {
+        "required": [
+          "id",
+          "name",
+          "state",
+          "created",
+          "modified"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Advertiser name as stored."
+          },
+          "state": {
+            "type": "string",
+            "description": "Advertiser lifecycle state: Active, Inactive, or Archived."
+          },
+          "created": {
+            "type": "string",
+            "description": "Time the entity was created, with UTC offset.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "Time the entity was last modified, with UTC offset.",
+            "format": "date-time"
+          }
+        },
+        "description": "Read-only advertiser summary."
+      },
       "AuthenticationMetadata": {
         "required": [
           "method"
@@ -5476,9 +6732,8 @@
           "assortments": {
             "type": "array",
             "items": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "format": "int32",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
           },
@@ -5582,6 +6837,254 @@
         },
         "description": "A compact representation of a Brand for lists and search results."
       },
+      "CampaignDetails": {
+        "required": [
+          "id",
+          "name",
+          "state",
+          "status",
+          "advertiserId",
+          "budget",
+          "startsAt",
+          "endsAt",
+          "created",
+          "modified",
+          "promotionsJson",
+          "conditionsJson"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Campaign name as stored."
+          },
+          "state": {
+            "type": "string",
+            "description": "Campaign approval state: Proposed, Approved, or Archived. Approved does not necessarily mean actively serving."
+          },
+          "status": {
+            "type": "string",
+            "description": "Current serving status: Active, Inactive, ScheduleCompleted, or BudgetReached. Distinct from approval state."
+          },
+          "advertiserId": {
+            "type": "string",
+            "description": "Associated Advertiser ID; use the advertiser detail operation to inspect it.",
+            "format": "uuid"
+          },
+          "budget": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RetailMediaBudget"
+              }
+            ],
+            "description": "Campaign budget, discriminated by type (currently cpm), with an optional spending cap. CPM and spending cap use the same monetary unit."
+          },
+          "startsAt": {
+            "type": "string",
+            "description": "Inclusive campaign start timestamp with UTC offset; null means no start boundary.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endsAt": {
+            "type": "string",
+            "description": "Inclusive campaign end timestamp with UTC offset; null means no end boundary.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "description": "Time the entity was created, with UTC offset.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "Time the entity was last modified, with UTC offset.",
+            "format": "date-time"
+          },
+          "promotionsJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise promotion collection, including sponsored-product and display-ad promotions, their locations, and nested filters. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK promotions configuration; null means no collection is provided, while an empty collection contains no promotions. See https://docs.relewise.com/docs/retailmedia/campaigns.html and https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          },
+          "conditionsJson": {
+            "type": "string",
+            "description": "JSON-encoded Relewise campaign conditions, including language-specific search-term conditions. Parse this string as JSON and preserve SDK $type metadata. Serialized from the SDK conditions configuration; null means no campaign-level conditions are configured. See https://docs.relewise.com/docs/retailmedia/campaigns.html#promoting-by-specific-search-terms and https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          }
+        },
+        "description": "Read-only campaign configuration."
+      },
+      "CampaignPerformance": {
+        "required": [
+          "campaignId",
+          "from",
+          "to",
+          "sponsoredProducts",
+          "displayAds"
+        ],
+        "type": "object",
+        "properties": {
+          "campaignId": {
+            "type": "string",
+            "description": "Campaign whose performance is reported.",
+            "format": "uuid"
+          },
+          "from": {
+            "type": "string",
+            "description": "Inclusive UTC start of the requested period.",
+            "format": "date-time"
+          },
+          "to": {
+            "type": "string",
+            "description": "UTC end of the requested period, capped at the current time.",
+            "format": "date-time"
+          },
+          "sponsoredProducts": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SponsoredProductPerformance"
+              }
+            ],
+            "description": "Sponsored Product promotion and commerce metrics. Revenue is separated by currency and includes all sales channels, not only ad-driven sales."
+          },
+          "displayAds": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DisplayAdPerformance"
+              }
+            ],
+            "description": "Display Ad promotion and click metrics; revenue attribution is not provided."
+          }
+        },
+        "description": "Campaign performance for the requested UTC period, separated by promotion format."
+      },
+      "CampaignPerformanceResponse": {
+        "required": [
+          "performance"
+        ],
+        "type": "object",
+        "properties": {
+          "performance": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CampaignPerformance"
+              }
+            ],
+            "description": "Campaign performance for the requested period."
+          }
+        },
+        "description": "Campaign performance for the requested period."
+      },
+      "CampaignResponse": {
+        "required": [
+          "campaign"
+        ],
+        "type": "object",
+        "properties": {
+          "campaign": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CampaignDetails"
+              }
+            ],
+            "description": "Read-only campaign configuration."
+          }
+        },
+        "description": "Read-only campaign detail response."
+      },
+      "CampaignsResponse": {
+        "required": [
+          "campaigns",
+          "pagination"
+        ],
+        "type": "object",
+        "properties": {
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CampaignSummary"
+            },
+            "description": "Matching campaigns ordered by creation time descending."
+          },
+          "pagination": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination of the filtered result set; an empty page does not imply no matches on earlier pages."
+          }
+        },
+        "description": "One page of matching campaigns."
+      },
+      "CampaignSummary": {
+        "required": [
+          "id",
+          "name",
+          "state",
+          "status",
+          "advertiserName",
+          "budget",
+          "startsAt",
+          "endsAt",
+          "modified"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Persistent entity ID within the Dataset; use it for detail lookup.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Campaign name as stored."
+          },
+          "state": {
+            "type": "string",
+            "description": "Campaign approval state: Proposed, Approved, or Archived. Approved does not necessarily mean actively serving."
+          },
+          "status": {
+            "type": "string",
+            "description": "Current serving status: Active, Inactive, ScheduleCompleted, or BudgetReached. Distinct from approval state."
+          },
+          "advertiserName": {
+            "type": "string",
+            "description": "Associated advertiser name; empty when the source cannot resolve the advertiser."
+          },
+          "budget": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RetailMediaBudget"
+              }
+            ],
+            "description": "Campaign budget, discriminated by type (currently cpm), with an optional spending cap. CPM and spending cap use the same monetary unit."
+          },
+          "startsAt": {
+            "type": "string",
+            "description": "Inclusive campaign start timestamp with UTC offset; null means no start boundary.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endsAt": {
+            "type": "string",
+            "description": "Inclusive campaign end timestamp with UTC offset; null means no end boundary.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "modified": {
+            "type": "string",
+            "description": "Time the entity was last modified, with UTC offset.",
+            "format": "date-time"
+          }
+        },
+        "description": "Read-only campaign summary."
+      },
       "CompanyMetadata": {
         "required": [
           "dataKeys"
@@ -5608,22 +7111,22 @@
         "type": "object",
         "properties": {
           "currentValue": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Value for the requested period.",
             "format": "double"
           },
           "previousValue": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Value for the preceding equivalent period.",
             "format": "double"
           },
           "change": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Current value minus previous value; percentage-point change for rate metrics.",
             "format": "double"
           },
           "relativeChangePercent": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Signed relative percentage change from the previous value, or null when it cannot be calculated.",
             "format": "double",
             "nullable": true
@@ -5689,9 +7192,8 @@
           "assortments": {
             "type": "array",
             "items": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "format": "int32",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
           },
@@ -5852,9 +7354,8 @@
           "assortments": {
             "type": "array",
             "items": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "format": "int32",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
           },
@@ -6346,10 +7847,9 @@
             "nullable": true
           },
           "modifierCount": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Number of terms that modify the Head.",
-            "format": "int32",
-            "type": "integer"
+            "format": "int32"
           },
           "preventsDecompounding": {
             "type": "boolean",
@@ -6421,10 +7921,9 @@
             "nullable": true
           },
           "modifierCount": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Number of terms that modify the Head.",
-            "format": "int32",
-            "type": "integer"
+            "format": "int32"
           },
           "preventsDecompounding": {
             "type": "boolean",
@@ -6432,6 +7931,206 @@
           }
         },
         "description": "Compact Decompounding rule representation returned by list operations."
+      },
+      "DisplayAdDetails": {
+        "required": [
+          "id",
+          "advertiserId",
+          "name",
+          "state",
+          "templateId",
+          "created",
+          "modified",
+          "dataValues"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Persistent Display Ad ID within the Dataset."
+          },
+          "advertiserId": {
+            "type": "string",
+            "description": "Owning Advertiser ID.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the creative."
+          },
+          "state": {
+            "type": "string",
+            "description": "Lifecycle state: Active, Inactive, or Archived."
+          },
+          "templateId": {
+            "type": "string",
+            "description": "Display Ad Type identifier used to interpret creative data.",
+            "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "description": "Creation timestamp with UTC offset.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "Last modification timestamp with UTC offset.",
+            "format": "date-time"
+          },
+          "dataValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDataValue"
+            },
+            "description": "Creative Data Values ordered by case-sensitive Data Key. Includes all configured values; empty means no data is configured."
+          }
+        },
+        "description": "Display Ad configuration."
+      },
+      "DisplayAdPerformance": {
+        "required": [
+          "promotions",
+          "timeSeries",
+          "displayAds"
+        ],
+        "type": "object",
+        "properties": {
+          "promotions": {
+            "type": "integer",
+            "description": "Total Display Ad promotion count in the reporting period.",
+            "format": "int32"
+          },
+          "timeSeries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisplayAdPeriod"
+            },
+            "description": "Source time buckets ordered by start timestamp."
+          },
+          "displayAds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PromotedDisplayAd"
+            },
+            "description": "Per-creative promotion and click counts."
+          }
+        },
+        "description": "Display Ad campaign performance."
+      },
+      "DisplayAdPeriod": {
+        "required": [
+          "from",
+          "promotions",
+          "clicks"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "UTC start timestamp of the source time bucket.",
+            "format": "date-time"
+          },
+          "promotions": {
+            "type": "integer",
+            "description": "Number of Display Ad promotions.",
+            "format": "int32"
+          },
+          "clicks": {
+            "type": "integer",
+            "description": "Number of Display Ad clicks.",
+            "format": "int32"
+          }
+        },
+        "description": "Display Ad metrics in a source time bucket."
+      },
+      "DisplayAdResponse": {
+        "required": [
+          "displayAd"
+        ],
+        "type": "object",
+        "properties": {
+          "displayAd": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DisplayAdDetails"
+              }
+            ],
+            "description": "Display Ad configuration."
+          }
+        },
+        "description": "Display Ad configuration."
+      },
+      "DisplayAdsResponse": {
+        "required": [
+          "displayAds",
+          "pagination"
+        ],
+        "type": "object",
+        "properties": {
+          "displayAds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DisplayAdSummary"
+            },
+            "description": "Display Ads ordered by creation time descending."
+          },
+          "pagination": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination for the filtered result set."
+          }
+        },
+        "description": "One page of advertiser-owned Display Ads."
+      },
+      "DisplayAdSummary": {
+        "required": [
+          "id",
+          "advertiserId",
+          "name",
+          "state",
+          "templateId",
+          "created",
+          "modified"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Persistent Display Ad ID within the Dataset."
+          },
+          "advertiserId": {
+            "type": "string",
+            "description": "Owning Advertiser ID.",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the creative."
+          },
+          "state": {
+            "type": "string",
+            "description": "Lifecycle state: Active, Inactive, or Archived."
+          },
+          "templateId": {
+            "type": "string",
+            "description": "Display Ad Type identifier used to interpret creative data.",
+            "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "description": "Creation timestamp with UTC offset.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "Last modification timestamp with UTC offset.",
+            "format": "date-time"
+          }
+        },
+        "description": "Display Ad identity and lifecycle state."
       },
       "EntityDataValue": {
         "required": [
@@ -6508,7 +8207,7 @@
             "description": "Currency identifier stored with the price. It is not guaranteed to be an ISO 4217 currency code."
           },
           "amount": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Monetary amount in Currency.",
             "format": "double"
           }
@@ -6850,10 +8549,9 @@
         "type": "object",
         "properties": {
           "id": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Execution Log ID used together with Job ID to retrieve this run.",
-            "format": "int32",
-            "type": "integer"
+            "format": "int32"
           },
           "jobId": {
             "type": "string",
@@ -6882,7 +8580,7 @@
             "nullable": true
           },
           "executionTimeSeconds": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": "number",
             "description": "Execution duration in seconds, or null when unfinished.",
             "format": "double",
             "nullable": true
@@ -6983,10 +8681,9 @@
         "type": "object",
         "properties": {
           "id": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Execution Log ID used together with Job ID to retrieve this run.",
-            "format": "int32",
-            "type": "integer"
+            "format": "int32"
           },
           "jobId": {
             "type": "string",
@@ -7015,7 +8712,7 @@
             "nullable": true
           },
           "executionTimeSeconds": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": "number",
             "description": "Execution duration in seconds, or null when unfinished.",
             "format": "double",
             "nullable": true
@@ -7404,10 +9101,9 @@
             "type": "string"
           },
           "position": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "One-based result position assigned to matching entities.",
-            "format": "int32",
-            "type": "integer"
+            "format": "int32"
           }
         },
         "description": "Configuration for a rule that places matching entities at a fixed result position."
@@ -7465,7 +9161,7 @@
             "description": "Whether the merchandising rule is enabled. A disabled rule is not applied to requests."
           },
           "priority": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": "number",
             "description": "Ordering value of the merchandising rule. Lower values appear earlier in the configured rule order, and list results are returned in this order.",
             "format": "double"
           },
@@ -7567,7 +9263,7 @@
             "type": "string"
           },
           "value": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": "number",
             "description": "Constant multiplier value. Values above one boost and values between zero and one bury matching entities.",
             "format": "double"
           }
@@ -7677,7 +9373,7 @@
             "description": "Whether the merchandising rule is enabled. A disabled rule is not applied to requests."
           },
           "priority": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": "number",
             "description": "Ordering value of the merchandising rule. Lower values appear earlier in the configured rule order, and list results are returned in this order.",
             "format": "double"
           },
@@ -7721,28 +9417,24 @@
         "type": "object",
         "properties": {
           "pageNumber": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "One-based number of the returned page.",
-            "format": "uint32",
-            "type": "integer"
+            "format": "uint32"
           },
           "pageSize": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Maximum number of items requested for the page.",
-            "format": "uint32",
-            "type": "integer"
+            "format": "uint32"
           },
           "totalResults": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Total number of items matching the request across all pages.",
-            "format": "uint32",
-            "type": "integer"
+            "format": "uint32"
           },
           "totalPages": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Total number of pages required to return all matching items at the requested page size.",
-            "format": "uint32",
-            "type": "integer"
+            "format": "uint32"
           }
         },
         "description": "Pagination details for one page of a collection."
@@ -7805,7 +9497,7 @@
             "format": "date"
           },
           "value": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Numeric measurement for the date.",
             "format": "double"
           }
@@ -7859,7 +9551,7 @@
             "description": "Display-ready value including applicable formatting, units, or currency. Use this value when presenting the metric to users."
           },
           "numericValue": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Raw numeric value. Use this value for calculations instead of parsing the formatted value.",
             "format": "double"
           },
@@ -7869,19 +9561,19 @@
             "nullable": true
           },
           "previousNumericValue": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Raw numeric value for the comparison period, or null when comparison data is unavailable.",
             "format": "double",
             "nullable": true
           },
           "change": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Signed arithmetic difference calculated as the requested-period value minus the comparison-period value, or null when comparison data is unavailable.",
             "format": "double",
             "nullable": true
           },
           "relativeChangePercent": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Signed relative percentage change from the comparison-period value, or null when it cannot be calculated.",
             "format": "double",
             "nullable": true
@@ -8070,9 +9762,8 @@
           "assortments": {
             "type": "array",
             "items": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "format": "int32",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
           },
@@ -8249,9 +9940,8 @@
           "assortments": {
             "type": "array",
             "items": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "format": "int32",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
           },
@@ -8432,9 +10122,8 @@
           "assortments": {
             "type": "array",
             "items": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "format": "int32",
-              "type": "integer"
+              "type": "integer",
+              "format": "int32"
             },
             "description": "Assortment values used by filters to control visibility. See https://docs.relewise.com/docs/filters/assortments.html."
           },
@@ -8536,6 +10225,50 @@
           }
         },
         "description": "A Variant belonging to a Product."
+      },
+      "PromotedDisplayAd": {
+        "required": [
+          "displayAdId",
+          "promotions",
+          "clicks"
+        ],
+        "type": "object",
+        "properties": {
+          "displayAdId": {
+            "type": "string",
+            "description": "Promoted Display Ad ID."
+          },
+          "promotions": {
+            "type": "integer",
+            "description": "Number of times the creative was promoted.",
+            "format": "int32"
+          },
+          "clicks": {
+            "type": "integer",
+            "description": "Number of clicks on the creative.",
+            "format": "int32"
+          }
+        },
+        "description": "Promotion and click counts for a Display Ad."
+      },
+      "PromotedProduct": {
+        "required": [
+          "productId",
+          "promotions"
+        ],
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "description": "Promoted Product ID."
+          },
+          "promotions": {
+            "type": "integer",
+            "description": "Number of times the product was promoted.",
+            "format": "int32"
+          }
+        },
+        "description": "Promotion count for a product."
       },
       "RedirectRule": {
         "required": [
@@ -8674,6 +10407,340 @@
         },
         "description": "Compact Redirect rule representation returned by list operations."
       },
+      "RetailMediaBudget": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/RetailMediaBudgetCpmRetailMediaBudget"
+          }
+        ],
+        "description": "Campaign budget. The type discriminator identifies the budget model (currently cpm). CPM and spending cap use the same monetary unit.",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "cpm": "#/components/schemas/RetailMediaBudgetCpmRetailMediaBudget"
+          }
+        }
+      },
+      "RetailMediaBudgetCpmRetailMediaBudget": {
+        "required": [
+          "costPerMille",
+          "maximumTotalCost"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "cpm"
+            ],
+            "type": "string"
+          },
+          "costPerMille": {
+            "type": "number",
+            "description": "Cost per thousand impressions (CPM).",
+            "format": "double"
+          },
+          "maximumTotalCost": {
+            "type": "number",
+            "description": "Maximum total campaign spend. Null means no spending cap. This is not a remaining-budget value.",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "description": "Campaign budget priced per thousand impressions (CPM)."
+      },
+      "RetailMediaBudgetRequest": {
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/RetailMediaBudgetRequestCpmRetailMediaBudgetRequest"
+          }
+        ],
+        "description": "Replacement budget using the campaign's existing monetary unit. The type discriminator identifies the budget model (currently cpm).",
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "cpm": "#/components/schemas/RetailMediaBudgetRequestCpmRetailMediaBudgetRequest"
+          }
+        }
+      },
+      "RetailMediaBudgetRequestCpmRetailMediaBudgetRequest": {
+        "required": [
+          "costPerMille"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "cpm"
+            ],
+            "type": "string"
+          },
+          "costPerMille": {
+            "type": "number",
+            "description": "Required replacement cost per thousand impressions; must not be negative.",
+            "format": "double",
+            "nullable": true
+          },
+          "maximumTotalCost": {
+            "type": "number",
+            "description": "Replacement spending cap. Null or omission removes the cap when a budget object is supplied.",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "description": "Replacement campaign budget priced per thousand impressions (CPM)."
+      },
+      "RetailMediaLocationDetails": {
+        "required": [
+          "key",
+          "name",
+          "state",
+          "created",
+          "modified",
+          "placements"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Stable Location Key used by promotion requests."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the page or context where promotions can appear."
+          },
+          "state": {
+            "type": "string",
+            "description": "Lifecycle state: Active, Inactive, or Archived."
+          },
+          "created": {
+            "type": "string",
+            "description": "Creation timestamp with UTC offset.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "Last modification timestamp with UTC offset.",
+            "format": "date-time"
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RetailMediaPlacement"
+            },
+            "description": "Configured placements; empty means no placements are available."
+          }
+        },
+        "description": "Location configuration with placements and variations."
+      },
+      "RetailMediaLocationResponse": {
+        "required": [
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "location": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RetailMediaLocationDetails"
+              }
+            ],
+            "description": "Location with placements and variations."
+          }
+        },
+        "description": "Location with placements and variations."
+      },
+      "RetailMediaLocationsResponse": {
+        "required": [
+          "locations",
+          "pagination"
+        ],
+        "type": "object",
+        "properties": {
+          "locations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RetailMediaLocationSummary"
+            },
+            "description": "Locations ordered by creation time descending."
+          },
+          "pagination": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaginationMetadata"
+              }
+            ],
+            "description": "Pagination of the filtered result set; an empty page does not imply no matches on earlier pages."
+          }
+        },
+        "description": "One page of Retail Media Settings locations."
+      },
+      "RetailMediaLocationSummary": {
+        "required": [
+          "key",
+          "name",
+          "state",
+          "created",
+          "modified"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Stable Location Key used by promotion requests."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the page or context where promotions can appear."
+          },
+          "state": {
+            "type": "string",
+            "description": "Lifecycle state: Active, Inactive, or Archived."
+          },
+          "created": {
+            "type": "string",
+            "description": "Creation timestamp with UTC offset.",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "description": "Last modification timestamp with UTC offset.",
+            "format": "date-time"
+          }
+        },
+        "description": "A Retail Media Settings location."
+      },
+      "RetailMediaPlacement": {
+        "required": [
+          "key",
+          "name",
+          "thresholds",
+          "displayAdTemplateFiltersJson",
+          "variations"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Stable Placement Key within the location."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the position within the location."
+          },
+          "thresholds": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RetailMediaScoreThresholds"
+              }
+            ],
+            "description": "Configured quality-score thresholds; null means no override at this level.",
+            "nullable": true
+          },
+          "displayAdTemplateFiltersJson": {
+            "type": "string",
+            "description": "SDK filters restricting Display Ad Types as JSON-encoded text. Parse it and preserve $type metadata. Null means no filter is configured. See https://docs.relewise.com/docs/filters/index.html.",
+            "nullable": true
+          },
+          "variations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RetailMediaVariation"
+            },
+            "description": "Configured device or layout variations; empty means none are available."
+          }
+        },
+        "description": "A placement within a Retail Media location."
+      },
+      "RetailMediaRevenue": {
+        "required": [
+          "currency",
+          "revenue"
+        ],
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "Currency code associated with the revenue."
+          },
+          "revenue": {
+            "type": "number",
+            "description": "Total sales revenue for products included in the campaign, in this currency, across all channels; not revenue attributed to ad impressions.",
+            "format": "double"
+          }
+        },
+        "description": "Revenue in one currency."
+      },
+      "RetailMediaScheduleRequest": {
+        "type": "object",
+        "properties": {
+          "startsAt": {
+            "type": "string",
+            "description": "Inclusive start boundary. Within a supplied schedule, null or omission clears this boundary.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endsAt": {
+            "type": "string",
+            "description": "Inclusive end boundary. Within a supplied schedule, null or omission clears this boundary.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "description": "Replacement campaign schedule."
+      },
+      "RetailMediaScoreThresholds": {
+        "required": [
+          "relevance",
+          "adjusted"
+        ],
+        "type": "object",
+        "properties": {
+          "relevance": {
+            "type": "number",
+            "description": "Minimum relevance score before relevance modifiers and merchandising rules. Expected range is 0 (everything matches) through 100 (exact matches). Null means no override at this level.",
+            "format": "float",
+            "nullable": true
+          },
+          "adjusted": {
+            "type": "number",
+            "description": "Minimum adjusted score after relevance modifiers and merchandising rules. Expected range is 0 through 100. Null means no override at this level.",
+            "format": "float",
+            "nullable": true
+          }
+        },
+        "description": "Configured relevance score thresholds for Retail Media promotion eligibility."
+      },
+      "RetailMediaVariation": {
+        "required": [
+          "key",
+          "name",
+          "supportedPromotionsJson"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Stable Variation Key within the placement."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the layout or device variation."
+          },
+          "supportedPromotionsJson": {
+            "type": "string",
+            "description": "SDK supported-promotion settings as JSON-encoded text, including counts and priorities. Parse it and preserve $type metadata. Null means no settings are configured. See https://docs.relewise.com/docs/retailmedia/locations.html.",
+            "nullable": true
+          }
+        },
+        "description": "A device or layout variation of a placement."
+      },
       "RevenueAnalyticsResponse": {
         "required": [
           "fromDate",
@@ -8761,7 +10828,7 @@
             "format": "date"
           },
           "value": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Numeric measurement for the date.",
             "format": "double"
           }
@@ -8841,7 +10908,7 @@
             "description": "Display-ready value including applicable formatting, units, or currency. Use this value when presenting the metric to users."
           },
           "numericValue": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Raw numeric value. Use this value for calculations instead of parsing the formatted value.",
             "format": "double"
           }
@@ -9299,7 +11366,7 @@
           },
           "term": {
             "type": "string",
-            "description": "Optional case-insensitive text used to filter returned search terms.",
+            "description": "Case-insensitive text filter for search terms.",
             "nullable": true
           },
           "pagination": {
@@ -9470,31 +11537,31 @@
             "format": "date"
           },
           "searches": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Total searches on the date, or null when the upstream series has no value for the date.",
             "format": "double",
             "nullable": true
           },
           "searchesWithoutResults": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Searches returning no products on the date, or null when unavailable.",
             "format": "double",
             "nullable": true
           },
           "clicks": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Product clicks originating from searches on the date, or null when unavailable.",
             "format": "double",
             "nullable": true
           },
           "averageClickPosition": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Average position of clicked products on the date, or null when unavailable.",
             "format": "double",
             "nullable": true
           },
           "conversions": {
-            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": "number",
             "description": "Conversions attributed to searches on the date, or null when unavailable.",
             "format": "double",
             "nullable": true
@@ -10269,10 +12336,9 @@
             "description": "Whether the condition result is inverted."
           },
           "nestedConditionCount": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Total number of nested AND and OR conditions directly attached to the root condition.",
-            "format": "int32",
-            "type": "integer"
+            "format": "int32"
           }
         },
         "description": "Compact representation of the root Search Term condition without its nested condition definitions."
@@ -10300,6 +12366,76 @@
           }
         },
         "description": "The Search Index and language scope in which a Search Tools rule applies."
+      },
+      "SponsoredProductPerformance": {
+        "required": [
+          "promotions",
+          "timeSeries",
+          "products"
+        ],
+        "type": "object",
+        "properties": {
+          "promotions": {
+            "type": "integer",
+            "description": "Total product promotion count in the reporting period; this is not a click count.",
+            "format": "int32"
+          },
+          "timeSeries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SponsoredProductPeriod"
+            },
+            "description": "Source time buckets ordered by start timestamp."
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PromotedProduct"
+            },
+            "description": "Per-product promotion counts."
+          }
+        },
+        "description": "Sponsored Product campaign performance."
+      },
+      "SponsoredProductPeriod": {
+        "required": [
+          "from",
+          "promotions",
+          "views",
+          "salesQuantity",
+          "revenue"
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "UTC start timestamp of the source time bucket.",
+            "format": "date-time"
+          },
+          "promotions": {
+            "type": "integer",
+            "description": "Number of product promotions.",
+            "format": "int32"
+          },
+          "views": {
+            "type": "integer",
+            "description": "Views of products included in the campaign across all channels, not only views from ad impressions.",
+            "format": "int32"
+          },
+          "salesQuantity": {
+            "type": "integer",
+            "description": "Quantity sold of products included in the campaign across all sales channels, not only ad-driven sales.",
+            "format": "int32"
+          },
+          "revenue": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RetailMediaRevenue"
+            },
+            "description": "Product sales revenue across all channels, separated by currency; never sum different currencies."
+          }
+        },
+        "description": "Sponsored Product metrics in a source time bucket."
       },
       "StemmingRule": {
         "required": [
@@ -10418,10 +12554,9 @@
             "nullable": true
           },
           "wordCount": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Number of word variants governed by the rule.",
-            "format": "int32",
-            "type": "integer"
+            "format": "int32"
           }
         },
         "description": "Compact Stemming rule representation returned by list operations."
@@ -10682,10 +12817,9 @@
             "format": "date-time"
           },
           "withinMinutes": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Evaluation window in minutes within which the Trigger criteria must be met. This is not necessarily the inactivity delay; consult the type-specific configuration and user conditions.",
-            "format": "int32",
-            "type": "integer"
+            "format": "int32"
           },
           "configuration": {
             "allOf": [
@@ -10917,10 +13051,9 @@
             "type": "string"
           },
           "considerAbandonedAfterMinutes": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": "integer",
             "description": "Minutes of inactivity after which a search is considered abandoned.",
-            "format": "int32",
-            "type": "integer"
+            "format": "int32"
           },
           "searchTypesInPrioritizedOrder": {
             "type": "array",
@@ -11156,6 +13289,48 @@
         },
         "description": "Configuration for a variant-change Trigger."
       },
+      "UpdateAdvertiserRequest": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "Set Active or Inactive. Omit or set null to preserve the current state. Archived advertisers cannot be changed.",
+            "nullable": true
+          }
+        },
+        "description": "Update an existing advertiser's lifecycle state while preserving its configuration."
+      },
+      "UpdateCampaignRequest": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "Set Approved to permit serving or Proposed to stop serving. Serving still depends on schedule, budget and eligibility. Omit or null preserves approval state. Archived campaigns cannot be changed.",
+            "nullable": true
+          },
+          "schedule": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RetailMediaScheduleRequest"
+              }
+            ],
+            "description": "Replacement schedule. Omit or null preserves the schedule. Supply an object to replace both boundaries; null or omitted boundaries inside it are cleared.",
+            "nullable": true
+          },
+          "budget": {
+            "type": "object",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RetailMediaBudgetRequest"
+              }
+            ],
+            "description": "Replacement budget using the campaign's existing monetary unit, discriminated by type (currently cpm). Omit or null preserves the budget. Supply costPerMille; null or omitted maximumTotalCost removes the spending cap.",
+            "nullable": true
+          }
+        },
+        "description": "Update approval state, schedule or budget while preserving campaign targeting and promotions."
+      },
       "UpdateMerchandisingRuleRequest": {
         "type": "object",
         "properties": {
@@ -11328,6 +13503,10 @@
     {
       "name": "Merchandising",
       "description": "Inspect and manage merchandising rules. Some operations modify live Dataset configuration."
+    },
+    {
+      "name": "Retail Media",
+      "description": "Inspect Retail Media configuration, update advertisers and campaigns, and review campaign performance."
     },
     {
       "name": "Administration",
