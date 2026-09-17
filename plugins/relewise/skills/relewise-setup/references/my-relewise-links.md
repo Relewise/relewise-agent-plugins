@@ -10,4 +10,4 @@ Use only these links:
 
 Substitute `{datasetId}` only with a Dataset ID returned by `get_me` or another verified Agent Gateway response. Preserve it exactly and never invent it. If the Dataset ID is unavailable, use the applicable account-scoped link instead of constructing a Dataset link.
 
-Do not infer or construct other My Relewise URLs from these examples. Do not add query parameters to open credential details; `get_me` does not expose a Personal Access Token key, and setup does not require credential-detail links. Never place a PAT value, OAuth access token, or OAuth client ID in a URL.
+Do not infer or construct other My Relewise URLs from these examples. Never place a PAT value, OAuth access token, or OAuth client ID in a URL.
