@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security fixes are applied to the latest published release. Users should upgrade to the newest release before reporting an issue that may already be resolved. Versions below `1.0.0` are prereleases and may change.
+Security fixes are applied to the latest published release. Users should upgrade to the newest release before reporting an issue that may already be resolved.
 
 ## Reporting a vulnerability
 

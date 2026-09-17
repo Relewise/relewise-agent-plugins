@@ -1,6 +1,6 @@
 {
   "name": "relewise",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Work with your Relewise configuration, analytics and optimization using AI.",
   "mcpServers": {
     "relewise-agent-gateway": {
