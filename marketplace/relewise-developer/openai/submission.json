@@ -1,0 +1,54 @@
+{
+  "$schema": "../../../contracts/openai-plugin-submission.schema.json",
+  "displayName": "Relewise Developer",
+  "subtitle": "Build Relewise integrations",
+  "description": "Build, review, and troubleshoot Relewise Search, Recommendations, behavioral tracking, and data integrations with current API and SDK guidance for C#, TypeScript/JavaScript, PHP, and Java.",
+  "category": "Developer Tools",
+  "developerName": "Relewise ApS",
+  "developerIdentity": "Relewise",
+  "entityType": "business",
+  "branding": {
+    "website": "https://docs.relewise.com/docs/developer/",
+    "customerSupport": "https://www.relewise.com/about/support",
+    "privacyPolicy": "https://docs.relewise.com/Privacy.html",
+    "termsOfService": "https://docs.relewise.com/Privacy.html#terms-of-use"
+  },
+  "assets": {
+    "directoryIcon": "marketplace/relewise-developer/openai/assets/icon-512.png",
+    "composerIcon": "marketplace/relewise-developer/openai/assets/icon-512.png",
+    "brandColor": "#3764E4"
+  },
+  "mcp": {
+    "serverName": "relewise-developer",
+    "url": "https://mcp.relewise.com",
+    "authentication": "NONE",
+    "toolNames": ["code_search_entity","docs_search","code_getting_started","code_search_parent_entities","code_search"]
+  },
+  "skills": ["relewise-development"],
+  "starterPrompts": [
+    "Help me add Relewise Search to this project.",
+    "Review this Relewise integration.",
+    "Help me troubleshoot this Relewise implementation."
+  ],
+  "testCases": [
+    {"description":"Add product search to a TypeScript application","userPrompt":"I am adding Relewise product search to a TypeScript application. Show me the correct SDK types and a basic request pattern.","toolsTriggered":"code_getting_started, code_search, code_search_entity","expectedOutput":"TypeScript-specific guidance grounded in the current Relewise SDK without invented APIs."},
+    {"description":"Implement behavioral tracking in C#","userPrompt":"How should I track product views and purchases with the Relewise .NET SDK?","toolsTriggered":"code_getting_started, docs_search, code_search","expectedOutput":"Current C# guidance for the relevant tracking requests and SDK types."},
+    {"description":"Find Java product-recommendation APIs","userPrompt":"Find the Java API types and methods I should use to request product recommendations.","toolsTriggered":"code_getting_started, code_search, code_search_entity, code_search_parent_entities","expectedOutput":"Current Java recommendation request types and relevant methods or constructors from the code index."},
+    {"description":"Troubleshoot a PHP search integration","userPrompt":"My PHP Relewise search integration is returning no results. Help me verify the request construction and relevant SDK methods.","toolsTriggered":"code_getting_started, docs_search, code_search, code_search_entity","expectedOutput":"A focused PHP troubleshooting path using current documentation and SDK entities."},
+    {"description":"Find C# product-import APIs","userPrompt":"Show me the current C# API types and constructors used to import products into Relewise.","toolsTriggered":"code_getting_started, code_search, code_search_entity, code_search_parent_entities","expectedOutput":"Current C# product data-integration types and constructor details from the code index."}
+  ],
+  "negativeTestCases": [
+    {"description":"Private Relewise business analytics","userPrompt":"Show me the top searches and revenue for my Relewise dataset last month.","expectedBehavior":"Do not invoke Relewise Developer; route the task to the business-facing Relewise plugin."},
+    {"description":"Change merchandising configuration","userPrompt":"Disable the Summer Sale merchandising rule in my Relewise dataset.","expectedBehavior":"Do not invoke Relewise Developer; route the task to the business-facing Relewise plugin."},
+    {"description":"Unrelated general programming help","userPrompt":"Help me center a div with CSS.","expectedBehavior":"Do not invoke Relewise Developer."}
+  ],
+  "toolJustificationDefaults": {
+    "readOnly":"The tool reads fixed Relewise documentation or SDK indexes and cannot create, update, or delete external data.",
+    "openWorld":"The tool is limited to Relewise-controlled documentation and SDK indexes, not the open web or arbitrary external entities.",
+    "destructive":"The tool performs retrieval only and cannot mutate code, configuration, credentials, or user data."
+  },
+  "reviewerSetup": "marketplace/relewise-developer/openai/reviewer-setup.md",
+  "demoRecording": {"required":true,"reusePolicy":"Reuse a previous recording only when it still demonstrates every submitted workflow and the portal accepts it."},
+  "availability": "all",
+  "policy": {"intendedAudience":"all_ages","commerceEnabled":false,"advertising":false,"moneyTransfers":false,"marketedToChildrenUnder13":false}
+}

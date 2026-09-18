@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Relewise/relewise-agent-plugins/contracts/openai-plugin-submission.schema.json",
+  "title": "Relewise OpenAI plugin submission dossier",
+  "type": "object",
+  "required": ["displayName","subtitle","description","category","developerName","developerIdentity","branding","assets","mcp","skills","starterPrompts","testCases","negativeTestCases","reviewerSetup","demoRecording","availability","policy"],
+  "properties": {
+    "$schema": {"type":"string"},
+    "displayName": {"type":"string","minLength":1},
+    "subtitle": {"type":"string","minLength":1,"maxLength":30},
+    "description": {"type":"string","minLength":1},
+    "category": {"type":"string","minLength":1},
+    "developerName": {"type":"string","minLength":1},
+    "developerIdentity": {"type":"string","minLength":1},
+    "entityType": {"enum":["business","individual"]},
+    "branding": {"type":"object","required":["website","customerSupport","privacyPolicy","termsOfService"]},
+    "assets": {"type":"object","required":["directoryIcon","composerIcon","brandColor"]},
+    "mcp": {"type":"object","required":["serverName","url","authentication"]},
+    "skills": {"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},
+    "starterPrompts": {"type":"array","minItems":1,"maxItems":3,"items":{"type":"string","minLength":1}},
+    "testCases": {"type":"array","minItems":5,"maxItems":5,"items":{"$ref":"#/$defs/testCase"}},
+    "negativeTestCases": {"type":"array","minItems":3,"maxItems":3,"items":{"type":"object","required":["description","userPrompt","expectedBehavior"]}},
+    "reviewerSetup": {"type":"string","minLength":1},
+    "demoRecording": {"type":"object","required":["required","reusePolicy"]},
+    "availability": {"type":"string","minLength":1},
+    "policy": {"type":"object","required":["intendedAudience","commerceEnabled","advertising","moneyTransfers","marketedToChildrenUnder13"]}
+  },
+  "$defs": {"testCase":{"type":"object","required":["description","userPrompt","toolsTriggered","expectedOutput"]}},
+  "additionalProperties": true
+}

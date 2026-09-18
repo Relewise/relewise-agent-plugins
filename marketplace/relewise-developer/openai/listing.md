@@ -14,7 +14,9 @@
 - **Authentication:** Public MCP server; no Agent Gateway PAT is required.
 - **Documentation:** https://docs.relewise.com/docs/developer/mcp.html
 - **Brand color:** #3764E4
-- **Logo source:** `../../../plugins/relewise-developer/assets/logo.png`
+- **Directory and composer icon:** `assets/icon-512.png`
+
+The canonical machine-readable source for portal preparation is `submission.json`.
 
 ## Starter prompts
 

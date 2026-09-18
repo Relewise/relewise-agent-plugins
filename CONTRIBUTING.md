@@ -58,6 +58,10 @@ The refresh reads the MCP catalog from the public My Relewise endpoint. Do not e
 - Never refresh the payload on `main`; source changes, synchronized metadata, and any required executable updates must merge atomically in the originating pull request.
 - Change `version.json` manually when the next release version is decided. Workflows add prerelease build numbers to manifests and rebuild the executables when runtime inputs change.
 
+### OpenAI Plugins Directory submissions
+
+Keep public submission copy and reviewer cases in `marketplace/<plugin>/openai/submission.json`. Use the repository maintainer skill at `.agents/skills/submit-openai-plugins/SKILL.md` to validate and package complete plugin and skill trees for an initial submission or update. Generated portal artifacts belong under ignored `artifacts/openai-submission/`; never commit reviewer credentials, customer data, portal file IDs, or temporary signed URLs.
+
 ## Validation
 
 Run the checks relevant to your change. The complete local validation set is:
