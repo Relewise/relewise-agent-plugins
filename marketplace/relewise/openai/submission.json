@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../contracts/openai-plugin-submission.schema.json",
+  "displayName": "Relewise",
+  "subtitle": "Optimize your Relewise setup",
+  "description": "Connect to your authorized Relewise Datasets to inspect entities, analyze search and revenue performance, review API consumption, audit configuration, and manage supported merchandising, Search Tools, and Retail Media settings.",
+  "category": "Productivity",
+  "developerName": "Relewise ApS",
+  "developerIdentity": "Relewise",
+  "entityType": "business",
+  "branding": {
+    "website": "https://www.relewise.com/",
+    "customerSupport": "https://www.relewise.com/about/support",
+    "privacyPolicy": "https://docs.relewise.com/Privacy.html",
+    "termsOfService": "https://docs.relewise.com/Privacy.html#terms-of-use"
+  },
+  "assets": {
+    "directoryIcon": "marketplace/relewise/openai/assets/icon-512.png",
+    "composerIcon": "marketplace/relewise/openai/assets/icon-512.png",
+    "brandColor": "#3764E4"
+  },
+  "mcp": {
+    "serverName": "relewise-agent-gateway",
+    "url": "https://my.relewise.com/agents/mcp",
+    "authentication": "OAUTH",
+    "toolCatalog": "generated/mcp-tools.json"
+  },
+  "skills": [
+    "relewise-administration",
+    "relewise-agent-gateway",
+    "relewise-analytics",
+    "relewise-compare-datasets",
+    "relewise-consumption",
+    "relewise-core",
+    "relewise-entities",
+    "relewise-merchandising",
+    "relewise-merchandising-audit",
+    "relewise-retail-media",
+    "relewise-retail-media-performance-review",
+    "relewise-search-performance-review",
+    "relewise-search-tools",
+    "relewise-setup",
+    "relewise-triggers"
+  ],
+  "starterPrompts": [
+    "Help me connect Relewise.",
+    "Review search performance for my Relewise Dataset.",
+    "Audit merchandising rules for my Relewise Dataset."
+  ],
+  "testCases": [
+    {"description":"Connect and discover Datasets","userPrompt":"Help me connect Relewise, then show my accessible Datasets.","toolsTriggered":"get_me","expectedOutput":"OAuth consent completes and only Datasets permitted for the reviewer are listed."},
+    {"description":"Review search performance","userPrompt":"Review search performance for Dataset <review-dataset> for the last 30 days.","toolsTriggered":"fetch_search_analytics_filter_options, fetch_search_analytics_overview","expectedOutput":"Search KPIs and prioritized findings for the requested Dataset and date range."},
+    {"description":"Inspect an entity","userPrompt":"Find the Product named <sample-product> and show its stored properties.","toolsTriggered":"search_products, fetch_product_by_id","expectedOutput":"The matching Product and its stored properties are returned without guessing an ID."},
+    {"description":"Review merchandising configuration","userPrompt":"Audit the merchandising rules for Dataset <review-dataset> and identify conflicts or gaps.","toolsTriggered":"list_merchandising_rules, get_merchandising_rule","expectedOutput":"An evidence-based audit of existing rules without changing them."},
+    {"description":"Review consumption","userPrompt":"Show Search and Recommendations consumption for Dataset <review-dataset> for the last 30 days.","toolsTriggered":"fetch_search_consumption_summary, fetch_recommendations_consumption_summary","expectedOutput":"Consumption summaries labeled with the requested period and Dataset."}
+  ],
+  "negativeTestCases": [
+    {"description":"Dataset access denied","userPrompt":"Inspect Dataset <dataset-without-access>.","expectedBehavior":"Deny the request without retrying through another transport or claiming access."},
+    {"description":"Connection method or area disabled","userPrompt":"Review analytics for Dataset <mcp-disabled-or-area-disabled-dataset>.","expectedBehavior":"Explain that Agent Gateway policy does not allow the requested connection or area."},
+    {"description":"Unrelated implementation task","userPrompt":"Show me how to implement a Relewise product search request in C#.","expectedBehavior":"Do not invoke this business-facing plugin; route the task to Relewise Developer."}
+  ],
+  "reviewerSetup": "marketplace/relewise/openai/reviewer-setup.md",
+  "demoRecording": {"required":true,"reusePolicy":"Reuse only when it still demonstrates every submitted workflow and the portal accepts it."},
+  "availability": "all",
+  "policy": {"intendedAudience":"all_ages","commerceEnabled":false,"advertising":false,"moneyTransfers":false,"marketedToChildrenUnder13":false}
+}

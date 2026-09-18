@@ -159,6 +159,10 @@ jobs:
       - name: Validate portable plugin manifests
         run: dotnet run --project tools/validate-agent-plugins/validate-agent-plugins.csproj --configuration Release
 
+      - name: Validate OpenAI submission dossiers
+        shell: pwsh
+        run: ./tests/package/openai-submission.ps1
+
       - name: Validate committed vendor marketplaces
         shell: pwsh
         run: |
