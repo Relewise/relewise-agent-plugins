@@ -1,11 +1,11 @@
 ---
 name: submit-openai-plugins
-description: Prepare, validate, and guide initial or update submissions of the Relewise and Relewise Developer plugins to the public OpenAI Plugins Directory. Use only for this repository's OpenAI submission workflow; it does not authorize submitting, publishing, unpublishing, or changing live portal records.
+description: Prepare, validate, and optionally populate initial or update drafts for the Relewise and Relewise Developer plugins in the public OpenAI Plugins Directory. Use only for this repository's OpenAI submission workflow; never submit, publish, or unpublish a plugin.
 ---
 
 # Submit Relewise plugins to OpenAI
 
-Prepare a reproducible submission from the repository and stop before external actions unless the user explicitly authorizes them.
+Prepare a reproducible submission from the repository. Ask the human whether to use the available browser to populate the portal draft; do not operate the portal without that approval.
 
 ## Prepare the repository
 
@@ -16,12 +16,13 @@ Prepare a reproducible submission from the repository and stop before external a
 ```powershell
 ./.agents/skills/submit-openai-plugins/scripts/prepare-openai-plugin-submission.ps1 `
   -Plugin relewise `
+  -SubmissionMode Initial `
   -Version <public-semver> `
   -ReleaseNotes <reviewer-facing-summary> `
   -DemoRecordingUrl <https-url-if-available>
 ```
 
-Use `-Plugin relewise-developer` for the developer plugin. The script validates the canonical dossier, verifies the MCP endpoint and every declared skill, packages complete skill directories (including scripts, references, and assets), packages the full plugin, and writes portal material under `artifacts/openai-submission/<plugin>/<version>/`.
+Choose `Initial` when the selected plugin has no published directory record; choose `Update` when creating a new draft for an existing published plugin. This choice is independent of `-Plugin`. The script validates the canonical dossier, verifies the MCP endpoint and every declared skill, packages complete skill directories (including scripts, references, and assets), packages the full plugin, and writes portal material under `artifacts/openai-submission/<plugin>/<version>/`.
 
 ## Review the artifacts
 
@@ -43,4 +44,6 @@ Also run the repository validations relevant to any changed shipped plugin conte
 
 ## Authorization boundary
 
-Creating a portal draft, uploading files, entering reviewer credentials, accepting attestations, submitting for review, publishing, and unpublishing are external actions. Prepare everything first, then obtain any confirmation required by the active computer-use policy immediately before the relevant action. Never commit reviewer credentials, access tokens, customer data, or signed temporary file URLs.
+Creating or editing a portal draft, uploading files, and entering reviewer credentials are external actions. Prepare everything first, then explicitly ask the human whether to use the available browser to populate the draft. Approval to populate a draft does not authorize any final action.
+
+Always stop with the completed draft open for human review. Never click or otherwise invoke **Submit for Review**, **Publish**, or **Unpublish**, even if the user asks. Explain that these actions are intentionally human-only. Do not accept attestations on the human's behalf. Never commit reviewer credentials, access tokens, customer data, or signed temporary file URLs.

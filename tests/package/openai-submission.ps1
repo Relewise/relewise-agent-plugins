@@ -15,9 +15,10 @@ try {
         $metadataPath = Join-Path $RepositoryRoot "marketplace/$plugin/openai/submission.json"
         $schemaPath = Join-Path $RepositoryRoot 'contracts/openai-plugin-submission.schema.json'
         if (-not (Test-Json -LiteralPath $metadataPath -SchemaFile $schemaPath)) { throw "$plugin metadata is invalid." }
-        $output = Join-Path $testRoot $plugin
+        foreach ($submissionMode in @('Initial', 'Update')) {
+        $output = Join-Path $testRoot "$plugin-$submissionMode"
         & (Join-Path $RepositoryRoot '.agents/skills/submit-openai-plugins/scripts/prepare-openai-plugin-submission.ps1') `
-            -Plugin $plugin -Version '9.9.9' -ReleaseNotes 'Automated packaging validation.' -RepositoryRoot $RepositoryRoot -OutputRoot $output
+            -Plugin $plugin -SubmissionMode $submissionMode -Version '9.9.9' -ReleaseNotes 'Automated packaging validation.' -RepositoryRoot $RepositoryRoot -OutputRoot $output
         foreach ($required in @('chatgpt-app-submission.json','canonical-submission.json','artifact-manifest.json','manual-checklist.md','reviewer-setup.md','reviewer-test-cases.md',"$plugin-plugin.zip",'assets/directory-icon.png','assets/composer-icon.png')) {
             if (-not (Test-Path -LiteralPath (Join-Path $output $required) -PathType Leaf)) { throw "$plugin missing artifact: $required" }
         }
@@ -26,7 +27,11 @@ try {
             throw "$plugin generated portal metadata has invalid counts or version."
         }
         $manifest = Get-Content -Raw -LiteralPath (Join-Path $output 'artifact-manifest.json') | ConvertFrom-Json
+        if ($manifest.submissionMode -ne $submissionMode) { throw "$plugin did not preserve submission mode $submissionMode." }
         if ($manifest.skills.Count -ne (Get-Content -Raw -LiteralPath $metadataPath | ConvertFrom-Json).skills.Count) { throw "$plugin did not package every skill." }
+        $checklist = Get-Content -Raw -LiteralPath (Join-Path $output 'manual-checklist.md')
+        $expectedAction = if ($submissionMode -eq 'Initial') { 'Create plugin / With MCP' } else { 'plugin-level Create Draft' }
+        if ($checklist -notlike "*$expectedAction*") { throw "$plugin $submissionMode checklist has the wrong portal action." }
         Assert-ArchiveContainsTree (Join-Path $output "$plugin-plugin.zip") (Join-Path $RepositoryRoot "plugins/$plugin")
         foreach ($skill in $manifest.skills.name) {
             Assert-ArchiveContainsTree (Join-Path $output "skills/$skill.zip") (Join-Path $RepositoryRoot "plugins/$plugin/skills/$skill")
@@ -39,6 +44,7 @@ try {
             if (@($submission.tool_justifications.PSObject.Properties).Count -ne $catalog.toolCount) { throw 'Relewise must generate a justification for every MCP tool.' }
         } elseif (@($submission.tool_justifications.PSObject.Properties).Count -ne 5) {
             throw 'Relewise Developer must generate a justification for every MCP tool.'
+        }
         }
     }
     Write-Host 'OpenAI submission metadata and deterministic packaging validated.'

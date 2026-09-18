@@ -48,7 +48,7 @@
     "destructive":"The tool performs retrieval only and cannot mutate code, configuration, credentials, or user data."
   },
   "reviewerSetup": "marketplace/relewise-developer/openai/reviewer-setup.md",
-  "demoRecording": {"required":true,"reusePolicy":"The approved 0.4 recording may be reused only when it still demonstrates every submitted workflow and the portal accepts it."},
+  "demoRecording": {"required":true,"reusePolicy":"Reuse a previous recording only when it still demonstrates every submitted workflow and the portal accepts it."},
   "availability": "all",
   "policy": {"intendedAudience":"all_ages","commerceEnabled":false,"advertising":false,"moneyTransfers":false,"marketedToChildrenUnder13":false}
 }

@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][ValidateSet('relewise', 'relewise-developer')][string] $Plugin,
+    [Parameter(Mandatory)][ValidateSet('Initial', 'Update')][string] $SubmissionMode,
     [Parameter(Mandatory)][ValidatePattern('^\d+\.\d+\.\d+$')][string] $Version,
     [Parameter(Mandatory)][ValidateNotNullOrEmpty()][string] $ReleaseNotes,
     [ValidatePattern('^https://')][string] $DemoRecordingUrl,
@@ -162,6 +163,7 @@ $reviewerCases | Set-Content -LiteralPath (Join-Path $OutputRoot 'reviewer-test-
 
 $manifest = [ordered]@{
     plugin = $Plugin
+    submissionMode = $SubmissionMode
     version = $Version
     generatedAtUtc = [DateTimeOffset]::UtcNow.ToString('O')
     sourcePluginVersion = (Get-Content -Raw -LiteralPath (Join-Path $pluginRoot 'plugin.json') | ConvertFrom-Json).version
@@ -176,12 +178,13 @@ $manifest = [ordered]@{
 $manifest | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $OutputRoot 'artifact-manifest.json') -Encoding utf8
 
 $recordingStatus = if ($DemoRecordingUrl) { '[x] Demo recording URL supplied; verify it still covers the submitted behavior.' } else { '[ ] Record or approve a reusable demo video and enter its HTTPS URL.' }
+$draftAction = if ($SubmissionMode -eq 'Initial') { 'Use Create plugin / With MCP to create the first portal record.' } else { 'Open the existing plugin record and use the plugin-level Create Draft action.' }
 $checklist = @"
-# Manual OpenAI submission checklist: $($metadata.displayName) $Version
+# Manual OpenAI $($SubmissionMode.ToLowerInvariant()) submission checklist: $($metadata.displayName) $Version
 
 - [ ] Confirm the branch has the intended source changes and synchronized marketplace payload/version.
 - [ ] Confirm Apps Management write access and the verified Relewise business identity.
-- [ ] Create the correct portal draft: Create plugin / With MCP for an initial submission, or plugin-level Create Draft for an update.
+- [ ] $draftAction
 - [ ] Review every value imported from chatgpt-app-submission.json.
 - [ ] Upload directory and composer icons from assets/.
 - [ ] Configure and scan $($metadata.mcp.url); resolve all validation errors.
@@ -191,8 +194,8 @@ $checklist = @"
 - [ ] Supply reviewer access through the secure portal channel; never commit credentials.
 - $recordingStatus
 - [ ] Review availability, release notes, policies, privacy disclosures, and attestations.
-- [ ] Obtain authorization immediately before Submit for Review.
-- [ ] After approval, obtain authorization immediately before Publish.
+- [ ] Human: review the completed draft, complete attestations, and click Submit for Review. The skill must not do this.
+- [ ] Human: after approval, click Publish if appropriate. The skill must not publish or unpublish.
 "@
 $checklist | Set-Content -LiteralPath (Join-Path $OutputRoot 'manual-checklist.md') -Encoding utf8
 
