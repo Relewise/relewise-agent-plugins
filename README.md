@@ -4,6 +4,9 @@ Use Relewise with AI assistants and coding agents through two open-source plugin
 
 ## Choose a Plugin
 
+<a id="relewise"></a>
+<a id="relewise-developer"></a>
+
 | Plugin | Use It For | Connection |
 | --- | --- | --- |
 | **Relewise** | Working with your Relewise Datasets, configuration, analytics, merchandising, and optimization. | Connects securely through [Agent Gateway](https://docs.relewise.com/docs/myrelewise/agent-gateway/). |
