@@ -1,59 +1,96 @@
 # Relewise Agent Plugins
 
-AI agent plugins for Relewise.
+Use Relewise with AI assistants and coding agents through two open-source plugins.
 
-## Products
+## Choose a Plugin
 
-### Relewise
+| Plugin | Use It For | Connection |
+| --- | --- | --- |
+| **Relewise** | Working with your Relewise Datasets, configuration, analytics, merchandising, and optimization. | Connects securely through [Agent Gateway](https://docs.relewise.com/docs/myrelewise/agent-gateway/). |
+| **Relewise Developer** | Building and troubleshooting Search, Recommendations, behavioral tracking, and data integrations in C#, TypeScript/JavaScript, PHP, or Java. | Connects to the public Relewise Developer MCP Server; no Relewise credential is required. |
 
-Work with your Relewise configuration, analytics and optimization using AI.
+Install either plugin or both. The products are intentionally separate so each agent receives only the tools and instructions relevant to its task.
 
-This product is for people operating and improving Relewise. It is available for Claude Code, GitHub Copilot CLI, OpenAI Codex, and Google Gemini CLI.
+## Get Started
 
-### Relewise Developer
+The documentation guides you through the recommended installation and connection flow for your AI client:
 
-Build and troubleshoot Relewise integrations using AI development agents.
+- [Install the Relewise plugin](https://docs.relewise.com/docs/myrelewise/agent-gateway/agent-plugin.html)
+- [Install the Relewise Developer plugin](https://docs.relewise.com/docs/developer/mcp.html)
 
-This product is for developers implementing Search, Recommendations, behavioral tracking, and data integration with Relewise. It automatically connects the remote Relewise Developer MCP and does not require an Agent Gateway PAT.
+After installing **Relewise**, ask your assistant:
 
-The two products are intentionally separate. Choose the product that matches the work you want to do; no knowledge of the underlying Relewise APIs or agent protocols is required.
+> Help me connect Relewise.
 
-Both products use the portable [Agent Plugins](https://agent-plugins.org/) structure: each directory under `plugins/` contains a canonical `plugin.json` manifest and [Agent Skills](https://agentskills.io/) compliant with the open specification. Platform-specific files under `vendors/` adapt that shared source for clients that require their own format. Installation and updates remain specific to each client. See [plugin configuration](docs/plugin-configuration.md) for canonical sources, generated formats, and validation limits.
+The plugin checks whether authentication already works and guides you through any remaining setup. Once connected, try prompts such as:
 
-## Installation
+- _What Relewise Datasets do I have access to?_
+- _Review search performance for my Relewise Dataset._
+- _Audit my merchandising rules for conflicts or gaps._
 
-Codex, Claude Code, and GitHub Copilot CLI users can add this repository directly as a marketplace. Gemini CLI installs the platform package selected from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases).
+After installing **Relewise Developer**, ask your coding agent for help implementing or troubleshooting a Relewise integration in your preferred supported language.
 
-The business-facing Relewise plugin supports the same Agent Gateway capabilities through its bundled REST CLI, the unified remote MCP connection, or authenticated direct REST. Domain skills retain focused Relewise knowledge and delegate execution to the shared `relewise-agent-gateway` skill, which selects an available transport permitted by the Dataset's Agent Gateway policy.
+## Install from This Marketplace
 
-To add the Codex marketplace, use `https://github.com/Relewise/relewise-agent-plugins.git` as the source, `main` as the Git ref, and leave **Sparse paths** empty. The marketplace points directly at the canonical Relewise plugin and includes all five native runtimes.
+### ChatGPT and OpenAI Codex
 
-Marketplace updates are atomic with their source changes. Required fingerprints separately track plugin content and executable inputs. A maintainer runs **Refresh marketplace payload** on a stale feature branch: runtime changes rebuild and commit all five NativeAOT executables, while skill, metadata, asset, launcher, or packaging-only changes reuse the existing executables. Both paths package and smoke-test the complete plugin before committing synchronized metadata back to the branch. Workflows on `main` only verify committed content and never create repair commits or follow-up pull requests.
+In **Settings** > **Plugins**, add this repository as a plugin marketplace:
 
-Claude Code users add the marketplace with `claude plugin marketplace add Relewise/relewise-agent-plugins`, then install either `relewise@relewise` or `relewise-developer@relewise`. GitHub Copilot CLI users add the same repository marketplace, then install either plugin with `copilot plugin install`. Codex users can choose both plugins after adding the repository marketplace. Every catalog points to the canonical plugin directories; skills are not copied into the vendor adapters.
+```text
+https://github.com/Relewise/relewise-agent-plugins.git
+```
 
-Gemini CLI users run `gemini extensions install https://github.com/Relewise/relewise-agent-plugins`. Gemini selects the matching release asset for the current platform. The repository must also carry the `gemini-cli-extension` GitHub topic before gallery discovery can work.
+Use `main` as the Git ref, leave **Sparse paths** empty, and install **Relewise**, **Relewise Developer**, or both.
 
-Claude Desktop and Cowork users who do not want to connect GitHub can download either `relewise-claude-plugin-v<version>.zip` or `relewise-developer-claude-plugin-v<version>.zip` from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases) and upload it as a custom plugin. The Relewise ZIP contains all five supported Agent Gateway runtimes; the smaller Relewise Developer ZIP contains its skill, icon, and remote MCP configuration. Manually uploaded plugins must be uploaded again for upgrades.
+### Claude Code
 
-OAuth-capable MCP clients use the Agent Gateway Connected App flow and do not require a PAT. The bundled CLI and the plugin's direct REST fallback can use a Relewise Agent Gateway PAT through `RELEWISE_AGENT_GATEWAY_TOKEN`, either via a secure credential provider that injects it on every invocation or as a persistent user or system environment variable. Never put a PAT in a prompt or command argument.
+```text
+claude plugin marketplace add Relewise/relewise-agent-plugins
+claude plugin install relewise@relewise
+claude plugin install relewise-developer@relewise
+```
 
-The shared `relewise-agent-gateway` skill contains both platform launchers and the native executables. It invokes `scripts/relewise-agent.ps1` on Windows and `scripts/relewise-agent` on macOS and Linux; the launchers select the matching executable under their skill-local `scripts/libexec/<runtime>/`. Platform-specific artifacts contain one runtime, while universal Claude and repository marketplace installations contain all supported runtimes. Packages intentionally have no top-level `bin/`, `scripts/`, or `libexec/` directory.
+Run only the install command for each plugin you want.
 
-## Releases
+### GitHub Copilot CLI
 
-Maintainers should follow [RELEASING.md](RELEASING.md) for the release procedure and vendor-specific publication requirements.
+```text
+copilot plugin marketplace add Relewise/relewise-agent-plugins
+copilot plugin install relewise@relewise
+copilot plugin install relewise-developer@relewise
+```
 
-The repository is versioned as one ecosystem. Pushing a semantic version tag such as `v1.0.0` validates the contracts and skills, builds and tests all supported native executables, packages every vendor adapter, and publishes the installable archives in a GitHub release.
+Run only the install command for each plugin you want.
 
-The planned version is maintained manually in `version.json`. Marketplace manifests automatically use `<version>-main.<run ID>`. Executables retain the version of their most recent runtime build until their code, embedded operation catalog, project configuration, or `version.json` changes. A release tag such as `v1.0.0` must match `version.json` and rebuilds every executable and manifest as version `1.0.0`. After a release, update `version.json` in a normal pull request when the next version is decided.
+### Other Supported Clients
 
-Each tagged release contains seven intentional assets: five conventionally named, platform-specific Relewise archives used by Gemini CLI, plus one direct-upload Claude ZIP for each plugin. `relewise-claude-plugin-v<version>.zip` contains all five native runtimes and its launcher selects Windows x64, Linux x64/ARM64, or macOS x64/ARM64. `relewise-developer-claude-plugin-v<version>.zip` contains no native executable because it connects directly to the remote Developer MCP.
+- **Gemini CLI:** Run `gemini extensions install https://github.com/Relewise/relewise-agent-plugins`. Gemini selects the matching Relewise extension for your platform.
+- **Claude Desktop and Cowork:** Download the appropriate Claude plugin ZIP from [GitHub Releases](https://github.com/Relewise/relewise-agent-plugins/releases) and upload it as a custom plugin.
+- Explore other clients that support the [Agent Plugins format](https://agent-plugins.org/compatible-clients).
 
-The release workflow applies that version to the executable and every packaged manifest; maintainers do not update the individual manifests.
+Installation interfaces can change. Use the linked Relewise documentation above when it differs from this overview.
 
-Marketplace-ready copy, onboarding guidance, platform notes, and official artwork live under `marketplace/`.
+## Authentication and Security
 
-Installed versions update through the vendor's plugin or extension update mechanism. Authentication credentials remain external user configuration and are neither packaged nor replaced during an upgrade. OAuth-capable MCP clients manage credentials through the host's Connected App flow; CLI and direct REST fallback usage can use a PAT.
+The **Relewise** plugin uses OAuth when supported by the AI client. Other transports can use a Relewise Agent Gateway Personal Access Token through `RELEWISE_AGENT_GATEWAY_TOKEN`.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes and [SECURITY.md](SECURITY.md) for private vulnerability reporting. This repository is licensed under the [MIT License](LICENSE).
+Never put a Personal Access Token in a prompt, command argument, repository file, log, or transcript. See the documentation for [Personal Access Tokens](https://docs.relewise.com/docs/myrelewise/agent-gateway/personal-access-tokens.html) and [Agent Gateway security and permissions](https://docs.relewise.com/docs/myrelewise/agent-gateway/security-and-permissions.html).
+
+The **Relewise Developer** plugin connects to the public Developer MCP Server and does not require a Relewise credential.
+
+## Repository Structure
+
+The plugins use the portable [Agent Plugins](https://agent-plugins.org/) structure and [Agent Skills](https://agentskills.io/):
+
+- `plugins/` contains the canonical plugin manifests, skills, and runtime configuration.
+- `vendors/` contains platform-specific adapters.
+- `marketplace/` contains marketplace-ready copy and publication material.
+- `src/`, `tools/`, and `tests/` contain the Agent Gateway helper, build tooling, and validation.
+
+See [plugin configuration](docs/plugin-configuration.md) and [architecture](docs/architecture.md) for implementation details.
+
+## Contributing and Releasing
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes. Maintainers should follow [RELEASING.md](RELEASING.md) for versioning, packaging, and publication.
+
+Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md). This repository is licensed under the [MIT License](LICENSE).
