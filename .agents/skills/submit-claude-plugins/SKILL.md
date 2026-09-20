@@ -53,4 +53,3 @@ After submission, verify the visible success state and record the status without
 If the portal reports that the repository and path already have a submission under review, stop. Do not create a duplicate, change the path to evade matching, or claim that resubmission succeeded. Inspect available submission-management UI without discarding a draft or deleting/withdrawing a submission. Deleting or withdrawing an existing submission requires separate explicit confirmation at action time. If no management control is available, report that Anthropic or the Relewise partner contact must amend or withdraw the pending submission.
 
 Never commit credentials, customer data, reviewer access, portal identifiers, or temporary URLs.
-
