@@ -22,7 +22,8 @@
     "serverName": "relewise-agent-gateway",
     "url": "https://my.relewise.com/agents/mcp",
     "authentication": "OAUTH",
-    "toolCatalog": "generated/mcp-tools.json"
+    "toolCatalog": "generated/mcp-tools.json",
+    "toolJustifications": "marketplace/relewise/openai/tool-justifications.json"
   },
   "skills": [
     "relewise-administration",

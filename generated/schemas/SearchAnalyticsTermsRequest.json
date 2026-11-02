@@ -49,14 +49,18 @@
       "nullable": true
     },
     "pagination": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/PaginationRequest"
         }
       ],
-      "description": "Optional page selection. Defaults to page 1 with 50 terms.",
-      "nullable": true
+      "description": "Optional page selection. Defaults to page 1 with 50 terms."
     }
   },
   "description": "Date range, filters, and pagination for a side-effect-free Search Analytics term query. The endpoint determines the ranking type."

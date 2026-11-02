@@ -40,84 +40,116 @@
       "description": "Distinct nonblank currency codes available during the requested period."
     },
     "products": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/ProductMetadata"
         }
       ],
-      "description": "Product metadata, or null when catalog metadata was not returned.",
-      "nullable": true
+      "description": "Product metadata, or null when catalog metadata was not returned."
     },
     "variants": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/VariantMetadata"
         }
       ],
-      "description": "Variant metadata, or null when catalog metadata was not returned.",
-      "nullable": true
+      "description": "Variant metadata, or null when catalog metadata was not returned."
     },
     "productCategories": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/ProductCategoryMetadata"
         }
       ],
-      "description": "Product category metadata, or null when catalog metadata was not returned.",
-      "nullable": true
+      "description": "Product category metadata, or null when catalog metadata was not returned."
     },
     "brands": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/BrandMetadata"
         }
       ],
-      "description": "Brand metadata, or null when catalog metadata was not returned.",
-      "nullable": true
+      "description": "Brand metadata, or null when catalog metadata was not returned."
     },
     "content": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/ContentMetadata"
         }
       ],
-      "description": "Content metadata, or null when content metadata was not returned.",
-      "nullable": true
+      "description": "Content metadata, or null when content metadata was not returned."
     },
     "contentCategories": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/ContentCategoryMetadata"
         }
       ],
-      "description": "Content category metadata, or null when content metadata was not returned.",
-      "nullable": true
+      "description": "Content category metadata, or null when content metadata was not returned."
     },
     "users": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/UserMetadata"
         }
       ],
-      "description": "User metadata, or null when user metadata was not returned.",
-      "nullable": true
+      "description": "User metadata, or null when user metadata was not returned."
     },
     "companies": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/CompanyMetadata"
         }
       ],
-      "description": "Company metadata, or null when company metadata was not returned or is unavailable for the Dataset.",
-      "nullable": true
+      "description": "Company metadata, or null when company metadata was not returned or is unavailable for the Dataset."
     }
   },
   "description": "Languages, currencies, and optionally requested entity metadata available for a Dataset."

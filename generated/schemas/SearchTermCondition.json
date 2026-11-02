@@ -21,6 +21,20 @@
     },
     "minimumLength": {
       "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        }
+      ],
       "description": "Optional minimum search-term length required for this condition.",
       "format": "int32",
       "nullable": true,

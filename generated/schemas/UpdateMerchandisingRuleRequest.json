@@ -7,14 +7,18 @@
       "nullable": true
     },
     "schedule": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/UpdateMerchandisingRuleScheduleRequest"
         }
       ],
-      "description": "Schedule controlling when the rule is active. Omit this property or set it to null to preserve the entire current schedule. To change or clear schedule bounds, provide a schedule object.",
-      "nullable": true
+      "description": "Schedule controlling when the rule is active. Omit this property or set it to null to preserve the entire current schedule. To change or clear schedule bounds, provide a schedule object."
     }
   },
   "description": "Settings that control whether and when a merchandising rule is active without changing its definition or targeting configuration."

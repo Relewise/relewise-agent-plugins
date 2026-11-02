@@ -5,7 +5,8 @@
     "searchesWithoutResults",
     "clicks",
     "averageClickPosition",
-    "conversions"
+    "conversions",
+    "conversionRate"
   ],
   "type": "object",
   "properties": {
@@ -41,6 +42,12 @@
     "conversions": {
       "type": "number",
       "description": "Conversions attributed to searches on the date, or null when unavailable.",
+      "format": "double",
+      "nullable": true
+    },
+    "conversionRate": {
+      "type": "number",
+      "description": "Conversions divided by searches on the date, expressed as a percentage rounded to two decimal places. Zero when there are no searches, or null when unavailable.",
       "format": "double",
       "nullable": true
     }

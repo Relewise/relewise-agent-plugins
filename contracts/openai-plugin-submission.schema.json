@@ -15,7 +15,12 @@
     "entityType": {"enum":["business","individual"]},
     "branding": {"type":"object","required":["website","customerSupport","privacyPolicy","termsOfService"]},
     "assets": {"type":"object","required":["directoryIcon","composerIcon","brandColor"]},
-    "mcp": {"type":"object","required":["serverName","url","authentication"]},
+    "mcp": {
+      "type":"object","required":["serverName","url","authentication"],
+      "properties": {"toolJustifications":{"type":"string","minLength":1}},
+      "if":{"required":["toolCatalog"]},
+      "then":{"required":["toolJustifications"]}
+    },
     "skills": {"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string"}},
     "starterPrompts": {"type":"array","minItems":1,"maxItems":3,"items":{"type":"string","minLength":1}},
     "testCases": {"type":"array","minItems":5,"maxItems":5,"items":{"$ref":"#/$defs/testCase"}},

@@ -7,6 +7,20 @@
   "properties": {
     "minimum": {
       "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        }
+      ],
       "description": "Inclusive minimum count; null means no lower bound.",
       "format": "int32",
       "nullable": true,
@@ -14,6 +28,20 @@
     },
     "maximum": {
       "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        }
+      ],
       "description": "Inclusive maximum count; null means no upper bound.",
       "format": "int32",
       "nullable": true,

@@ -32,14 +32,18 @@
       "description": "Metrics aggregated across the Dataset."
     },
     "graph": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/RevenueGraph"
         }
       ],
-      "description": "Daily Revenue series aggregated across the Dataset, or null when the report is empty.",
-      "nullable": true
+      "description": "Daily Revenue series aggregated across the Dataset, or null when the report is empty."
     },
     "locations": {
       "type": "array",

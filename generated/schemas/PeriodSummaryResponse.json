@@ -37,14 +37,18 @@
       "description": "Named metrics for the requested period."
     },
     "graph": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/PeriodGraph"
         }
       ],
-      "description": "Daily metric series for the requested period, or null when graph data is unavailable.",
-      "nullable": true
+      "description": "Daily metric series for the requested period, or null when graph data is unavailable."
     }
   },
   "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available."

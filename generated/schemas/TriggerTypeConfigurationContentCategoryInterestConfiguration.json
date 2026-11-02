@@ -12,24 +12,32 @@
       "type": "string"
     },
     "categoryViews": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/TriggerCountRange"
         }
       ],
-      "description": "Required category-view count range; null means no count constraint.",
-      "nullable": true
+      "description": "Required category-view count range; null means no count constraint."
     },
     "contentViews": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/TriggerCountRange"
         }
       ],
-      "description": "Required content-view count range; null means no count constraint.",
-      "nullable": true
+      "description": "Required content-view count range; null means no count constraint."
     },
     "filtersJson": {
       "type": "string",

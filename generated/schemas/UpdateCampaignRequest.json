@@ -7,24 +7,32 @@
       "nullable": true
     },
     "schedule": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/RetailMediaScheduleRequest"
         }
       ],
-      "description": "Replacement schedule. Omit or null preserves the schedule. Supply an object to replace both boundaries; null or omitted boundaries inside it are cleared.",
-      "nullable": true
+      "description": "Replacement schedule. Omit or null preserves the schedule. Supply an object to replace both boundaries; null or omitted boundaries inside it are cleared."
     },
     "budget": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/RetailMediaBudgetRequest"
         }
       ],
-      "description": "Replacement budget using the campaign's existing monetary unit, discriminated by type (currently cpm). Omit or null preserves the budget. Supply costPerMille; null or omitted maximumTotalCost removes the spending cap.",
-      "nullable": true
+      "description": "Replacement budget using the campaign's existing monetary unit, discriminated by type (currently cpm). Omit or null preserves the budget. Supply costPerMille; null or omitted maximumTotalCost removes the spending cap."
     }
   },
   "description": "Update approval state, schedule or budget while preserving campaign targeting and promotions."

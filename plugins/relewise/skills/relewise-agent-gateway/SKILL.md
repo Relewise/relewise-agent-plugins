@@ -30,6 +30,8 @@ When MCP is selected, use the related tool named by the domain skill's `operatio
 
 When direct REST is selected, resolve current HTTP mechanics from `https://my.relewise.com/agents/openapi/v1.json` and use base URL `https://my.relewise.com/agents/api/v1`. Use the exact operation ID provided by the domain skill and the schema exposed by OpenAPI.
 
+For operations exposing `pageNumber` and `pageSize` pagination, use one-based pages and `pageSize` 1 through 100 for records (default 50). Use `pageSize: 0` for totals only; `pagination.totalPages` is then zero. Keep filters stable when requesting subsequent pages and stop at `pagination.totalPages`. Preserve the selected transport's parameter placement, including nested pagination objects when required. Other limits and cursor-based operations follow their own schemas.
+
 ## Protect credentials
 
 OAuth-capable MCP clients should use the Agent Gateway Connected App flow. The bundled CLI and the plugin's direct REST fallback currently use PAT authentication; MCP clients without an OAuth-managed Agent Gateway connection may also require a PAT. Prefer an already configured vendor-protected credential or secure credential provider. The portable fallback is `RELEWISE_AGENT_GATEWAY_TOKEN`.

@@ -16,7 +16,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets Dataset details.",
+        "summary": "Gets Dataset details",
         "description": "Returns identifying and operational details about the requested Dataset, its License, and its effective Agent Gateway access policy. Use CoreGetDatasetMetadata instead to discover languages, currencies, Data Keys, Classification Values, and other Dataset-specific request vocabulary. This operation is read-only.",
         "operationId": "CoreGetDataset",
         "parameters": [
@@ -85,7 +85,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Discovers Dataset metadata.",
+        "summary": "Discovers Dataset metadata",
         "description": "Discovers Dataset-specific languages, currencies, and schema information needed to construct subsequent requests. It can include available Data Keys, nested Data Keys, Variant specification keys, Classification Values, and company metadata. Use this operation when required Dataset-specific field names or values are unknown; Data Key names are case-sensitive. This operation is read-only.",
         "operationId": "CoreGetDatasetMetadata",
         "parameters": [
@@ -212,7 +212,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets the Behavioral Tracking consumption summary.",
+        "summary": "Gets the Behavioral Tracking consumption summary",
         "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
         "operationId": "CoreGetBehavioralTrackingConsumptionSummary",
         "parameters": [
@@ -301,7 +301,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets the Integrations consumption summary.",
+        "summary": "Gets the Integrations consumption summary",
         "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
         "operationId": "CoreGetIntegrationsConsumptionSummary",
         "parameters": [
@@ -390,7 +390,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets the Recommendations consumption summary.",
+        "summary": "Gets the Recommendations consumption summary",
         "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
         "operationId": "CoreGetRecommendationsConsumptionSummary",
         "parameters": [
@@ -479,7 +479,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets the Shoppertainment consumption summary.",
+        "summary": "Gets the Shoppertainment consumption summary",
         "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
         "operationId": "CoreGetShoppertainmentConsumptionSummary",
         "parameters": [
@@ -568,7 +568,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets the Search consumption summary.",
+        "summary": "Gets the Search consumption summary",
         "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
         "operationId": "CoreGetSearchConsumptionSummary",
         "parameters": [
@@ -657,7 +657,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets the Analyzer consumption summary.",
+        "summary": "Gets the Analyzer consumption summary",
         "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
         "operationId": "CoreGetAnalyzerConsumptionSummary",
         "parameters": [
@@ -746,7 +746,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets the Marketing Automation consumption summary.",
+        "summary": "Gets the Marketing Automation consumption summary",
         "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
         "operationId": "CoreGetMarketingAutomationConsumptionSummary",
         "parameters": [
@@ -835,7 +835,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets the Retail Media consumption summary.",
+        "summary": "Gets the Retail Media consumption summary",
         "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
         "operationId": "CoreGetRetailMediaConsumptionSummary",
         "parameters": [
@@ -924,7 +924,7 @@
         "tags": [
           "Core"
         ],
-        "summary": "Gets the Content Delivery consumption summary.",
+        "summary": "Gets the Content Delivery consumption summary",
         "description": "Returns read-only aggregate consumption measurements, comparison-period changes, and daily trends for an inclusive date range.",
         "operationId": "CoreGetContentDeliveryConsumptionSummary",
         "parameters": [
@@ -1013,7 +1013,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Searches Products.",
+        "summary": "Searches Products",
         "description": "Returns a bounded list of Products matching a Product ID, display name, or Product data value. Variant data is not searched; use EntitiesGetProductVariant when both IDs are known. This operation is read-only.",
         "operationId": "EntitiesSearchProducts",
         "parameters": [
@@ -1049,6 +1049,14 @@
               "maximum": 25,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -1118,7 +1126,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Gets a Product.",
+        "summary": "Gets a Product",
         "description": "Returns one Product's stored properties and actual Product data values. Variant data values are not included; use EntitiesGetProductVariant when the Variant ID is known. This operation is read-only.",
         "operationId": "EntitiesGetProduct",
         "parameters": [
@@ -1196,7 +1204,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Gets a Product Variant.",
+        "summary": "Gets a Product Variant",
         "description": "Returns one Variant's stored properties and actual Variant data values. A Variant ID is unique only within its parent Product, so both IDs are required. This operation is read-only.",
         "operationId": "EntitiesGetProductVariant",
         "parameters": [
@@ -1283,7 +1291,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Searches Content.",
+        "summary": "Searches Content",
         "description": "Returns a bounded list of Content entities matching a Content ID, display name, Content Category display name, or string-based Content Data Value. This operation is read-only.",
         "operationId": "EntitiesSearchContent",
         "parameters": [
@@ -1319,6 +1327,14 @@
               "maximum": 25,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -1388,7 +1404,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Gets Content.",
+        "summary": "Gets Content",
         "description": "Returns one Content entity's stored properties and actual Content Data Values. Use EntitiesSearchContent when the Content ID is unknown. This operation is read-only.",
         "operationId": "EntitiesGetContent",
         "parameters": [
@@ -1466,7 +1482,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Searches Brands.",
+        "summary": "Searches Brands",
         "description": "Returns a bounded list of Brands matching a Brand ID, display name, or Brand Data Value. Use EntitiesGetBrand when the Brand ID is known. This operation is read-only.",
         "operationId": "EntitiesSearchBrands",
         "parameters": [
@@ -1502,6 +1518,14 @@
               "maximum": 25,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -1571,7 +1595,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Gets a Brand.",
+        "summary": "Gets a Brand",
         "description": "Returns one Brand's stored properties and actual Brand Data Values. Use EntitiesSearchBrands when the Brand ID is unknown. This operation is read-only.",
         "operationId": "EntitiesGetBrand",
         "parameters": [
@@ -1649,7 +1673,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Searches Product Categories.",
+        "summary": "Searches Product Categories",
         "description": "Returns a bounded list of Product Category entities matching a Product Category ID, display name, or Product Category Data Value. This finds category entities, not the Products assigned to a category. Use EntitiesGetProductCategory when the Product Category ID is known. This operation is read-only.",
         "operationId": "EntitiesSearchProductCategories",
         "parameters": [
@@ -1685,6 +1709,14 @@
               "maximum": 25,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -1754,7 +1786,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Gets a Product Category.",
+        "summary": "Gets a Product Category",
         "description": "Returns one Product Category entity's stored properties and actual Data Values. This does not return Products assigned to the category. Use EntitiesSearchProductCategories when the Product Category ID is unknown. This operation is read-only.",
         "operationId": "EntitiesGetProductCategory",
         "parameters": [
@@ -1832,7 +1864,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Searches Content Categories.",
+        "summary": "Searches Content Categories",
         "description": "Returns a bounded list of Content Category entities matching a Content Category ID, display name, or Content Category Data Value. This finds category entities; it does not search for Content associated with a category. Use EntitiesGetContentCategory when the Content Category ID is known. This operation is read-only.",
         "operationId": "EntitiesSearchContentCategories",
         "parameters": [
@@ -1868,6 +1900,14 @@
               "maximum": 25,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -1937,7 +1977,7 @@
         "tags": [
           "Entities"
         ],
-        "summary": "Gets a Content Category.",
+        "summary": "Gets a Content Category",
         "description": "Returns one Content Category entity's stored properties and actual Data Values. This does not return Content associated with the category. Use EntitiesSearchContentCategories when the Content Category ID is unknown. This operation is read-only.",
         "operationId": "EntitiesGetContentCategory",
         "parameters": [
@@ -2015,7 +2055,7 @@
         "tags": [
           "Analytics"
         ],
-        "summary": "Gets aggregate Search Analytics KPIs and trends.",
+        "summary": "Gets aggregate Search Analytics KPIs and trends",
         "description": "Read-only Product Search performance for the requested period, covering identified users. Use a term-list operation for individual search terms.",
         "operationId": "AnalyticsGetSearchOverview",
         "parameters": [
@@ -2100,7 +2140,7 @@
         "tags": [
           "Analytics"
         ],
-        "summary": "Discovers filter options.",
+        "summary": "Discovers filter options",
         "description": "Discovers valid currencies, channels, subchannels, and Classification Keys and Values for the period and current selections. Use CoreGetDatasetMetadata if the required language is unknown. Discover values instead of guessing; subchannels depend on the selected channel. Read-only Product Search data from identified users.",
         "operationId": "AnalyticsGetSearchFilterOptions",
         "parameters": [
@@ -2179,7 +2219,7 @@
         "tags": [
           "Analytics"
         ],
-        "summary": "Lists popular searches.",
+        "summary": "Lists popular searches",
         "description": "Returns search terms ranked by search count for the requested period. Use AnalyticsGetSearchOverview for aggregate KPIs or AnalyticsListTrendingUpSearches for increasing volume. Read-only Product Search data from identified users.",
         "operationId": "AnalyticsListPopularSearches",
         "parameters": [
@@ -2267,7 +2307,7 @@
         "tags": [
           "Analytics"
         ],
-        "summary": "Lists low-click searches.",
+        "summary": "Lists low-click searches",
         "description": "Returns search terms ranked using Relewise's low-click-opportunity calculation for the requested period. Use this operation to identify searches that attract few result clicks. Use AnalyticsListSearchesWithoutResults for terms that returned no results. This operation is read-only.",
         "operationId": "AnalyticsListLowClickRateSearches",
         "parameters": [
@@ -2346,7 +2386,7 @@
         "tags": [
           "Analytics"
         ],
-        "summary": "Lists rising searches.",
+        "summary": "Lists rising searches",
         "description": "Returns search terms ranked using Relewise's trending-up calculation for the requested period and its preceding equivalent period. Use this operation when the user asks which searches are gaining popularity. Use AnalyticsListPopularSearches for the highest-volume terms regardless of trend. This operation is read-only.",
         "operationId": "AnalyticsListTrendingUpSearches",
         "parameters": [
@@ -2425,7 +2465,7 @@
         "tags": [
           "Analytics"
         ],
-        "summary": "Lists declining searches.",
+        "summary": "Lists declining searches",
         "description": "Returns search terms ranked using Relewise's trending-down calculation for the requested period and its preceding equivalent period. Use this operation when the user asks which searches are losing popularity. Use AnalyticsListPopularSearches for the highest-volume terms regardless of trend. This operation is read-only.",
         "operationId": "AnalyticsListTrendingDownSearches",
         "parameters": [
@@ -2504,7 +2544,7 @@
         "tags": [
           "Analytics"
         ],
-        "summary": "Lists unsuccessful searches.",
+        "summary": "Lists unsuccessful searches",
         "description": "Returns search terms that produced no results, ranked by search count for the requested period. Use this operation to identify unmet search demand. Use AnalyticsListLowClickRateSearches when results existed but attracted few clicks. This operation is read-only.",
         "operationId": "AnalyticsListSearchesWithoutResults",
         "parameters": [
@@ -2583,7 +2623,7 @@
         "tags": [
           "Analytics"
         ],
-        "summary": "Gets revenue analytics.",
+        "summary": "Gets revenue analytics",
         "description": "Returns read-only attributed Revenue measurements and trends for the requested period and currency. Use numeric values for calculations and formatted values for presentation. Use Search Analytics operations for search-performance questions.",
         "operationId": "AnalyticsGetRevenue",
         "parameters": [
@@ -2681,7 +2721,7 @@
         "tags": [
           "Merchandising"
         ],
-        "summary": "Lists merchandising rules.",
+        "summary": "Lists merchandising rules",
         "description": "Returns one page of compact merchandising rule representations in configured priority order, including grouping and creation and modification timestamps. Actor identities, conditions, and detailed configuration are omitted. Use this operation when the intended Rule ID is unknown. Inspect a selected rule with MerchandisingGetRule before changing it. This operation is read-only.",
         "operationId": "MerchandisingListRules",
         "parameters": [
@@ -2693,6 +2733,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -2700,11 +2748,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "description": "Maximum number of items returned per page: 0 for totals only, or 1 through 100 for records. Defaults to 50 when omitted.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -2774,7 +2830,7 @@
         "tags": [
           "Merchandising"
         ],
-        "summary": "Gets a merchandising rule.",
+        "summary": "Gets a merchandising rule",
         "description": "Returns one merchandising rule with its documented type-specific configuration, complete conditions, and advanced request configuration. The conditionsJson and requestConfigurationJson properties contain JSON-encoded text that must be parsed before inspection. Use this operation to inspect current state before a possible change. Use MerchandisingListRules first when the Rule ID is unknown. This operation is read-only.",
         "operationId": "MerchandisingGetRule",
         "parameters": [
@@ -2851,7 +2907,7 @@
         "tags": [
           "Merchandising"
         ],
-        "summary": "Updates rule state.",
+        "summary": "Updates rule state",
         "description": "MODIFIES DATA. Updates the enabled state and/or activation schedule of an existing merchandising rule and can change live Dataset behavior. Use it only when the user explicitly requests the change. Omit a property or set it to null to preserve that part of the rule. When schedule is an object, a null startsAt or endsAt removes that schedule bound. Use MerchandisingGetRule to inspect without changing data.",
         "operationId": "MerchandisingUpdateRule",
         "parameters": [
@@ -2957,7 +3013,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Lists Search Indexes.",
+        "summary": "Lists Search Indexes",
         "description": "Returns compact summaries of the Search Indexes configured for the Dataset. Use this read-only operation when the Search Index ID is unknown, then get the selected Search Index to inspect its complete configuration.",
         "operationId": "SearchToolsListSearchIndexes",
         "parameters": [
@@ -3026,7 +3082,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Gets a Search Index.",
+        "summary": "Gets a Search Index",
         "description": "Returns one Search Index's current operational state and complete configuration. This operation is read-only.",
         "operationId": "SearchToolsGetSearchIndex",
         "parameters": [
@@ -3104,7 +3160,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Lists Synonym rules.",
+        "summary": "Lists Synonym rules",
         "description": "Returns a bounded page of Synonym rules with their complete direction-specific definitions. Use this read-only operation to discover and filter rules.",
         "operationId": "SearchToolsListSynonymRules",
         "parameters": [
@@ -3142,6 +3198,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -3149,11 +3213,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "description": "Maximum number of items returned per page: 0 for totals only, or 1 through 100 for records. Defaults to 50 when omitted.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -3213,7 +3285,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Gets a Synonym rule.",
+        "summary": "Gets a Synonym rule",
         "description": "Returns one Synonym rule by Rule ID with its complete current configuration. Use this read-only operation when the Rule ID is already known.",
         "operationId": "SearchToolsGetSynonymRule",
         "parameters": [
@@ -3290,7 +3362,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Updates Synonym rule state.",
+        "summary": "Updates Synonym rule state",
         "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
         "operationId": "SearchToolsPatchSynonymRule",
         "parameters": [
@@ -3379,7 +3451,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Lists Stemming rules.",
+        "summary": "Lists Stemming rules",
         "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
         "operationId": "SearchToolsListStemmingRules",
         "parameters": [
@@ -3417,6 +3489,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -3424,11 +3504,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "description": "Maximum number of items returned per page: 0 for totals only, or 1 through 100 for records. Defaults to 50 when omitted.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -3488,7 +3576,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Gets a Stemming rule.",
+        "summary": "Gets a Stemming rule",
         "description": "Returns one rule's complete current configuration. This operation is read-only.",
         "operationId": "SearchToolsGetStemmingRule",
         "parameters": [
@@ -3565,7 +3653,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Updates Stemming rule state.",
+        "summary": "Updates Stemming rule state",
         "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
         "operationId": "SearchToolsPatchStemmingRule",
         "parameters": [
@@ -3654,7 +3742,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Lists Redirect rules.",
+        "summary": "Lists Redirect rules",
         "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
         "operationId": "SearchToolsListRedirectRules",
         "parameters": [
@@ -3692,6 +3780,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -3699,11 +3795,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "description": "Maximum number of items returned per page: 0 for totals only, or 1 through 100 for records. Defaults to 50 when omitted.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -3763,7 +3867,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Gets a Redirect rule.",
+        "summary": "Gets a Redirect rule",
         "description": "Returns one rule's complete current configuration. This operation is read-only.",
         "operationId": "SearchToolsGetRedirectRule",
         "parameters": [
@@ -3840,7 +3944,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Updates Redirect rule state.",
+        "summary": "Updates Redirect rule state",
         "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
         "operationId": "SearchToolsPatchRedirectRule",
         "parameters": [
@@ -3929,7 +4033,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Lists Search Term Modifier rules.",
+        "summary": "Lists Search Term Modifier rules",
         "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
         "operationId": "SearchToolsListSearchTermModifierRules",
         "parameters": [
@@ -3967,6 +4071,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -3974,11 +4086,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "description": "Maximum number of items returned per page: 0 for totals only, or 1 through 100 for records. Defaults to 50 when omitted.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -4038,7 +4158,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Gets a Search Term Modifier rule.",
+        "summary": "Gets a Search Term Modifier rule",
         "description": "Returns one rule's complete current configuration. This operation is read-only.",
         "operationId": "SearchToolsGetSearchTermModifierRule",
         "parameters": [
@@ -4115,7 +4235,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Updates Search Term Modifier rule state.",
+        "summary": "Updates Search Term Modifier rule state",
         "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
         "operationId": "SearchToolsPatchSearchTermModifierRule",
         "parameters": [
@@ -4204,7 +4324,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Lists Decompounding rules.",
+        "summary": "Lists Decompounding rules",
         "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
         "operationId": "SearchToolsListDecompoundingRules",
         "parameters": [
@@ -4242,6 +4362,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -4249,11 +4377,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "description": "Maximum number of items returned per page: 0 for totals only, or 1 through 100 for records. Defaults to 50 when omitted.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -4313,7 +4449,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Gets a Decompounding rule.",
+        "summary": "Gets a Decompounding rule",
         "description": "Returns one rule's complete current configuration. This operation is read-only.",
         "operationId": "SearchToolsGetDecompoundingRule",
         "parameters": [
@@ -4390,7 +4526,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Updates Decompounding rule state.",
+        "summary": "Updates Decompounding rule state",
         "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
         "operationId": "SearchToolsPatchDecompoundingRule",
         "parameters": [
@@ -4479,7 +4615,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Lists Search Result Modifier rules.",
+        "summary": "Lists Search Result Modifier rules",
         "description": "Returns a bounded page of compact rule summaries. Use this read-only operation when the Rule ID is unknown, then use the corresponding get operation to inspect a selected rule's complete configuration.",
         "operationId": "SearchToolsListSearchResultModifierRules",
         "parameters": [
@@ -4517,6 +4653,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -4524,11 +4668,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "description": "Maximum number of items returned per page: 0 for totals only, or 1 through 100 for records. Defaults to 50 when omitted.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -4588,7 +4740,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Gets a Search Result Modifier rule.",
+        "summary": "Gets a Search Result Modifier rule",
         "description": "Returns one rule's complete current configuration. This operation is read-only.",
         "operationId": "SearchToolsGetSearchResultModifierRule",
         "parameters": [
@@ -4665,7 +4817,7 @@
         "tags": [
           "Search Tools"
         ],
-        "summary": "Updates Search Result Modifier rule state.",
+        "summary": "Updates Search Result Modifier rule state",
         "description": "MODIFIES DATA. Updates specified rule properties without replacing its definition or scope. Omit a property or set it to null to preserve its current value. Use the corresponding get operation to inspect without changing data.",
         "operationId": "SearchToolsPatchSearchResultModifierRule",
         "parameters": [
@@ -4754,7 +4906,7 @@
         "tags": [
           "Triggers"
         ],
-        "summary": "Lists Trigger configurations.",
+        "summary": "Lists Trigger configurations",
         "description": "Read-only configuration discovery ordered by name and then Configuration ID. Use TriggersGetConfiguration to inspect a selected configuration; globallyEnabled reports Dataset-wide evaluation state.",
         "operationId": "TriggersListConfigurations",
         "parameters": [
@@ -4766,6 +4918,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -4773,11 +4933,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when omitted.",
+            "description": "Maximum number of items returned per page: 0 for totals only, or 1 through 100 for records. Defaults to 50 when omitted.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -4847,7 +5015,7 @@
         "tags": [
           "Triggers"
         ],
-        "summary": "Gets a Trigger configuration.",
+        "summary": "Gets a Trigger configuration",
         "description": "Read-only inspection by Configuration ID. Use TriggersListConfigurations to discover the ID. Inspect the typed configuration and parse the scoped condition/filter JSON documents as needed. Delivery settings and credentials are omitted. This operation never evaluates a Trigger or sends a webhook.",
         "operationId": "TriggersGetConfiguration",
         "parameters": [
@@ -4926,7 +5094,7 @@
         "tags": [
           "Administration"
         ],
-        "summary": "Lists Dataset Jobs.",
+        "summary": "Lists Dataset Jobs",
         "description": "Read-only list of all Jobs ordered by display name and then Job ID. Use AdministrationGetJob for configuration details. Latest execution summaries are included; execution logs are not returned.",
         "operationId": "AdministrationListJobs",
         "parameters": [
@@ -4995,7 +5163,7 @@
         "tags": [
           "Administration"
         ],
-        "summary": "Gets Dataset Job details.",
+        "summary": "Gets Dataset Job details",
         "description": "Read-only inspection using a Job ID from AdministrationListJobs. Settings with gRPC- or httpRequest- prefixes are excluded case-insensitively; remaining custom configuration names and values are returned as stored. Does not execute or modify the Job or retrieve execution logs.",
         "operationId": "AdministrationGetJob",
         "parameters": [
@@ -5074,7 +5242,7 @@
         "tags": [
           "Administration"
         ],
-        "summary": "Lists Job executions.",
+        "summary": "Lists Job executions",
         "description": "Lists execution summaries, newest first, with cursors for older and newer pages. Use AdministrationListJobs for Job IDs and AdministrationGetJobLog for one execution's messages. This operation never executes or changes Jobs.",
         "operationId": "AdministrationListJobLogs",
         "parameters": [
@@ -5121,6 +5289,14 @@
             "description": "Page size from 10 to 100; defaults to 50.",
             "schema": {
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "uint32",
               "type": "integer"
             }
@@ -5131,6 +5307,14 @@
             "description": "NextCursor from the previous page to retrieve older executions by start time then Log ID. Cannot combine with afterLogId.",
             "schema": {
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -5141,6 +5325,14 @@
             "description": "PreviousCursor from the previous page to retrieve newer executions by start time then Log ID. Cannot combine with beforeLogId.",
             "schema": {
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -5210,7 +5402,7 @@
         "tags": [
           "Administration"
         ],
-        "summary": "Gets one Job execution.",
+        "summary": "Gets one Job execution",
         "description": "Reads one execution and its available history messages using Job ID and Log ID from AdministrationListJobLogs. History may be empty due to retention. This operation never executes or changes Jobs.",
         "operationId": "AdministrationGetJobLog",
         "parameters": [
@@ -5231,6 +5423,14 @@
             "required": true,
             "schema": {
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -5300,7 +5500,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Lists advertisers.",
+        "summary": "Lists advertisers",
         "description": "Read-only page ordered by advertiser name ascending. Use RetailMediaGetAdvertiser for configuration. Repeat with the next pageNumber while pagination.totalPages is greater than the current page.",
         "operationId": "RetailMediaListAdvertisers",
         "parameters": [
@@ -5331,6 +5531,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -5338,11 +5546,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "description": "Maximum results per page, 0 for totals only, or 1 through 100 for records; defaults to 50.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -5412,7 +5628,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Gets advertiser configuration.",
+        "summary": "Gets advertiser configuration",
         "description": "Read-only configuration lookup. Discover the Advertiser ID with RetailMediaListAdvertisers. Inspect typed allowedLocations and parse allowedPromotionsJson for promotion restrictions; preserve SDK $type metadata. Does not modify entities or retrieve campaign performance.",
         "operationId": "RetailMediaGetAdvertiser",
         "parameters": [
@@ -5489,7 +5705,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Updates advertiser state.",
+        "summary": "Updates advertiser state",
         "description": "Changes the lifecycle state of an existing advertiser. Preserves promotion restrictions and locations. Archived advertisers cannot be changed.",
         "operationId": "RetailMediaUpdateAdvertiser",
         "parameters": [
@@ -5578,7 +5794,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Lists campaigns.",
+        "summary": "Lists campaigns",
         "description": "Read-only page ordered by campaign creation time descending. Use RetailMediaGetCampaign for configuration. Repeat with the next pageNumber while pagination.totalPages is greater than the current page.",
         "operationId": "RetailMediaListCampaigns",
         "parameters": [
@@ -5609,6 +5825,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -5616,11 +5840,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "description": "Maximum results per page, 0 for totals only, or 1 through 100 for records; defaults to 50.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -5699,7 +5931,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Gets campaign configuration.",
+        "summary": "Gets campaign configuration",
         "description": "Read-only configuration lookup. Discover the Campaign ID with RetailMediaListCampaigns. Parse promotionsJson and conditionsJson for promotion and targeting configuration; preserve SDK $type metadata. Does not modify entities or retrieve campaign performance.",
         "operationId": "RetailMediaGetCampaign",
         "parameters": [
@@ -5776,7 +6008,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Updates campaign approval, schedule, or budget.",
+        "summary": "Updates campaign approval, schedule, or budget",
         "description": "Changes approval state, schedule or budget of an existing campaign. Preserves targeting and promotions. Approved permits serving but does not override schedule, budget or eligibility. Archived campaigns cannot be changed.",
         "operationId": "RetailMediaUpdateCampaign",
         "parameters": [
@@ -5865,7 +6097,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Lists Display Ads.",
+        "summary": "Lists Display Ads",
         "description": "Read-only advertiser-owned Display Ads ordered by creation time descending. Use RetailMediaGetDisplayAd for creative configuration. Request subsequent pages using pagination.totalPages.",
         "operationId": "RetailMediaListDisplayAds",
         "parameters": [
@@ -5906,6 +6138,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -5913,11 +6153,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "description": "Maximum results per page, 0 for totals only, or 1 through 100 for records; defaults to 50.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -5987,7 +6235,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Gets Display Ad configuration.",
+        "summary": "Gets Display Ad configuration",
         "description": "Read-only creative configuration. Discover IDs with RetailMediaListDisplayAds. A creative belonging to another advertiser returns 404.",
         "operationId": "RetailMediaGetDisplayAd",
         "parameters": [
@@ -6075,7 +6323,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Lists Retail Media locations.",
+        "summary": "Lists Retail Media locations",
         "description": "Read-only Retail Media Settings locations ordered by creation time descending. Use RetailMediaGetLocation for placements and variations. Continue while hasMore is true.",
         "operationId": "RetailMediaListLocations",
         "parameters": [
@@ -6103,6 +6351,14 @@
               "maximum": 2147483647,
               "minimum": 1,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -6110,11 +6366,19 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "description": "Maximum results per page, 0 for totals only, or 1 through 100 for records; defaults to 50.",
             "schema": {
               "maximum": 100,
-              "minimum": 10,
+              "minimum": 0,
               "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                }
+              ],
               "format": "int32",
               "type": "integer"
             }
@@ -6184,7 +6448,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Gets location settings.",
+        "summary": "Gets location settings",
         "description": "Read-only location settings with nested placements and variations. Discover the Location Key with RetailMediaListLocations.",
         "operationId": "RetailMediaGetLocation",
         "parameters": [
@@ -6262,7 +6526,7 @@
         "tags": [
           "Retail Media"
         ],
-        "summary": "Gets campaign performance.",
+        "summary": "Gets campaign performance",
         "description": "Read-only Sponsored Product and Display Ad performance for the requested UTC period, up to 366 days. Future end times are capped at now. Includes source time buckets and entity breakdowns. Product revenue covers all sales channels and remains separated by currency; Display Ad revenue is not supplied. No UI comparison period is added.",
         "operationId": "RetailMediaGetCampaignPerformance",
         "parameters": [
@@ -6383,7 +6647,7 @@
         "tags": [
           "Identity"
         ],
-        "summary": "Gets the authenticated user.",
+        "summary": "Gets the authenticated user",
         "description": "Returns the My Relewise user represented by the supplied Personal Access Token or OAuth access token, non-secret authentication metadata, and candidate Datasets grouped by License. Dataset policies are checked when a Dataset-specific operation runs. Use CoreGetDataset to verify access and discover the effective Agent Gateway policy before making other Dataset-scoped requests. This operation is read-only.",
         "operationId": "IdentityGetCurrentUser",
         "responses": {
@@ -6501,14 +6765,18 @@
             "description": "Stored Placement Key within the containing location."
           },
           "thresholds": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/RetailMediaScoreThresholds"
               }
             ],
-            "description": "Configured score-threshold overrides; null means no overrides at this level. These are not the resolved thresholds from other configuration levels.",
-            "nullable": true
+            "description": "Configured score-threshold overrides; null means no overrides at this level. These are not the resolved thresholds from other configuration levels."
           }
         },
         "description": "A configured advertiser placement and optional score-threshold overrides."
@@ -7659,84 +7927,116 @@
             "description": "Distinct nonblank currency codes available during the requested period."
           },
           "products": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/ProductMetadata"
               }
             ],
-            "description": "Product metadata, or null when catalog metadata was not returned.",
-            "nullable": true
+            "description": "Product metadata, or null when catalog metadata was not returned."
           },
           "variants": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/VariantMetadata"
               }
             ],
-            "description": "Variant metadata, or null when catalog metadata was not returned.",
-            "nullable": true
+            "description": "Variant metadata, or null when catalog metadata was not returned."
           },
           "productCategories": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/ProductCategoryMetadata"
               }
             ],
-            "description": "Product category metadata, or null when catalog metadata was not returned.",
-            "nullable": true
+            "description": "Product category metadata, or null when catalog metadata was not returned."
           },
           "brands": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/BrandMetadata"
               }
             ],
-            "description": "Brand metadata, or null when catalog metadata was not returned.",
-            "nullable": true
+            "description": "Brand metadata, or null when catalog metadata was not returned."
           },
           "content": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/ContentMetadata"
               }
             ],
-            "description": "Content metadata, or null when content metadata was not returned.",
-            "nullable": true
+            "description": "Content metadata, or null when content metadata was not returned."
           },
           "contentCategories": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/ContentCategoryMetadata"
               }
             ],
-            "description": "Content category metadata, or null when content metadata was not returned.",
-            "nullable": true
+            "description": "Content category metadata, or null when content metadata was not returned."
           },
           "users": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/UserMetadata"
               }
             ],
-            "description": "User metadata, or null when user metadata was not returned.",
-            "nullable": true
+            "description": "User metadata, or null when user metadata was not returned."
           },
           "companies": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/CompanyMetadata"
               }
             ],
-            "description": "Company metadata, or null when company metadata was not returned or is unavailable for the Dataset.",
-            "nullable": true
+            "description": "Company metadata, or null when company metadata was not returned or is unavailable for the Dataset."
           }
         },
         "description": "Languages, currencies, and optionally requested entity metadata available for a Dataset."
@@ -8227,6 +8527,20 @@
           },
           "status": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
             "format": "int32",
             "nullable": true,
             "type": "integer"
@@ -8653,6 +8967,20 @@
           },
           "previousCursor": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
             "description": "Pass as afterLogId to retrieve newer executions, or null when no newer page is available.",
             "format": "int32",
             "nullable": true,
@@ -8660,6 +8988,20 @@
           },
           "nextCursor": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
             "description": "Pass as beforeLogId to retrieve older executions, or null when no older page is available.",
             "format": "int32",
             "nullable": true,
@@ -9433,7 +9775,7 @@
           },
           "totalPages": {
             "type": "integer",
-            "description": "Total number of pages required to return all matching items at the requested page size.",
+            "description": "Total number of pages required to return all matching items at the requested page size. Zero for totals-only requests.",
             "format": "uint32"
           }
         },
@@ -9446,6 +9788,20 @@
             "maximum": 2147483647,
             "minimum": 1,
             "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
             "description": "One-based page number. Defaults to 1 when pagination is omitted or this property is null.",
             "format": "uint32",
             "nullable": true,
@@ -9453,9 +9809,23 @@
           },
           "pageSize": {
             "maximum": 100,
-            "minimum": 10,
+            "minimum": 0,
             "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "description": "Maximum number of items returned per page, from 10 through 100. Defaults to 50 when pagination is omitted or this property is null.",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
+            "description": "Maximum number of items returned per page: 0 for totals only, or 1 through 100 for records. Defaults to 50 when pagination is omitted or this property is null.",
             "format": "uint32",
             "nullable": true,
             "type": "integer"
@@ -9646,14 +10016,18 @@
             "description": "Named metrics for the requested period."
           },
           "graph": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/PeriodGraph"
               }
             ],
-            "description": "Daily metric series for the requested period, or null when graph data is unavailable.",
-            "nullable": true
+            "description": "Daily metric series for the requested period, or null when graph data is unavailable."
           }
         },
         "description": "Consumption summary for the requested period, including aggregate measurements, comparison-period changes, and daily trends when available."
@@ -9671,6 +10045,20 @@
           },
           "status": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
             "format": "int32",
             "nullable": true,
             "type": "integer"
@@ -9915,14 +10303,18 @@
             "description": "Available display names."
           },
           "brand": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/ProductBrandReference"
               }
             ],
-            "description": "Associated Brand, or null when none.",
-            "nullable": true
+            "description": "Associated Brand, or null when none."
           },
           "created": {
             "type": "string",
@@ -10634,14 +11026,18 @@
             "description": "Display name of the position within the location."
           },
           "thresholds": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/RetailMediaScoreThresholds"
               }
             ],
-            "description": "Configured quality-score thresholds; null means no override at this level.",
-            "nullable": true
+            "description": "Configured quality-score thresholds; null means no override at this level."
           },
           "displayAdTemplateFiltersJson": {
             "type": "string",
@@ -10775,14 +11171,18 @@
             "description": "Metrics aggregated across the Dataset."
           },
           "graph": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/RevenueGraph"
               }
             ],
-            "description": "Daily Revenue series aggregated across the Dataset, or null when the report is empty.",
-            "nullable": true
+            "description": "Daily Revenue series aggregated across the Dataset, or null when the report is empty."
           },
           "locations": {
             "type": "array",
@@ -11370,14 +11770,18 @@
             "nullable": true
           },
           "pagination": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/PaginationRequest"
               }
             ],
-            "description": "Optional page selection. Defaults to page 1 with 50 terms.",
-            "nullable": true
+            "description": "Optional page selection. Defaults to page 1 with 50 terms."
           }
         },
         "description": "Date range, filters, and pagination for a side-effect-free Search Analytics term query. The endpoint determines the ranking type."
@@ -11527,7 +11931,8 @@
           "searchesWithoutResults",
           "clicks",
           "averageClickPosition",
-          "conversions"
+          "conversions",
+          "conversionRate"
         ],
         "type": "object",
         "properties": {
@@ -11563,6 +11968,12 @@
           "conversions": {
             "type": "number",
             "description": "Conversions attributed to searches on the date, or null when unavailable.",
+            "format": "double",
+            "nullable": true
+          },
+          "conversionRate": {
+            "type": "number",
+            "description": "Conversions divided by searches on the date, expressed as a percentage rounded to two decimal places. Zero when there are no searches, or null when unavailable.",
             "format": "double",
             "nullable": true
           }
@@ -12107,6 +12518,20 @@
           },
           "minimumLength": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
             "description": "Optional minimum search-term length required for this condition.",
             "format": "int32",
             "nullable": true,
@@ -12326,6 +12751,20 @@
           },
           "minimumLength": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
             "description": "Optional minimum search-term length required for this condition.",
             "format": "int32",
             "nullable": true,
@@ -12950,6 +13389,20 @@
         "properties": {
           "minimum": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
             "description": "Inclusive minimum count; null means no lower bound.",
             "format": "int32",
             "nullable": true,
@@ -12957,6 +13410,20 @@
           },
           "maximum": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              }
+            ],
             "description": "Inclusive maximum count; null means no upper bound.",
             "format": "int32",
             "nullable": true,
@@ -13088,24 +13555,32 @@
             "type": "string"
           },
           "categoryViews": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
-            "description": "Required category-view count range; null means no count constraint.",
-            "nullable": true
+            "description": "Required category-view count range; null means no count constraint."
           },
           "contentViews": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
-            "description": "Required content-view count range; null means no count constraint.",
-            "nullable": true
+            "description": "Required content-view count range; null means no count constraint."
           },
           "filtersJson": {
             "type": "string",
@@ -13129,24 +13604,32 @@
             "type": "string"
           },
           "categoryViews": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
-            "description": "Required category-view count range; null means no count constraint.",
-            "nullable": true
+            "description": "Required category-view count range; null means no count constraint."
           },
           "productViews": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
-            "description": "Required product-view count range; null means no count constraint.",
-            "nullable": true
+            "description": "Required product-view count range; null means no count constraint."
           },
           "filtersJson": {
             "type": "string",
@@ -13213,14 +13696,18 @@
             "type": "string"
           },
           "productViews": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/TriggerCountRange"
               }
             ],
-            "description": "Required product-view count range; null means no count constraint.",
-            "nullable": true
+            "description": "Required product-view count range; null means no count constraint."
           },
           "filtersJson": {
             "type": "string",
@@ -13309,24 +13796,32 @@
             "nullable": true
           },
           "schedule": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/RetailMediaScheduleRequest"
               }
             ],
-            "description": "Replacement schedule. Omit or null preserves the schedule. Supply an object to replace both boundaries; null or omitted boundaries inside it are cleared.",
-            "nullable": true
+            "description": "Replacement schedule. Omit or null preserves the schedule. Supply an object to replace both boundaries; null or omitted boundaries inside it are cleared."
           },
           "budget": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/RetailMediaBudgetRequest"
               }
             ],
-            "description": "Replacement budget using the campaign's existing monetary unit, discriminated by type (currently cpm). Omit or null preserves the budget. Supply costPerMille; null or omitted maximumTotalCost removes the spending cap.",
-            "nullable": true
+            "description": "Replacement budget using the campaign's existing monetary unit, discriminated by type (currently cpm). Omit or null preserves the budget. Supply costPerMille; null or omitted maximumTotalCost removes the spending cap."
           }
         },
         "description": "Update approval state, schedule or budget while preserving campaign targeting and promotions."
@@ -13340,14 +13835,18 @@
             "nullable": true
           },
           "schedule": {
-            "type": "object",
             "oneOf": [
+              {
+                "enum": [
+                  null
+                ],
+                "nullable": true
+              },
               {
                 "$ref": "#/components/schemas/UpdateMerchandisingRuleScheduleRequest"
               }
             ],
-            "description": "Schedule controlling when the rule is active. Omit this property or set it to null to preserve the entire current schedule. To change or clear schedule bounds, provide a schedule object.",
-            "nullable": true
+            "description": "Schedule controlling when the rule is active. Omit this property or set it to null to preserve the entire current schedule. To change or clear schedule bounds, provide a schedule object."
           }
         },
         "description": "Settings that control whether and when a merchandising rule is active without changing its definition or targeting configuration."
@@ -13490,31 +13989,35 @@
     },
     {
       "name": "Core",
-      "description": "Dataset discovery and read-only Agent Gateway consumption information."
-    },
-    {
-      "name": "Analytics",
-      "description": "Read-only analysis of Search and attributed Revenue performance."
+      "description": "Read-only Dataset context and consumption information."
     },
     {
       "name": "Entities",
       "description": "Find and inspect data entities, such as Products and Content. To protect personal data and maintain a clear GDPR boundary, this area does not return User entities."
     },
     {
+      "name": "Analytics",
+      "description": "Read-only insights into Relewise performance and user behavior."
+    },
+    {
       "name": "Merchandising",
-      "description": "Inspect and manage merchandising rules. Some operations modify live Dataset configuration."
+      "description": "View and manage rules that influence Search and Recommendation results."
+    },
+    {
+      "name": "Search Tools",
+      "description": "View and manage rules that refine search terms and results."
     },
     {
       "name": "Retail Media",
-      "description": "Inspect Retail Media configuration, update advertisers and campaigns, and review campaign performance."
-    },
-    {
-      "name": "Administration",
-      "description": "Read Dataset Jobs, their schedules, restricted configuration, and execution history, including execution summaries and log messages."
+      "description": "View and manage Retail Media configuration and review campaign performance."
     },
     {
       "name": "Triggers",
-      "description": "View Trigger configurations for marketing automation, such as abandoned carts, product interest, and price drops. https://docs.relewise.com/docs/triggers/"
+      "description": "View Trigger configurations for marketing automation, such as abandoned carts, product interest, and price drops."
+    },
+    {
+      "name": "Administration",
+      "description": "View Jobs, their schedules, configuration, and execution history, including execution summaries and log messages."
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "relewise-developer",
-  "version": "1.0.0-main.35245073381",
+  "version": "1.0.0-main.41403067183",
   "description": "Build and troubleshoot Relewise integrations with current API and SDK guidance.",
   "author": {
     "name": "Relewise",

@@ -31,14 +31,18 @@
       "description": "Available display names."
     },
     "brand": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/ProductBrandReference"
         }
       ],
-      "description": "Associated Brand, or null when none.",
-      "nullable": true
+      "description": "Associated Brand, or null when none."
     },
     "created": {
       "type": "string",

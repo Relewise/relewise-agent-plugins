@@ -17,14 +17,18 @@
       "description": "Display name of the position within the location."
     },
     "thresholds": {
-      "type": "object",
       "oneOf": [
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        },
         {
           "$ref": "#/components/schemas/RetailMediaScoreThresholds"
         }
       ],
-      "description": "Configured quality-score thresholds; null means no override at this level.",
-      "nullable": true
+      "description": "Configured quality-score thresholds; null means no override at this level."
     },
     "displayAdTemplateFiltersJson": {
       "type": "string",

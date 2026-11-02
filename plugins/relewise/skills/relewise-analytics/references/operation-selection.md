@@ -12,3 +12,5 @@
 | Valid search filters | `AnalyticsGetSearchFilterOptions` | Resolve language first; options depend on current selections. |
 
 Search Analytics represents Product Search activity from identified users. Keep that scope visible when interpreting results.
+
+The search overview timeline includes daily `conversionRate`: conversions divided by searches, expressed as a percentage rounded to two decimal places. It is zero when there are no searches and may be null when unavailable. Preserve that distinction and do not multiply the returned percentage by 100 again.
