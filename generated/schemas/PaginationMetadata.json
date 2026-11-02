@@ -24,7 +24,7 @@
     },
     "totalPages": {
       "type": "integer",
-      "description": "Total number of pages required to return all matching items at the requested page size.",
+      "description": "Total number of pages required to return all matching items at the requested page size. Zero for totals-only requests.",
       "format": "uint32"
     }
   },

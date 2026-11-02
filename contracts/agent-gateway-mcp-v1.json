@@ -1522,7 +1522,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -1851,7 +1851,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -2193,7 +2193,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -2522,7 +2522,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -4750,6 +4750,13 @@
                     "number",
                     "null"
                   ]
+                },
+                "conversionRate": {
+                  "description": "Conversions divided by searches on the date, expressed as a percentage rounded to two decimal places. Zero when there are no searches, or null when unavailable.",
+                  "type": [
+                    "number",
+                    "null"
+                  ]
                 }
               },
               "required": [
@@ -4758,7 +4765,8 @@
                 "searchesWithoutResults",
                 "clicks",
                 "averageClickPosition",
-                "conversions"
+                "conversions",
+                "conversionRate"
               ]
             }
           }
@@ -5092,7 +5100,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -5421,7 +5429,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -5534,7 +5542,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -5863,7 +5871,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -5976,7 +5984,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -6127,7 +6135,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -10638,7 +10646,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "description": "Maximum results per page, 0 for totals only, or 1 through 100 for records; defaults to 50.",
             "type": "integer",
             "default": 50
           }
@@ -10707,7 +10715,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -10785,7 +10793,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "description": "Maximum results per page, 0 for totals only, or 1 through 100 for records; defaults to 50.",
             "type": "integer",
             "default": 50
           }
@@ -10909,7 +10917,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -10972,7 +10980,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -11073,7 +11081,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -11147,7 +11155,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "description": "Maximum results per page, 0 for totals only, or 1 through 100 for records; defaults to 50.",
             "type": "integer",
             "default": 50
           }
@@ -11228,7 +11236,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -11708,7 +11716,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -11836,7 +11844,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -11899,7 +11907,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -12028,7 +12036,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -12091,7 +12099,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum results per page, from 10 through 100; defaults to 50.",
+            "description": "Maximum results per page, 0 for totals only, or 1 through 100 for records; defaults to 50.",
             "type": "integer",
             "default": 50
           }
@@ -12159,7 +12167,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -12313,7 +12321,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -12447,7 +12455,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -12510,7 +12518,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -12646,7 +12654,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -12709,7 +12717,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -12800,7 +12808,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -12863,7 +12871,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -13000,7 +13008,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },
@@ -13047,7 +13055,7 @@
             "default": 1
           },
           "pageSize": {
-            "description": "Maximum items per page, from 10 through 100. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
+            "description": "Maximum items per page: 0 for totals only, or 1 through 100 for records. Repeat with the next pageNumber while pageNumber is below pagination.totalPages.",
             "type": "integer",
             "default": 50
           }
@@ -13144,7 +13152,7 @@
                 "type": "integer"
               },
               "totalPages": {
-                "description": "Total number of pages required to return the complete result set at the requested page size.",
+                "description": "Total number of pages required to return the complete result set at the requested page size. Zero for totals-only requests.",
                 "type": "integer"
               }
             },

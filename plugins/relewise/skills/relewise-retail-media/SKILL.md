@@ -22,7 +22,7 @@ After the user confirms a configuration change, retrieve the Dataset details aga
 
 ## Discover configuration
 
-Use list operations to discover identifiers rather than guessing them. Advertiser and Campaign IDs are GUIDs; Display Ad IDs and Location Keys are strings. A Display Ad lookup also requires its owning advertiser. For every paginated list, keep filters stable and request subsequent one-based pages while `pageNumber` is below `pagination.totalPages`; valid `pageSize` values are 10 through 100.
+Use list operations to discover identifiers rather than guessing them. Advertiser and Campaign IDs are GUIDs; Display Ad IDs and Location Keys are strings. A Display Ad lookup also requires its owning advertiser. For every paginated list, use `pageSize` 1 through 100 for records, keep filters stable, and request subsequent one-based pages while `pageNumber` is below `pagination.totalPages`. Use `pageSize: 0` when only totals are needed; totals-only responses have `totalPages: 0` and do not provide records for identifier discovery.
 
 Use the matching get operation for full configuration:
 

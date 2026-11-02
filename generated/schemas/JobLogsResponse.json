@@ -15,6 +15,20 @@
     },
     "previousCursor": {
       "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        }
+      ],
       "description": "Pass as afterLogId to retrieve newer executions, or null when no newer page is available.",
       "format": "int32",
       "nullable": true,
@@ -22,6 +36,20 @@
     },
     "nextCursor": {
       "pattern": "^-?(?:0|[1-9]\\d*)$",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "enum": [
+            null
+          ],
+          "nullable": true
+        }
+      ],
       "description": "Pass as beforeLogId to retrieve older executions, or null when no older page is available.",
       "format": "int32",
       "nullable": true,
