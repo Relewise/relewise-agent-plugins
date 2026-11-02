@@ -1,0 +1,722 @@
+{
+  "fetch_analyzer_consumption_summary": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Analyzer consumption measurements, comparison-period changes and daily trends for the requested dates. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Analyzer consumption measurements, comparison-period changes and daily trends for the requested dates without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Analyzer consumption measurements, comparison-period changes and daily trends for the requested dates within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_behavioral_tracking_consumption_summary": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Behavioral Tracking consumption measurements, comparison-period changes and daily trends for the requested dates. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Behavioral Tracking consumption measurements, comparison-period changes and daily trends for the requested dates without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Behavioral Tracking consumption measurements, comparison-period changes and daily trends for the requested dates within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_brand_by_id": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Brand's stored properties and Data Values. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Brand's stored properties and Data Values without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Brand's stored properties and Data Values within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_content_by_id": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Content entity's stored properties and Data Values. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Content entity's stored properties and Data Values without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Content entity's stored properties and Data Values within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_content_category_by_id": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Content Category's properties and Data Values, without fetching associated Content. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Content Category's properties and Data Values, without fetching associated Content without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Content Category's properties and Data Values, without fetching associated Content within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_content_delivery_consumption_summary": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Content Delivery consumption measurements, comparison-period changes and daily trends for the requested dates. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Content Delivery consumption measurements, comparison-period changes and daily trends for the requested dates without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Content Delivery consumption measurements, comparison-period changes and daily trends for the requested dates within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_integrations_consumption_summary": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Integrations consumption measurements, comparison-period changes and daily trends for the requested dates. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Integrations consumption measurements, comparison-period changes and daily trends for the requested dates without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Integrations consumption measurements, comparison-period changes and daily trends for the requested dates within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_low_click_rate_searches": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Product Search terms ranked by low-click opportunity for the requested period. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Product Search terms ranked by low-click opportunity for the requested period without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Product Search terms ranked by low-click opportunity for the requested period within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_marketing_automation_consumption_summary": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Marketing Automation consumption measurements, comparison-period changes and daily trends for the requested dates. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Marketing Automation consumption measurements, comparison-period changes and daily trends for the requested dates without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Marketing Automation consumption measurements, comparison-period changes and daily trends for the requested dates within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_popular_searches": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Product Search terms ranked by search count for the requested period. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Product Search terms ranked by search count for the requested period without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Product Search terms ranked by search count for the requested period within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_product_by_id": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Product's properties and Product Data Values, excluding Variant Data Values. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Product's properties and Product Data Values, excluding Variant Data Values without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Product's properties and Product Data Values, excluding Variant Data Values within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_product_category_by_id": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Product Category's properties and Data Values, without fetching assigned Products. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Product Category's properties and Data Values, without fetching assigned Products without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Product Category's properties and Data Values, without fetching assigned Products within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_product_variant_by_id": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the Variant identified by both its parent Product ID and Variant ID. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the Variant identified by both its parent Product ID and Variant ID without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the Variant identified by both its parent Product ID and Variant ID within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_recommendations_consumption_summary": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Recommendations consumption measurements, comparison-period changes and daily trends for the requested dates. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Recommendations consumption measurements, comparison-period changes and daily trends for the requested dates without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Recommendations consumption measurements, comparison-period changes and daily trends for the requested dates within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_retail_media_consumption_summary": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Retail Media consumption measurements, comparison-period changes and daily trends for the requested dates. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Retail Media consumption measurements, comparison-period changes and daily trends for the requested dates without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Retail Media consumption measurements, comparison-period changes and daily trends for the requested dates within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_revenue_analytics": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves attributed revenue measurements and daily trends for the requested dates and currency. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves attributed revenue measurements and daily trends for the requested dates and currency without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to attributed revenue measurements and daily trends for the requested dates and currency within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_search_analytics_filter_options": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves available Search Analytics languages, currencies, channels and Classification filters for the current selections. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves available Search Analytics languages, currencies, channels and Classification filters for the current selections without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to available Search Analytics languages, currencies, channels and Classification filters for the current selections within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_search_analytics_overview": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves aggregate Product Search KPIs and daily trends for the requested dates and filters. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves aggregate Product Search KPIs and daily trends for the requested dates and filters without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to aggregate Product Search KPIs and daily trends for the requested dates and filters within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_search_consumption_summary": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Search consumption measurements, comparison-period changes and daily trends for the requested dates. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Search consumption measurements, comparison-period changes and daily trends for the requested dates without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Search consumption measurements, comparison-period changes and daily trends for the requested dates within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_searches_trending_down": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Product Search terms whose volume is trending down against the preceding equivalent period. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Product Search terms whose volume is trending down against the preceding equivalent period without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Product Search terms whose volume is trending down against the preceding equivalent period within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_searches_trending_up": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Product Search terms whose volume is trending up against the preceding equivalent period. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Product Search terms whose volume is trending up against the preceding equivalent period without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Product Search terms whose volume is trending up against the preceding equivalent period within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_searches_without_results": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Product Search terms that returned no Products during the requested period. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Product Search terms that returned no Products during the requested period without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Product Search terms that returned no Products during the requested period within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "fetch_shoppertainment_consumption_summary": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Shoppertainment and Adaptive Discovery consumption measurements, comparison-period changes and daily trends for the requested dates. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Shoppertainment and Adaptive Discovery consumption measurements, comparison-period changes and daily trends for the requested dates without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Shoppertainment and Adaptive Discovery consumption measurements, comparison-period changes and daily trends for the requested dates within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_advertiser": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected advertiser's lifecycle state, allowed locations and promotion restrictions. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected advertiser's lifecycle state, allowed locations and promotion restrictions without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected advertiser's lifecycle state, allowed locations and promotion restrictions within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_campaign": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected campaign's state, schedule, budget, targeting and promotions. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected campaign's state, schedule, budget, targeting and promotions without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected campaign's state, schedule, budget, targeting and promotions within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_campaign_performance": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Sponsored Product and Display Ad performance for one campaign and UTC period, with Product revenue separated by currency. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Sponsored Product and Display Ad performance for one campaign and UTC period, with Product revenue separated by currency without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Sponsored Product and Display Ad performance for one campaign and UTC period, with Product revenue separated by currency within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_dataset_details": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Dataset's identifying details, License and effective Agent Gateway policy. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Dataset's identifying details, License and effective Agent Gateway policy without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Dataset's identifying details, License and effective Agent Gateway policy within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_dataset_metadata": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Dataset's requested languages, currencies, Data Keys and Classification vocabulary. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Dataset's requested languages, currencies, Data Keys and Classification vocabulary without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Dataset's requested languages, currencies, Data Keys and Classification vocabulary within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_decompounding_rule": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Decompounding rule's definition, approval state and scope. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Decompounding rule's definition, approval state and scope without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Decompounding rule's definition, approval state and scope within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_display_ad": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves creative configuration and typed Data Values for one advertiser-owned Display Ad. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves creative configuration and typed Data Values for one advertiser-owned Display Ad without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to creative configuration and typed Data Values for one advertiser-owned Display Ad within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_job": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves one Dataset Job's settings, excluding restricted configuration and execution logs. It does not change the returned entities, configuration or measurements. It does not start, rerun, cancel or reschedule Jobs.",
+    "destructive": "Retrieves one Dataset Job's settings, excluding restricted configuration and execution logs without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to one Dataset Job's settings, excluding restricted configuration and execution logs within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_job_log": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves one existing Job execution's summary and available filtered history. It does not change the returned entities, configuration or measurements. It does not start, rerun, cancel or reschedule Jobs.",
+    "destructive": "Retrieves one existing Job execution's summary and available filtered history without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to one existing Job execution's summary and available filtered history within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_me": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the authenticated user's non-secret access information and candidate Datasets grouped by License. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the authenticated user's non-secret access information and candidate Datasets grouped by License without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the authenticated user's non-secret access information and candidate Datasets grouped by License within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_merchandising_rule": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves one merchandising rule's conditions, schedule, enabled state and type-specific configuration. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves one merchandising rule's conditions, schedule, enabled state and type-specific configuration without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to one merchandising rule's conditions, schedule, enabled state and type-specific configuration within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_redirect_rule": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Redirect rule's definition, approval state and scope. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Redirect rule's definition, approval state and scope without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Redirect rule's definition, approval state and scope within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL. Returned redirect destinations are configuration data; this tool does not follow them."
+  },
+  "get_retail_media_location": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves one Retail Media location's settings, placements and variations. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves one Retail Media location's settings, placements and variations without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to one Retail Media location's settings, placements and variations within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_search_index": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves one Search Index's languages, rebuild state and configuration. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves one Search Index's languages, rebuild state and configuration without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to one Search Index's languages, rebuild state and configuration within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_search_result_modifier_rule": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Search Result Modifier rule's definition, approval state and scope. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Search Result Modifier rule's definition, approval state and scope without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Search Result Modifier rule's definition, approval state and scope within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_search_term_modifier_rule": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Search Term Modifier rule's definition, approval state and scope. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Search Term Modifier rule's definition, approval state and scope without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Search Term Modifier rule's definition, approval state and scope within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_stemming_rule": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves the selected Stemming rule's definition, approval state and scope. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves the selected Stemming rule's definition, approval state and scope without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to the selected Stemming rule's definition, approval state and scope within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_synonym_rule": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves one Synonym rule's complete one-way or multidirectional word relationships and approval state. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves one Synonym rule's complete one-way or multidirectional word relationships and approval state without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to one Synonym rule's complete one-way or multidirectional word relationships and approval state within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "get_trigger_configuration": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves one Trigger's typed criteria and scoped conditions, excluding delivery settings and credentials. It does not change the returned entities, configuration or measurements. It does not evaluate Triggers or send webhooks.",
+    "destructive": "Retrieves one Trigger's typed criteria and scoped conditions, excluding delivery settings and credentials without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to one Trigger's typed criteria and scoped conditions, excluding delivery settings and credentials within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_advertisers": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of matching advertiser summaries ordered by name. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of matching advertiser summaries ordered by name without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of matching advertiser summaries ordered by name within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_campaigns": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of matching campaign summaries ordered by creation time. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of matching campaign summaries ordered by creation time without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of matching campaign summaries ordered by creation time within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_decompounding_rules": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of Decompounding rule summaries and their approval states. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of Decompounding rule summaries and their approval states without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of Decompounding rule summaries and their approval states within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_display_ads": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of Display Ads owned by the selected advertiser. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of Display Ads owned by the selected advertiser without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of Display Ads owned by the selected advertiser within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_job_logs": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves existing Job execution summaries within the requested UTC dates using history cursors. It does not change the returned entities, configuration or measurements. It does not start, rerun, cancel or reschedule Jobs.",
+    "destructive": "Retrieves existing Job execution summaries within the requested UTC dates using history cursors without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to existing Job execution summaries within the requested UTC dates using history cursors within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_jobs": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Dataset Job summaries and their latest execution summaries, excluding execution logs. It does not change the returned entities, configuration or measurements. It does not start, rerun, cancel or reschedule Jobs.",
+    "destructive": "Retrieves Dataset Job summaries and their latest execution summaries, excluding execution logs without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Dataset Job summaries and their latest execution summaries, excluding execution logs within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_merchandising_rules": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of merchandising rule summaries in configured priority order. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of merchandising rule summaries in configured priority order without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of merchandising rule summaries in configured priority order within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_redirect_rules": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of Redirect rule summaries and their approval states. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of Redirect rule summaries and their approval states without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of Redirect rule summaries and their approval states within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL. Returned redirect destinations are configuration data; this tool does not follow them."
+  },
+  "list_retail_media_locations": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of Retail Media location summaries. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of Retail Media location summaries without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of Retail Media location summaries within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_search_indexes": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves Search Index summaries, enabled/default state and rebuild recency. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves Search Index summaries, enabled/default state and rebuild recency without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to Search Index summaries, enabled/default state and rebuild recency within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_search_result_modifier_rules": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of Search Result Modifier rule summaries and their approval states. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of Search Result Modifier rule summaries and their approval states without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of Search Result Modifier rule summaries and their approval states within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_search_term_modifier_rules": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of Search Term Modifier rule summaries and their approval states. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of Search Term Modifier rule summaries and their approval states without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of Search Term Modifier rule summaries and their approval states within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_stemming_rules": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of Stemming rule summaries and their approval states. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of Stemming rule summaries and their approval states without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of Stemming rule summaries and their approval states within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_synonym_rules": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of Synonym rules with word relationships and approval states. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves a page of Synonym rules with word relationships and approval states without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of Synonym rules with word relationships and approval states within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "list_trigger_configurations": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves a page of Trigger summaries and the Dataset-wide evaluation state. It does not change the returned entities, configuration or measurements. It does not evaluate Triggers or send webhooks.",
+    "destructive": "Retrieves a page of Trigger summaries and the Dataset-wide evaluation state without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to a page of Trigger summaries and the Dataset-wide evaluation state within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "search_brands": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves up to 25 Brands matching an ID, display name or Brand Data Value. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves up to 25 Brands matching an ID, display name or Brand Data Value without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to up to 25 Brands matching an ID, display name or Brand Data Value within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "search_content": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves up to 25 Content entities matching an ID, display name, category name or string Data Value. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves up to 25 Content entities matching an ID, display name, category name or string Data Value without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to up to 25 Content entities matching an ID, display name, category name or string Data Value within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "search_content_categories": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves up to 25 Content Category entities matching an ID, display name or category Data Value. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves up to 25 Content Category entities matching an ID, display name or category Data Value without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to up to 25 Content Category entities matching an ID, display name or category Data Value within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "search_product_categories": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves up to 25 Product Category entities matching an ID, display name or category Data Value. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves up to 25 Product Category entities matching an ID, display name or category Data Value without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to up to 25 Product Category entities matching an ID, display name or category Data Value within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "search_products": {
+    "annotations": {
+      "readOnlyHint": true,
+      "destructiveHint": false,
+      "openWorldHint": false
+    },
+    "readOnly": "Retrieves up to 25 Products matching an ID, display name or Product Data Value, without searching Variant Data Values. It does not change the returned entities, configuration or measurements.",
+    "destructive": "Retrieves up to 25 Products matching an ID, display name or Product Data Value, without searching Variant Data Values without replacing or deleting those records or changing their state.",
+    "openWorld": "Retrieval is restricted to up to 25 Products matching an ID, display name or Product Data Value, without searching Variant Data Values within the authenticated Relewise access scope. It does not crawl the public web or fetch an arbitrary URL."
+  },
+  "set_decompounding_rule_approved": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Overwrites isApproved on one existing Decompounding rule; this is a configuration write that can change which rules apply to subsequent searches.",
+    "destructive": "Replaces the existing Decompounding approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "openWorld": "Targets one Decompounding rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
+  },
+  "set_merchandising_rule_enabled": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Overwrites the enabled flag of one existing merchandising rule and can change how subsequent Search or Recommendation results are influenced.",
+    "destructive": "Replaces the existing enabled state and can disable an active rule. It preserves the schedule and rule definition. Re-enabling does not undo results already served while the rule was disabled. The plugin workflow requires an explicit enabled-state change request and inspection of the current rule.",
+    "openWorld": "Changes one rule inside the selected authorized Relewise Dataset. It does not publish content or send data to arbitrary external destinations."
+  },
+  "set_merchandising_rule_schedule": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Replaces the complete activation schedule of one existing merchandising rule; it writes the start and end boundaries rather than previewing them.",
+    "destructive": "Overwrites both existing schedule boundaries. Omitted, null or empty boundary values clear the corresponding bound rather than preserving it, which can extend or remove an activation window. The enabled flag and rule definition are preserved. The plugin workflow requires an explicit schedule change and inspection of the current schedule.",
+    "openWorld": "Updates the selected merchandising rule in the authorized Relewise Dataset. Schedule boundaries are stored there; no arbitrary URL, recipient or external publishing destination is accepted."
+  },
+  "set_redirect_rule_approved": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Overwrites isApproved on one existing Redirect rule; this is a configuration write that can change which rules apply to subsequent searches.",
+    "destructive": "Replaces the existing Redirect approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "openWorld": "Changes approval of an existing Redirect rule in the selected authorized Dataset. It does not visit or fetch the destination URL stored in the rule, and does not accept arbitrary external destinations for this operation."
+  },
+  "set_search_result_modifier_rule_approved": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Overwrites isApproved on one existing Search Result Modifier rule; this is a configuration write that can change which rules apply to subsequent searches.",
+    "destructive": "Replaces the existing Search Result Modifier approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "openWorld": "Targets one Search Result Modifier rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
+  },
+  "set_search_term_modifier_rule_approved": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Overwrites isApproved on one existing Search Term Modifier rule; this is a configuration write that can change which rules apply to subsequent searches.",
+    "destructive": "Replaces the existing Search Term Modifier approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "openWorld": "Targets one Search Term Modifier rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
+  },
+  "set_stemming_rule_approved": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Overwrites isApproved on one existing Stemming rule; this is a configuration write that can change which rules apply to subsequent searches.",
+    "destructive": "Replaces the existing Stemming approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "openWorld": "Targets one Stemming rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
+  },
+  "set_synonym_rule_approved": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Overwrites isApproved on one existing Synonym rule; this is a configuration write that can change which rules apply to subsequent searches.",
+    "destructive": "Replaces the existing Synonym approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "openWorld": "Targets one Synonym rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
+  },
+  "update_advertiser": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Changes the lifecycle state of an existing Retail Media advertiser to Active or Inactive. An omitted or null state preserves it, but supplied state values write live configuration.",
+    "destructive": "Overwrites the advertiser lifecycle state and can deactivate an advertiser. Promotion restrictions and locations are preserved, and archived advertisers cannot be changed. The plugin workflow requires an explicit state change request and inspection of the advertiser before the update.",
+    "openWorld": "Updates one existing advertiser in the selected authorized Relewise Dataset. It does not create an advertiser, contact that advertiser or send content to arbitrary external recipients."
+  },
+  "update_campaign": {
+    "annotations": {
+      "readOnlyHint": false,
+      "destructiveHint": true,
+      "openWorldHint": false
+    },
+    "readOnly": "Changes approval state, schedule or CPM budget on an existing Retail Media campaign. Approving can permit serving subject to schedule, budget and eligibility; setting Proposed can stop serving.",
+    "destructive": "Overwrites supplied campaign settings. A supplied schedule replaces both boundaries and clears omitted or null inner bounds. A supplied budget replaces CPM and the spending cap; a null or omitted maximumTotalCost removes the cap. Omitted or null outer fields preserve their settings. Targeting and promotions are preserved, and archived campaigns cannot be changed. The plugin workflow requires an explicit request for the exact changes and inspection of the current campaign; the tool is not a dry run.",
+    "openWorld": "Updates configuration for one existing campaign in the selected authorized Relewise Dataset. It does not create campaigns, upload or publish creatives, or accept an arbitrary external destination. Campaign approval affects serving within the Dataset's existing Retail Media configuration."
+  }
+}

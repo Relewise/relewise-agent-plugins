@@ -68,6 +68,26 @@ foreach ($skill in $metadata.skills) {
     Assert-File (Join-Path $skillRoot 'SKILL.md') "skill $skill"
 }
 
+. (Join-Path $PSScriptRoot 'get-reviewed-tool-justifications.ps1')
+$toolJustifications = [ordered]@{}
+if ($metadata.mcp.ContainsKey('toolCatalog')) {
+    $catalogPath = Resolve-RepositoryPath $metadata.mcp.toolCatalog
+    Assert-File $catalogPath 'MCP tool catalog'
+    $catalog = Get-Content -Raw -LiteralPath $catalogPath | ConvertFrom-Json -AsHashtable
+    $reviewedPath = Resolve-RepositoryPath $metadata.mcp.toolJustifications
+    Assert-File $reviewedPath 'reviewed tool explanations'
+    $reviewedTools = Get-Content -Raw -LiteralPath $reviewedPath | ConvertFrom-Json -AsHashtable
+    $toolJustifications = Get-ReviewedToolJustifications $catalog $reviewedTools
+} elseif ($metadata.mcp.ContainsKey('toolNames')) {
+    foreach ($toolName in $metadata.mcp.toolNames) {
+        $toolJustifications[$toolName] = [ordered]@{
+            read_only_justification = $metadata.toolJustificationDefaults.readOnly
+            open_world_justification = $metadata.toolJustificationDefaults.openWorld
+            destructive_justification = $metadata.toolJustificationDefaults.destructive
+        }
+    }
+}
+
 if ([string]::IsNullOrWhiteSpace($OutputRoot)) { $OutputRoot = Join-Path $RepositoryRoot "artifacts/openai-submission/$Plugin/$Version" }
 $OutputRoot = [IO.Path]::GetFullPath($OutputRoot)
 New-Item -ItemType Directory -Force -Path $OutputRoot, (Join-Path $OutputRoot 'skills'), (Join-Path $OutputRoot 'assets') | Out-Null
@@ -87,29 +107,6 @@ Compress-Archive -Path (Join-Path $pluginRoot '*') -DestinationPath $pluginZip -
 
 Copy-Item -LiteralPath $directoryIcon -Destination (Join-Path $OutputRoot 'assets/directory-icon.png') -Force
 Copy-Item -LiteralPath $composerIcon -Destination (Join-Path $OutputRoot 'assets/composer-icon.png') -Force
-
-$toolJustifications = [ordered]@{}
-if ($metadata.mcp.ContainsKey('toolCatalog')) {
-    $catalogPath = Resolve-RepositoryPath $metadata.mcp.toolCatalog
-    Assert-File $catalogPath 'MCP tool catalog'
-    $catalog = Get-Content -Raw -LiteralPath $catalogPath | ConvertFrom-Json -AsHashtable
-    foreach ($tool in $catalog.tools) {
-        $annotations = $tool.annotations
-        $toolJustifications[$tool.name] = [ordered]@{
-            read_only_justification = if ($annotations.readOnlyHint) { "This tool reads authorized Relewise data and does not change external state." } else { "This tool can change authorized Relewise state as described by its tool metadata; readOnlyHint is false." }
-            open_world_justification = if ($annotations.openWorldHint) { "This tool can interact with open-ended external entities as described by its metadata." } else { "This tool is limited to the authenticated user's bounded Relewise account and Datasets; it does not access the open web." }
-            destructive_justification = if ($annotations.destructiveHint) { "This tool can cause the irreversible or overwrite behavior described by its metadata; destructiveHint is true." } else { "This tool does not delete, overwrite, revoke, send, or cause another irreversible side effect." }
-        }
-    }
-} elseif ($metadata.mcp.ContainsKey('toolNames')) {
-    foreach ($toolName in $metadata.mcp.toolNames) {
-        $toolJustifications[$toolName] = [ordered]@{
-            read_only_justification = $metadata.toolJustificationDefaults.readOnly
-            open_world_justification = $metadata.toolJustificationDefaults.openWorld
-            destructive_justification = $metadata.toolJustificationDefaults.destructive
-        }
-    }
-}
 
 $auth = if ($metadata.mcp.authentication -eq 'NONE') { @([ordered]@{ type = 'NONE' }) } else { @([ordered]@{ type = 'OAUTH' }) }
 $portal = [ordered]@{
@@ -144,6 +141,9 @@ $portal = [ordered]@{
     not_marketed_to_children_under_13 = -not $metadata.policy.marketedToChildrenUnder13
 }
 $portal | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath (Join-Path $OutputRoot 'chatgpt-app-submission.json') -Encoding utf8
+if ($metadata.mcp.ContainsKey('toolCatalog')) {
+    Copy-Item -LiteralPath $reviewedPath -Destination (Join-Path $OutputRoot 'reviewed-tool-annotations.json') -Force
+}
 Copy-Item -LiteralPath $metadataPath -Destination (Join-Path $OutputRoot 'canonical-submission.json') -Force
 Copy-Item -LiteralPath (Resolve-RepositoryPath $metadata.reviewerSetup) -Destination (Join-Path $OutputRoot 'reviewer-setup.md') -Force
 
@@ -175,6 +175,7 @@ $manifest = [ordered]@{
     reviewerTestCases = 'reviewer-test-cases.md'
     canonicalSubmission = 'canonical-submission.json'
 }
+if ($metadata.mcp.ContainsKey('toolCatalog')) { $manifest.reviewedToolAnnotations = 'reviewed-tool-annotations.json' }
 $manifest | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $OutputRoot 'artifact-manifest.json') -Encoding utf8
 
 $recordingStatus = if ($DemoRecordingUrl) { '[x] Demo recording URL supplied; verify it still covers the submitted behavior.' } else { '[ ] Record or approve a reusable demo video and enter its HTTPS URL.' }

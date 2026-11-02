@@ -28,6 +28,8 @@ Choose `Initial` when the selected plugin has no published directory record; cho
 
 Review `chatgpt-app-submission.json`, `artifact-manifest.json`, and `manual-checklist.md`. Do not treat generated copy or tool justifications as self-approving. After the portal scans the live MCP server, compare every discovered tool and annotation with the generated material and the server's actual behavior.
 
+For catalog-backed submissions, maintain the per-tool explanations referenced by `mcp.toolJustifications` in the canonical dossier. Each entry records the reviewed boolean annotations and explains the specific retrieval or mutation, overwrite effects, scope, and applicable safeguards. Preparation rejects missing or stale tool entries, missing explanations, nonboolean annotations, and differences between reviewed and catalog annotations. A passing check verifies completeness and annotation agreement, not the correctness of the explanation; review changed tool behavior manually. Distinguish safeguards in the plugin workflow from safeguards enforced by the server. The generated `reviewed-tool-annotations.json` preserves these reviewed values alongside the portal copy for comparison with the live scan.
+
 Read [references/portal-workflow.md](references/portal-workflow.md) before operating the portal. It distinguishes initial submissions, updates, continuously reviewed MCP changes, and manual-only steps.
 
 ## Validate
