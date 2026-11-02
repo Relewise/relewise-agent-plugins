@@ -15,7 +15,7 @@
     "recommendations",
     "tracking"
   ],
-  "version": "1.0.0-main.35245073381",
+  "version": "1.0.0-main.41403067183",
   "interface": {
     "displayName": "Relewise Developer",
     "shortDescription": "Build and troubleshoot Relewise integrations",
