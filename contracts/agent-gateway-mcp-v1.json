@@ -13824,7 +13824,7 @@
       },
       "annotations": {
         "title": "Set Decompounding Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -14076,7 +14076,7 @@
       },
       "annotations": {
         "title": "Set Merchandising Rule Enabled State",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -14633,7 +14633,7 @@
       },
       "annotations": {
         "title": "Set Redirect Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -14937,7 +14937,7 @@
       },
       "annotations": {
         "title": "Set Search Result Modifier Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -15237,7 +15237,7 @@
       },
       "annotations": {
         "title": "Set Search Term Modifier Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -15359,7 +15359,7 @@
       },
       "annotations": {
         "title": "Set Stemming Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -15519,7 +15519,7 @@
       },
       "annotations": {
         "title": "Set Synonym Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -15681,7 +15681,7 @@
       },
       "annotations": {
         "title": "Update Advertiser",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false

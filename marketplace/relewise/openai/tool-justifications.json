@@ -622,21 +622,21 @@
   "set_decompounding_rule_approved": {
     "annotations": {
       "readOnlyHint": false,
-      "destructiveHint": true,
+      "destructiveHint": false,
       "openWorldHint": false
     },
-    "readOnly": "Overwrites isApproved on one existing Decompounding rule; this is a configuration write that can change which rules apply to subsequent searches.",
-    "destructive": "Replaces the existing Decompounding approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "readOnly": "Sets the approval state of one existing Decompounding rule. This writes configuration and can change whether that rule applies to subsequent searches.",
+    "destructive": "Changes only the reversible approval flag of the selected Decompounding rule; the rule, its definition and its scope are preserved. Approval can be restored through the same tool. It does not delete the rule or replace its configuration. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
     "openWorld": "Targets one Decompounding rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
   },
   "set_merchandising_rule_enabled": {
     "annotations": {
       "readOnlyHint": false,
-      "destructiveHint": true,
+      "destructiveHint": false,
       "openWorldHint": false
     },
-    "readOnly": "Overwrites the enabled flag of one existing merchandising rule and can change how subsequent Search or Recommendation results are influenced.",
-    "destructive": "Replaces the existing enabled state and can disable an active rule. It preserves the schedule and rule definition. Re-enabling does not undo results already served while the rule was disabled. The plugin workflow requires an explicit enabled-state change request and inspection of the current rule.",
+    "readOnly": "Enables or disables one existing merchandising rule. This writes the enabled flag and can change how subsequent Search or Recommendation results are influenced.",
+    "destructive": "Changes only the reversible enabled flag; the rule, its complete definition and its activation schedule are preserved. The same tool can restore the enabled state. It does not delete the rule, replace its configuration or clear schedule boundaries. The plugin workflow requires an explicit enabled-state change request and inspection of the current rule.",
     "openWorld": "Changes one rule inside the selected authorized Relewise Dataset. It does not publish content or send data to arbitrary external destinations."
   },
   "set_merchandising_rule_schedule": {
@@ -652,61 +652,61 @@
   "set_redirect_rule_approved": {
     "annotations": {
       "readOnlyHint": false,
-      "destructiveHint": true,
+      "destructiveHint": false,
       "openWorldHint": false
     },
-    "readOnly": "Overwrites isApproved on one existing Redirect rule; this is a configuration write that can change which rules apply to subsequent searches.",
-    "destructive": "Replaces the existing Redirect approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "readOnly": "Sets the approval state of one existing Redirect rule. This writes configuration and can change whether that rule applies to subsequent searches.",
+    "destructive": "Changes only the reversible approval flag of the selected Redirect rule; the rule, its definition and its scope are preserved. Approval can be restored through the same tool. It does not delete the rule or replace its configuration. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
     "openWorld": "Changes approval of an existing Redirect rule in the selected authorized Dataset. It does not visit or fetch the destination URL stored in the rule, and does not accept arbitrary external destinations for this operation."
   },
   "set_search_result_modifier_rule_approved": {
     "annotations": {
       "readOnlyHint": false,
-      "destructiveHint": true,
+      "destructiveHint": false,
       "openWorldHint": false
     },
-    "readOnly": "Overwrites isApproved on one existing Search Result Modifier rule; this is a configuration write that can change which rules apply to subsequent searches.",
-    "destructive": "Replaces the existing Search Result Modifier approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "readOnly": "Sets the approval state of one existing Search Result Modifier rule. This writes configuration and can change whether that rule applies to subsequent searches.",
+    "destructive": "Changes only the reversible approval flag of the selected Search Result Modifier rule; the rule, its definition and its scope are preserved. Approval can be restored through the same tool. It does not delete the rule or replace its configuration. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
     "openWorld": "Targets one Search Result Modifier rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
   },
   "set_search_term_modifier_rule_approved": {
     "annotations": {
       "readOnlyHint": false,
-      "destructiveHint": true,
+      "destructiveHint": false,
       "openWorldHint": false
     },
-    "readOnly": "Overwrites isApproved on one existing Search Term Modifier rule; this is a configuration write that can change which rules apply to subsequent searches.",
-    "destructive": "Replaces the existing Search Term Modifier approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "readOnly": "Sets the approval state of one existing Search Term Modifier rule. This writes configuration and can change whether that rule applies to subsequent searches.",
+    "destructive": "Changes only the reversible approval flag of the selected Search Term Modifier rule; the rule, its definition and its scope are preserved. Approval can be restored through the same tool. It does not delete the rule or replace its configuration. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
     "openWorld": "Targets one Search Term Modifier rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
   },
   "set_stemming_rule_approved": {
     "annotations": {
       "readOnlyHint": false,
-      "destructiveHint": true,
+      "destructiveHint": false,
       "openWorldHint": false
     },
-    "readOnly": "Overwrites isApproved on one existing Stemming rule; this is a configuration write that can change which rules apply to subsequent searches.",
-    "destructive": "Replaces the existing Stemming approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "readOnly": "Sets the approval state of one existing Stemming rule. This writes configuration and can change whether that rule applies to subsequent searches.",
+    "destructive": "Changes only the reversible approval flag of the selected Stemming rule; the rule, its definition and its scope are preserved. Approval can be restored through the same tool. It does not delete the rule or replace its configuration. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
     "openWorld": "Targets one Stemming rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
   },
   "set_synonym_rule_approved": {
     "annotations": {
       "readOnlyHint": false,
-      "destructiveHint": true,
+      "destructiveHint": false,
       "openWorldHint": false
     },
-    "readOnly": "Overwrites isApproved on one existing Synonym rule; this is a configuration write that can change which rules apply to subsequent searches.",
-    "destructive": "Replaces the existing Synonym approval value and can remove approval. The rule definition and scope are preserved, but being able to set approval again does not make this overwrite additive. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
+    "readOnly": "Sets the approval state of one existing Synonym rule. This writes configuration and can change whether that rule applies to subsequent searches.",
+    "destructive": "Changes only the reversible approval flag of the selected Synonym rule; the rule, its definition and its scope are preserved. Approval can be restored through the same tool. It does not delete the rule or replace its configuration. The plugin workflow requires an explicit request for the approval change and inspection of the current rule.",
     "openWorld": "Targets one Synonym rule in the selected authorized Relewise Dataset. It does not accept an arbitrary destination or publish the rule definition to an external service."
   },
   "update_advertiser": {
     "annotations": {
       "readOnlyHint": false,
-      "destructiveHint": true,
+      "destructiveHint": false,
       "openWorldHint": false
     },
     "readOnly": "Changes the lifecycle state of an existing Retail Media advertiser to Active or Inactive. An omitted or null state preserves it, but supplied state values write live configuration.",
-    "destructive": "Overwrites the advertiser lifecycle state and can deactivate an advertiser. Promotion restrictions and locations are preserved, and archived advertisers cannot be changed. The plugin workflow requires an explicit state change request and inspection of the advertiser before the update.",
+    "destructive": "Changes only the reversible Active/Inactive state of an existing advertiser, preserving its promotion restrictions and locations. The same tool can restore the state. It does not delete or archive the advertiser, and archived advertisers cannot be changed. The plugin workflow requires an explicit state change request and inspection of the advertiser before the update.",
     "openWorld": "Updates one existing advertiser in the selected authorized Relewise Dataset. It does not create an advertiser, contact that advertiser or send content to arbitrary external recipients."
   },
   "update_campaign": {

@@ -1,6 +1,6 @@
 {
   "source": "contracts/agent-gateway-mcp-v1.json",
-  "sourceSha256": "3c0e06d16a18eaf83cc7c917be436fef4454f4c8694cbad989050ae77e5ec076",
+  "sourceSha256": "9ebdb18558b1004c9d6a621714357500a55a684dcb350115098bb3bc07454408",
   "toolCount": 72,
   "tools": [
     {
@@ -13827,7 +13827,7 @@
       },
       "annotations": {
         "title": "Set Decompounding Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -14079,7 +14079,7 @@
       },
       "annotations": {
         "title": "Set Merchandising Rule Enabled State",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -14636,7 +14636,7 @@
       },
       "annotations": {
         "title": "Set Redirect Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -14940,7 +14940,7 @@
       },
       "annotations": {
         "title": "Set Search Result Modifier Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -15240,7 +15240,7 @@
       },
       "annotations": {
         "title": "Set Search Term Modifier Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -15362,7 +15362,7 @@
       },
       "annotations": {
         "title": "Set Stemming Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -15522,7 +15522,7 @@
       },
       "annotations": {
         "title": "Set Synonym Rule Approval",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
@@ -15684,7 +15684,7 @@
       },
       "annotations": {
         "title": "Update Advertiser",
-        "destructiveHint": true,
+        "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": false,
         "readOnlyHint": false
